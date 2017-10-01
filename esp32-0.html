@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>ERNI Performance Day - Embedded</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/modern-business.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">EPD - Embedded</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Roadmap
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
+                                <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
+                                <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="feedback.html">Feedback</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container mb-3">
+
+            <ol class="breadcrumb mt-4  mb-3">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="roadmap-esp32.html">Roadmap ESP32</a>
+                </li>
+                <li class="breadcrumb-item active">Project Zero</li>
+            </ol>
+
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">ESP32 Project Zero
+                <br>
+                <small>Setup the ESP32 Development Environment </small>
+            </h1>
+
+            <div class="alert alert-info">
+                To install the toolchain and the Espressif IoT Development framework on Linux, Window or Mac Os, follow the official documentation on <a href='http://esp-idf.readthedocs.io/en/latest/get-started/index.html'>http://esp-idf.readthedocs.io/en/latest/get-started/index.html</a>.
+            </div>
+            
+            <hr>
+            
+            <h3 class="mb-3">Install the toolchain</h3>
+            
+            <ol>
+                <li>Create a directory named esp at your home</li>                
+                <li>Download the <a href='files/xtensa-esp32-elf.tar.gz'>xtensa-esp32 toolchain for raspberry</a></li>
+                <li>Extract it under your ~/esp/xtensa-esp32-elf/ directory</li>
+                <li>
+                    Check if ~/esp/xtensa-esp32-elf/bin is in your PATH, and if not, include it. 
+                    <br/>
+                    For that, edit your ~/.profile or ~/.bash_profile file, and add the following line:
+                    <br/>
+                    <div class="well">export PATH="$PATH:$HOME/esp/xtensa-esp32-elf/bin"</div>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h3>Install your Epressif IoT Development Framework</h3>
+            <ol>               
+                <li>Download the <a href='files/esp-idf-master.zip'>Espressif IoT Development Framework</a></li>
+                <li>Extract it under your ~/esp/esp-idf/ directory</li>
+                <li>Add an environment variable IDF_PATH to your ~/.profile or ~/.bash_profile file.
+                    <br/>
+                    export IDF_PATH=~/esp/esp-idf
+                </li>
+                <li>Add your user to the dialout user group
+                    <br/>
+                    sudo usermod -a -G dialout $USER
+                </li>
+            </ol>
+
+            <hr>
+
+            <h3>Check USB Comm</h3>
+            <ol>               
+                <li>Run the command 'ls /dev/tty*' before plug the USB cable</li>
+                <li>Plug the USB cable to a free USB port in the raspberry and to the Espressif Board</li>
+                <li>Run again the command 'ls /dev/tty*' after plug the USB cable</li>
+                <li>Write down the new entry. It should be /dev/ttyUSBx.</li>
+                <li>Run a serial terminal to this port, with baudrate of 115200 and 8N1
+                    <br>
+                    <span class="code">i.e.: miniterm.py  /dev/ttyUSB0 115200</span>
+                </li>
+            </ol>
+            
+            <br>
+            <b>Reset your board. You should see the board log. If so, congrats!</b>    
+
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">ERNI Spain - Embedded Firmware Community</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper/popper.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
+
+</html>
