@@ -1,7 +1,7 @@
 # ERNI PERFORMANCE DAY WEBSITE
 
-Based on Start Bootstrap created by and maintained by [David Miller](http://davidmiller.io/)
-Based on the Bootstrap framework created by Mark Otto and Jacob Thorton.
+- Based on Start Bootstrap created by and maintained by [David Miller](http://davidmiller.io/)
+- Based on the Bootstrap framework created by Mark Otto and Jacob Thorton.
 
 ## Copyright and License
 
