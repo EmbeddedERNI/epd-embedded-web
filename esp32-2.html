@@ -60,73 +60,24 @@
                 <li class="breadcrumb-item">
                     <a href="roadmap-esp32.html">Roadmap ESP32</a>
                 </li>
-                <li class="breadcrumb-item active">Project Zero</li>
+                <li class="breadcrumb-item active">Project Two</li>
             </ol>
 
             <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">ESP32 Project Zero
+            <h1 class="mt-4 mb-3">ESP32 Project Two
                 <br>
-                <small>Setup the ESP32 Development Environment </small>
+                <small>Manage GPIOs</small>
             </h1>
 
-            <div class="alert alert-info">
-                To install the toolchain and the Espressif IoT Development framework on Linux, Window or Mac Os, follow the official documentation on <a href='http://esp-idf.readthedocs.io/en/latest/get-started/index.html'>http://esp-idf.readthedocs.io/en/latest/get-started/index.html</a>.
-            </div>
-
             <hr>
 
-            <h3 class="mb-3">Install the toolchain</h3>
-
-            <ol>
-                <li>Create a directory named <code>esp</code> at your home</li>
-                <li>Download the <a href='files/xtensa-esp32-elf.tar.gz'>xtensa-esp32 toolchain for raspberry</a></li>
-                <li>Extract it under your <code>~/esp/xtensa-esp32-elf/</code> directory</li>
-                <li>
-                    Check if <code>~/esp/xtensa-esp32-elf/bin</code> is in your PATH, and if not, include it.
-                    <br/>
-                    For that, edit your <code>~/.profile</code> or <code>~/.bash_profile</code> file, and add the following line:
-                    <br/>
-                    <div class="well"><code>export PATH="$PATH:$HOME/esp/xtensa-esp32-elf/bin"</code></div>
-                </li>
-            </ol>
-
-            <hr>
-
-            <h3>Install your Epressif IoT Development Framework</h3>
-            <ol>
-                <li>Download the <a href='files/esp-idf-master.zip'>Espressif IoT Development Framework</a></li>
-                <li>Extract it under your <code>~/esp/esp-idf/</code> directory</li>
-                <li>Add an environment variable <code>IDF_PATH</code> to your <code>~/.profile</code> or <code>~/.bash_profile</code> file.
-                    <br/>
-                    <code>export IDF_PATH=~/esp/esp-idf</code>
-                </li>
-                <li>Add your user to the dialout user group
-                    <br/>
-                    <code>sudo usermod -a -G dialout $USER</code>
-                </li>
-            </ol>
-
-            <hr>
-
-            <h3>Check USB Comm</h3>
-            <ol>
-                <li>Run the command <code>ls /dev/tty*</code> before plug the USB cable</li>
-                <li>Plug the USB cable to a free USB port in the raspberry and to the Espressif Board</li>
-                <li>Run again the command <code>ls /dev/tty*</code> after plug the USB cable</li>
-                <li>Write down the new entry. It should be <code>/dev/ttyUSBx</code>.</li>
-                <li>Run a serial terminal to this port, with baudrate of 115200 and 8N1
-                    <br>
-                    i.e.: <code>miniterm.py  /dev/ttyUSB0 115200</code>
-                </li>
-            </ol>
+            <h3 class="mb-3">Get the skeleton code</h3>
 
             <hr>
 
             <div class="alert alert-success">
-                Reset your board. You should see the board log. If so, congrats!
+                You should be able to manage an digital output, an digital input and a PWM output signal. If so, congrats!
             </div>
-
-
         </div>
         <!-- /.container -->
 
