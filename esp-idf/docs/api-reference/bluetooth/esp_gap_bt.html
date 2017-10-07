@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CLASSIC BLUETOOTH GAP API &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="CLASSIC BT" href="classic_bt.html"/>
+        <link rel="next" title="Bluetooth A2DP API" href="esp_a2dp.html"/>
+        <link rel="prev" title="CLASSIC BT" href="classic_bt.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="controller_vhci.html">Bluetooth Controller &amp;&amp; VHCI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bt_common.html">Bluetooth Common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bt_le.html">Bluetooth LE</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="classic_bt.html">Bluetooth Classic</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="esp_gap_bt.html#">BT GAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_a2dp.html">BT A2DP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_avrc.html">BT AVRC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Bluetooth API</a> &raquo;</li>
+        
+          <li><a href="classic_bt.html">CLASSIC BT</a> &raquo;</li>
+        
+      <li>CLASSIC BLUETOOTH GAP API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/bluetooth/esp_gap_bt.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="classic-bluetooth-gap-api">
+<h1>CLASSIC BLUETOOTH GAP API<a class="headerlink" href="esp_gap_bt.html#classic-bluetooth-gap-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="esp_gap_bt.html#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="esp_gap_bt.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="esp_gap_bt.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="esp_gap_bt.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/bt/bluedroid/api/include/esp_gap_bt_api.h">bt/bluedroid/api/include/esp_gap_bt_api.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="esp_gap_bt.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv224esp_bt_gap_set_scan_mode18esp_bt_scan_mode_t">
+<span id="esp_bt_gap_set_scan_mode__esp_bt_scan_mode_t"></span><span class="target" id="esp__gap__bt__api_8h_1a56cca136845f9cd9efbdaf668b5c50b4"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_bt_gap_set_scan_mode</code><span class="sig-paren">(</span><a class="reference internal" href="esp_gap_bt.html#_CPPv218esp_bt_scan_mode_t" title="esp_bt_scan_mode_t">esp_bt_scan_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="esp_gap_bt.html#_CPPv224esp_bt_gap_set_scan_mode18esp_bt_scan_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set discoverability and connectability mode for legacy bluetooth. This function should be called after esp_bluedroid_enable() completes successfully. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK : Succeed</li>
+<li>ESP_ERR_INVALID_ARG: if argument invalid</li>
+<li>ESP_INVALID_STATE: if bluetooth stack is not yet enabled</li>
+<li>ESP_FAIL: others </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: : one of the enums of bt_scan_mode_t</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="esp_gap_bt.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv218esp_bt_scan_mode_t">
+<span id="esp_bt_scan_mode_t"></span><span class="target" id="esp__gap__bt__api_8h_1a672863e3322907a0aa2b7520206623fe"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_bt_scan_mode_t</code><a class="headerlink" href="esp_gap_bt.html#_CPPv218esp_bt_scan_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Discoverability and Connectability mode. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv221ESP_BT_SCAN_MODE_NONE">
+<span id="ESP_BT_SCAN_MODE_NONE"></span><span class="target" id="esp__gap__bt__api_8h_1a672863e3322907a0aa2b7520206623feab8fc7ff183397ce3baf10c1b7580f6ee"></span><code class="descname">ESP_BT_SCAN_MODE_NONE</code> = 0<a class="headerlink" href="esp_gap_bt.html#_CPPv221ESP_BT_SCAN_MODE_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Neither discoverable nor connectable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv228ESP_BT_SCAN_MODE_CONNECTABLE">
+<span id="ESP_BT_SCAN_MODE_CONNECTABLE"></span><span class="target" id="esp__gap__bt__api_8h_1a672863e3322907a0aa2b7520206623fea579aebe887accc59b4562f637eef0c05"></span><code class="descname">ESP_BT_SCAN_MODE_CONNECTABLE</code><a class="headerlink" href="esp_gap_bt.html#_CPPv228ESP_BT_SCAN_MODE_CONNECTABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connectable but not discoverable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv241ESP_BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE">
+<span id="ESP_BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE"></span><span class="target" id="esp__gap__bt__api_8h_1a672863e3322907a0aa2b7520206623feac5ce274b219d6c91aa3eed4d5b3935e9"></span><code class="descname">ESP_BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE</code><a class="headerlink" href="esp_gap_bt.html#_CPPv241ESP_BT_SCAN_MODE_CONNECTABLE_DISCOVERABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>both discoverable and connectaable </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="esp_a2dp.html" class="btn btn-neutral float-right" title="Bluetooth A2DP API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="classic_bt.html" class="btn btn-neutral" title="CLASSIC BT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

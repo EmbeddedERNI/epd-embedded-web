@@ -1,0 +1,1116 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Non-volatile storage library &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Storage API" href="index.html"/>
+        <link rel="next" title="Virtual filesystem component" href="vfs.html"/>
+        <link rel="prev" title="SPI Flash APIs" href="spi_flash.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spi_flash.html">SPI Flash and Partition APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="nvs_flash.html#">Non-Volatile Storage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nvs_flash.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nvs_flash.html#internals">Internals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nvs_flash.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nvs_flash.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatfs.html">FAT Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Storage API</a> &raquo;</li>
+        
+      <li>Non-volatile storage library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/storage/nvs_flash.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="non-volatile-storage-library">
+<h1>Non-volatile storage library<a class="headerlink" href="nvs_flash.html#non-volatile-storage-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="nvs_flash.html#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Non-volatile storage (NVS) library is designed to store key-value pairs in flash. This sections introduces some concepts used by NVS.</p>
+<div class="section" id="underlying-storage">
+<h3>Underlying storage<a class="headerlink" href="nvs_flash.html#underlying-storage" title="Permalink to this headline">¶</a></h3>
+<p>Currently NVS uses a portion of main flash memory through <code class="docutils literal"><span class="pre">spi_flash_{read|write|erase}</span></code> APIs. The library uses the all the partitions with <code class="docutils literal"><span class="pre">data</span></code> type and <code class="docutils literal"><span class="pre">nvs</span></code> subtype. The application can choose to use the partition with label <code class="docutils literal"><span class="pre">nvs</span></code> through <code class="docutils literal"><span class="pre">nvs_open</span></code> API or any of the other partition by specifying its name through <code class="docutils literal"><span class="pre">nvs_open_from_part</span></code> API.</p>
+<p>Future versions of this library may add other storage backends to keep data in another flash chip (SPI or I2C), RTC, FRAM, etc.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">if an NVS partition is truncated (for example, when the partition table layout is changed), its contents should be erased. ESP-IDF build system provides a <code class="docutils literal"><span class="pre">make</span> <span class="pre">erase_flash</span></code> target to erase all contents of the flash chip.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">NVS works best for storing many small values, rather than a few large values of type &#8216;string&#8217; and &#8216;blob&#8217;. If storing large blobs or strings is required, consider using the facilities provided by the FAT filesystem on top of the wear levelling library.</p>
+</div>
+</div>
+<div class="section" id="keys-and-values">
+<h3>Keys and values<a class="headerlink" href="nvs_flash.html#keys-and-values" title="Permalink to this headline">¶</a></h3>
+<p>NVS operates on key-value pairs. Keys are ASCII strings, maximum key length is currently 15 characters. Values can have one of the following types:</p>
+<ul class="simple">
+<li>integer types: <code class="docutils literal"><span class="pre">uint8_t</span></code>, <code class="docutils literal"><span class="pre">int8_t</span></code>, <code class="docutils literal"><span class="pre">uint16_t</span></code>, <code class="docutils literal"><span class="pre">int16_t</span></code>, <code class="docutils literal"><span class="pre">uint32_t</span></code>, <code class="docutils literal"><span class="pre">int32_t</span></code>, <code class="docutils literal"><span class="pre">uint64_t</span></code>, <code class="docutils literal"><span class="pre">int64_t</span></code></li>
+<li>zero-terminated string</li>
+<li>variable length binary data (blob)</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">String and blob values are currently limited to 1984 bytes. For strings, this includes the null terminator.</p>
+</div>
+<p>Additional types, such as <code class="docutils literal"><span class="pre">float</span></code> and <code class="docutils literal"><span class="pre">double</span></code> may be added later.</p>
+<p>Keys are required to be unique. Writing a value for a key which already exists behaves as follows:</p>
+<ul class="simple">
+<li>if the new value is of the same type as old one, value is updated</li>
+<li>if the new value has different data type, an error is returned</li>
+</ul>
+<p>Data type check is also performed when reading a value. An error is returned if data type of read operation doesn’t match the data type of the value.</p>
+</div>
+<div class="section" id="namespaces">
+<h3>Namespaces<a class="headerlink" href="nvs_flash.html#namespaces" title="Permalink to this headline">¶</a></h3>
+<p>To mitigate potential conflicts in key names between different components, NVS assigns each key-value pair to one of namespaces. Namespace names follow the same rules as key names, i.e. 15 character maximum length. Namespace name is specified in the <code class="docutils literal"><span class="pre">nvs_open</span></code> or <code class="docutils literal"><span class="pre">nvs_open_from_part</span></code> call. This call returns an opaque handle, which is used in subsequent calls to <code class="docutils literal"><span class="pre">nvs_read_*</span></code>, <code class="docutils literal"><span class="pre">nvs_write_*</span></code>, and <code class="docutils literal"><span class="pre">nvs_commit</span></code> functions. This way, handle is associated with a namespace, and key names will not collide with same names in other namespaces.
+Please note that the namespaces with same name in different NVS partitions are considered as separate namespaces.</p>
+</div>
+<div class="section" id="security-tampering-and-robustness">
+<h3>Security, tampering, and robustness<a class="headerlink" href="nvs_flash.html#security-tampering-and-robustness" title="Permalink to this headline">¶</a></h3>
+<p>NVS library doesn&#8217;t implement tamper prevention measures. It is possible for anyone with physical access to the flash chip to alter, erase, or add key-value pairs.</p>
+<p>NVS is compatible with the ESP32 flash encryption system, and it can store  key-value pairs in an encrypted form. Some metadata, like page state and write/erase flags of individual entries can not be encrypted as they are represented as bits of flash memory for efficient access and manipulation. Flash encryption can prevent some forms of modification:</p>
+<ul class="simple">
+<li>replacing keys or values with arbitrary data</li>
+<li>changing data types of values</li>
+</ul>
+<p>The following forms of modification are still possible when flash encryption is used:</p>
+<ul class="simple">
+<li>erasing a page completely, removing all key-value pairs which were stored in that page</li>
+<li>corrupting data in a page, which will cause the page to be erased automatically when such condition is detected</li>
+<li>rolling back the contents of flash memory to an earlier snapshot</li>
+<li>merging two snapshots of flash memory, rolling back some key-value pairs to an earlier state (although this is possible to mitigate with the current design — TODO)</li>
+</ul>
+<p>The library does try to recover from conditions when flash memory is in an inconsistent state. In particular, one should be able to power off the device at any point and time and then power it back on. This should not result in loss of data, expect for the new key-value pair if it was being written at the moment of power off. The library should also be able to initialize properly with any random data present in flash memory.</p>
+</div>
+</div>
+<div class="section" id="internals">
+<h2>Internals<a class="headerlink" href="nvs_flash.html#internals" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="log-of-key-value-pairs">
+<h3>Log of key-value pairs<a class="headerlink" href="nvs_flash.html#log-of-key-value-pairs" title="Permalink to this headline">¶</a></h3>
+<p>NVS stores key-value pairs sequentially, with new key-value pairs being added at the end. When a value of any given key has to be updated, new key-value pair is added at the end of the log and old key-value pair is marked as erased.</p>
+</div>
+<div class="section" id="pages-and-entries">
+<h3>Pages and entries<a class="headerlink" href="nvs_flash.html#pages-and-entries" title="Permalink to this headline">¶</a></h3>
+<p>NVS library uses two main entities in its operation: pages and entries. Page is a logical structure which stores a portion of the overall log. Logical page corresponds to one physical sector of flash memory. Pages which are in use have a <em>sequence number</em> associated with them. Sequence numbers impose an ordering on pages. Higher sequence numbers correspond to pages which were created later. Each page can be in one of the following states:</p>
+<dl class="docutils">
+<dt>Empty/uninitialized</dt>
+<dd>Flash storage for the page is empty (all bytes are <code class="docutils literal"><span class="pre">0xff</span></code>). Page isn&#8217;t used to store any data at this point and doesn’t have a sequence number.</dd>
+<dt>Active</dt>
+<dd>Flash storage is initialized, page header has been written to flash, page has a valid sequence number. Page has some empty entries and data can be written there. At most one page can be in this state at any given moment.</dd>
+<dt>Full</dt>
+<dd>Flash storage is in a consistent state and is filled with key-value pairs.
+Writing new key-value pairs into this page is not possible. It is still possible to mark some key-value pairs as erased.</dd>
+<dt>Erasing</dt>
+<dd>Non-erased key-value pairs are being moved into another page so that the current page can be erased. This is a transient state, i.e. page should never stay in this state when any API call returns. In case of a sudden power off, move-and-erase process will be completed upon next power on.</dd>
+<dt>Corrupted</dt>
+<dd>Page header contains invalid data, and further parsing of page data was canceled. Any items previously written into this page will not be accessible. Corresponding flash sector will not be erased immediately, and will be kept along with sectors in <em>uninitialized</em> state for later use. This may be useful for debugging.</dd>
+</dl>
+<p>Mapping from flash sectors to logical pages doesn&#8217;t have any particular order. Library will inspect sequence numbers of pages found in each flash sector and organize pages in a list based on these numbers.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+--------+</span>     <span class="o">+--------+</span>     <span class="o">+--------+</span>     <span class="o">+--------+</span>
+<span class="o">|</span> <span class="n">Page</span> <span class="mi">1</span> <span class="o">|</span>     <span class="o">|</span> <span class="n">Page</span> <span class="mi">2</span> <span class="o">|</span>     <span class="o">|</span> <span class="n">Page</span> <span class="mi">3</span> <span class="o">|</span>     <span class="o">|</span> <span class="n">Page</span> <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Full</span>   <span class="o">+---&gt;</span> <span class="o">|</span> <span class="n">Full</span>   <span class="o">+---&gt;</span> <span class="o">|</span> <span class="n">Active</span> <span class="o">|</span>     <span class="o">|</span> <span class="n">Empty</span>  <span class="o">|</span>   <span class="o">&lt;-</span> <span class="n">states</span>
+<span class="o">|</span> <span class="c1">#11    |     | #12    |     | #14    |     |        |   &lt;- sequence numbers</span>
+<span class="o">+---+----+</span>     <span class="o">+----+---+</span>     <span class="o">+----+---+</span>     <span class="o">+---+----+</span>
+    <span class="o">|</span>               <span class="o">|</span>              <span class="o">|</span>             <span class="o">|</span>
+    <span class="o">|</span>               <span class="o">|</span>              <span class="o">|</span>             <span class="o">|</span>
+    <span class="o">|</span>               <span class="o">|</span>              <span class="o">|</span>             <span class="o">|</span>
+<span class="o">+---</span><span class="n">v</span><span class="o">------+</span>  <span class="o">+-----</span><span class="n">v</span><span class="o">----+</span>  <span class="o">+------</span><span class="n">v</span><span class="o">---+</span>  <span class="o">+------</span><span class="n">v</span><span class="o">---+</span>
+<span class="o">|</span> <span class="n">Sector</span> <span class="mi">3</span> <span class="o">|</span>  <span class="o">|</span> <span class="n">Sector</span> <span class="mi">0</span> <span class="o">|</span>  <span class="o">|</span> <span class="n">Sector</span> <span class="mi">2</span> <span class="o">|</span>  <span class="o">|</span> <span class="n">Sector</span> <span class="mi">1</span> <span class="o">|</span>    <span class="o">&lt;-</span> <span class="n">physical</span> <span class="n">sectors</span>
+<span class="o">+----------+</span>  <span class="o">+----------+</span>  <span class="o">+----------+</span>  <span class="o">+----------+</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="structure-of-a-page">
+<h3>Structure of a page<a class="headerlink" href="nvs_flash.html#structure-of-a-page" title="Permalink to this headline">¶</a></h3>
+<p>For now we assume that flash sector size is 4096 bytes and that ESP32 flash encryption hardware operates on 32-byte blocks. It is possible to introduce some settings configurable at compile-time (e.g. via menuconfig) to accommodate flash chips with different sector sizes (although it is not clear if other components in the system, e.g. SPI flash driver and SPI flash cache can support these other sizes).</p>
+<p>Page consists of three parts: header, entry state bitmap, and entries themselves. To be compatible with ESP32 flash encryption, entry size is 32 bytes. For integer types, entry holds one key-value pair. For strings and blobs, an entry holds part of key-value pair (more on that in the entry structure description).</p>
+<p>The following diagram illustrates page structure. Numbers in parentheses indicate size of each part in bytes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+-----------+--------------+-------------+-----------+</span>
+<span class="o">|</span> <span class="n">State</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">Seq</span><span class="o">.</span> <span class="n">no</span><span class="o">.</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">Unused</span> <span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span> <span class="n">CRC32</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">Header</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="o">+-----------+--------------+-------------+-----------+</span>
+<span class="o">|</span>                <span class="n">Entry</span> <span class="n">state</span> <span class="n">bitmap</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>             <span class="o">|</span>
+<span class="o">+----------------------------------------------------+</span>
+<span class="o">|</span>                       <span class="n">Entry</span> <span class="mi">0</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>                 <span class="o">|</span>
+<span class="o">+----------------------------------------------------+</span>
+<span class="o">|</span>                       <span class="n">Entry</span> <span class="mi">1</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>                 <span class="o">|</span>
+<span class="o">+----------------------------------------------------+</span>
+<span class="o">/</span>                                                    <span class="o">/</span>
+<span class="o">/</span>                                                    <span class="o">/</span>
+<span class="o">+----------------------------------------------------+</span>
+<span class="o">|</span>                       <span class="n">Entry</span> <span class="mi">125</span> <span class="p">(</span><span class="mi">32</span><span class="p">)</span>               <span class="o">|</span>
+<span class="o">+----------------------------------------------------+</span>
+</pre></div>
+</div>
+<p>Page header and entry state bitmap are always written to flash unencrypted. Entries are encrypted if flash encryption feature of the ESP32 is used.</p>
+<p>Page state values are defined in such a way that changing state is possible by writing 0 into some of the bits. Therefore it not necessary to erase the page to change page state, unless that is a change to <em>erased</em> state.</p>
+<p>CRC32 value in header is calculated over the part which doesn&#8217;t include state value (bytes 4 to 28). Unused part is currently filled with <code class="docutils literal"><span class="pre">0xff</span></code> bytes. Future versions of the library may store format version there.</p>
+<p>The following sections describe structure of entry state bitmap and entry itself.</p>
+</div>
+<div class="section" id="entry-and-entry-state-bitmap">
+<h3>Entry and entry state bitmap<a class="headerlink" href="nvs_flash.html#entry-and-entry-state-bitmap" title="Permalink to this headline">¶</a></h3>
+<p>Each entry can be in one of the following three states. Each state is represented with two bits in the entry state bitmap. Final four bits in the bitmap (256 - 2 * 126) are unused.</p>
+<dl class="docutils">
+<dt>Empty (2&#8217;b11)</dt>
+<dd>Nothing is written into the specific entry yet. It is in an uninitialized state (all bytes <code class="docutils literal"><span class="pre">0xff</span></code>).</dd>
+<dt>Written (2&#8217;b10)</dt>
+<dd>A key-value pair (or part of key-value pair which spans multiple entries) has been written into the entry.</dd>
+<dt>Erased (2&#8217;b00)</dt>
+<dd>A key-value pair in this entry has been discarded. Contents of this entry will not be parsed anymore.</dd>
+</dl>
+</div>
+<div class="section" id="structure-of-entry">
+<h3>Structure of entry<a class="headerlink" href="nvs_flash.html#structure-of-entry" title="Permalink to this headline">¶</a></h3>
+<p>For values of primitive types (currently integers from 1 to 8 bytes long), entry holds one key-value pair. For string and blob types, entry holds part of the whole key-value pair. In case when a key-value pair spans multiple entries, all entries are stored in the same page.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+--------+----------+----------+---------+-----------+---------------+----------+</span>
+<span class="o">|</span> <span class="n">NS</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">Type</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">Span</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">Rsv</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">CRC32</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span>    <span class="n">Key</span> <span class="p">(</span><span class="mi">16</span><span class="p">)</span>   <span class="o">|</span> <span class="n">Data</span> <span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">+--------+----------+----------+---------+-----------+---------------+----------+</span>
+
+                                               <span class="o">+--------------------------------+</span>
+                         <span class="o">+-&gt;</span>    <span class="n">Fixed</span> <span class="n">length</span><span class="p">:</span>  <span class="o">|</span> <span class="n">Data</span> <span class="p">(</span><span class="mi">8</span><span class="p">)</span>                       <span class="o">|</span>
+                         <span class="o">|</span>                     <span class="o">+--------------------------------+</span>
+          <span class="n">Data</span> <span class="nb">format</span> <span class="o">---+</span>
+                         <span class="o">|</span>                     <span class="o">+----------+---------+-----------+</span>
+                         <span class="o">+-&gt;</span> <span class="n">Variable</span> <span class="n">length</span><span class="p">:</span>  <span class="o">|</span> <span class="n">Size</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="n">Rsv</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="n">CRC32</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span>
+                                               <span class="o">+----------+---------+-----------+</span>
+</pre></div>
+</div>
+<p>Individual fields in entry structure have the following meanings:</p>
+<dl class="docutils">
+<dt>NS</dt>
+<dd>Namespace index for this entry. See section on namespaces implementation for explanation of this value.</dd>
+<dt>Type</dt>
+<dd>One byte indicating data type of value. See <code class="docutils literal"><span class="pre">ItemType</span></code> enumeration in <code class="docutils literal"><span class="pre">nvs_types.h</span></code> for possible values.</dd>
+<dt>Span</dt>
+<dd>Number of entries used by this key-value pair. For integer types, this is equal to 1. For strings and blobs this depends on value length.</dd>
+<dt>Rsv</dt>
+<dd>Unused field, should be <code class="docutils literal"><span class="pre">0xff</span></code>.</dd>
+<dt>CRC32</dt>
+<dd>Checksum calculated over all the bytes in this entry, except for the CRC32 field itself.</dd>
+<dt>Key</dt>
+<dd>Zero-terminated ASCII string containing key name. Maximum string length is 15 bytes, excluding zero terminator.</dd>
+<dt>Data</dt>
+<dd>For integer types, this field contains the value itself. If the value itself is shorter than 8 bytes it is padded to the right, with unused bytes filled with <code class="docutils literal"><span class="pre">0xff</span></code>. For string and blob values, these 8 bytes hold additional data about the value, described next:</dd>
+<dt>Size</dt>
+<dd>(Only for strings and blobs.) Size, in bytes, of actual data. For strings, this includes zero terminator.</dd>
+<dt>CRC32</dt>
+<dd>(Only for strings and blobs.) Checksum calculated over all bytes of data.</dd>
+</dl>
+<p>Variable length values (strings and blobs) are written into subsequent entries, 32 bytes per entry. <cite>Span</cite> field of the first entry indicates how many entries are used.</p>
+</div>
+<div class="section" id="id1">
+<h3>Namespaces<a class="headerlink" href="nvs_flash.html#id1" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned above, each key-value pair belongs to one of the namespaces. Namespaces identifiers (strings) are stored as keys of key-value pairs in namespace with index 0. Values corresponding to these keys are indexes of these namespaces.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">+-------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NS</span><span class="o">=</span><span class="mi">0</span> <span class="n">Type</span><span class="o">=</span><span class="n">uint8_t</span> <span class="n">Key</span><span class="o">=</span><span class="s2">&quot;wifi&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="mi">1</span>      <span class="o">|</span>   <span class="n">Entry</span> <span class="n">describing</span> <span class="n">namespace</span> <span class="s2">&quot;wifi&quot;</span>
+<span class="o">+-------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NS</span><span class="o">=</span><span class="mi">1</span> <span class="n">Type</span><span class="o">=</span><span class="n">uint32_t</span> <span class="n">Key</span><span class="o">=</span><span class="s2">&quot;channel&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="mi">6</span>  <span class="o">|</span>   <span class="n">Key</span> <span class="s2">&quot;channel&quot;</span> <span class="ow">in</span> <span class="n">namespace</span> <span class="s2">&quot;wifi&quot;</span>
+<span class="o">+-------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NS</span><span class="o">=</span><span class="mi">0</span> <span class="n">Type</span><span class="o">=</span><span class="n">uint8_t</span> <span class="n">Key</span><span class="o">=</span><span class="s2">&quot;pwm&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="mi">2</span>       <span class="o">|</span>   <span class="n">Entry</span> <span class="n">describing</span> <span class="n">namespace</span> <span class="s2">&quot;pwm&quot;</span>
+<span class="o">+-------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NS</span><span class="o">=</span><span class="mi">2</span> <span class="n">Type</span><span class="o">=</span><span class="n">uint16_t</span> <span class="n">Key</span><span class="o">=</span><span class="s2">&quot;channel&quot;</span> <span class="n">Value</span><span class="o">=</span><span class="mi">20</span> <span class="o">|</span>   <span class="n">Key</span> <span class="s2">&quot;channel&quot;</span> <span class="ow">in</span> <span class="n">namespace</span> <span class="s2">&quot;pwm&quot;</span>
+<span class="o">+-------------------------------------------+</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="item-hash-list">
+<h3>Item hash list<a class="headerlink" href="nvs_flash.html#item-hash-list" title="Permalink to this headline">¶</a></h3>
+<p>To reduce the number of reads performed from flash memory, each member of Page class maintains a list of pairs: (item index; item hash). This list makes searches much quicker. Instead of iterating over all entries, reading them from flash one at a time, <code class="docutils literal"><span class="pre">Page::findItem</span></code> first performs search for item hash in the hash list. This gives the item index within the page, if such an item exists. Due to a hash collision it is possible that a different item will be found. This is handled by falling back to iteration over items in flash.</p>
+<p>Each node in hash list contains a 24-bit hash and 8-bit item index. Hash is calculated based on item namespace and key name. CRC32 is used for calculation, result is truncated to 24 bits. To reduce overhead of storing 32-bit entries in a linked list, list is implemented as a doubly-linked list of arrays. Each array holds 29 entries, for the total size of 128 bytes, together with linked list pointers and 32-bit count field. Minimal amount of extra RAM useage per page is therefore 128 bytes, maximum is 640 bytes.</p>
+</div>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="nvs_flash.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>Two examples are provided in <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/storage">storage</a> directory of ESP-IDF examples:</p>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/storage/nvs_rw_value">storage/nvs_rw_value</a></p>
+<blockquote>
+<div><p>Demonstrates how to read and write a single integer value using NVS.</p>
+<p>The value holds the number of ESP32 module restarts. Since it is written to NVS, the value is preserved between restarts.</p>
+<p>Example also shows how to check if read / write operation was successful, or certain value is not initialized in NVS. Diagnostic is provided in plain text to help track program flow and capture any issues on the way.</p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/storage/nvs_rw_blob">storage/nvs_rw_blob</a></p>
+<blockquote>
+<div><p>Demonstrates how to read and write a single integer value and a blob (binary large object) using NVS to preserve them between ESP32 module restarts.</p>
+<blockquote>
+<div><ul class="simple">
+<li>value - tracks number of ESP32 module soft and hard restarts.</li>
+<li>blob - contains a table with module run times. The table is read from NVS to dynamically allocated RAM. New run time is added to the table on each manually triggered soft restart and written back to NVS. Triggering is done by pulling down GPIO0.</li>
+</ul>
+</div></blockquote>
+<p>Example also shows how to implement diagnostics if read / write operation was successful.</p>
+</div></blockquote>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="nvs_flash.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="nvs_flash.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/nvs_flash/include/nvs_flash.h">nvs_flash/include/nvs_flash.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="nvs_flash.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv214nvs_flash_initv">
+<span id="nvs_flash_init__void"></span><span class="target" id="nvs__flash_8h_1a0c37702eca98ffe39ff4d8a47a0e093f"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv214nvs_flash_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the default NVS partition. </p>
+<p>This API initialises the default NVS partition. The default NVS partition is the one that is labeled &#8220;nvs&#8221; in the partition table.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if storage was successfully initialized.</li>
+<li>ESP_ERR_NVS_NO_FREE_PAGES if the NVS storage contains no empty pages (which may happen if NVS partition was truncated)</li>
+<li>ESP_ERR_NOT_FOUND if no partition with label &#8220;nvs&#8221; is found in the partition table</li>
+<li>one of the error codes from the underlying flash storage driver </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224nvs_flash_init_partitionPKc">
+<span id="nvs_flash_init_partition__cCP"></span><span class="target" id="nvs__flash_8h_1ae744286f362cca501e9f3cf753d538ea"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_init_partition</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>partition_label</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv224nvs_flash_init_partitionPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize NVS flash storage for the specified partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if storage was successfully initialized.</li>
+<li>ESP_ERR_NVS_NO_FREE_PAGES if the NVS storage contains no empty pages (which may happen if NVS partition was truncated)</li>
+<li>ESP_ERR_NOT_FOUND if specified partition is not found in the partition table</li>
+<li>one of the error codes from the underlying flash storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition_label</span></code>: Label of the partition. Note that internally a reference to passed value is kept and it should be accessible for future operations</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216nvs_flash_deinitv">
+<span id="nvs_flash_deinit__void"></span><span class="target" id="nvs__flash_8h_1ab0743d413ccfb038ea2cc78a151bbfb6"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_deinit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv216nvs_flash_deinitv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deinitialize NVS storage for the default NVS partition. </p>
+<p>Default NVS partition is the partition with &#8220;nvs&#8221; label in the partition table.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success (storage was deinitialized)</li>
+<li>ESP_ERR_NVS_NOT_INITIALIZED if the storage was not initialized prior to this call </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226nvs_flash_deinit_partitionPKc">
+<span id="nvs_flash_deinit_partition__cCP"></span><span class="target" id="nvs__flash_8h_1a16c7e9782bc34910db1e2811034a113c"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_deinit_partition</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>partition_label</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv226nvs_flash_deinit_partitionPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deinitialize NVS storage for the given NVS partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_NVS_NOT_INITIALIZED if the storage for given partition was not initialized prior to this call </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition_label</span></code>: Label of the partition</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215nvs_flash_erasev">
+<span id="nvs_flash_erase__void"></span><span class="target" id="nvs__flash_8h_1ac9e4c719ccdb0d92ba974012868435cf"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_erase</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv215nvs_flash_erasev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase the default NVS partition. </p>
+<p>This function erases all contents of the default NVS partition (one with label &#8220;nvs&#8221;)</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_NOT_FOUND if there is no NVS partition labeled &#8220;nvs&#8221; in the partition table </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225nvs_flash_erase_partitionPKc">
+<span id="nvs_flash_erase_partition__cCP"></span><span class="target" id="nvs__flash_8h_1aac0d1a70e1e4fb943c7a201bc27025b4"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_flash_erase_partition</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>part_name</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv225nvs_flash_erase_partitionPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase specified NVS partition. </p>
+<p>This function erases all contents of specified NVS partition</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_NOT_FOUND if there is no NVS partition with the specified name in the partition table </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">part_name</span></code>: Name (label) of the partition to be erased</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>Header File<a class="headerlink" href="nvs_flash.html#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/nvs_flash/include/nvs.h">nvs_flash/include/nvs.h</a></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Functions<a class="headerlink" href="nvs_flash.html#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv210nvs_set_i810nvs_handlePKc6int8_t">
+<span id="nvs_set_i8__nvs_handle.cCP.int8_t"></span><span class="target" id="nvs_8h_1a00d848b3225b7c74cab88861677e70bc"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_i8</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int8_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_set_i810nvs_handlePKc6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set value for given key </p>
+<p>This family of functions set value for the key, given its name. Note that actual storage will not be updated until nvs_commit function is called.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if value was set successfully</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_READ_ONLY if storage handle was opened as read only</li>
+<li>ESP_ERR_NVS_INVALID_NAME if key name doesn&#8217;t satisfy constraints</li>
+<li>ESP_ERR_NVS_NOT_ENOUGH_SPACE if there is not enough space in the underlying storage to save the value</li>
+<li>ESP_ERR_NVS_REMOVE_FAILED if the value wasn&#8217;t updated because flash write operation has failed. The value was written however, and update will be finished after re-initialization of nvs, provided that flash operation doesn&#8217;t fail again.</li>
+<li>ESP_ERR_NVS_VALUE_TOO_LONG if the string value is too long </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from nvs_open function. Handles that were opened read only cannot be used. </li>
+<li><code class="docutils literal"><span class="pre">key</span></code>: Key name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: The value to set. For strings, the maximum length (including null character) is 1984 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210nvs_set_u810nvs_handlePKc7uint8_t">
+<span id="nvs_set_u8__nvs_handle.cCP.uint8_t"></span><span class="target" id="nvs_8h_1a3ecc30970a8c782d35d25908d960973a"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_u8</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint8_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_set_u810nvs_handlePKc7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_i1610nvs_handlePKc7int16_t">
+<span id="nvs_set_i16__nvs_handle.cCP.int16_t"></span><span class="target" id="nvs_8h_1a8b72144d625452ef53433f143c52f306"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_i16</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_i1610nvs_handlePKc7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_u1610nvs_handlePKc8uint16_t">
+<span id="nvs_set_u16__nvs_handle.cCP.uint16_t"></span><span class="target" id="nvs_8h_1a2be2015dc8325199a392899f54923d00"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_u16</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_u1610nvs_handlePKc8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_i3210nvs_handlePKc7int32_t">
+<span id="nvs_set_i32__nvs_handle.cCP.int32_t"></span><span class="target" id="nvs_8h_1a1f3663c63589882409082d9456269e3b"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_i32</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_i3210nvs_handlePKc7int32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_u3210nvs_handlePKc8uint32_t">
+<span id="nvs_set_u32__nvs_handle.cCP.uint32_t"></span><span class="target" id="nvs_8h_1a91c4e2b98c904781a475d2034b660b8c"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_u32</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_u3210nvs_handlePKc8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_i6410nvs_handlePKc7int64_t">
+<span id="nvs_set_i64__nvs_handle.cCP.int64_t"></span><span class="target" id="nvs_8h_1a2423f057136bdcb11ed22e6cc8be8212"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_i64</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_i6410nvs_handlePKc7int64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_u6410nvs_handlePKc8uint64_t">
+<span id="nvs_set_u64__nvs_handle.cCP.uint64_t"></span><span class="target" id="nvs_8h_1a5a3cbb6d6845c2d0191f92e078caa974"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_u64</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_u6410nvs_handlePKc8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_set_str10nvs_handlePKcPKc">
+<span id="nvs_set_str__nvs_handle.cCP.cCP"></span><span class="target" id="nvs_8h_1a4e3df6d1d3e13968542ee69be200efac"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_str</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, <em class="property">const</em> char *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_set_str10nvs_handlePKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210nvs_get_i810nvs_handlePKcP6int8_t">
+<span id="nvs_get_i8__nvs_handle.cCP.int8_tP"></span><span class="target" id="nvs_8h_1a428435532417051f4e62b368caeeb8e0"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_i8</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int8_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_get_i810nvs_handlePKcP6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get value for given key </p>
+<p>These functions retrieve value for the key, given its name. If key does not exist, or the requested variable type doesn&#8217;t match the type which was used when setting a value, an error is returned.</p>
+<p>In case of any error, out_value is not modified.</p>
+<p>All functions expect out_value to be a pointer to an already allocated variable of the given type.</p>
+<p><div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Example</span> <span class="n">of</span> <span class="n">using</span> <span class="n">nvs_get_i32</span><span class="p">:</span>
+<span class="n">int32_t</span> <span class="n">max_buffer_size</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">;</span> <span class="o">//</span> <span class="n">default</span> <span class="n">value</span>
+<span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">nvs_get_i32</span><span class="p">(</span><span class="n">my_handle</span><span class="p">,</span> <span class="s2">&quot;max_buffer_size&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">max_buffer_size</span><span class="p">);</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">ESP_OK</span> <span class="o">||</span> <span class="n">err</span> <span class="o">==</span> <span class="n">ESP_ERR_NVS_NOT_FOUND</span><span class="p">);</span>
+<span class="o">//</span> <span class="k">if</span> <span class="n">ESP_ERR_NVS_NOT_FOUND</span> <span class="n">was</span> <span class="n">returned</span><span class="p">,</span> <span class="n">max_buffer_size</span> <span class="n">will</span> <span class="n">still</span>
+<span class="o">//</span> <span class="n">have</span> <span class="n">its</span> <span class="n">default</span> <span class="n">value</span><span class="o">.</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if the value was retrieved successfully</li>
+<li>ESP_ERR_NVS_NOT_FOUND if the requested key doesn&#8217;t exist</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_INVALID_NAME if key name doesn&#8217;t satisfy constraints</li>
+<li>ESP_ERR_NVS_INVALID_LENGTH if length is not sufficient to store data </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from nvs_open function. </li>
+<li><code class="docutils literal"><span class="pre">key</span></code>: Key name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">out_value</span></code>: Pointer to the output value. May be NULL for nvs_get_str and nvs_get_blob, in this case required length will be returned in length argument.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210nvs_get_u810nvs_handlePKcP7uint8_t">
+<span id="nvs_get_u8__nvs_handle.cCP.uint8_tP"></span><span class="target" id="nvs_8h_1aba693e574ba8335f2448aa449a84b46d"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_u8</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint8_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_get_u810nvs_handlePKcP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_i1610nvs_handlePKcP7int16_t">
+<span id="nvs_get_i16__nvs_handle.cCP.int16_tP"></span><span class="target" id="nvs_8h_1afdf70a40ef9dd510c757e3b72b355e47"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_i16</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int16_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_i1610nvs_handlePKcP7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_u1610nvs_handlePKcP8uint16_t">
+<span id="nvs_get_u16__nvs_handle.cCP.uint16_tP"></span><span class="target" id="nvs_8h_1a5782b9aede0d984af3d32fa2fc445eba"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_u16</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint16_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_u1610nvs_handlePKcP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_i3210nvs_handlePKcP7int32_t">
+<span id="nvs_get_i32__nvs_handle.cCP.int32_tP"></span><span class="target" id="nvs_8h_1a684daad208a9af1b32e7f503a78b7575"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_i32</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int32_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_i3210nvs_handlePKcP7int32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_u3210nvs_handlePKcP8uint32_t">
+<span id="nvs_get_u32__nvs_handle.cCP.uint32_tP"></span><span class="target" id="nvs_8h_1af734cdf112897d1197c98edc4cd2098c"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_u32</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint32_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_u3210nvs_handlePKcP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_i6410nvs_handlePKcP7int64_t">
+<span id="nvs_get_i64__nvs_handle.cCP.int64_tP"></span><span class="target" id="nvs_8h_1aac4c6955acbd800a85a5a835558d6f6b"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_i64</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, int64_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_i6410nvs_handlePKcP7int64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_u6410nvs_handlePKcP8uint64_t">
+<span id="nvs_get_u64__nvs_handle.cCP.uint64_tP"></span><span class="target" id="nvs_8h_1aea2ec8d01f81c1ce117f0435d8a5b860"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_u64</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, uint64_t *<em>out_value</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_u6410nvs_handlePKcP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211nvs_get_str10nvs_handlePKcPcP6size_t">
+<span id="nvs_get_str__nvs_handle.cCP.cP.sP"></span><span class="target" id="nvs_8h_1ae8c0fc894917679f0d7753a90034ffc5"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_str</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, char *<em>out_value</em>, size_t *<em>length</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv211nvs_get_str10nvs_handlePKcPcP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get value for given key </p>
+<p>These functions retrieve value for the key, given its name. If key does not exist, or the requested variable type doesn&#8217;t match the type which was used when setting a value, an error is returned.</p>
+<p>In case of any error, out_value is not modified.</p>
+<p>All functions expect out_value to be a pointer to an already allocated variable of the given type.</p>
+<p>nvs_get_str and nvs_get_blob functions support WinAPI-style length queries. To get the size necessary to store the value, call nvs_get_str or nvs_get_blob with zero out_value and non-zero pointer to length. Variable pointed to by length argument will be set to the required length. For nvs_get_str, this length includes the zero terminator. When calling nvs_get_str and nvs_get_blob with non-zero out_value, length has to be non-zero and has to point to the length available in out_value. It is suggested that nvs_get/set_str is used for zero-terminated C strings, and nvs_get/set_blob used for arbitrary data structures.</p>
+<p><div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Example</span> <span class="p">(</span><span class="n">without</span> <span class="n">error</span> <span class="n">checking</span><span class="p">)</span> <span class="n">of</span> <span class="n">using</span> <span class="n">nvs_get_str</span> <span class="n">to</span> <span class="n">get</span> <span class="n">a</span> <span class="n">string</span> <span class="n">into</span> <span class="n">dynamic</span> <span class="n">array</span><span class="p">:</span>
+<span class="n">size_t</span> <span class="n">required_size</span><span class="p">;</span>
+<span class="n">nvs_get_str</span><span class="p">(</span><span class="n">my_handle</span><span class="p">,</span> <span class="s2">&quot;server_name&quot;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">required_size</span><span class="p">);</span>
+<span class="n">char</span><span class="o">*</span> <span class="n">server_name</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">required_size</span><span class="p">);</span>
+<span class="n">nvs_get_str</span><span class="p">(</span><span class="n">my_handle</span><span class="p">,</span> <span class="s2">&quot;server_name&quot;</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">required_size</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Example</span> <span class="p">(</span><span class="n">without</span> <span class="n">error</span> <span class="n">checking</span><span class="p">)</span> <span class="n">of</span> <span class="n">using</span> <span class="n">nvs_get_blob</span> <span class="n">to</span> <span class="n">get</span> <span class="n">a</span> <span class="n">binary</span> <span class="n">data</span>
+<span class="n">into</span> <span class="n">a</span> <span class="n">static</span> <span class="n">array</span><span class="p">:</span>
+<span class="n">uint8_t</span> <span class="n">mac_addr</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+<span class="n">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">mac_addr</span><span class="p">);</span>
+<span class="n">nvs_get_blob</span><span class="p">(</span><span class="n">my_handle</span><span class="p">,</span> <span class="s2">&quot;dst_mac_addr&quot;</span><span class="p">,</span> <span class="n">mac_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if the value was retrieved successfully</li>
+<li>ESP_ERR_NVS_NOT_FOUND if the requested key doesn&#8217;t exist</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_INVALID_NAME if key name doesn&#8217;t satisfy constraints</li>
+<li>ESP_ERR_NVS_INVALID_LENGTH if length is not sufficient to store data </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from nvs_open function. </li>
+<li><code class="docutils literal"><span class="pre">key</span></code>: Key name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">out_value</span></code>: Pointer to the output value. May be NULL for nvs_get_str and nvs_get_blob, in this case required length will be returned in length argument. </li>
+<li><code class="docutils literal"><span class="pre">length</span></code>: A non-zero pointer to the variable holding the length of out_value. In case out_value a zero, will be set to the length required to hold the value. In case out_value is not zero, will be set to the actual length of the value written. For nvs_get_str this includes zero terminator.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212nvs_get_blob10nvs_handlePKcPvP6size_t">
+<span id="nvs_get_blob__nvs_handle.cCP.voidP.sP"></span><span class="target" id="nvs_8h_1a8ee04f009271489b6b522a04cba9acd9"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_get_blob</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, void *<em>out_value</em>, size_t *<em>length</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv212nvs_get_blob10nvs_handlePKcPvP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv28nvs_openPKc13nvs_open_modeP10nvs_handle">
+<span id="nvs_open__cCP.nvs_open_mode.nvs_handleP"></span><span class="target" id="nvs_8h_1a3ee65323278ad1c58bc4ffacdcfd1d45"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_open</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>name</em>, <a class="reference internal" href="nvs_flash.html#_CPPv213nvs_open_mode" title="nvs_open_mode">nvs_open_mode</a> <em>open_mode</em>, <a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv28nvs_openPKc13nvs_open_modeP10nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open non-volatile storage with a given namespace from the default NVS partition. </p>
+<p>Multiple internal ESP-IDF and third party application modules can store their key-value pairs in the NVS module. In order to reduce possible conflicts on key names, each module can use its own namespace. The default NVS partition is the one that is labelled &#8220;nvs&#8221; in the partition table.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if storage handle was opened successfully</li>
+<li>ESP_ERR_NVS_NOT_INITIALIZED if the storage driver is not initialized</li>
+<li>ESP_ERR_NVS_PART_NOT_FOUND if the partition with label &#8220;nvs&#8221; is not found</li>
+<li>ESP_ERR_NVS_NOT_FOUND id namespace doesn&#8217;t exist yet and mode is NVS_READONLY</li>
+<li>ESP_ERR_NVS_INVALID_NAME if namespace name doesn&#8217;t satisfy constraints</li>
+<li>other error codes from the underlying storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: Namespace name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">open_mode</span></code>: NVS_READWRITE or NVS_READONLY. If NVS_READONLY, will open a handle for reading only. All write requests will be rejected for this handle. </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: If successful (return code is zero), handle will be returned in this argument.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223nvs_open_from_partitionPKcPKc13nvs_open_modeP10nvs_handle">
+<span id="nvs_open_from_partition__cCP.cCP.nvs_open_mode.nvs_handleP"></span><span class="target" id="nvs_8h_1ae35671a5071c5e6ac7e77833661d2601"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_open_from_partition</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>part_name</em>, <em class="property">const</em> char *<em>name</em>, <a class="reference internal" href="nvs_flash.html#_CPPv213nvs_open_mode" title="nvs_open_mode">nvs_open_mode</a> <em>open_mode</em>, <a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv223nvs_open_from_partitionPKcPKc13nvs_open_modeP10nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open non-volatile storage with a given namespace from specified partition. </p>
+<p>The behaviour is same as nvs_open() API. However this API can operate on a specified NVS partition instead of default NVS partition. Note that the specified partition must be registered with NVS using nvs_flash_init_partition() API.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if storage handle was opened successfully</li>
+<li>ESP_ERR_NVS_NOT_INITIALIZED if the storage driver is not initialized</li>
+<li>ESP_ERR_NVS_PART_NOT_FOUND if the partition with specified name is not found</li>
+<li>ESP_ERR_NVS_NOT_FOUND id namespace doesn&#8217;t exist yet and mode is NVS_READONLY</li>
+<li>ESP_ERR_NVS_INVALID_NAME if namespace name doesn&#8217;t satisfy constraints</li>
+<li>other error codes from the underlying storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">part_name</span></code>: Label (name) of the partition of interest for object read/write/erase </li>
+<li><code class="docutils literal"><span class="pre">name</span></code>: Namespace name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">open_mode</span></code>: NVS_READWRITE or NVS_READONLY. If NVS_READONLY, will open a handle for reading only. All write requests will be rejected for this handle. </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: If successful (return code is zero), handle will be returned in this argument.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212nvs_set_blob10nvs_handlePKcPKv6size_t">
+<span id="nvs_set_blob__nvs_handle.cCP.voidCP.s"></span><span class="target" id="nvs_8h_1ac3a6a0193bf81a7a423bc33618b4163d"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_set_blob</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em>, <em class="property">const</em> void *<em>value</em>, size_t <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv212nvs_set_blob10nvs_handlePKcPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set variable length binary value for given key </p>
+<p>This family of functions set value for the key, given its name. Note that actual storage will not be updated until nvs_commit function is called.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if value was set successfully</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_READ_ONLY if storage handle was opened as read only</li>
+<li>ESP_ERR_NVS_INVALID_NAME if key name doesn&#8217;t satisfy constraints</li>
+<li>ESP_ERR_NVS_NOT_ENOUGH_SPACE if there is not enough space in the underlying storage to save the value</li>
+<li>ESP_ERR_NVS_REMOVE_FAILED if the value wasn&#8217;t updated because flash write operation has failed. The value was written however, and update will be finished after re-initialization of nvs, provided that flash operation doesn&#8217;t fail again.</li>
+<li>ESP_ERR_NVS_VALUE_TOO_LONG if the value is too long </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from nvs_open function. Handles that were opened read only cannot be used. </li>
+<li><code class="docutils literal"><span class="pre">key</span></code>: Key name. Maximal length is 15 characters. Shouldn&#8217;t be empty. </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: The value to set. </li>
+<li><code class="docutils literal"><span class="pre">length</span></code>: length of binary value to set, in bytes; Maximum length is 1984 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213nvs_erase_key10nvs_handlePKc">
+<span id="nvs_erase_key__nvs_handle.cCP"></span><span class="target" id="nvs_8h_1a342ea370d0a68ecc92c925951984baa2"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_erase_key</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em>, <em class="property">const</em> char *<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv213nvs_erase_key10nvs_handlePKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase key-value pair with given key name. </p>
+<p>Note that actual storage may not be updated until nvs_commit function is called.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if erase operation was successful</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_READ_ONLY if handle was opened as read only</li>
+<li>ESP_ERR_NVS_NOT_FOUND if the requested key doesn&#8217;t exist</li>
+<li>other error codes from the underlying storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Storage handle obtained with nvs_open. Handles that were opened read only cannot be used.</li>
+<li><code class="docutils literal"><span class="pre">key</span></code>: Key name. Maximal length is determined by the underlying implementation, but is guaranteed to be at least 15 characters. Shouldn&#8217;t be empty.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213nvs_erase_all10nvs_handle">
+<span id="nvs_erase_all__nvs_handle"></span><span class="target" id="nvs_8h_1a4de7e006fd3cb11c2798a304f50dc3d5"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_erase_all</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv213nvs_erase_all10nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase all key-value pairs in a namespace. </p>
+<p>Note that actual storage may not be updated until nvs_commit function is called.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if erase operation was successful</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>ESP_ERR_NVS_READ_ONLY if handle was opened as read only</li>
+<li>other error codes from the underlying storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Storage handle obtained with nvs_open. Handles that were opened read only cannot be used.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210nvs_commit10nvs_handle">
+<span id="nvs_commit__nvs_handle"></span><span class="target" id="nvs_8h_1a5bbacc12c53730b91d48f0b04023023f"></span>esp_err_t <code class="descclassname"></code><code class="descname">nvs_commit</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_commit10nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write any pending changes to non-volatile storage. </p>
+<p>After setting any values, nvs_commit() must be called to ensure changes are written to non-volatile storage. Individual implementations may write to storage at other times, but this is not guaranteed.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK if the changes have been written successfully</li>
+<li>ESP_ERR_NVS_INVALID_HANDLE if handle has been closed or is NULL</li>
+<li>other error codes from the underlying storage driver </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Storage handle obtained with nvs_open. Handles that were opened read only cannot be used.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29nvs_close10nvs_handle">
+<span id="nvs_close__nvs_handle"></span><span class="target" id="nvs_8h_1a93cf027c98355dfa925d7c41db3198da"></span>void <code class="descclassname"></code><code class="descname">nvs_close</code><span class="sig-paren">(</span><a class="reference internal" href="nvs_flash.html#_CPPv210nvs_handle" title="nvs_handle">nvs_handle</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="nvs_flash.html#_CPPv29nvs_close10nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close the storage handle and free any allocated resources. </p>
+<p>This function should be called for each handle opened with nvs_open once the handle is not in use any more. Closing the handle may not automatically write the changes to nonvolatile storage. This has to be done explicitly using nvs_commit function. Once this function is called on a handle, the handle should no longer be used.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Storage handle to close </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="nvs_flash.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_BASE">
+<span class="target" id="nvs_8h_1a6ebf3d06cf50a876d6702b293e909d8b"></span><code class="descname">ESP_ERR_NVS_BASE</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_BASE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starting number of error codes </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_NOT_INITIALIZED">
+<span class="target" id="nvs_8h_1ad943a82bd363a027c66c0a96be0d18c1"></span><code class="descname">ESP_ERR_NVS_NOT_INITIALIZED</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_NOT_INITIALIZED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The storage driver is not initialized </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_NOT_FOUND">
+<span class="target" id="nvs_8h_1a082e1ba076150e1c74f78bedf51f33d3"></span><code class="descname">ESP_ERR_NVS_NOT_FOUND</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_NOT_FOUND" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id namespace doesn’t exist yet and mode is NVS_READONLY </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_TYPE_MISMATCH">
+<span class="target" id="nvs_8h_1a879189233ef6af91693744b61315b8b0"></span><code class="descname">ESP_ERR_NVS_TYPE_MISMATCH</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_TYPE_MISMATCH" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of set or get operation doesn&#8217;t match the type of value stored in NVS </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_READ_ONLY">
+<span class="target" id="nvs_8h_1a0375ec3f706dae978eec4e5ea4b63595"></span><code class="descname">ESP_ERR_NVS_READ_ONLY</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_READ_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage handle was opened as read only </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_NOT_ENOUGH_SPACE">
+<span class="target" id="nvs_8h_1a749dd12cecf7a713767e02d82a691438"></span><code class="descname">ESP_ERR_NVS_NOT_ENOUGH_SPACE</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_NOT_ENOUGH_SPACE" title="Permalink to this definition">¶</a></dt>
+<dd><p>There is not enough space in the underlying storage to save the value </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_INVALID_NAME">
+<span class="target" id="nvs_8h_1a1bd03eb2ed14371d21bad10191296603"></span><code class="descname">ESP_ERR_NVS_INVALID_NAME</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_INVALID_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Namespace name doesn’t satisfy constraints </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_INVALID_HANDLE">
+<span class="target" id="nvs_8h_1a5f8311ac86b9c5148a5a462ed807bb9c"></span><code class="descname">ESP_ERR_NVS_INVALID_HANDLE</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_INVALID_HANDLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle has been closed or is NULL </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_REMOVE_FAILED">
+<span class="target" id="nvs_8h_1a6e2dd398a871449dacf60f7291f23033"></span><code class="descname">ESP_ERR_NVS_REMOVE_FAILED</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_REMOVE_FAILED" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value wasn’t updated because flash write operation has failed. The value was written however, and update will be finished after re-initialization of nvs, provided that flash operation doesn’t fail again. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_KEY_TOO_LONG">
+<span class="target" id="nvs_8h_1a43e34b6c49c7aa954db4f04fc41e3296"></span><code class="descname">ESP_ERR_NVS_KEY_TOO_LONG</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_KEY_TOO_LONG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key name is too long </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_PAGE_FULL">
+<span class="target" id="nvs_8h_1a48b4105cbb5e8ddde83619b4ab88daa5"></span><code class="descname">ESP_ERR_NVS_PAGE_FULL</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_PAGE_FULL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal error; never returned by nvs_ API functions </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_INVALID_STATE">
+<span class="target" id="nvs_8h_1a0a66474f77e59dd4e9d0f92402c71a08"></span><code class="descname">ESP_ERR_NVS_INVALID_STATE</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_INVALID_STATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>NVS is in an inconsistent state due to a previous error. Call nvs_flash_init and nvs_open again, then retry. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_INVALID_LENGTH">
+<span class="target" id="nvs_8h_1a8fe5478e998fcb6ba2504fad13563695"></span><code class="descname">ESP_ERR_NVS_INVALID_LENGTH</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_INVALID_LENGTH" title="Permalink to this definition">¶</a></dt>
+<dd><p>String or blob length is not sufficient to store data </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_NO_FREE_PAGES">
+<span class="target" id="nvs_8h_1a0db9bc5030273dc8443de06de2bdf166"></span><code class="descname">ESP_ERR_NVS_NO_FREE_PAGES</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_NO_FREE_PAGES" title="Permalink to this definition">¶</a></dt>
+<dd><p>NVS partition doesn&#8217;t contain any empty pages. This may happen if NVS partition was truncated. Erase the whole partition and call nvs_flash_init again. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_VALUE_TOO_LONG">
+<span class="target" id="nvs_8h_1a069270375766125d42cd881d17e0caac"></span><code class="descname">ESP_ERR_NVS_VALUE_TOO_LONG</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_VALUE_TOO_LONG" title="Permalink to this definition">¶</a></dt>
+<dd><p>String or blob length is longer than supported by the implementation </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_NVS_PART_NOT_FOUND">
+<span class="target" id="nvs_8h_1ab5c583c77736f31153212fc24e9ad428"></span><code class="descname">ESP_ERR_NVS_PART_NOT_FOUND</code><a class="headerlink" href="nvs_flash.html#c.ESP_ERR_NVS_PART_NOT_FOUND" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partition with specified name is not found in the partition table </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.NVS_DEFAULT_PART_NAME">
+<span class="target" id="nvs_8h_1a4e567a079a04ef71a18d21de58bd9b5a"></span><code class="descname">NVS_DEFAULT_PART_NAME</code><a class="headerlink" href="nvs_flash.html#c.NVS_DEFAULT_PART_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default partition name of the NVS partition in the partition table </p>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="nvs_flash.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv210nvs_handle">
+<span id="nvs_handle"></span><span class="target" id="nvs_8h_1ac594cc4e62d59e54d9ea0d2cf3b6d648"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">nvs_handle</code><a class="headerlink" href="nvs_flash.html#_CPPv210nvs_handle" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opaque pointer type representing non-volatile storage handle </p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="nvs_flash.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv213nvs_open_mode">
+<span id="nvs_open_mode"></span><span class="target" id="nvs_8h_1a737bd8c1d556ff9ce5e4184837fb29e0"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">nvs_open_mode</code><a class="headerlink" href="nvs_flash.html#_CPPv213nvs_open_mode" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mode of opening the non-volatile storage. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv212NVS_READONLY">
+<span id="NVS_READONLY"></span><span class="target" id="nvs_8h_1a737bd8c1d556ff9ce5e4184837fb29e0adcb7dd95b10700e8855315dd2a88c02d"></span><code class="descname">NVS_READONLY</code><a class="headerlink" href="nvs_flash.html#_CPPv212NVS_READONLY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read only </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213NVS_READWRITE">
+<span id="NVS_READWRITE"></span><span class="target" id="nvs_8h_1a737bd8c1d556ff9ce5e4184837fb29e0afd73ea5fe0b78c36af2a47b3bb788d7b"></span><code class="descname">NVS_READWRITE</code><a class="headerlink" href="nvs_flash.html#_CPPv213NVS_READWRITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read and write </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vfs.html" class="btn btn-neutral float-right" title="Virtual filesystem component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="spi_flash.html" class="btn btn-neutral" title="SPI Flash APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

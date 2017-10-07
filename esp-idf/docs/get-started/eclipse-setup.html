@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Build and Flash with Eclipse IDE &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="Get Started" href="index.html"/>
+        <link rel="next" title="Eclipse IDE on Windows" href="eclipse-setup-windows.html"/>
+        <link rel="prev" title="Build and Flash with Make" href="make-project.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-need">What You Need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#guides">Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-toolchain">Setup Toolchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-esp-idf">Get ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-path-to-esp-idf">Setup Path to ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#start-a-project">Start a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#connect">Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#build-and-flash">Build and Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#monitor">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-esp-idf">Updating ESP-IDF</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#related-documents">Related Documents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="add-idf_path-to-profile.html">Add IDF_PATH to User Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="establish-serial-connection.html">Establish Serial Connection with ESP32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="make-project.html">Build and Flash with Make</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="eclipse-setup.html#">Build and Flash with Eclipse IDE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eclipse-setup.html#installing-eclipse-ide">Installing Eclipse IDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eclipse-setup.html#windows-users">Windows Users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eclipse-setup.html#setting-up-eclipse">Setting up Eclipse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="idf-monitor.html">IDF Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchain-setup-scratch.html">Customized Setup of Toolchain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Get Started</a> &raquo;</li>
+        
+      <li>Build and Flash with Eclipse IDE</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get-started/eclipse-setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build-and-flash-with-eclipse-ide">
+<h1>Build and Flash with Eclipse IDE<a class="headerlink" href="eclipse-setup.html#build-and-flash-with-eclipse-ide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-eclipse-ide">
+<span id="eclipse-install-steps"></span><h2>Installing Eclipse IDE<a class="headerlink" href="eclipse-setup.html#installing-eclipse-ide" title="Permalink to this headline">¶</a></h2>
+<p>The Eclipse IDE gives you a graphical integrated development environment for writing, compiling and debugging ESP-IDF projects.</p>
+<ul class="simple">
+<li>Start by installing the esp-idf for your platform (see files in this directory with steps for Windows, OS X, Linux).</li>
+<li>We suggest building a project from the command line first, to get a feel for how that process works. You also need to use the command line to configure your esp-idf project (via <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code>), this is not currently supported inside Eclipse.</li>
+<li>Download the Eclipse Installer for your platform from <a class="reference external" href="https://www.eclipse.org/">eclipse.org</a>.</li>
+<li>When running the Eclipse Installer, choose &#8220;Eclipse for C/C++ Development&#8221; (in other places you&#8217;ll see this referred to as CDT.)</li>
+</ul>
+</div>
+<div class="section" id="windows-users">
+<h2>Windows Users<a class="headerlink" href="eclipse-setup.html#windows-users" title="Permalink to this headline">¶</a></h2>
+<p>Using ESP-IDF with Eclipse on Windows requires different configuration steps. <a class="reference internal" href="eclipse-setup-windows.html#eclipse-windows-setup"><span class="std std-ref">See the Eclipse IDE on Windows guide</span></a>.</p>
+</div>
+<div class="section" id="setting-up-eclipse">
+<h2>Setting up Eclipse<a class="headerlink" href="eclipse-setup.html#setting-up-eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Once your new Eclipse installation launches, follow these steps:</p>
+<div class="section" id="import-new-project">
+<h3>Import New Project<a class="headerlink" href="eclipse-setup.html#import-new-project" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Eclipse makes use of the Makefile support in ESP-IDF. This means you need to start by creating an ESP-IDF project. You can use the idf-template project from github, or open one of the examples in the esp-idf examples subdirectory.</li>
+<li>Once Eclipse is running, choose File -&gt; Import...</li>
+<li>In the dialog that pops up, choose &#8220;C/C++&#8221; -&gt; &#8220;Existing Code as Makefile Project&#8221; and click Next.</li>
+<li>On the next page, enter &#8220;Existing Code Location&#8221; to be the directory of your IDF project. Don&#8217;t specify the path to the ESP-IDF directory itself (that comes later). The directory you specify should contain a file named &#8220;Makefile&#8221; (the project Makefile).</li>
+<li>On the same page, under &#8220;Toolchain for Indexer Settings&#8221; choose &#8220;Cross GCC&#8221;. Then click Finish.</li>
+</ul>
+</div>
+<div class="section" id="project-properties">
+<h3>Project Properties<a class="headerlink" href="eclipse-setup.html#project-properties" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The new project will appear under Project Explorer. Right-click the project and choose Properties from the context menu.</li>
+<li>Click on the &#8220;Environment&#8221; properties page under &#8220;C/C++ Build&#8221;. Click &#8220;Add...&#8221; and enter name <code class="docutils literal"><span class="pre">BATCH_BUILD</span></code> and value <code class="docutils literal"><span class="pre">1</span></code>.</li>
+<li>Click &#8220;Add...&#8221; again, and enter name <code class="docutils literal"><span class="pre">IDF_PATH</span></code>. The value should be the full path where ESP-IDF is installed.</li>
+<li>Edit the <code class="docutils literal"><span class="pre">PATH</span></code> environment variable. Keep the current value, and append the path to the Xtensa toolchain that will installed as part of IDF setup (<code class="docutils literal"><span class="pre">something/xtensa-esp32-elf/bin</span></code>) if this is not already listed on the PATH.</li>
+<li>On macOS, add a <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable and set it to <code class="docutils literal"><span class="pre">/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages</span></code>. This is so that the system Python, which has pyserial installed as part of the setup steps, overrides any built-in Eclipse Python.</li>
+</ul>
+<p>Navigate to &#8220;C/C++ General&#8221; -&gt; &#8220;Preprocessor Include Paths&#8221; property page:</p>
+<ul class="simple">
+<li>Click the &#8220;Providers&#8221; tab</li>
+<li>In the list of providers, click &#8220;CDT Cross GCC Built-in Compiler Settings&#8221;. Under &#8220;Command to get compiler specs&#8221;, replace the text <code class="docutils literal"><span class="pre">${COMMAND}</span></code> at the beginning of the line with <code class="docutils literal"><span class="pre">xtensa-esp32-elf-gcc</span></code>. This means the full &#8220;Command to get compiler specs&#8221; should be <code class="docutils literal"><span class="pre">xtensa-esp32-elf-gcc</span> <span class="pre">${FLAGS}</span> <span class="pre">-E</span> <span class="pre">-P</span> <span class="pre">-v</span> <span class="pre">-dD</span> <span class="pre">&quot;${INPUTS}&quot;</span></code>.</li>
+<li>In the list of providers, click &#8220;CDT GCC Build Output Parser&#8221; and type <code class="docutils literal"><span class="pre">xtensa-esp32-elf-</span></code> at the beginning of the Compiler command pattern. This means the full Compiler command pattern should be <code class="docutils literal"><span class="pre">xtensa-esp32-elf-(g?cc)|([gc]\+\+)|(clang)</span></code></li>
+</ul>
+</div>
+<div class="section" id="building-in-eclipse">
+<span id="eclipse-build-project"></span><h3>Building in Eclipse<a class="headerlink" href="eclipse-setup.html#building-in-eclipse" title="Permalink to this headline">¶</a></h3>
+<p>Before your project is first built, Eclipse may show a lot of errors and warnings about undefined values. This is because some source files are automatically generated as part of the esp-idf build process. These errors and warnings will go away after you build the project.</p>
+<ul class="simple">
+<li>Click OK to close the Properties dialog in Eclipse.</li>
+<li>Outside Eclipse, open a command line prompt. Navigate to your project directory, and run <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code> to configure your project&#8217;s esp-idf settings. This step currently has to be run outside Eclipse.</li>
+</ul>
+<p><em>If you try to build without running a configuration step first, esp-idf will prompt for configuration on the command line - but Eclipse is not able to deal with this, so the build will hang or fail.</em></p>
+<ul class="simple">
+<li>Back in Eclipse, choose Project -&gt; Build to build your project.</li>
+</ul>
+<p><strong>TIP</strong>: If your project had already been built outside Eclipse, you may need to do a Project -&gt; Clean before choosing Project -&gt; Build. This is so Eclipse can see the compiler arguments for all source files. It uses these to determine the header include paths.</p>
+</div>
+<div class="section" id="flash-from-eclipse">
+<h3>Flash from Eclipse<a class="headerlink" href="eclipse-setup.html#flash-from-eclipse" title="Permalink to this headline">¶</a></h3>
+<p>You can integrate the &#8220;make flash&#8221; target into your Eclipse project to flash using esptool.py from the Eclipse UI:</p>
+<ul class="simple">
+<li>Right-click your project in Project Explorer (important to make sure you select the project, not a directory in the project, or Eclipse may find the wrong Makefile.)</li>
+<li>Select Make Targets -&gt; Create from the context menu.</li>
+<li>Type &#8220;flash&#8221; as the target name. Leave the other options as their defaults.</li>
+<li>Now you can use Project -&gt; Make Target -&gt; Build (Shift+F9) to build the custom flash target, which will compile and flash the project.</li>
+</ul>
+<p>Note that you will need to use &#8220;make menuconfig&#8221; to set the serial port and other config options for flashing. &#8220;make menuconfig&#8221; still requires a command line terminal (see the instructions for your platform.)</p>
+<p>Follow the same steps to add <code class="docutils literal"><span class="pre">bootloader</span></code> and <code class="docutils literal"><span class="pre">partition_table</span></code> targets, if necessary.</p>
+</div>
+<div class="section" id="related-documents">
+<h3>Related Documents<a class="headerlink" href="eclipse-setup.html#related-documents" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eclipse-setup-windows.html">Eclipse IDE on Windows</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eclipse-setup-windows.html" class="btn btn-neutral float-right" title="Eclipse IDE on Windows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="make-project.html" class="btn btn-neutral" title="Build and Flash with Make" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

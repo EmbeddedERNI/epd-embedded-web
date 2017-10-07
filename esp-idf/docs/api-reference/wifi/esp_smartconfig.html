@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Smart Config &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Wi-Fi API" href="index.html"/>
+        <link rel="next" title="ESP-NOW" href="esp_now.html"/>
+        <link rel="prev" title="Wi-Fi" href="esp_wifi.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Wi-Fi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="esp_wifi.html">Wi-Fi</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="esp_smartconfig.html#">Smart Config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="esp_smartconfig.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="esp_now.html">ESPNOW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Wi-Fi API</a> &raquo;</li>
+        
+      <li>Smart Config</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/wifi/esp_smartconfig.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="smart-config">
+<h1>Smart Config<a class="headerlink" href="esp_smartconfig.html#smart-config" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="esp_smartconfig.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="esp_smartconfig.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/esp32/include/esp_smartconfig.h">esp32/include/esp_smartconfig.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="esp_smartconfig.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv227esp_smartconfig_get_versionv">
+<span id="esp_smartconfig_get_version__void"></span><span class="target" id="esp__smartconfig_8h_1ab46f7d206fbd9f74a583224c2b970ac6"></span><em class="property">const</em> char *<code class="descclassname"></code><code class="descname">esp_smartconfig_get_version</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv227esp_smartconfig_get_versionv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the version of SmartConfig. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>SmartConfig version const char. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221esp_smartconfig_start13sc_callback_tz">
+<span id="esp_smartconfig_start__sc_callback_t.z"></span><span class="target" id="esp__smartconfig_8h_1a01990e106c36f5996cc2ff1b8cab0bfa"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_smartconfig_start</code><span class="sig-paren">(</span><a class="reference internal" href="esp_smartconfig.html#_CPPv213sc_callback_t" title="sc_callback_t">sc_callback_t</a> <em>cb</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv221esp_smartconfig_start13sc_callback_tz" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start SmartConfig, config ESP device to connect AP. You need to broadcast information by phone APP. Device sniffer special packets from the air that containing SSID and password of target AP. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API can be called in station or softAP-station mode. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. Can not call esp_smartconfig_start twice before it finish, please call esp_smartconfig_stop first.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">cb</span></code>: SmartConfig callback function. </li>
+<li><code class="docutils literal"><span class="pre">...</span></code>: log 1: UART output logs; 0: UART only outputs the result.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_smartconfig_stopv">
+<span id="esp_smartconfig_stop__void"></span><span class="target" id="esp__smartconfig_8h_1a543a176d4c38f652bdbc08b03eead51b"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_smartconfig_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv220esp_smartconfig_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop SmartConfig, free the buffer taken by esp_smartconfig_start. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>Whether connect to AP succeed or not, this API should be called to free memory taken by smartconfig_start.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_esptouch_set_timeout7uint8_t">
+<span id="esp_esptouch_set_timeout__uint8_t"></span><span class="target" id="esp__smartconfig_8h_1acd76a5aba9cbbaa636bd48f07dc40f51"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_esptouch_set_timeout</code><span class="sig-paren">(</span>uint8_t <em>time_s</em><span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv224esp_esptouch_set_timeout7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set timeout of SmartConfig process. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>Timing starts from SC_STATUS_FIND_CHANNEL status. SmartConfig will restart if timeout.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">time_s</span></code>: range 15s~255s, offset:45s.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_smartconfig_set_type18smartconfig_type_t">
+<span id="esp_smartconfig_set_type__smartconfig_type_t"></span><span class="target" id="esp__smartconfig_8h_1a66ffd35b468013ac7bd5f1a1d2dc1cee"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_smartconfig_set_type</code><span class="sig-paren">(</span><a class="reference internal" href="esp_smartconfig.html#_CPPv218smartconfig_type_t" title="smartconfig_type_t">smartconfig_type_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv224esp_smartconfig_set_type18smartconfig_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set protocol type of SmartConfig. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>If users need to set the SmartConfig type, please set it before calling esp_smartconfig_start.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">type</span></code>: Choose from the smartconfig_type_t.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_smartconfig_fast_modeb">
+<span id="esp_smartconfig_fast_mode__b"></span><span class="target" id="esp__smartconfig_8h_1a6773e238d2a1444b0f5ad1d59f624574"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_smartconfig_fast_mode</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv225esp_smartconfig_fast_modeb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set mode of SmartConfig. default normal mode. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. Please call it before API esp_smartconfig_start. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. Fast mode have corresponding APP(phone). </dd>
+<dt><strong>Attention</strong></dt>
+<dd>3. Two mode is compatible.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">enable</span></code>: false-disable(default); true-enable;</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="esp_smartconfig.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv213sc_callback_t">
+<span id="sc_callback_t"></span><span class="target" id="esp__smartconfig_8h_1acf2f284f1b56f3629164c0c38970784d"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">sc_callback_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="esp_smartconfig.html#_CPPv220smartconfig_status_t" title="smartconfig_status_t">smartconfig_status_t</a> status, void *pdata<span class="sig-paren">)</span><a class="headerlink" href="esp_smartconfig.html#_CPPv213sc_callback_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The callback of SmartConfig, executed when smart-config status changed. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">status</span></code>: Status of SmartConfig:<ul>
+<li>SC_STATUS_GETTING_SSID_PSWD : pdata is a pointer of smartconfig_type_t, means config type.</li>
+<li>SC_STATUS_LINK : pdata is a pointer of struct station_config.</li>
+<li>SC_STATUS_LINK_OVER : pdata is a pointer of phone&#8217;s IP address(4 bytes) if pdata unequal NULL.</li>
+<li>otherwise : parameter void *pdata is NULL. </li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">pdata</span></code>: According to the different status have different values. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="esp_smartconfig.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv220smartconfig_status_t">
+<span id="smartconfig_status_t"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">smartconfig_status_t</code><a class="headerlink" href="esp_smartconfig.html#_CPPv220smartconfig_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214SC_STATUS_WAIT">
+<span id="SC_STATUS_WAIT"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266a3de75e54ab5d15e0aa697d2d35adc363"></span><code class="descname">SC_STATUS_WAIT</code> = 0<a class="headerlink" href="esp_smartconfig.html#_CPPv214SC_STATUS_WAIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Waiting to start connect </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv222SC_STATUS_FIND_CHANNEL">
+<span id="SC_STATUS_FIND_CHANNEL"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266a30fee0de55f059ac14821f8e2b22ac03"></span><code class="descname">SC_STATUS_FIND_CHANNEL</code><a class="headerlink" href="esp_smartconfig.html#_CPPv222SC_STATUS_FIND_CHANNEL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Finding target channel </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv227SC_STATUS_GETTING_SSID_PSWD">
+<span id="SC_STATUS_GETTING_SSID_PSWD"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266aefc9b644b16531defe122b7316cea0c0"></span><code class="descname">SC_STATUS_GETTING_SSID_PSWD</code><a class="headerlink" href="esp_smartconfig.html#_CPPv227SC_STATUS_GETTING_SSID_PSWD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getting SSID and password of target AP </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214SC_STATUS_LINK">
+<span id="SC_STATUS_LINK"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266aae1dcaae9b8358bd43499bbca2e0bf95"></span><code class="descname">SC_STATUS_LINK</code><a class="headerlink" href="esp_smartconfig.html#_CPPv214SC_STATUS_LINK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connecting to target AP </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219SC_STATUS_LINK_OVER">
+<span id="SC_STATUS_LINK_OVER"></span><span class="target" id="esp__smartconfig_8h_1acba0704a07455bd03904abeb81406266a1ae1253a12888c150c36cd30f56394dc"></span><code class="descname">SC_STATUS_LINK_OVER</code><a class="headerlink" href="esp_smartconfig.html#_CPPv219SC_STATUS_LINK_OVER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connected to AP successfully </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv218smartconfig_type_t">
+<span id="smartconfig_type_t"></span><span class="target" id="esp__smartconfig_8h_1ada8d141e87f57b27ec96a6d030f597b0"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">smartconfig_type_t</code><a class="headerlink" href="esp_smartconfig.html#_CPPv218smartconfig_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216SC_TYPE_ESPTOUCH">
+<span id="SC_TYPE_ESPTOUCH"></span><span class="target" id="esp__smartconfig_8h_1ada8d141e87f57b27ec96a6d030f597b0abae45491cc05b00bd1b069bb61e37b01"></span><code class="descname">SC_TYPE_ESPTOUCH</code> = 0<a class="headerlink" href="esp_smartconfig.html#_CPPv216SC_TYPE_ESPTOUCH" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>protocol: ESPTouch </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215SC_TYPE_AIRKISS">
+<span id="SC_TYPE_AIRKISS"></span><span class="target" id="esp__smartconfig_8h_1ada8d141e87f57b27ec96a6d030f597b0a6254d899f4bf164fdb0f3dd778c206e9"></span><code class="descname">SC_TYPE_AIRKISS</code><a class="headerlink" href="esp_smartconfig.html#_CPPv215SC_TYPE_AIRKISS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>protocol: AirKiss </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv224SC_TYPE_ESPTOUCH_AIRKISS">
+<span id="SC_TYPE_ESPTOUCH_AIRKISS"></span><span class="target" id="esp__smartconfig_8h_1ada8d141e87f57b27ec96a6d030f597b0a50e8065c00b088cdb87b8b0ded4a853c"></span><code class="descname">SC_TYPE_ESPTOUCH_AIRKISS</code><a class="headerlink" href="esp_smartconfig.html#_CPPv224SC_TYPE_ESPTOUCH_AIRKISS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>protocol: ESPTouch and AirKiss </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="esp_now.html" class="btn btn-neutral float-right" title="ESP-NOW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="esp_wifi.html" class="btn btn-neutral" title="Wi-Fi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

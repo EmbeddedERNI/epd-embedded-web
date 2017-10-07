@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Establish Serial Connection with ESP32 &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="Get Started" href="index.html"/>
+        <link rel="next" title="Build and Flash with Make" href="make-project.html"/>
+        <link rel="prev" title="Add IDF_PATH to User Profile" href="add-idf_path-to-profile.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-need">What You Need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#guides">Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-toolchain">Setup Toolchain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-esp-idf">Get ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-path-to-esp-idf">Setup Path to ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#start-a-project">Start a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#connect">Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#build-and-flash">Build and Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#monitor">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-esp-idf">Updating ESP-IDF</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#related-documents">Related Documents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="add-idf_path-to-profile.html">Add IDF_PATH to User Profile</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="establish-serial-connection.html#">Establish Serial Connection with ESP32</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="establish-serial-connection.html#connect-esp32-to-pc">Connect ESP32 to PC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="establish-serial-connection.html#check-port-on-windows">Check port on Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="establish-serial-connection.html#check-port-on-linux-and-macos">Check port on Linux and MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="establish-serial-connection.html#adding-user-to-dialout-on-linux">Adding user to <code class="docutils literal"><span class="pre">dialout</span></code> on Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="establish-serial-connection.html#verify-serial-connection">Verify serial connection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="make-project.html">Build and Flash with Make</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eclipse-setup.html">Build and Flash with Eclipse IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idf-monitor.html">IDF Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchain-setup-scratch.html">Customized Setup of Toolchain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Get Started</a> &raquo;</li>
+        
+      <li>Establish Serial Connection with ESP32</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get-started/establish-serial-connection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="establish-serial-connection-with-esp32">
+<h1>Establish Serial Connection with ESP32<a class="headerlink" href="establish-serial-connection.html#establish-serial-connection-with-esp32" title="Permalink to this headline">¶</a></h1>
+<p>This section provides guidance how to establish serial connection between ESP32 and PC.</p>
+<div class="section" id="connect-esp32-to-pc">
+<h2>Connect ESP32 to PC<a class="headerlink" href="establish-serial-connection.html#connect-esp32-to-pc" title="Permalink to this headline">¶</a></h2>
+<p>Connect the ESP32 board to the PC using the USB cable. If device driver does not install automatically, identify USB to serial converter chip on your ESP32 board (or external converter dongle), search for drivers in internet and install them.</p>
+<p>Below are the links to Windows and MacOS drivers for ESP32 boards produced by Espressif:</p>
+<ul class="simple">
+<li>ESP32 Core Board - <a class="reference external" href="https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers">CP210x USB to UART Bridge VCP Drivers</a></li>
+<li>ESP32 WROVER KIT and ESP32 Demo Board - <a class="reference external" href="http://www.ftdichip.com/Drivers/D2XX.htm">FTDI Virtual COM Port Drivers</a></li>
+</ul>
+<p>For Linux, suitable drivers should already be bundled with the operating system.</p>
+</div>
+<div class="section" id="check-port-on-windows">
+<h2>Check port on Windows<a class="headerlink" href="establish-serial-connection.html#check-port-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>Check the list of identified COM ports in the Windows Device Manager. Disconnect ESP32 and connect it back, to verify which port disappears from the list and then shows back again.</p>
+<p>Figures below show serial port for ESP32 DevKitC and ESP32 WROVER KIT</p>
+<div class="align-center figure" id="id1">
+<img alt="USB to UART bridge of ESP32-DevKitC in Windows Device Manager" src="../_images/esp32-devkitc-in-device-manager.png" />
+<p class="caption"><span class="caption-text">USB to UART bridge of ESP32-DevKitC in Windows Device Manager</span></p>
+</div>
+<div class="align-center figure" id="id2">
+<img alt="Two USB Serial Ports of ESP-WROVER-KIT in Windows Device Manager" src="../_images/esp32-wrover-kit-in-device-manager.png" />
+<p class="caption"><span class="caption-text">Two USB Serial Ports of ESP-WROVER-KIT in Windows Device Manager</span></p>
+</div>
+</div>
+<div class="section" id="check-port-on-linux-and-macos">
+<h2>Check port on Linux and MacOS<a class="headerlink" href="establish-serial-connection.html#check-port-on-linux-and-macos" title="Permalink to this headline">¶</a></h2>
+<p>To check the device name for the serial port of your ESP32 board (or external converter dongle), run this command two times, first with the board / dongle unplugged, then with plugged in. The port which appears the second time is the one you need:</p>
+<p>Linux</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">tty</span><span class="o">*</span>
+</pre></div>
+</div>
+<p>MacOS</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.*</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-user-to-dialout-on-linux">
+<h2>Adding user to <code class="docutils literal"><span class="pre">dialout</span></code> on Linux<a class="headerlink" href="establish-serial-connection.html#adding-user-to-dialout-on-linux" title="Permalink to this headline">¶</a></h2>
+<p>The currently logged user should have read and write access the serial port over USB. This is done by adding the user to <code class="docutils literal"><span class="pre">dialout</span></code> group with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>sudo usermod -a -G dialout $USER
+</pre></div>
+</div>
+<p>Make sure you re-login to enable read and write permissions for the serial port.</p>
+</div>
+<div class="section" id="verify-serial-connection">
+<h2>Verify serial connection<a class="headerlink" href="establish-serial-connection.html#verify-serial-connection" title="Permalink to this headline">¶</a></h2>
+<p>Now verify that the serial connection is operational. You can do this using a serial terminal program. In this example we will use <a class="reference external" href="http://www.putty.org/">PuTTY SSH Client</a> that is avilable for both Windows and Linux. You can use other serial program and set communication parameters like below.</p>
+<p>Run terminal, set identified serial port, baud rate = 115200, data bits = 8, stop bits = 1, and parity = N. Below are example screen shots of setting the port and such transmission parameters (in short described as  115200-8-1-N) on Windows and Linux. Remember to select exactly the same serial port you have identified in steps above.</p>
+<div class="align-center figure" id="id3">
+<img alt="Setting Serial Communication in PuTTY on Windows" src="../_images/putty-settings-windows.png" />
+<p class="caption"><span class="caption-text">Setting Serial Communication in PuTTY on Windows</span></p>
+</div>
+<div class="align-center figure" id="id4">
+<img alt="Setting Serial Communication in PuTTY on Linux" src="../_images/putty-settings-linux.png" />
+<p class="caption"><span class="caption-text">Setting Serial Communication in PuTTY on Linux</span></p>
+</div>
+<p>Then open serial port in terminal and check, if you see any log printed out by ESP32. The log contents will depend on application loaded to ESP32. An example log by ESP32 is shown below.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>ets Jun  8 2016 00:22:57
+
+rst:0x5 (DEEPSLEEP_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+ets Jun  8 2016 00:22:57
+
+rst:0x7 (TG0WDT_SYS_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0x00
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0008,len:8
+load:0x3fff0010,len:3464
+load:0x40078000,len:7828
+load:0x40080000,len:252
+entry 0x40080034
+I (44) boot: ESP-IDF v2.0-rc1-401-gf9fba35 2nd stage bootloader
+I (45) boot: compile time 18:48:10
+
+...
+</pre></div>
+</div>
+<p>If you see some legible log, it means serial connection is working and you are ready to proceed with installation and finally upload of application to ESP32.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For some serial port wiring configurations, the serial RTS &amp; DTR pins need to be disabled in the terminal program before the ESP32 will boot and produce serial output. This depends on the hardware itself, most development boards (including all Espressif boards) <em>do not</em> have this issue. The issue is present if RTS &amp; DTR are wired directly to the EN &amp; GPIO0 pins. See the <a class="reference external" href="https://github.com/espressif/esptool/wiki/ESP32-Boot-Mode-Selection#automatic-bootloader">esptool documentation</a> for more details.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Close serial terminal after verification that communication is working. In next step we are going to use another application to upload ESP32. This application will not be able to access serial port while it is open in terminal.</p>
+</div>
+<p>If you got here from section <a class="reference internal" href="index.html#get-started-connect"><span class="std std-ref">Connect</span></a> when installing s/w for ESP32 development, then go back to section <a class="reference internal" href="index.html#get-started-configure"><span class="std std-ref">Configure</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="make-project.html" class="btn btn-neutral float-right" title="Build and Flash with Make" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="add-idf_path-to-profile.html" class="btn btn-neutral" title="Add IDF_PATH to User Profile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BT AVRCP APIs &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="CLASSIC BT" href="classic_bt.html"/>
+        <link rel="next" title="Ethernet API" href="../ethernet/index.html"/>
+        <link rel="prev" title="Bluetooth A2DP API" href="esp_a2dp.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bluetooth</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="controller_vhci.html">Bluetooth Controller &amp;&amp; VHCI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bt_common.html">Bluetooth Common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bt_le.html">Bluetooth LE</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="classic_bt.html">Bluetooth Classic</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="esp_gap_bt.html">BT GAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_a2dp.html">BT A2DP</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="esp_avrc.html#">BT AVRC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Bluetooth API</a> &raquo;</li>
+        
+          <li><a href="classic_bt.html">CLASSIC BT</a> &raquo;</li>
+        
+      <li>BT AVRCP APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/bluetooth/esp_avrc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bt-avrcp-apis">
+<h1>BT AVRCP APIs<a class="headerlink" href="esp_avrc.html#bt-avrcp-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="esp_avrc.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>Bluetooth AVRCP reference APIs.</p>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="esp_avrc.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="esp_avrc.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="esp_avrc.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/bt/bluedroid/api/include/esp_avrc_api.h">bt/bluedroid/api/include/esp_avrc_api.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="esp_avrc.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv229esp_avrc_ct_register_callback16esp_avrc_ct_cb_t">
+<span id="esp_avrc_ct_register_callback__esp_avrc_ct_cb_t"></span><span class="target" id="esp__avrc__api_8h_1a9bdf38d2c1b7c854642e6d277d24e8a4"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_avrc_ct_register_callback</code><span class="sig-paren">(</span><a class="reference internal" href="esp_avrc.html#_CPPv216esp_avrc_ct_cb_t" title="esp_avrc_ct_cb_t">esp_avrc_ct_cb_t</a> <em>callback</em><span class="sig-paren">)</span><a class="headerlink" href="esp_avrc.html#_CPPv229esp_avrc_ct_register_callback16esp_avrc_ct_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register application callbacks to AVRCP module; for now only AVRCP Controller role is supported. This function should be called after esp_bluedroid_enable() completes successfully. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: success</li>
+<li>ESP_INVALID_STATE: if bluetooth stack is not yet enabled</li>
+<li>ESP_FAIL: others </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">callback</span></code>: AVRCP controller callback function</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_avrc_ct_initv">
+<span id="esp_avrc_ct_init__void"></span><span class="target" id="esp__avrc__api_8h_1a56e84c559f9afafe1b3f6fe565326ded"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_avrc_ct_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_avrc.html#_CPPv216esp_avrc_ct_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the bluetooth AVRCP controller module, This function should be called after esp_bluedroid_enable() completes successfully. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: success</li>
+<li>ESP_INVALID_STATE: if bluetooth stack is not yet enabled</li>
+<li>ESP_FAIL: others </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_avrc_ct_deinitv">
+<span id="esp_avrc_ct_deinit__void"></span><span class="target" id="esp__avrc__api_8h_1a930a3a7e4d13a833c240ed88e7db50a4"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_avrc_ct_deinit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_avrc.html#_CPPv218esp_avrc_ct_deinitv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>De-initialize AVRCP controller module. This function should be called after after esp_bluedroid_enable() completes successfully. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: success</li>
+<li>ESP_INVALID_STATE: if bluetooth stack is not yet enabled</li>
+<li>ESP_FAIL: others </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv232esp_avrc_ct_send_passthrough_cmd7uint8_t7uint8_t7uint8_t">
+<span id="esp_avrc_ct_send_passthrough_cmd__uint8_t.uint8_t.uint8_t"></span><span class="target" id="esp__avrc__api_8h_1aa5cd3b236a68cd3b82d850e8dfb3372f"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_avrc_ct_send_passthrough_cmd</code><span class="sig-paren">(</span>uint8_t <em>tl</em>, uint8_t <em>key_code</em>, uint8_t <em>key_state</em><span class="sig-paren">)</span><a class="headerlink" href="esp_avrc.html#_CPPv232esp_avrc_ct_send_passthrough_cmd7uint8_t7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send passthrough command to AVRCP target, This function should be called after ESP_AVRC_CT_CONNECTION_STATE_EVT is received and AVRCP connection is established. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: success</li>
+<li>ESP_INVALID_STATE: if bluetooth stack is not yet enabled</li>
+<li>ESP_FAIL: others </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">tl</span></code>: : transaction label, 0 to 15, consecutive commands should use different values. </li>
+<li><code class="docutils literal"><span class="pre">key_code</span></code>: : passthrough command code, e.g. ESP_AVRC_PT_CMD_PLAY, ESP_AVRC_PT_CMD_STOP, etc. </li>
+<li><code class="docutils literal"><span class="pre">key_state</span></code>: : passthrough command key state, ESP_AVRC_PT_CMD_STATE_PRESSED or ESP_AVRC_PT_CMD_STATE_RELEASED</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="unions">
+<h3>Unions<a class="headerlink" href="esp_avrc.html#unions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv222esp_avrc_ct_cb_param_t">
+<span id="esp_avrc_ct_cb_param_t"></span><span class="target" id="unionesp__avrc__ct__cb__param__t"></span><em class="property">union </em><code class="descclassname"></code><code class="descname">esp_avrc_ct_cb_param_t</code><a class="headerlink" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_param_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;esp_avrc_api.h&gt;</em><p>AVRC controller callback parameters. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t9conn_statE">
+<span id="esp_avrc_ct_cb_param_t::conn_stat__esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param"></span><span class="target" id="unionesp__avrc__ct__cb__param__t_1a8936141819065b720f2c78989b791e97"></span><em class="property">struct</em> <a class="reference internal" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_param_t" title="esp_avrc_ct_cb_param_t">esp_avrc_ct_cb_param_t</a>::<a class="reference internal" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_paramE" title="esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param">avrc_ct_conn_stat_param</a> <code class="descname">conn_stat</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t9conn_statE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC connection status </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t8psth_rspE">
+<span id="esp_avrc_ct_cb_param_t::psth_rsp__esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param"></span><span class="target" id="unionesp__avrc__ct__cb__param__t_1ae7399b34e30fa55beda79345b4c036bf"></span><em class="property">struct</em> <a class="reference internal" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_param_t" title="esp_avrc_ct_cb_param_t">esp_avrc_ct_cb_param_t</a>::<a class="reference internal" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_paramE" title="esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param">avrc_ct_psth_rsp_param</a> <code class="descname">psth_rsp</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t8psth_rspE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>passthrough command response </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_paramE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__conn__stat__param"></span><em class="property">struct </em><code class="descname">avrc_ct_conn_stat_param</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_paramE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;esp_avrc_api.h&gt;</em><p>ESP_AVRC_CT_CONNECTION_STATE_EVT. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param9connectedE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param::connected__b"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__conn__stat__param_1a77b59ba5c5428c143e33214cfe3e0a2f"></span>bool <code class="descname">connected</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param9connectedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>whether AVRC connection is set up </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param9feat_maskE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param::feat_mask__uint32_t"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__conn__stat__param_1a7e888dc1073719c2461e065f957bd4ec"></span>uint32_t <code class="descname">feat_mask</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param9feat_maskE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC feature mask of remote device </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param10remote_bdaE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_conn_stat_param::remote_bda__esp_bd_addr_t"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__conn__stat__param_1a6af45338fac1c2f82957cc60db47d707"></span><a class="reference internal" href="esp_bt_defs.html#_CPPv213esp_bd_addr_t" title="esp_bd_addr_t">esp_bd_addr_t</a> <code class="descname">remote_bda</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t23avrc_ct_conn_stat_param10remote_bdaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote bluetooth device address </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_paramE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__psth__rsp__param"></span><em class="property">struct </em><code class="descname">avrc_ct_psth_rsp_param</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_paramE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;esp_avrc_api.h&gt;</em><p>ESP_AVRC_CT_PASSTHROUGH_RSP_EVT. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param2tlE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param::tl__uint8_t"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__psth__rsp__param_1ab406783ceb137af73c40e55c7c02f1e8"></span>uint8_t <code class="descname">tl</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param2tlE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>transaction label, 0 to 15 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param8key_codeE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param::key_code__uint8_t"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__psth__rsp__param_1ae1557c3c3df7af04d698fbc5c17d6138"></span>uint8_t <code class="descname">key_code</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param8key_codeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>passthrough command code </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param9key_stateE">
+<span id="esp_avrc_ct_cb_param_t::avrc_ct_psth_rsp_param::key_state__uint8_t"></span><span class="target" id="structesp__avrc__ct__cb__param__t_1_1avrc__ct__psth__rsp__param_1ae55e16bab384b71686afaa8d14ca5c0c"></span>uint8_t <code class="descname">key_state</code><a class="headerlink" href="esp_avrc.html#_CPPv2N22esp_avrc_ct_cb_param_t22avrc_ct_psth_rsp_param9key_stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>0 for PRESSED, 1 for RELEASED </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="esp_avrc.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv216esp_avrc_ct_cb_t">
+<span id="esp_avrc_ct_cb_t"></span><span class="target" id="esp__avrc__api_8h_1a73b33f3856a1958decf2f478aff9b717"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">esp_avrc_ct_cb_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_event_t" title="esp_avrc_ct_cb_event_t">esp_avrc_ct_cb_event_t</a> event, <a class="reference internal" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_param_t" title="esp_avrc_ct_cb_param_t">esp_avrc_ct_cb_param_t</a> *param<span class="sig-paren">)</span><a class="headerlink" href="esp_avrc.html#_CPPv216esp_avrc_ct_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRCP controller callback function type. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">event</span></code>: : Event type </li>
+<li><code class="docutils literal"><span class="pre">param</span></code>: : Pointer to callback parameter union </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="esp_avrc.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv219esp_avrc_features_t">
+<span id="esp_avrc_features_t"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895d"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_avrc_features_t</code><a class="headerlink" href="esp_avrc.html#_CPPv219esp_avrc_features_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC feature bit mask. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv218ESP_AVRC_FEAT_RCTG">
+<span id="ESP_AVRC_FEAT_RCTG"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895dad92710237ecdc1be4b5abbfafdd185b4"></span><code class="descname">ESP_AVRC_FEAT_RCTG</code> = 0x0001<a class="headerlink" href="esp_avrc.html#_CPPv218ESP_AVRC_FEAT_RCTG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote control target </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv218ESP_AVRC_FEAT_RCCT">
+<span id="ESP_AVRC_FEAT_RCCT"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895daae5f2851188b0c14af7c31cda358c97b"></span><code class="descname">ESP_AVRC_FEAT_RCCT</code> = 0x0002<a class="headerlink" href="esp_avrc.html#_CPPv218ESP_AVRC_FEAT_RCCT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote control controller </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220ESP_AVRC_FEAT_VENDOR">
+<span id="ESP_AVRC_FEAT_VENDOR"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895da678db0fac71e5eaf33a394864e64022b"></span><code class="descname">ESP_AVRC_FEAT_VENDOR</code> = 0x0008<a class="headerlink" href="esp_avrc.html#_CPPv220ESP_AVRC_FEAT_VENDOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote control vendor dependent commands </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220ESP_AVRC_FEAT_BROWSE">
+<span id="ESP_AVRC_FEAT_BROWSE"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895da68fa03b4e2222a7cd693d5e234f48226"></span><code class="descname">ESP_AVRC_FEAT_BROWSE</code> = 0x0010<a class="headerlink" href="esp_avrc.html#_CPPv220ESP_AVRC_FEAT_BROWSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>use browsing channel </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv223ESP_AVRC_FEAT_META_DATA">
+<span id="ESP_AVRC_FEAT_META_DATA"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895daf80a2494c7b5b0f3a44b64b4f1c68c4c"></span><code class="descname">ESP_AVRC_FEAT_META_DATA</code> = 0x0040<a class="headerlink" href="esp_avrc.html#_CPPv223ESP_AVRC_FEAT_META_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote control metadata transfer command/response </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv222ESP_AVRC_FEAT_ADV_CTRL">
+<span id="ESP_AVRC_FEAT_ADV_CTRL"></span><span class="target" id="esp__avrc__api_8h_1a9ef5bd5b03132bb17d1ff2e0f630895daff2c521d3ca63e36d76e6e861fc280e0"></span><code class="descname">ESP_AVRC_FEAT_ADV_CTRL</code> = 0x0200<a class="headerlink" href="esp_avrc.html#_CPPv222ESP_AVRC_FEAT_ADV_CTRL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>remote control advanced control commmand/response </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217esp_avrc_pt_cmd_t">
+<span id="esp_avrc_pt_cmd_t"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0b"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_avrc_pt_cmd_t</code><a class="headerlink" href="esp_avrc.html#_CPPv217esp_avrc_pt_cmd_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC passthrough command code. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv220ESP_AVRC_PT_CMD_PLAY">
+<span id="ESP_AVRC_PT_CMD_PLAY"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0badfd04e15848b95738ef2f4a998e69062"></span><code class="descname">ESP_AVRC_PT_CMD_PLAY</code> = 0x44<a class="headerlink" href="esp_avrc.html#_CPPv220ESP_AVRC_PT_CMD_PLAY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>play </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220ESP_AVRC_PT_CMD_STOP">
+<span id="ESP_AVRC_PT_CMD_STOP"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0ba6dcb07a8643427efb21c5334f39a1b4e"></span><code class="descname">ESP_AVRC_PT_CMD_STOP</code> = 0x45<a class="headerlink" href="esp_avrc.html#_CPPv220ESP_AVRC_PT_CMD_STOP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>stop </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv221ESP_AVRC_PT_CMD_PAUSE">
+<span id="ESP_AVRC_PT_CMD_PAUSE"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0bad169098859ab9011075f639cadf79257"></span><code class="descname">ESP_AVRC_PT_CMD_PAUSE</code> = 0x46<a class="headerlink" href="esp_avrc.html#_CPPv221ESP_AVRC_PT_CMD_PAUSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>pause </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv223ESP_AVRC_PT_CMD_FORWARD">
+<span id="ESP_AVRC_PT_CMD_FORWARD"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0bab8a290d8fdfc3ac32966d02317e8044e"></span><code class="descname">ESP_AVRC_PT_CMD_FORWARD</code> = 0x4B<a class="headerlink" href="esp_avrc.html#_CPPv223ESP_AVRC_PT_CMD_FORWARD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>forward </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv224ESP_AVRC_PT_CMD_BACKWARD">
+<span id="ESP_AVRC_PT_CMD_BACKWARD"></span><span class="target" id="esp__avrc__api_8h_1a6798943e30e800bcabb7c2be822b7f0bacb6066a62a46faea7ff14446bf0dfb2d"></span><code class="descname">ESP_AVRC_PT_CMD_BACKWARD</code> = 0x4C<a class="headerlink" href="esp_avrc.html#_CPPv224ESP_AVRC_PT_CMD_BACKWARD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>backward </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv223esp_avrc_pt_cmd_state_t">
+<span id="esp_avrc_pt_cmd_state_t"></span><span class="target" id="esp__avrc__api_8h_1a9bfb65ae02f0a23d64b001b0010bcfed"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_avrc_pt_cmd_state_t</code><a class="headerlink" href="esp_avrc.html#_CPPv223esp_avrc_pt_cmd_state_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC passthrough command state. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv229ESP_AVRC_PT_CMD_STATE_PRESSED">
+<span id="ESP_AVRC_PT_CMD_STATE_PRESSED"></span><span class="target" id="esp__avrc__api_8h_1a9bfb65ae02f0a23d64b001b0010bcfeda09766e25dcba58114cd730d4bfb417c2"></span><code class="descname">ESP_AVRC_PT_CMD_STATE_PRESSED</code> = 0<a class="headerlink" href="esp_avrc.html#_CPPv229ESP_AVRC_PT_CMD_STATE_PRESSED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>key pressed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_AVRC_PT_CMD_STATE_RELEASED">
+<span id="ESP_AVRC_PT_CMD_STATE_RELEASED"></span><span class="target" id="esp__avrc__api_8h_1a9bfb65ae02f0a23d64b001b0010bcfeda4d3f3cffb966e3a606a135b55282483a"></span><code class="descname">ESP_AVRC_PT_CMD_STATE_RELEASED</code> = 1<a class="headerlink" href="esp_avrc.html#_CPPv230ESP_AVRC_PT_CMD_STATE_RELEASED" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>key released </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv222esp_avrc_ct_cb_event_t">
+<span id="esp_avrc_ct_cb_event_t"></span><span class="target" id="esp__avrc__api_8h_1a7cf57f5e253d2e9d8eb8c31cc07d3d92"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_avrc_ct_cb_event_t</code><a class="headerlink" href="esp_avrc.html#_CPPv222esp_avrc_ct_cb_event_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>AVRC Controller callback events. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv232ESP_AVRC_CT_CONNECTION_STATE_EVT">
+<span id="ESP_AVRC_CT_CONNECTION_STATE_EVT"></span><span class="target" id="esp__avrc__api_8h_1a7cf57f5e253d2e9d8eb8c31cc07d3d92a56b2dcda3f1a0cb41183b21c713cfc5b"></span><code class="descname">ESP_AVRC_CT_CONNECTION_STATE_EVT</code> = 0<a class="headerlink" href="esp_avrc.html#_CPPv232ESP_AVRC_CT_CONNECTION_STATE_EVT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>connection state changed event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_AVRC_CT_PASSTHROUGH_RSP_EVT">
+<span id="ESP_AVRC_CT_PASSTHROUGH_RSP_EVT"></span><span class="target" id="esp__avrc__api_8h_1a7cf57f5e253d2e9d8eb8c31cc07d3d92a0d44f5b947c8c71b32a33cfcc3872f97"></span><code class="descname">ESP_AVRC_CT_PASSTHROUGH_RSP_EVT</code> = 1<a class="headerlink" href="esp_avrc.html#_CPPv231ESP_AVRC_CT_PASSTHROUGH_RSP_EVT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>passthrough response event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219ESP_AVRC_CT_MAX_EVT">
+<span id="ESP_AVRC_CT_MAX_EVT"></span><span class="target" id="esp__avrc__api_8h_1a7cf57f5e253d2e9d8eb8c31cc07d3d92a2e982df872bf874b32f46e96432973e5"></span><code class="descname">ESP_AVRC_CT_MAX_EVT</code><a class="headerlink" href="esp_avrc.html#_CPPv219ESP_AVRC_CT_MAX_EVT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ethernet/index.html" class="btn btn-neutral float-right" title="Ethernet API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="esp_a2dp.html" class="btn btn-neutral" title="Bluetooth A2DP API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

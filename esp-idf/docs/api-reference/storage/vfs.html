@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Virtual filesystem component &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Storage API" href="index.html"/>
+        <link rel="next" title="FAT Filesystem Support" href="fatfs.html"/>
+        <link rel="prev" title="Non-volatile storage library" href="nvs_flash.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spi_flash.html">SPI Flash and Partition APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="vfs.html#">Virtual Filesystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#fs-registration">FS registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#paths">Paths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#file-descriptors">File descriptors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#standard-io-streams-stdin-stdout-stderr">Standard IO streams (stdin, stdout, stderr)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vfs.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fatfs.html">FAT Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Storage API</a> &raquo;</li>
+        
+      <li>Virtual filesystem component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/storage/vfs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="virtual-filesystem-component">
+<h1>Virtual filesystem component<a class="headerlink" href="vfs.html#virtual-filesystem-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="vfs.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>Virtual filesystem (VFS) component provides a unified interface for drivers which can perform operations on file-like objects. This can be a real filesystems (FAT, SPIFFS, etc.), or device drivers which exposes file-like interface.</p>
+<p>This component allows C library functions, such as fopen and fprintf, to work with FS drivers. At high level, each FS driver is associated with some path prefix. When one of C library functions needs to open a file, VFS component searches for the FS driver associated with the file&#8217;s path, and forwards the call to that driver. VFS also forwards read, write, and other calls for the given file to the same FS driver.</p>
+<p>For example, one can register a FAT filesystem driver with <code class="docutils literal"><span class="pre">/fat</span></code> prefix, and call <code class="docutils literal"><span class="pre">fopen(&quot;/fat/file.txt&quot;,</span> <span class="pre">&quot;w&quot;)</span></code>. VFS component will then call <code class="docutils literal"><span class="pre">open</span></code> function of FAT driver and pass <code class="docutils literal"><span class="pre">/file.txt</span></code> argument to it (and appropriate mode flags). All subsequent calls to C library functions for the returned <code class="docutils literal"><span class="pre">FILE*</span></code> stream will also be forwarded to the FAT driver.</p>
+</div>
+<div class="section" id="fs-registration">
+<h2>FS registration<a class="headerlink" href="vfs.html#fs-registration" title="Permalink to this headline">¶</a></h2>
+<p>To register an FS driver, application needs to define in instance of esp_vfs_t structure and populate it with function pointers to FS APIs:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">esp_vfs_t</span> <span class="n">myfs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">fd_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">ESP_VFS_FLAG_DEFAULT</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_write</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_open</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">fstat</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_fstat</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">close</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_close</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_read</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_vfs_register</span><span class="p">(</span><span class="s">&quot;/data&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myfs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Depending on the way FS driver declares its APIs, either <code class="docutils literal"><span class="pre">read</span></code>, <code class="docutils literal"><span class="pre">write</span></code>, etc., or <code class="docutils literal"><span class="pre">read_p</span></code>, <code class="docutils literal"><span class="pre">write_p</span></code>, etc. should be used.</p>
+<p>Case 1: API functions are declared without an extra context pointer (FS driver is a singleton):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">ssize_t</span> <span class="nf">myfs_write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+
+<span class="c1">// In definition of esp_vfs_t:</span>
+    <span class="p">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">ESP_VFS_FLAG_DEFAULT</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_write</span><span class="p">,</span>
+<span class="c1">// ... other members initialized</span>
+
+<span class="c1">// When registering FS, context pointer (third argument) is NULL:</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_vfs_register</span><span class="p">(</span><span class="s">&quot;/data&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myfs</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Case 2: API functions are declared with an extra context pointer (FS driver supports multiple instances):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">ssize_t</span> <span class="nf">myfs_write</span><span class="p">(</span><span class="n">myfs_t</span><span class="o">*</span> <span class="n">fs</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+
+<span class="c1">// In definition of esp_vfs_t:</span>
+    <span class="p">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">ESP_VFS_FLAG_CONTEXT_PTR</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">write_p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myfs_write</span><span class="p">,</span>
+<span class="c1">// ... other members initialized</span>
+
+<span class="c1">// When registering FS, pass the FS context pointer into the third argument</span>
+<span class="c1">// (hypothetical myfs_mount function is used for illustrative purposes)</span>
+<span class="n">myfs_t</span><span class="o">*</span> <span class="n">myfs_inst1</span> <span class="o">=</span> <span class="n">myfs_mount</span><span class="p">(</span><span class="n">partition1</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">,</span> <span class="n">partition1</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">);</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_vfs_register</span><span class="p">(</span><span class="s">&quot;/data1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myfs</span><span class="p">,</span> <span class="n">myfs_inst1</span><span class="p">));</span>
+
+<span class="c1">// Can register another instance:</span>
+<span class="n">myfs_t</span><span class="o">*</span> <span class="n">myfs_inst2</span> <span class="o">=</span> <span class="n">myfs_mount</span><span class="p">(</span><span class="n">partition2</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">,</span> <span class="n">partition2</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">);</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_vfs_register</span><span class="p">(</span><span class="s">&quot;/data2&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myfs</span><span class="p">,</span> <span class="n">myfs_inst2</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="paths">
+<h2>Paths<a class="headerlink" href="vfs.html#paths" title="Permalink to this headline">¶</a></h2>
+<p>Each registered FS has a path prefix associated with it. This prefix may be considered a &#8220;mount point&#8221; of this partition.</p>
+<p>In case when mount points are nested, the mount point with the longest matching path prefix is used when opening the file. For instance, suppose that the following filesystems are registered in VFS:</p>
+<ul class="simple">
+<li>FS 1 on /data</li>
+<li>FS 2 on /data/static</li>
+</ul>
+<p>Then:</p>
+<ul class="simple">
+<li>FS 1 will be used when opening a file called <code class="docutils literal"><span class="pre">/data/log.txt</span></code></li>
+<li>FS 2 will be used when opening a file called <code class="docutils literal"><span class="pre">/data/static/index.html</span></code></li>
+<li>Even if <code class="docutils literal"><span class="pre">/index.html&quot;</span></code> doesn&#8217;t exist in FS 2, FS 1 will <em>not</em> be searched for <code class="docutils literal"><span class="pre">/static/index.html</span></code>.</li>
+</ul>
+<p>As a general rule, mount point names must start with the path separator (<code class="docutils literal"><span class="pre">/</span></code>) and must contain at least one character after path separator. However an empty mount point name is also supported, and may be used in cases when application needs to provide &#8220;fallback&#8221; filesystem, or override VFS functionality altogether. Such filesystem will be used if no prefix matches the path given.</p>
+<p>VFS does not handle dots (<code class="docutils literal"><span class="pre">.</span></code>) in path names in any special way. VFS does not treat <code class="docutils literal"><span class="pre">..</span></code> as a reference to the parent directory. I.e. in the above example, using a path <code class="docutils literal"><span class="pre">/data/static/../log.txt</span></code> will not result in a call to FS 1 to open <code class="docutils literal"><span class="pre">/log.txt</span></code>. Specific FS drivers (such as FATFS) may handle dots in file names differently.</p>
+<p>When opening files, FS driver will only be given relative path to files. For example:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">myfs</span></code> driver is registered with <code class="docutils literal"><span class="pre">/data</span></code> as path prefix</li>
+<li>and application calls <code class="docutils literal"><span class="pre">fopen(&quot;/data/config.json&quot;,</span> <span class="pre">...)</span></code></li>
+<li>then VFS component will call <code class="docutils literal"><span class="pre">myfs_open(&quot;/config.json&quot;,</span> <span class="pre">...)</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">myfs</span></code> driver will open <code class="docutils literal"><span class="pre">/config.json</span></code> file</li>
+</ul>
+<p>VFS doesn&#8217;t impose a limit on total file path length, but it does limit FS path prefix to <code class="docutils literal"><span class="pre">ESP_VFS_PATH_MAX</span></code> characters. Individual FS drivers may have their own filename length limitations.</p>
+</div>
+<div class="section" id="file-descriptors">
+<h2>File descriptors<a class="headerlink" href="vfs.html#file-descriptors" title="Permalink to this headline">¶</a></h2>
+<p>It is suggested that filesystem drivers should use small positive integers as file descriptors. VFS component assumes that <code class="docutils literal"><span class="pre">CONFIG_MAX_FD_BITS</span></code> bits (12 by default) are sufficient to represent a file descriptor.</p>
+<p>If filesystem is configured with an option to offset all file descriptors by a constant value, such value should be passed to <code class="docutils literal"><span class="pre">fd_offset</span></code> field of <code class="docutils literal"><span class="pre">esp_vfs_t</span></code> structure. VFS component will then remove this offset when working with FDs of that specific FS, bringing them into the range of small positive integers.</p>
+<p>While file descriptors returned by VFS component to newlib library are rarely seen by the application, the following details may be useful for debugging purposes. File descriptors returned by VFS component are composed of two parts: FS driver ID, and the actual file descriptor. Because newlib stores file descriptors as 16-bit integers, VFS component is also limited by 16 bits to store both parts.</p>
+<p>Lower <code class="docutils literal"><span class="pre">CONFIG_MAX_FD_BITS</span></code> bits are used to store zero-based file descriptor. If FS driver has a non-zero <code class="docutils literal"><span class="pre">fd_offset</span></code> field, this <code class="docutils literal"><span class="pre">fd_offset</span></code> is subtracted FDs obtained from the FS <code class="docutils literal"><span class="pre">open</span></code> call, and the result is stored in the lower bits of the FD. Higher bits are used to save the index of FS in the internal table of registered filesystems.</p>
+<p>When VFS component receives a call from newlib which has a file descriptor, this file descriptor is translated back to the FS-specific file descriptor. First, higher bits of FD are used to identify the FS. Then <code class="docutils literal"><span class="pre">fd_offset</span></code> field of the FS is added to the lower <code class="docutils literal"><span class="pre">CONFIG_MAX_FD_BITS</span></code> bits of the fd, and resulting FD is passed to the FS driver.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>   FD as seen by newlib                                    FD as seen by FS driver
+                                              +-----+
++-------+---------------+                     |     |    +------------------------+
+| FS id | Zero—based FD |     +---------------&gt; sum +----&gt;                        |
++---+---+------+--------+     |               |     |    +------------------------+
+    |          |              |               +--^--+
+    |          +--------------+                  |
+    |                                            |
+    |       +-------------+                      |
+    |       | Table of    |                      |
+    |       | registered  |                      |
+    |       | filesystems |                      |
+    |       +-------------+    +-------------+   |
+    +-------&gt;  entry      +----&gt; esp_vfs_t   |   |
+    index   +-------------+    | structure   |   |
+            |             |    |             |   |
+            |             |    | + fd_offset +---+
+            +-------------+    |             |
+                               +-------------+
+</pre></div>
+</div>
+</div>
+<div class="section" id="standard-io-streams-stdin-stdout-stderr">
+<h2>Standard IO streams (stdin, stdout, stderr)<a class="headerlink" href="vfs.html#standard-io-streams-stdin-stdout-stderr" title="Permalink to this headline">¶</a></h2>
+<p>If &#8220;UART for console output&#8221; menuconfig option is not set to &#8220;None&#8221;, then <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, and <code class="docutils literal"><span class="pre">stderr</span></code> are configured to read from, and write to, a UART. It is possible to use UART0 or UART1 for standard IO. By default, UART0 is used, with 115200 baud rate, TX pin is GPIO1 and RX pin is GPIO3. These parameters can be changed in menuconfig.</p>
+<p>Writing to <code class="docutils literal"><span class="pre">stdout</span></code> or <code class="docutils literal"><span class="pre">stderr</span></code> will send characters to the UART transmit FIFO. Reading from <code class="docutils literal"><span class="pre">stdin</span></code> will retrieve characters from the UART receive FIFO.</p>
+<p>By default, VFS uses simple functions for reading from and writing to UART. Writes busy-wait until all data is put into UART FIFO, and reads are non-blocking, returning only the data present in the FIFO. Because of this non-blocking read behavior, higher level C library calls, such as <code class="docutils literal"><span class="pre">fscanf(&quot;%d\n&quot;,</span> <span class="pre">&amp;var);</span></code> may not have desired results.</p>
+<p>Applications which use UART driver may instruct VFS to use the driver&#8217;s interrupt driven, blocking read and write functions instead. This can be done using a call to <code class="docutils literal"><span class="pre">esp_vfs_dev_uart_use_driver</span></code> function. It is also possible to revert to the basic non-blocking functions using a call to <code class="docutils literal"><span class="pre">esp_vfs_dev_uart_use_nonblocking</span></code>.</p>
+<p>VFS also provides optional newline conversion feature for input and output. Internally, most applications send and receive lines terminated by LF (&#8216;&#8217;n&#8217;&#8216;) character. Different terminal programs may require different line termination, such as CR or CRLF. Applications can configure this separately for input and output either via menuconfig, or by calls to <code class="docutils literal"><span class="pre">esp_vfs_dev_uart_set_rx_line_endings</span></code> and <code class="docutils literal"><span class="pre">esp_vfs_dev_uart_set_tx_line_endings</span></code> functions.</p>
+<div class="section" id="standard-streams-and-freertos-tasks">
+<h3>Standard streams and FreeRTOS tasks<a class="headerlink" href="vfs.html#standard-streams-and-freertos-tasks" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">FILE</span></code> objects for <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, and <code class="docutils literal"><span class="pre">stderr</span></code> are shared between all FreeRTOS tasks, but the pointers to these objects are are stored in per-task <code class="docutils literal"><span class="pre">struct</span> <span class="pre">_reent</span></code>. The following code:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;42</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>actually is translated to to this (by the preprocessor):</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">__getreent</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">_stderr</span><span class="p">,</span> <span class="s">&quot;42</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where the <code class="docutils literal"><span class="pre">__getreent()</span></code> function returns a per-task pointer to <code class="docutils literal"><span class="pre">struct</span> <span class="pre">_reent</span></code> (<a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/newlib/include/sys/reent.h#L370-L417">newlib/include/sys/reent.h#L370-L417</a>). This structure is allocated on the TCB of each task. When a task is initialized, <code class="docutils literal"><span class="pre">_stdin</span></code>, <code class="docutils literal"><span class="pre">_stdout</span></code> and <code class="docutils literal"><span class="pre">_stderr</span></code> members of <code class="docutils literal"><span class="pre">struct</span> <span class="pre">_reent</span></code> are set to the values of <code class="docutils literal"><span class="pre">_stdin</span></code>, <code class="docutils literal"><span class="pre">_stdout</span></code> and <code class="docutils literal"><span class="pre">_stderr</span></code> of <code class="docutils literal"><span class="pre">_GLOBAL_REENT</span></code> (i.e. the structure which is used before FreeRTOS is started).</p>
+<p>Such a design has the following consequences:</p>
+<ul class="simple">
+<li>It is possible to set <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, and <code class="docutils literal"><span class="pre">stderr</span></code> for any given task without affecting other tasks, e.g. by doing <code class="docutils literal"><span class="pre">stdin</span> <span class="pre">=</span> <span class="pre">fopen(&quot;/dev/uart/1&quot;,</span> <span class="pre">&quot;r&quot;)</span></code>.</li>
+<li>Closing default <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, or <code class="docutils literal"><span class="pre">stderr</span></code> using <code class="docutils literal"><span class="pre">fclose</span></code> will close the <code class="docutils literal"><span class="pre">FILE</span></code> stream object — this will affect all other tasks.</li>
+<li>To change the default <code class="docutils literal"><span class="pre">stdin</span></code>, <code class="docutils literal"><span class="pre">stdout</span></code>, <code class="docutils literal"><span class="pre">stderr</span></code> streams for new tasks, modify <code class="docutils literal"><span class="pre">_GLOBAL_REENT-&gt;_stdin</span></code> (<code class="docutils literal"><span class="pre">_stdout</span></code>, <code class="docutils literal"><span class="pre">_stderr</span></code>) before creating the task.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="vfs.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="vfs.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="vfs.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/vfs/include/esp_vfs.h">vfs/include/esp_vfs.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="vfs.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv213esp_vfs_writeP6_reentiPKv6size_t">
+<span id="esp_vfs_write___reentP.i.voidCP.s"></span><span class="target" id="esp__vfs_8h_1a3a2e3e1bf108c6e7984912f5f6e60259"></span>ssize_t <code class="descclassname"></code><code class="descname">esp_vfs_write</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, int <em>fd</em>, <em class="property">const</em> void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv213esp_vfs_writeP6_reentiPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>These functions are to be used in newlib syscall table. They will be called by newlib when it needs to use any of the syscalls. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213esp_vfs_lseekP6_reenti5off_ti">
+<span id="esp_vfs_lseek___reentP.i.off_t.i"></span><span class="target" id="esp__vfs_8h_1a4745673c71fa8df4e2863c93c8d3de59"></span>off_t <code class="descclassname"></code><code class="descname">esp_vfs_lseek</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, int <em>fd</em>, off_t <em>size</em>, int <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv213esp_vfs_lseekP6_reenti5off_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212esp_vfs_readP6_reentiPv6size_t">
+<span id="esp_vfs_read___reentP.i.voidP.s"></span><span class="target" id="esp__vfs_8h_1a884f29cef422f25fdea6cd372de4c6b6"></span>ssize_t <code class="descclassname"></code><code class="descname">esp_vfs_read</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, int <em>fd</em>, void *<em>dst</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv212esp_vfs_readP6_reentiPv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212esp_vfs_openP6_reentPKcii">
+<span id="esp_vfs_open___reentP.cCP.i.i"></span><span class="target" id="esp__vfs_8h_1a5f4b2b4e6427cdaff417b3dd89cd021c"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_open</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, <em class="property">const</em> char *<em>path</em>, int <em>flags</em>, int <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv212esp_vfs_openP6_reentPKcii" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213esp_vfs_closeP6_reenti">
+<span id="esp_vfs_close___reentP.i"></span><span class="target" id="esp__vfs_8h_1af1e87f8a6cf7278ec4c53834010a4b6b"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_close</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv213esp_vfs_closeP6_reenti" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213esp_vfs_fstatP6_reentiP4stat">
+<span id="esp_vfs_fstat___reentP.i.statP"></span><span class="target" id="esp__vfs_8h_1a7a66a9415e2ad2e48e61dc96f36b4908"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_fstat</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, int <em>fd</em>, <em class="property">struct</em> stat *<em>st</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv213esp_vfs_fstatP6_reentiP4stat" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212esp_vfs_statP6_reentPKcP4stat">
+<span id="esp_vfs_stat___reentP.cCP.statP"></span><span class="target" id="esp__vfs_8h_1a0635dc938339f8f1400e09ab1f134b6d"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_stat</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, <em class="property">const</em> char *<em>path</em>, <em class="property">struct</em> stat *<em>st</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv212esp_vfs_statP6_reentPKcP4stat" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212esp_vfs_linkP6_reentPKcPKc">
+<span id="esp_vfs_link___reentP.cCP.cCP"></span><span class="target" id="esp__vfs_8h_1a62cd80733cae312790d3c8197947af5b"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_link</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, <em class="property">const</em> char *<em>n1</em>, <em class="property">const</em> char *<em>n2</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv212esp_vfs_linkP6_reentPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214esp_vfs_unlinkP6_reentPKc">
+<span id="esp_vfs_unlink___reentP.cCP"></span><span class="target" id="esp__vfs_8h_1ae66ff057997b607c2cafc3250163985e"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_unlink</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, <em class="property">const</em> char *<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv214esp_vfs_unlinkP6_reentPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214esp_vfs_renameP6_reentPKcPKc">
+<span id="esp_vfs_rename___reentP.cCP.cCP"></span><span class="target" id="esp__vfs_8h_1abca72e5d3a37e9269cbe888de867ea1f"></span>int <code class="descclassname"></code><code class="descname">esp_vfs_rename</code><span class="sig-paren">(</span><em class="property">struct</em> _reent *<em>r</em>, <em class="property">const</em> char *<em>src</em>, <em class="property">const</em> char *<em>dst</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv214esp_vfs_renameP6_reentPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_vfs_registerPKcPK9esp_vfs_tPv">
+<span id="esp_vfs_register__cCP.esp_vfs_tCP.voidP"></span><span class="target" id="esp__vfs_8h_1a732fcf8679e84bc69c9477e326877a2c"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_register</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em>, <em class="property">const</em> <a class="reference internal" href="vfs.html#_CPPv29esp_vfs_t" title="esp_vfs_t">esp_vfs_t</a> *<em>vfs</em>, void *<em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv216esp_vfs_registerPKcPK9esp_vfs_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register a virtual filesystem for given path prefix.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK if successful, ESP_ERR_NO_MEM if too many VFSes are registered. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: file path prefix associated with the filesystem. Must be a zero-terminated C string, up to ESP_VFS_PATH_MAX characters long, and at least 2 characters long. Name must start with a &#8220;/&#8221; and must not end with &#8220;/&#8221;. For example, &#8220;/data&#8221; or &#8220;/dev/spi&#8221; are valid. These VFSes would then be called to handle file paths such as &#8220;/data/myfile.txt&#8221; or &#8220;/dev/spi/0&#8221;. </li>
+<li><code class="docutils literal"><span class="pre">vfs</span></code>: Pointer to <a class="reference internal" href="vfs.html#structesp__vfs__t"><span class="std std-ref">esp_vfs_t</span></a>, a structure which maps syscalls to the filesystem driver functions. VFS component doesn&#8217;t assume ownership of this pointer. </li>
+<li><code class="docutils literal"><span class="pre">ctx</span></code>: If vfs-&gt;flags has ESP_VFS_FLAG_CONTEXT_PTR set, a pointer which should be passed to VFS functions. Otherwise, NULL.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_vfs_unregisterPKc">
+<span id="esp_vfs_unregister__cCP"></span><span class="target" id="esp__vfs_8h_1a0d1f4219100762f93da1ba6f7a45a737"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_unregister</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv218esp_vfs_unregisterPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unregister a virtual filesystem for given path prefix</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK if successful, ESP_ERR_INVALID_STATE if VFS for given prefix hasn&#8217;t been registered </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: file prefix previously used in esp_vfs_register call </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="vfs.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv29esp_vfs_t">
+<span id="esp_vfs_t"></span><span class="target" id="structesp__vfs__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">esp_vfs_t</code><a class="headerlink" href="vfs.html#_CPPv29esp_vfs_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VFS definition structure. </p>
+<p>This structure should be filled with pointers to corresponding FS driver functions.</p>
+<p>If the FS implementation has an option to use certain offset for all file descriptors, this value should be passed into fd_offset field. Otherwise VFS component will translate all FDs to start at zero offset.</p>
+<p>Some FS implementations expect some state (e.g. pointer to some structure) to be passed in as a first argument. For these implementations, populate the members of this structure which have _p suffix, set flags member to ESP_VFS_FLAG_CONTEXT_PTR and provide the context pointer to esp_vfs_register function. If the implementation doesn&#8217;t use this extra argument, populate the members without _p suffix and set flags member to ESP_VFS_FLAG_DEFAULT.</p>
+<p>If the FS driver doesn&#8217;t provide some of the functions, set corresponding members to NULL. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N9esp_vfs_t9fd_offsetE">
+<span id="esp_vfs_t::fd_offset__i"></span><span class="target" id="structesp__vfs__t_1ab40e85ec57a012a062d656f6a5b8b2d7"></span>int <code class="descname">fd_offset</code><a class="headerlink" href="vfs.html#_CPPv2N9esp_vfs_t9fd_offsetE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>file descriptor offset, determined by the FS driver </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N9esp_vfs_t5flagsE">
+<span id="esp_vfs_t::flags__i"></span><span class="target" id="structesp__vfs__t_1a12d8a41bee2fd76b18e205efb40cc460"></span>int <code class="descname">flags</code><a class="headerlink" href="vfs.html#_CPPv2N9esp_vfs_t5flagsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ESP_VFS_FLAG_CONTEXT_PTR or ESP_VFS_FLAG_DEFAULT </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="vfs.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.ESP_VFS_PATH_MAX">
+<span class="target" id="esp__vfs_8h_1a627b235f37e74d5852546f228484e93a"></span><code class="descname">ESP_VFS_PATH_MAX</code><a class="headerlink" href="vfs.html#c.ESP_VFS_PATH_MAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum length of path prefix (not including zero terminator) </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_VFS_FLAG_DEFAULT">
+<span class="target" id="esp__vfs_8h_1a12d4f495ac0b2513c069f9f6c809ab9b"></span><code class="descname">ESP_VFS_FLAG_DEFAULT</code><a class="headerlink" href="vfs.html#c.ESP_VFS_FLAG_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default value of flags member in <a class="reference internal" href="vfs.html#structesp__vfs__t"><span class="std std-ref">esp_vfs_t</span></a> structure. </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_VFS_FLAG_CONTEXT_PTR">
+<span class="target" id="esp__vfs_8h_1ac145ec9b3f732b1f3a8b71cf3db349b5"></span><code class="descname">ESP_VFS_FLAG_CONTEXT_PTR</code><a class="headerlink" href="vfs.html#c.ESP_VFS_FLAG_CONTEXT_PTR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag which indicates that FS needs extra context pointer in syscalls. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h3>Header File<a class="headerlink" href="vfs.html#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/vfs/include/esp_vfs_dev.h">vfs/include/esp_vfs_dev.h</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Functions<a class="headerlink" href="vfs.html#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv225esp_vfs_dev_uart_registerv">
+<span id="esp_vfs_dev_uart_register"></span><span class="target" id="esp__vfs__dev_8h_1ad5b78dfc602ec9065d03666f5e8f61ce"></span>void <code class="descclassname"></code><code class="descname">esp_vfs_dev_uart_register</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv225esp_vfs_dev_uart_registerv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>add /dev/uart virtual filesystem driver </p>
+<p>This function is called from startup code to enable serial output </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv236esp_vfs_dev_uart_set_rx_line_endings18esp_line_endings_t">
+<span id="esp_vfs_dev_uart_set_rx_line_endings__esp_line_endings_t"></span><span class="target" id="esp__vfs__dev_8h_1af1367db500cd5aff1ecd13fdd6db2c41"></span>void <code class="descclassname"></code><code class="descname">esp_vfs_dev_uart_set_rx_line_endings</code><span class="sig-paren">(</span><a class="reference internal" href="vfs.html#_CPPv218esp_line_endings_t" title="esp_line_endings_t">esp_line_endings_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv236esp_vfs_dev_uart_set_rx_line_endings18esp_line_endings_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the line endings expected to be received on UART. </p>
+<p>This specifies the conversion between line endings received on UART and newlines (&#8216;
+&#8216;, LF) passed into stdin:</p>
+<p><ul class="simple">
+<li>ESP_LINE_ENDINGS_CRLF: convert CRLF to LF</li>
+<li>ESP_LINE_ENDINGS_CR: convert CR to LF</li>
+<li>ESP_LINE_ENDINGS_LF: no modification</li>
+</ul>
+</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>this function is not thread safe w.r.t. reading from UART</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: line endings expected on UART </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv236esp_vfs_dev_uart_set_tx_line_endings18esp_line_endings_t">
+<span id="esp_vfs_dev_uart_set_tx_line_endings__esp_line_endings_t"></span><span class="target" id="esp__vfs__dev_8h_1a1f9628b1b7802ebe30c6bc153a8dbec2"></span>void <code class="descclassname"></code><code class="descname">esp_vfs_dev_uart_set_tx_line_endings</code><span class="sig-paren">(</span><a class="reference internal" href="vfs.html#_CPPv218esp_line_endings_t" title="esp_line_endings_t">esp_line_endings_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv236esp_vfs_dev_uart_set_tx_line_endings18esp_line_endings_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the line endings to sent to UART. </p>
+<p>This specifies the conversion between newlines (&#8216;
+&#8216;, LF) on stdout and line endings sent over UART:</p>
+<p><ul class="simple">
+<li>ESP_LINE_ENDINGS_CRLF: convert LF to CRLF</li>
+<li>ESP_LINE_ENDINGS_CR: convert LF to CR</li>
+<li>ESP_LINE_ENDINGS_LF: no modification</li>
+</ul>
+</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>this function is not thread safe w.r.t. writing to UART</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: line endings to send to UART </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv232esp_vfs_dev_uart_use_nonblockingi">
+<span id="esp_vfs_dev_uart_use_nonblocking__i"></span><span class="target" id="esp__vfs__dev_8h_1a018841872464e2d2a79cdf8157efafb5"></span>void <code class="descclassname"></code><code class="descname">esp_vfs_dev_uart_use_nonblocking</code><span class="sig-paren">(</span>int <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv232esp_vfs_dev_uart_use_nonblockingi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set VFS to use simple functions for reading and writing UART Read is non-blocking, write is busy waiting until TX FIFO has enough space. These functions are used by default. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART peripheral number </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227esp_vfs_dev_uart_use_driveri">
+<span id="esp_vfs_dev_uart_use_driver__i"></span><span class="target" id="esp__vfs__dev_8h_1a3c6c34c20a967574b779166ad6bfdf3c"></span>void <code class="descclassname"></code><code class="descname">esp_vfs_dev_uart_use_driver</code><span class="sig-paren">(</span>int <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="vfs.html#_CPPv227esp_vfs_dev_uart_use_driveri" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set VFS to use UART driver for reading and writing </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>application must configure UART driver before calling these functions With these functions, read and write are blocking and interrupt-driven. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART peripheral number </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="vfs.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv218esp_line_endings_t">
+<span id="esp_line_endings_t"></span><span class="target" id="esp__vfs__dev_8h_1a01e0eb6622c4b3717282875c4effdf16"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_line_endings_t</code><a class="headerlink" href="vfs.html#_CPPv218esp_line_endings_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Line ending settings. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv221ESP_LINE_ENDINGS_CRLF">
+<span id="ESP_LINE_ENDINGS_CRLF"></span><span class="target" id="esp__vfs__dev_8h_1a01e0eb6622c4b3717282875c4effdf16a812df487e1b1214d2ae1ef1631b67880"></span><code class="descname">ESP_LINE_ENDINGS_CRLF</code><a class="headerlink" href="vfs.html#_CPPv221ESP_LINE_ENDINGS_CRLF" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>CR + LF. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219ESP_LINE_ENDINGS_CR">
+<span id="ESP_LINE_ENDINGS_CR"></span><span class="target" id="esp__vfs__dev_8h_1a01e0eb6622c4b3717282875c4effdf16afba5656982f4c111803912a37579f75d"></span><code class="descname">ESP_LINE_ENDINGS_CR</code><a class="headerlink" href="vfs.html#_CPPv219ESP_LINE_ENDINGS_CR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>CR. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219ESP_LINE_ENDINGS_LF">
+<span id="ESP_LINE_ENDINGS_LF"></span><span class="target" id="esp__vfs__dev_8h_1a01e0eb6622c4b3717282875c4effdf16a3525702b9521dd82991163b5a7067b0e"></span><code class="descname">ESP_LINE_ENDINGS_LF</code><a class="headerlink" href="vfs.html#_CPPv219ESP_LINE_ENDINGS_LF" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>LF. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fatfs.html" class="btn btn-neutral float-right" title="FAT Filesystem Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nvs_flash.html" class="btn btn-neutral" title="Non-volatile storage library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

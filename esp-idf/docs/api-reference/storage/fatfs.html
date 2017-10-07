@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FAT Filesystem Support &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Storage API" href="index.html"/>
+        <link rel="next" title="Wear Levelling APIs" href="wear-levelling.html"/>
+        <link rel="prev" title="Virtual filesystem component" href="vfs.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spi_flash.html">SPI Flash and Partition APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="fatfs.html#">FAT Filesystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fatfs.html#using-fatfs-with-vfs">Using FatFs with VFS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fatfs.html#using-fatfs-with-vfs-and-sd-cards">Using FatFs with VFS and SD cards</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fatfs.html#fatfs-disk-io-layer">FatFS disk IO layer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Storage API</a> &raquo;</li>
+        
+      <li>FAT Filesystem Support</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/storage/fatfs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fat-filesystem-support">
+<h1>FAT Filesystem Support<a class="headerlink" href="fatfs.html#fat-filesystem-support" title="Permalink to this headline">¶</a></h1>
+<p>ESP-IDF uses <a class="reference external" href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs</a> library to work with FAT filesystems. FatFs library resides in <code class="docutils literal"><span class="pre">fatfs</span></code> component. Although it can be used directly, many of its features can be accessed via VFS using C standard library and POSIX APIs.</p>
+<p>Additionally, FatFs has been modified to support run-time pluggable disk IO layer. This allows mapping of FatFs drives to physical disks at run-time.</p>
+<div class="section" id="using-fatfs-with-vfs">
+<h2>Using FatFs with VFS<a class="headerlink" href="fatfs.html#using-fatfs-with-vfs" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">esp_vfs_fat.h</span></code> header file defines functions to connect FatFs with VFS. <code class="docutils literal"><span class="pre">esp_vfs_fat_register</span></code> function allocates a <code class="docutils literal"><span class="pre">FATFS</span></code> structure, and registers a given path prefix in VFS. Subsequent operations on files starting with this prefix are forwarded to FatFs APIs. <code class="docutils literal"><span class="pre">esp_vfs_fat_unregister_path</span></code> function deletes the registration with VFS, and frees the <code class="docutils literal"><span class="pre">FATFS</span></code> structure.</p>
+<p>Most applications will use the following flow when working with <code class="docutils literal"><span class="pre">esp_vfs_fat_</span></code> functions:</p>
+<ol class="arabic simple">
+<li>Call <code class="docutils literal"><span class="pre">esp_vfs_fat_register</span></code>, specifying path prefix where the filesystem has to be mounted (e.g. <code class="docutils literal"><span class="pre">&quot;/sdcard&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;/spiflash&quot;</span></code>), FatFs drive number, and a variable which will receive a pointer to <code class="docutils literal"><span class="pre">FATFS</span></code> structure.</li>
+<li>Call <code class="docutils literal"><span class="pre">ff_diskio_register</span></code> function to register disk IO driver for the drive number used in step 1.</li>
+<li>Call <code class="docutils literal"><span class="pre">f_mount</span></code> function (and optionally <code class="docutils literal"><span class="pre">f_fdisk</span></code>, <code class="docutils literal"><span class="pre">f_mkfs</span></code>) to mount the filesystem using the same drive number which was passed to <code class="docutils literal"><span class="pre">esp_vfs_fat_register</span></code>. See FatFs documentation for more details.</li>
+<li>Call POSIX and C standard library functions to open, read, write, erase, copy files, etc. Use paths starting with the prefix passed to <code class="docutils literal"><span class="pre">esp_vfs_register</span></code> (such as <code class="docutils literal"><span class="pre">&quot;/sdcard/hello.txt&quot;</span></code>).</li>
+<li>Optionally, call FatFs library functions directly. Use paths without a VFS prefix in this case (<code class="docutils literal"><span class="pre">&quot;/hello.txt&quot;</span></code>).</li>
+<li>Close all open files.</li>
+<li>Call <code class="docutils literal"><span class="pre">f_mount</span></code> function for the same drive number, with NULL <code class="docutils literal"><span class="pre">FATFS*</span></code> argument, to unmount the filesystem.</li>
+<li>Call <code class="docutils literal"><span class="pre">ff_diskio_register</span></code> with NULL <code class="docutils literal"><span class="pre">ff_diskio_impl_t*</span></code> argument and the same drive number.</li>
+<li>Call <code class="docutils literal"><span class="pre">esp_vfs_fat_unregister_path</span></code> with the path where the file system is mounted to remove FatFs from VFS, and free the <code class="docutils literal"><span class="pre">FATFS</span></code> structure allocated on step 1.</li>
+</ol>
+<p>Convenience functions, <code class="docutils literal"><span class="pre">esp_vfs_fat_sdmmc_mount</span></code> and <code class="docutils literal"><span class="pre">esp_vfs_fat_sdmmc_unmount</span></code>, which wrap these steps and also handle SD card initialization, are described in the next section.</p>
+<dl class="function">
+<dt id="_CPPv220esp_vfs_fat_registerPKcPKc6size_tPP5FATFS">
+<span id="esp_vfs_fat_register__cCP.cCP.s.FATFSPP"></span><span class="target" id="esp__vfs__fat_8h_1ab35397c8c48509cd5adae0344adb00bd"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_register</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em>, <em class="property">const</em> char *<em>fat_drive</em>, size_t <em>max_files</em>, FATFS **<em>out_fs</em><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv220esp_vfs_fat_registerPKcPKc6size_tPP5FATFS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register FATFS with VFS component. </p>
+<p>This function registers given FAT drive in VFS, at the specified base path. If only one drive is used, fat_drive argument can be an empty string. Refer to FATFS library documentation on how to specify FAT drive. This function also allocates FATFS structure which should be used for f_mount call.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function doesn&#8217;t mount the drive into FATFS, it just connects POSIX and C standard library IO function with FATFS. You need to mount desired drive into FATFS separately.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if esp_vfs_fat_register was already called</li>
+<li>ESP_ERR_NO_MEM if not enough memory or too many VFSes already registered </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: path prefix where FATFS should be registered </li>
+<li><code class="docutils literal"><span class="pre">fat_drive</span></code>: FATFS drive specification; if only one drive is used, can be an empty string </li>
+<li><code class="docutils literal"><span class="pre">max_files</span></code>: maximum number of files which can be open at the same time </li>
+<li><code class="docutils literal"><span class="pre">out_fs</span></code>: pointer to FATFS structure which can be used for FATFS f_mount call is returned via this argument. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227esp_vfs_fat_unregister_pathPKc">
+<span id="esp_vfs_fat_unregister_path__cCP"></span><span class="target" id="esp__vfs__fat_8h_1a85fb92efa1bf2fac6bd209d37778d8f5"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_unregister_path</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv227esp_vfs_fat_unregister_pathPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Un-register FATFS from VFS. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>FATFS structure returned by esp_vfs_fat_register is destroyed after this call. Make sure to call f_mount function to unmount it before calling esp_vfs_fat_unregister_ctx. Difference between this function and the one above is that this one will release the correct drive, while the one above will release the last registered one</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if FATFS is not registered in VFS </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: path prefix where FATFS is registered. This is the same used when esp_vfs_fat_register was called </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="using-fatfs-with-vfs-and-sd-cards">
+<h2>Using FatFs with VFS and SD cards<a class="headerlink" href="fatfs.html#using-fatfs-with-vfs-and-sd-cards" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">esp_vfs_fat.h</span></code> header file also provides a convenience function to perform steps 1–3 and 7–9, and also handle SD card initialization: <code class="docutils literal"><span class="pre">esp_vfs_fat_sdmmc_mount</span></code>. This function does only limited error handling. Developers are encouraged to look at its source code and incorporate more advanced versions into production applications. <code class="docutils literal"><span class="pre">esp_vfs_fat_sdmmc_unmount</span></code> function unmounts the filesystem and releases resources acquired by <code class="docutils literal"><span class="pre">esp_vfs_fat_sdmmc_mount</span></code>.</p>
+<dl class="function">
+<dt id="_CPPv223esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t">
+<span id="esp_vfs_fat_sdmmc_mount__cCP.sdmmc_host_tCP.voidCP.esp_vfs_fat_mount_config_tCP.sdmmc_card_tPP"></span><span class="target" id="esp__vfs__fat_8h_1a3765e848b78d99a925001ee41c7d3890"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_sdmmc_mount</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em>, <em class="property">const</em> <a class="reference internal" href="sdmmc.html#_CPPv212sdmmc_host_t" title="sdmmc_host_t">sdmmc_host_t</a> *<em>host_config</em>, <em class="property">const</em> void *<em>slot_config</em>, <em class="property">const</em> <a class="reference internal" href="fatfs.html#_CPPv226esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t">esp_vfs_fat_mount_config_t</a> *<em>mount_config</em>, <a class="reference internal" href="sdmmc.html#_CPPv212sdmmc_card_t" title="sdmmc_card_t">sdmmc_card_t</a> **<em>out_card</em><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv223esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convenience function to get FAT filesystem on SD card registered in VFS. </p>
+<p>This is an all-in-one function which does the following:<ul class="simple">
+<li>initializes SDMMC driver or SPI driver with configuration in host_config</li>
+<li>initializes SD card with configuration in slot_config</li>
+<li>mounts FAT partition on SD card using FATFS library, with configuration in mount_config</li>
+<li>registers FATFS library with VFS, with prefix given by base_prefix variable</li>
+</ul>
+</p>
+<p>This function is intended to make example code more compact. For real world applications, developers should implement the logic of probing SD card, locating and mounting partition, and registering FATFS in VFS, with proper error checking and handling of exceptional conditions.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount was already called</li>
+<li>ESP_ERR_NO_MEM if memory can not be allocated</li>
+<li>ESP_FAIL if partition can not be mounted</li>
+<li>other error codes from SDMMC or SPI drivers, SDMMC protocol, or FATFS drivers </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: path where partition should be registered (e.g. &#8220;/sdcard&#8221;) </li>
+<li><code class="docutils literal"><span class="pre">host_config</span></code>: Pointer to structure describing SDMMC host. When using SDMMC peripheral, this structure can be initialized using SDMMC_HOST_DEFAULT() macro. When using SPI peripheral, this structure can be initialized using SDSPI_HOST_DEFAULT() macro. </li>
+<li><code class="docutils literal"><span class="pre">slot_config</span></code>: Pointer to structure with slot configuration. For SDMMC peripheral, pass a pointer to <a class="reference internal" href="sdmmc.html#structsdmmc__slot__config__t"><span class="std std-ref">sdmmc_slot_config_t</span></a> structure initialized using SDMMC_SLOT_CONFIG_DEFAULT. For SPI peripheral, pass a pointer to <a class="reference internal" href="sdmmc.html#structsdspi__slot__config__t"><span class="std std-ref">sdspi_slot_config_t</span></a> structure initialized using SDSPI_SLOT_CONFIG_DEFAULT. </li>
+<li><code class="docutils literal"><span class="pre">mount_config</span></code>: pointer to structure with extra parameters for mounting FATFS </li>
+<li><code class="docutils literal"><span class="pre">out_card</span></code>: if not NULL, pointer to the card information structure will be returned via this argument </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv226esp_vfs_fat_mount_config_t">
+<span id="esp_vfs_fat_mount_config_t"></span><span class="target" id="structesp__vfs__fat__mount__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">esp_vfs_fat_mount_config_t</code><a class="headerlink" href="fatfs.html#_CPPv226esp_vfs_fat_mount_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configuration arguments for esp_vfs_fat_sdmmc_mount and esp_vfs_fat_spiflash_mount functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N26esp_vfs_fat_mount_config_t22format_if_mount_failedE">
+<span id="esp_vfs_fat_mount_config_t::format_if_mount_failed__b"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a00a3a5b150759860512e9d44c89232ac"></span>bool <code class="descname">format_if_mount_failed</code><a class="headerlink" href="fatfs.html#_CPPv2N26esp_vfs_fat_mount_config_t22format_if_mount_failedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>If FAT partition can not be mounted, and this parameter is true, create partition table and format the filesystem. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N26esp_vfs_fat_mount_config_t9max_filesE">
+<span id="esp_vfs_fat_mount_config_t::max_files__i"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a2eec236e215f9fc7cd94fb340e32f301"></span>int <code class="descname">max_files</code><a class="headerlink" href="fatfs.html#_CPPv2N26esp_vfs_fat_mount_config_t9max_filesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Max number of open files. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_vfs_fat_sdmmc_unmountv">
+<span id="esp_vfs_fat_sdmmc_unmount"></span><span class="target" id="esp__vfs__fat_8h_1ab4cd9bdf10821f07b1c05610f5a412a9"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_sdmmc_unmount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv225esp_vfs_fat_sdmmc_unmountv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unmount FAT filesystem and release resources acquired using esp_vfs_fat_sdmmc_mount. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount hasn&#8217;t been called </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="fatfs-disk-io-layer">
+<h2>FatFS disk IO layer<a class="headerlink" href="fatfs.html#fatfs-disk-io-layer" title="Permalink to this headline">¶</a></h2>
+<p>FatFs has been extended with an API to register disk IO driver at runtime.</p>
+<p>Implementation of disk IO functions for SD/MMC cards is provided. It can be registered for the given FatFs drive number using <code class="docutils literal"><span class="pre">ff_diskio_register_sdmmc</span></code> function.</p>
+<dl class="function">
+<dt id="_CPPv218ff_diskio_register4BYTEPK16ff_diskio_impl_t">
+<span id="ff_diskio_register__BYTE.ff_diskio_impl_tCP"></span><span class="target" id="diskio_8h_1aede394e2f813eefc9492432b93b66101"></span>void <code class="descclassname"></code><code class="descname">ff_diskio_register</code><span class="sig-paren">(</span>BYTE <em>pdrv</em>, <em class="property">const</em> <a class="reference internal" href="fatfs.html#_CPPv216ff_diskio_impl_t" title="ff_diskio_impl_t">ff_diskio_impl_t</a> *<em>discio_impl</em><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv218ff_diskio_register4BYTEPK16ff_diskio_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register or unregister diskio driver for given drive number.</p>
+<p>When FATFS library calls one of disk_xxx functions for driver number pdrv, corresponding function in discio_impl for given pdrv will be called.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pdrv</span></code>: drive number </li>
+<li><code class="docutils literal"><span class="pre">discio_impl</span></code>: pointer to <a class="reference internal" href="fatfs.html#structff__diskio__impl__t"><span class="std std-ref">ff_diskio_impl_t</span></a> structure with diskio functions or NULL to unregister and free previously registered drive </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv216ff_diskio_impl_t">
+<span id="ff_diskio_impl_t"></span><span class="target" id="structff__diskio__impl__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">ff_diskio_impl_t</code><a class="headerlink" href="fatfs.html#_CPPv216ff_diskio_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Structure of pointers to disk IO driver functions.</p>
+<p>See FatFs documentation for details about these functions </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N16ff_diskio_impl_t4initE">
+<span class="target" id="structff__diskio__impl__t_1a75af438461e0226788a87b8c535cc062"></span>DSTATUS (*<code class="descname">init</code>)<span class="sig-paren">(</span>BYTE pdrv<span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv2N16ff_diskio_impl_t4initE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>disk initialization function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16ff_diskio_impl_t6statusE">
+<span class="target" id="structff__diskio__impl__t_1a4dabfe8f66545a65ba07ed244215702c"></span>DSTATUS (*<code class="descname">status</code>)<span class="sig-paren">(</span>BYTE pdrv<span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv2N16ff_diskio_impl_t6statusE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>disk status check function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16ff_diskio_impl_t4readE">
+<span class="target" id="structff__diskio__impl__t_1a5e6e2e7a5ecaf811910af3d1437b8d53"></span>DRESULT (*<code class="descname">read</code>)<span class="sig-paren">(</span>BYTE pdrv, BYTE *buff, DWORD sector, UINT count<span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv2N16ff_diskio_impl_t4readE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sector read function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16ff_diskio_impl_t5writeE">
+<span class="target" id="structff__diskio__impl__t_1a6bc20934b7eb1bea18ffda9d4f60174d"></span>DRESULT (*<code class="descname">write</code>)<span class="sig-paren">(</span>BYTE pdrv, <em class="property">const</em> BYTE *buff, DWORD sector, UINT count<span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv2N16ff_diskio_impl_t5writeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sector write function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N16ff_diskio_impl_t5ioctlE">
+<span class="target" id="structff__diskio__impl__t_1ac788ebd5d5648d78541cb56f9d6d0782"></span>DRESULT (*<code class="descname">ioctl</code>)<span class="sig-paren">(</span>BYTE pdrv, BYTE cmd, void *buff<span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv2N16ff_diskio_impl_t5ioctlE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>function to get info about disk and do some misc operations </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224ff_diskio_register_sdmmc4BYTEP12sdmmc_card_t">
+<span id="ff_diskio_register_sdmmc__BYTE.sdmmc_card_tP"></span><span class="target" id="diskio_8h_1a86f1e2865c714d20aedef86c86757ba6"></span>void <code class="descclassname"></code><code class="descname">ff_diskio_register_sdmmc</code><span class="sig-paren">(</span>BYTE <em>pdrv</em>, <a class="reference internal" href="sdmmc.html#_CPPv212sdmmc_card_t" title="sdmmc_card_t">sdmmc_card_t</a> *<em>card</em><span class="sig-paren">)</span><a class="headerlink" href="fatfs.html#_CPPv224ff_diskio_register_sdmmc4BYTEP12sdmmc_card_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register SD/MMC diskio driver</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pdrv</span></code>: drive number </li>
+<li><code class="docutils literal"><span class="pre">card</span></code>: pointer to <a class="reference internal" href="sdmmc.html#structsdmmc__card__t"><span class="std std-ref">sdmmc_card_t</span></a> structure describing a card; card should be initialized before calling f_mount. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wear-levelling.html" class="btn btn-neutral float-right" title="Wear Levelling APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vfs.html" class="btn btn-neutral" title="Virtual filesystem component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

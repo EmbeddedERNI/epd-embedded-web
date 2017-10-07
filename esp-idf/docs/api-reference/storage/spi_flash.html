@@ -1,0 +1,1401 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SPI Flash APIs &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Storage API" href="index.html"/>
+        <link rel="next" title="Non-volatile storage library" href="nvs_flash.html"/>
+        <link rel="prev" title="Storage API" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="spi_flash.html#">SPI Flash and Partition APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#spi-flash-access-apis">SPI flash access APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#spi-flash-size">SPI Flash Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#concurrency-constraints">Concurrency Constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#partition-table-apis">Partition table APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#spi-flash-encryption">SPI Flash Encryption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#memory-mapping-apis">Memory mapping APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#see-also">See also</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#implementation-details">Implementation details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#api-reference-spi-flash">API Reference - SPI Flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#api-reference-partition-table">API Reference - Partition Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spi_flash.html#api-reference-flash-encrypt">API Reference - Flash Encrypt</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatfs.html">FAT Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Storage API</a> &raquo;</li>
+        
+      <li>SPI Flash APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/storage/spi_flash.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="spi-flash-apis">
+<h1>SPI Flash APIs<a class="headerlink" href="spi_flash.html#spi-flash-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="spi_flash.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>The spi_flash component contains APIs related to reading, writing, erasing,
+memory mapping data in the external SPI flash. It also has higher-level
+APIs which work with partitions defined in the <a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">partition table</span></a>.</p>
+<p>Note that all the functionality is limited to the &#8220;main&#8221; SPI flash chip,
+the same SPI flash chip from which program runs. For <code class="docutils literal"><span class="pre">spi_flash_*</span></code> functions,
+this is a software limitation. The underlying ROM functions which work with SPI flash
+do not have provisions for working with flash chips attached to SPI peripherals
+other than SPI0.</p>
+</div>
+<div class="section" id="spi-flash-access-apis">
+<h2>SPI flash access APIs<a class="headerlink" href="spi_flash.html#spi-flash-access-apis" title="Permalink to this headline">¶</a></h2>
+<p>This is the set of APIs for working with data in flash:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">spi_flash_read</span></code> used to read data from flash to RAM</li>
+<li><code class="docutils literal"><span class="pre">spi_flash_write</span></code> used to write data from RAM to flash</li>
+<li><code class="docutils literal"><span class="pre">spi_flash_erase_sector</span></code> used to erase individual sectors of flash</li>
+<li><code class="docutils literal"><span class="pre">spi_flash_erase_range</span></code> used to erase range of addresses in flash</li>
+<li><code class="docutils literal"><span class="pre">spi_flash_get_chip_size</span></code> returns flash chip size, in bytes, as configured in menuconfig</li>
+</ul>
+<p>Generally, try to avoid using the raw SPI flash functions in favour of
+partition-specific functions.</p>
+</div>
+<div class="section" id="spi-flash-size">
+<h2>SPI Flash Size<a class="headerlink" href="spi_flash.html#spi-flash-size" title="Permalink to this headline">¶</a></h2>
+<p>The SPI flash size is configured by writing a field in the software bootloader
+image header, flashed at offset 0x1000.</p>
+<p>By default, the SPI flash size is detected by esptool.py when this bootloader is
+written to flash, and the header is updated with the correct
+size. Alternatively, it is possible to generate a fixed flash size by disabling
+detection in <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code> (under Serial Flasher Config).</p>
+<p>If it is necessary to override the configured flash size at runtime, is is
+possible to set the <code class="docutils literal"><span class="pre">chip_size</span></code> member of <code class="docutils literal"><span class="pre">g_rom_flashchip</span></code> structure. This
+size is used by <code class="docutils literal"><span class="pre">spi_flash_*</span></code> functions (in both software &amp; ROM) for bounds
+checking.</p>
+</div>
+<div class="section" id="concurrency-constraints">
+<h2>Concurrency Constraints<a class="headerlink" href="spi_flash.html#concurrency-constraints" title="Permalink to this headline">¶</a></h2>
+<p>Because the SPI flash is also used for firmware execution (via the instruction &amp;
+data caches), these caches much be disabled while reading/writing/erasing. This
+means that both CPUs must be running code from IRAM and only reading data from
+DRAM while flash write operations occur.</p>
+<p>Refer to the <a class="reference internal" href="../../api-guides/general-notes.html#memory-layout"><span class="std std-ref">application memory layout</span></a> documentation for
+an explanation of the differences between IRAM, DRAM and flash cache.</p>
+<p>To avoid reading flash cache accidentally, when one CPU commences a flash write
+or erase operation the other CPU is put into a blocked state and all
+non-IRAM-safe interrupts are disabled on both CPUs, until the flash operation
+completes.</p>
+<div class="section" id="iram-safe-interrupt-handlers">
+<span id="id1"></span><h3>IRAM-Safe Interrupt Handlers<a class="headerlink" href="spi_flash.html#iram-safe-interrupt-handlers" title="Permalink to this headline">¶</a></h3>
+<p>If you have an interrupt handler that you want to execute even when a flash
+operation is in progress (for example, for low latency operations), set the
+<code class="docutils literal"><span class="pre">ESP_INTR_FLAG_IRAM</span></code> flag when the <a class="reference internal" href="../system/intr_alloc.html"><span class="doc">interrupt handler is registered</span></a>.</p>
+<p>You must ensure all data and functions accessed by these interrupt handlers are
+located in IRAM or DRAM. This includes any functions that the handler calls.</p>
+<p>Use the <code class="docutils literal"><span class="pre">IRAM_ATTR</span></code> attribute for functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;esp_attr.h&quot;</span>
+
+<span class="n">void</span> <span class="n">IRAM_ATTR</span> <span class="n">gpio_isr_handler</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal"><span class="pre">DRAM_ATTR</span></code> and <code class="docutils literal"><span class="pre">DRAM_STR</span></code> attributes for constant data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">IRAM_ATTR</span> <span class="n">gpio_isr_handler</span><span class="p">(</span><span class="n">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="n">const</span> <span class="n">static</span> <span class="n">DRAM_ATTR</span> <span class="n">uint8_t</span> <span class="n">INDEX_DATA</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>
+   <span class="n">const</span> <span class="n">static</span> <span class="n">char</span> <span class="o">*</span><span class="n">MSG</span> <span class="o">=</span> <span class="n">DRAM_STR</span><span class="p">(</span><span class="s2">&quot;I am a string stored in RAM&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that knowing which data should be marked with <code class="docutils literal"><span class="pre">DRAM_ATTR</span></code> can be hard,
+the compiler will sometimes recognise that a variable or expression is constant
+(even if it is not marked <code class="docutils literal"><span class="pre">const</span></code>) and optimise it into flash, unless it is
+marked with <code class="docutils literal"><span class="pre">DRAM_ATTR</span></code>.</p>
+<p>If a function or symbol is not correctly put into IRAM/DRAM and the interrupt
+handler reads from the flash cache during a flash operation, it will cause a
+crash due to Illegal Instruction exception (for code which should be in IRAM) or
+garbage data to be read (for constant data which should be in DRAM).</p>
+</div>
+</div>
+<div class="section" id="partition-table-apis">
+<h2>Partition table APIs<a class="headerlink" href="spi_flash.html#partition-table-apis" title="Permalink to this headline">¶</a></h2>
+<p>ESP-IDF projects use a partition table to maintain information about various regions of
+SPI flash memory (bootloader, various application binaries, data, filesystems).
+More information about partition tables can be found <a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">here</span></a>.</p>
+<p>This component provides APIs to enumerate partitions found in the partition table
+and perform operations on them. These functions are declared in <code class="docutils literal"><span class="pre">esp_partition.h</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">esp_partition_find</span></code> used to search partition table for entries with
+specific type, returns an opaque iterator</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_get</span></code> returns a structure describing the partition, for the given iterator</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_next</span></code> advances iterator to the next partition found</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_iterator_release</span></code> releases iterator returned by <code class="docutils literal"><span class="pre">esp_partition_find</span></code></li>
+<li><code class="docutils literal"><span class="pre">esp_partition_find_first</span></code> is a convenience function which returns structure
+describing the first partition found by esp_partition_find</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_read</span></code>, <code class="docutils literal"><span class="pre">esp_partition_write</span></code>, <code class="docutils literal"><span class="pre">esp_partition_erase_range</span></code>
+are equivalent to <code class="docutils literal"><span class="pre">spi_flash_read</span></code>, <code class="docutils literal"><span class="pre">spi_flash_write</span></code>,
+<code class="docutils literal"><span class="pre">spi_flash_erase_range</span></code>, but operate within partition boundaries</li>
+</ul>
+<p>Most application code should use <code class="docutils literal"><span class="pre">esp_partition_*</span></code> APIs instead of lower level
+<code class="docutils literal"><span class="pre">spi_flash_*</span></code> APIs. Partition APIs do bounds checking and calculate correct
+offsets in flash based on data stored in partition table.</p>
+</div>
+<div class="section" id="spi-flash-encryption">
+<h2>SPI Flash Encryption<a class="headerlink" href="spi_flash.html#spi-flash-encryption" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to encrypt SPI flash contents, and have it transparenlty decrypted by hardware.</p>
+<p>Refer to the <a class="reference internal" href="../../security/flash-encryption.html"><span class="doc">Flash Encryption documentation</span></a> for more details.</p>
+</div>
+<div class="section" id="memory-mapping-apis">
+<h2>Memory mapping APIs<a class="headerlink" href="spi_flash.html#memory-mapping-apis" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 features memory hardware which allows regions of flash memory to be mapped
+into instruction and data address spaces. This mapping works only for read operations,
+it is not possible to modify contents of flash memory by writing to mapped memory
+region. Mapping happens in 64KB pages. Memory mapping hardware can map up to
+4 megabytes of flash into data address space, and up to 16 megabytes of flash into
+instruction address space. See the technical reference manual for more details
+about memory mapping hardware.</p>
+<p>Note that some number of 64KB pages is used to map the application
+itself into memory, so the actual number of available 64KB pages may be less.</p>
+<p>Reading data from flash using a memory mapped region is the only way to decrypt
+contents of flash when <a class="reference internal" href="../../security/flash-encryption.html"><span class="doc">flash encryption</span></a> is enabled.
+Decryption is performed at hardware level.</p>
+<p>Memory mapping APIs are declared in <code class="docutils literal"><span class="pre">esp_spi_flash.h</span></code> and <code class="docutils literal"><span class="pre">esp_partition.h</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">spi_flash_mmap</span></code> maps a region of physical flash addresses into instruction space or data space of the CPU</li>
+<li><code class="docutils literal"><span class="pre">spi_flash_munmap</span></code> unmaps previously mapped region</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_mmap</span></code> maps part of a partition into the instruction space or data space of the CPU</li>
+</ul>
+<p>Differences between <code class="docutils literal"><span class="pre">spi_flash_mmap</span></code> and <code class="docutils literal"><span class="pre">esp_partition_mmap</span></code> are as follows:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">spi_flash_mmap</span></code> must be given a 64KB aligned physical address</li>
+<li><code class="docutils literal"><span class="pre">esp_partition_mmap</span></code> may be given an arbitrary offset within the partition,
+it will adjust returned pointer to mapped memory as necessary</li>
+</ul>
+<p>Note that because memory mapping happens in 64KB blocks, it may be possible to
+read data outside of the partition provided to <code class="docutils literal"><span class="pre">esp_partition_mmap</span></code>.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="spi_flash.html#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">Partition Table documentation</span></a></li>
+<li><a class="reference internal" href="../system/ota.html"><span class="doc">Over The Air Update (OTA) API</span></a> provides high-level API for updating app firmware stored in flash.</li>
+<li><a class="reference internal" href="nvs_flash.html"><span class="doc">Non-Volatile Storage (NVS) API</span></a> provides a structured API for storing small items of data in SPI flash.</li>
+</ul>
+</div>
+<div class="section" id="implementation-details">
+<span id="spi-flash-implementation-details"></span><h2>Implementation details<a class="headerlink" href="spi_flash.html#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform some flash operations, we need to make sure both CPUs
+are not running any code from flash for the duration of the flash operation.
+In a single-core setup this is easy: we disable interrupts/scheduler and do
+the flash operation. In the dual-core setup this is slightly more complicated.
+We need to make sure that the other CPU doesn&#8217;t run any code from flash.</p>
+<p>When SPI flash API is called on CPU A (can be PRO or APP), we start
+spi_flash_op_block_func function on CPU B using esp_ipc_call API. This API
+wakes up high priority task on CPU B and tells it to execute given function,
+in this case spi_flash_op_block_func. This function disables cache on CPU B and
+signals that cache is disabled by setting s_flash_op_can_start flag.
+Then the task on CPU A disables cache as well, and proceeds to execute flash
+operation.</p>
+<p>While flash operation is running, interrupts can still run on CPUs A and B.
+We assume that all interrupt code is placed into RAM. Once interrupt allocation
+API is added, we should add a flag to request interrupt to be disabled for
+the duration of flash operations.</p>
+<p>Once flash operation is complete, function on CPU A sets another flag,
+s_flash_op_complete, to let the task on CPU B know that it can re-enable
+cache and release the CPU. Then the function on CPU A re-enables the cache on
+CPU A as well and returns control to the calling code.</p>
+<p>Additionally, all API functions are protected with a mutex (s_flash_op_mutex).</p>
+<p>In a single core environment (CONFIG_FREERTOS_UNICORE enabled), we simply
+disable both caches, no inter-CPU communication takes place.</p>
+</div>
+<div class="section" id="api-reference-spi-flash">
+<h2>API Reference - SPI Flash<a class="headerlink" href="spi_flash.html#api-reference-spi-flash" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="spi_flash.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/spi_flash/include/esp_spi_flash.h">spi_flash/include/esp_spi_flash.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="spi_flash.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv214spi_flash_initv">
+<span id="spi_flash_init"></span><span class="target" id="esp__spi__flash_8h_1a4d544f141bfd2147b3b7f017d7523e17"></span>void <code class="descclassname"></code><code class="descname">spi_flash_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv214spi_flash_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize SPI flash access driver. </p>
+<p>This function must be called exactly once, before any other spi_flash_* functions are called. Currently this function is called from startup code. There is no need to call it from application code. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223spi_flash_get_chip_sizev">
+<span id="spi_flash_get_chip_size"></span><span class="target" id="esp__spi__flash_8h_1a80f40a82e658fad73179c7f450686acb"></span>size_t <code class="descclassname"></code><code class="descname">spi_flash_get_chip_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv223spi_flash_get_chip_sizev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get flash chip size, as set in binary image header. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This value does not necessarily match real flash size.</dd>
+<dt><strong>Return</strong></dt>
+<dd>size of flash chip, in bytes </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222spi_flash_erase_sector6size_t">
+<span id="spi_flash_erase_sector__s"></span><span class="target" id="esp__spi__flash_8h_1ae6dfd646e0e7bd4dbb63f86d224c0fae"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_erase_sector</code><span class="sig-paren">(</span>size_t <em>sector</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv222spi_flash_erase_sector6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase the Flash sector. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">sector</span></code>: Sector number, the count starts at sector 0, 4KB per sector.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221spi_flash_erase_range6size_t6size_t">
+<span id="spi_flash_erase_range__s.s"></span><span class="target" id="esp__spi__flash_8h_1a039cbe4c069a1fbd11eca3e8e5dfd8f7"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_erase_range</code><span class="sig-paren">(</span>size_t <em>start_address</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv221spi_flash_erase_range6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase a range of flash sectors. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">start_address</span></code>: Address where erase operation has to start. Must be 4kB-aligned </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of erased range, in bytes. Must be divisible by 4kB.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215spi_flash_write6size_tPKv6size_t">
+<span id="spi_flash_write__s.voidCP.s"></span><span class="target" id="esp__spi__flash_8h_1af22b8163809b93fc58360e908dac952d"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_write</code><span class="sig-paren">(</span>size_t <em>dest_addr</em>, <em class="property">const</em> void *<em>src</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv215spi_flash_write6size_tPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write data to Flash. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>If source address is in DROM, this function will return ESP_ERR_INVALID_ARG.</dd>
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">dest_addr</span></code>: destination address in Flash. Must be a multiple of 4 bytes. </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: pointer to the source buffer. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: length of data, in bytes. Must be a multiple of 4 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225spi_flash_write_encrypted6size_tPKv6size_t">
+<span id="spi_flash_write_encrypted__s.voidCP.s"></span><span class="target" id="esp__spi__flash_8h_1afe7a0e0351e8b85fa19ba58da05d91bd"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_write_encrypted</code><span class="sig-paren">(</span>size_t <em>dest_addr</em>, <em class="property">const</em> void *<em>src</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv225spi_flash_write_encrypted6size_tPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write data encrypted to Flash. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Flash encryption must be enabled for this function to work.</dd>
+<dt><strong>Note</strong></dt>
+<dd>Flash encryption must be enabled when calling this function. If flash encryption is disabled, the function returns ESP_ERR_INVALID_STATE. Use esp_flash_encryption_enabled() function to determine if flash encryption is enabled.</dd>
+<dt><strong>Note</strong></dt>
+<dd>Both dest_addr and size must be multiples of 16 bytes. For absolute best performance, both dest_addr and size arguments should be multiples of 32 bytes.</dd>
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">dest_addr</span></code>: destination address in Flash. Must be a multiple of 16 bytes. </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: pointer to the source buffer. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: length of data, in bytes. Must be a multiple of 16 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214spi_flash_read6size_tPv6size_t">
+<span id="spi_flash_read__s.voidP.s"></span><span class="target" id="esp__spi__flash_8h_1af91ef7ddb168c3a7a0cb5112284f4ec8"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_read</code><span class="sig-paren">(</span>size_t <em>src_addr</em>, void *<em>dest</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv214spi_flash_read6size_tPv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data from Flash. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src_addr</span></code>: source address of the data in Flash. </li>
+<li><code class="docutils literal"><span class="pre">dest</span></code>: pointer to the destination buffer </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: length of data</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224spi_flash_read_encrypted6size_tPv6size_t">
+<span id="spi_flash_read_encrypted__s.voidP.s"></span><span class="target" id="esp__spi__flash_8h_1ae7ee55c08ce09cf77069a58d0b5bab05"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_read_encrypted</code><span class="sig-paren">(</span>size_t <em>src</em>, void *<em>dest</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv224spi_flash_read_encrypted6size_tPv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data from Encrypted Flash. </p>
+<p>If flash encryption is enabled, this function will transparently decrypt data as it is read. If flash encryption is not enabled, this function behaves the same as spi_flash_read().</p>
+<p>See esp_flash_encryption_enabled() for a function to check if flash encryption is enabled.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>esp_err_t </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src</span></code>: source address of the data in Flash. </li>
+<li><code class="docutils literal"><span class="pre">dest</span></code>: pointer to the destination buffer </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: length of data</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214spi_flash_mmap6size_t6size_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t">
+<span id="spi_flash_mmap__s.s.spi_flash_mmap_memory_t.voidCPP.spi_flash_mmap_handle_tP"></span><span class="target" id="esp__spi__flash_8h_1a67db63d2f5295f914e5cb26c7f913ee7"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_mmap</code><span class="sig-paren">(</span>size_t <em>src_addr</em>, size_t <em>size</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_memory_t" title="spi_flash_mmap_memory_t">spi_flash_mmap_memory_t</a> <em>memory</em>, <em class="property">const</em> void **<em>out_ptr</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_handle_t" title="spi_flash_mmap_handle_t">spi_flash_mmap_handle_t</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv214spi_flash_mmap6size_t6size_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Map region of flash memory into data or instruction address space. </p>
+<p>This function allocates sufficient number of 64k MMU pages and configures them to map request region of flash memory into data address space or into instruction address space. It may reuse MMU pages which already provide required mapping. As with any allocator, there is possibility of fragmentation of address space if mmap/munmap are heavily used. To troubleshoot issues with page allocation, use spi_flash_mmap_dump function.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK on success, ESP_ERR_NO_MEM if pages can not be allocated </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src_addr</span></code>: Physical address in flash where requested region starts. This address <em>must</em> be aligned to 64kB boundary (SPI_FLASH_MMU_PAGE_SIZE). </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of region which has to be mapped. This size will be rounded up to a 64k boundary. </li>
+<li><code class="docutils literal"><span class="pre">memory</span></code>: Memory space where the region should be mapped </li>
+<li><code class="docutils literal"><span class="pre">out_ptr</span></code>: Output, pointer to the mapped memory region </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: Output, handle which should be used for spi_flash_munmap call</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220spi_flash_mmap_pagesPi6size_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t">
+<span id="spi_flash_mmap_pages__iP.s.spi_flash_mmap_memory_t.voidCPP.spi_flash_mmap_handle_tP"></span><span class="target" id="esp__spi__flash_8h_1a73d6bfefe26c4b35ecf0e99f5e2786ee"></span>esp_err_t <code class="descclassname"></code><code class="descname">spi_flash_mmap_pages</code><span class="sig-paren">(</span>int *<em>pages</em>, size_t <em>pagecount</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_memory_t" title="spi_flash_mmap_memory_t">spi_flash_mmap_memory_t</a> <em>memory</em>, <em class="property">const</em> void **<em>out_ptr</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_handle_t" title="spi_flash_mmap_handle_t">spi_flash_mmap_handle_t</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv220spi_flash_mmap_pagesPi6size_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Map sequences of pages of flash memory into data or instruction address space. </p>
+<p>This function allocates sufficient number of 64k MMU pages and configures them to map the indicated pages of flash memory contiguously into data address space or into instruction address space. In this respect, it works in a similar way as spi_flash_mmap but it allows mapping a (maybe non-contiguous) set of pages into a contiguous region of memory.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK on success, ESP_ERR_NO_MEM if pages can not be allocated </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pages</span></code>: An array of numbers indicating the 64K pages in flash to be mapped contiguously into memory. These indicate the indexes of the 64K pages, not the byte-size addresses as used in other functions. </li>
+<li><code class="docutils literal"><span class="pre">pagecount</span></code>: Size of the pages array </li>
+<li><code class="docutils literal"><span class="pre">memory</span></code>: Memory space where the region should be mapped </li>
+<li><code class="docutils literal"><span class="pre">out_ptr</span></code>: Output, pointer to the mapped memory region </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: Output, handle which should be used for spi_flash_munmap call</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216spi_flash_munmap23spi_flash_mmap_handle_t">
+<span id="spi_flash_munmap__spi_flash_mmap_handle_t"></span><span class="target" id="esp__spi__flash_8h_1afa00cc4e800e5ed031430d940d7a0001"></span>void <code class="descclassname"></code><code class="descname">spi_flash_munmap</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_handle_t" title="spi_flash_mmap_handle_t">spi_flash_mmap_handle_t</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv216spi_flash_munmap23spi_flash_mmap_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Release region previously obtained using spi_flash_mmap. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Calling this function will not necessarily unmap memory region. Region will only be unmapped when there are no other handles which reference this region. In case of partially overlapping regions it is possible that memory will be unmapped partially.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from spi_flash_mmap </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219spi_flash_mmap_dumpv">
+<span id="spi_flash_mmap_dump"></span><span class="target" id="esp__spi__flash_8h_1ae3105f0f9bbd4b7ac8619aea33069317"></span>void <code class="descclassname"></code><code class="descname">spi_flash_mmap_dump</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv219spi_flash_mmap_dumpv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Display information about mapped regions. </p>
+<p>This function lists handles obtained using spi_flash_mmap, along with range of pages allocated to each handle. It also lists all non-zero entries of MMU table and corresponding reference counts. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220spi_flash_cache2physPKv">
+<span id="spi_flash_cache2phys__voidCP"></span><span class="target" id="esp__spi__flash_8h_1a16fcc5322fcfe1df401ea5820873084f"></span>size_t <code class="descclassname"></code><code class="descname">spi_flash_cache2phys</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>cached</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv220spi_flash_cache2physPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Given a memory address where flash is mapped, return the corresponding physical flash offset. </p>
+<p>Cache address does not have have been assigned via spi_flash_mmap(), any address in flash map space can be looked up.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>SPI_FLASH_CACHE2PHYS_FAIL If cache address is outside flash cache region, or the address is not mapped.</li>
+<li>Otherwise, returns physical offset in flash </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">cached</span></code>: Pointer to flashed cached memory.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220spi_flash_phys2cache6size_t23spi_flash_mmap_memory_t">
+<span id="spi_flash_phys2cache__s.spi_flash_mmap_memory_t"></span><span class="target" id="esp__spi__flash_8h_1a2d7d239f12bc223901a307db1504099b"></span><em class="property">const</em> void *<code class="descclassname"></code><code class="descname">spi_flash_phys2cache</code><span class="sig-paren">(</span>size_t <em>phys_offs</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_memory_t" title="spi_flash_mmap_memory_t">spi_flash_mmap_memory_t</a> <em>memory</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv220spi_flash_phys2cache6size_t23spi_flash_mmap_memory_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Given a physical offset in flash, return the address where it is mapped in the memory space. </p>
+<p>Physical address does not have to have been assigned via spi_flash_mmap(), any address in flash can be looked up.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Only the first matching cache address is returned. If MMU flash cache table is configured so multiple entries point to the same physical address, there may be more than one cache address corresponding to that physical address. It is also possible for a single physical address to be mapped to both the IROM and DROM regions.</dd>
+<dt><strong>Note</strong></dt>
+<dd>This function doesn&#8217;t impose any alignment constraints, but if memory argument is SPI_FLASH_MMAP_INST and phys_offs is not 4-byte aligned, then reading from the returned pointer will result in a crash.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>NULL if the physical address is invalid or not mapped to flash cache of the specified memory type.</li>
+<li>Cached memory address (in IROM or DROM space) corresponding to phys_offs. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">phys_offs</span></code>: Physical offset in flash memory to look up. </li>
+<li><code class="docutils literal"><span class="pre">memory</span></code>: Memory type to look up a flash cache address mapping for (IROM or DROM)</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223spi_flash_cache_enabledv">
+<span id="spi_flash_cache_enabled"></span><span class="target" id="esp__spi__flash_8h_1a8156f67ab03d195da1334e5775698fb4"></span>bool <code class="descclassname"></code><code class="descname">spi_flash_cache_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv223spi_flash_cache_enabledv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check at runtime if flash cache is enabled on both CPUs. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if both CPUs have flash cache enabled, false otherwise. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219spi_flash_guard_setPK23spi_flash_guard_funcs_t">
+<span id="spi_flash_guard_set__spi_flash_guard_funcs_tCP"></span><span class="target" id="esp__spi__flash_8h_1a293a93580bb7fd2f2d185d3689db6d0a"></span>void <code class="descclassname"></code><code class="descname">spi_flash_guard_set</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_guard_funcs_t" title="spi_flash_guard_funcs_t">spi_flash_guard_funcs_t</a> *<em>funcs</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv219spi_flash_guard_setPK23spi_flash_guard_funcs_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets guard functions to access flash. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Pointed structure and corresponding guard functions should not reside in flash. For example structure can be placed in DRAM and functions in IRAM sections.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">funcs</span></code>: pointer to structure holding flash access guard functions. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="spi_flash.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv223spi_flash_guard_funcs_t">
+<span id="spi_flash_guard_funcs_t"></span><span class="target" id="structspi__flash__guard__funcs__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">spi_flash_guard_funcs_t</code><a class="headerlink" href="spi_flash.html#_CPPv223spi_flash_guard_funcs_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Structure holding SPI flash access critical sections management functions.</p>
+<p>Flash API uses two types of flash access management functions: 1) Functions which prepare/restore flash cache and interrupts before calling appropriate ROM functions (SPIWrite, SPIRead and SPIEraseBlock):<ul class="simple">
+<li>&#8216;start&#8217; function should disables flash cache and non-IRAM interrupts and is invoked before the call to one of ROM function above.</li>
+<li>&#8216;end&#8217; function should restore state of flash cache and non-IRAM interrupts and is invoked after the call to one of ROM function above. 2) Functions which synchronizes access to internal data used by flash API. This functions are mostly intended to synchronize access to flash API internal data in multithreaded environment and use OS primitives:</li>
+<li>&#8216;op_lock&#8217; locks access to flash API internal data.</li>
+<li>&#8216;op_unlock&#8217; unlocks access to flash API internal data. Different versions of the guarding functions should be used depending on the context of execution (with or without functional OS). In normal conditions when flash API is called from task the functions use OS primitives. When there is no OS at all or when it is not guaranteed that OS is functional (accessing flash from exception handler) these functions cannot use OS primitives or even does not need them (multithreaded access is not possible).</li>
+</ul>
+</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Structure and corresponding guard functions should not reside in flash. For example structure can be placed in DRAM and functions in IRAM sections. </dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N23spi_flash_guard_funcs_t5startE">
+<span id="spi_flash_guard_funcs_t::start__spi_flash_guard_start_func_t"></span><span class="target" id="structspi__flash__guard__funcs__t_1aa8fb74e39877d3cce9ebb9ef19b71102"></span><a class="reference internal" href="spi_flash.html#_CPPv228spi_flash_guard_start_func_t" title="spi_flash_guard_start_func_t">spi_flash_guard_start_func_t</a> <code class="descname">start</code><a class="headerlink" href="spi_flash.html#_CPPv2N23spi_flash_guard_funcs_t5startE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>critical section start func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N23spi_flash_guard_funcs_t3endE">
+<span id="spi_flash_guard_funcs_t::end__spi_flash_guard_end_func_t"></span><span class="target" id="structspi__flash__guard__funcs__t_1a87c2e25400e885d4848b64226aa5dadb"></span><a class="reference internal" href="spi_flash.html#_CPPv226spi_flash_guard_end_func_t" title="spi_flash_guard_end_func_t">spi_flash_guard_end_func_t</a> <code class="descname">end</code><a class="headerlink" href="spi_flash.html#_CPPv2N23spi_flash_guard_funcs_t3endE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>critical section end func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N23spi_flash_guard_funcs_t7op_lockE">
+<span id="spi_flash_guard_funcs_t::op_lock__spi_flash_op_lock_func_t"></span><span class="target" id="structspi__flash__guard__funcs__t_1ab4ca5a298d3f799d8c16d0e0637b85d1"></span><a class="reference internal" href="spi_flash.html#_CPPv224spi_flash_op_lock_func_t" title="spi_flash_op_lock_func_t">spi_flash_op_lock_func_t</a> <code class="descname">op_lock</code><a class="headerlink" href="spi_flash.html#_CPPv2N23spi_flash_guard_funcs_t7op_lockE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>flash access API lock func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N23spi_flash_guard_funcs_t9op_unlockE">
+<span id="spi_flash_guard_funcs_t::op_unlock__spi_flash_op_unlock_func_t"></span><span class="target" id="structspi__flash__guard__funcs__t_1a9d19f91bc09068693fb4bb7c7e8d24d1"></span><a class="reference internal" href="spi_flash.html#_CPPv226spi_flash_op_unlock_func_t" title="spi_flash_op_unlock_func_t">spi_flash_op_unlock_func_t</a> <code class="descname">op_unlock</code><a class="headerlink" href="spi_flash.html#_CPPv2N23spi_flash_guard_funcs_t9op_unlockE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>flash access API unlock func </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="spi_flash.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.ESP_ERR_FLASH_BASE">
+<span class="target" id="esp__spi__flash_8h_1a0f7829768a4f555f72fb7e04b502695e"></span><code class="descname">ESP_ERR_FLASH_BASE</code><a class="headerlink" href="spi_flash.html#c.ESP_ERR_FLASH_BASE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_FLASH_OP_FAIL">
+<span class="target" id="esp__spi__flash_8h_1a757e63109d77e4ba432f8c9fe76767bd"></span><code class="descname">ESP_ERR_FLASH_OP_FAIL</code><a class="headerlink" href="spi_flash.html#c.ESP_ERR_FLASH_OP_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_FLASH_OP_TIMEOUT">
+<span class="target" id="esp__spi__flash_8h_1ae5b1d442b602258a8d69c2cddd2090bc"></span><code class="descname">ESP_ERR_FLASH_OP_TIMEOUT</code><a class="headerlink" href="spi_flash.html#c.ESP_ERR_FLASH_OP_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.SPI_FLASH_SEC_SIZE">
+<span class="target" id="esp__spi__flash_8h_1a518257817c69fec25290c1bebad544b0"></span><code class="descname">SPI_FLASH_SEC_SIZE</code><a class="headerlink" href="spi_flash.html#c.SPI_FLASH_SEC_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>SPI Flash sector size </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SPI_FLASH_MMU_PAGE_SIZE">
+<span class="target" id="esp__spi__flash_8h_1a18e85b2d8b00a2f0ebd4fb71b4409e9c"></span><code class="descname">SPI_FLASH_MMU_PAGE_SIZE</code><a class="headerlink" href="spi_flash.html#c.SPI_FLASH_MMU_PAGE_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flash cache MMU mapping page size </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.SPI_FLASH_CACHE2PHYS_FAIL">
+<span class="target" id="esp__spi__flash_8h_1a6f333cc6feedb6777fbe2b74b2f89201"></span><code class="descname">SPI_FLASH_CACHE2PHYS_FAIL</code><a class="headerlink" href="spi_flash.html#c.SPI_FLASH_CACHE2PHYS_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="spi_flash.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv223spi_flash_mmap_handle_t">
+<span id="spi_flash_mmap_handle_t"></span><span class="target" id="esp__spi__flash_8h_1ac5101ad2d6bde58272d6467f8046f8a5"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">spi_flash_mmap_handle_t</code><a class="headerlink" href="spi_flash.html#_CPPv223spi_flash_mmap_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opaque handle for memory region obtained from spi_flash_mmap. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv228spi_flash_guard_start_func_t">
+<span id="spi_flash_guard_start_func_t"></span><span class="target" id="esp__spi__flash_8h_1ad74348c5d026e8d30a04f9e6e7b28cd8"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">spi_flash_guard_start_func_t</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv228spi_flash_guard_start_func_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>SPI flash critical section enter function. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv226spi_flash_guard_end_func_t">
+<span id="spi_flash_guard_end_func_t"></span><span class="target" id="esp__spi__flash_8h_1a17f590f91d291c600a3ed6847a1235f9"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">spi_flash_guard_end_func_t</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv226spi_flash_guard_end_func_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>SPI flash critical section exit function. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv224spi_flash_op_lock_func_t">
+<span id="spi_flash_op_lock_func_t"></span><span class="target" id="esp__spi__flash_8h_1abe5c1649f23a33355788884cd624777e"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">spi_flash_op_lock_func_t</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv224spi_flash_op_lock_func_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>SPI flash operation lock function. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv226spi_flash_op_unlock_func_t">
+<span id="spi_flash_op_unlock_func_t"></span><span class="target" id="esp__spi__flash_8h_1a789596ae6bedc6ec08c71bc0c2a69e2c"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">spi_flash_op_unlock_func_t</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv226spi_flash_op_unlock_func_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>SPI flash operation unlock function. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="spi_flash.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv223spi_flash_mmap_memory_t">
+<span id="spi_flash_mmap_memory_t"></span><span class="target" id="esp__spi__flash_8h_1aa42bc94be93468811b9b2014039a4534"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">spi_flash_mmap_memory_t</code><a class="headerlink" href="spi_flash.html#_CPPv223spi_flash_mmap_memory_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enumeration which specifies memory space requested in an mmap call. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv219SPI_FLASH_MMAP_DATA">
+<span id="SPI_FLASH_MMAP_DATA"></span><span class="target" id="esp__spi__flash_8h_1aa42bc94be93468811b9b2014039a4534abdd9b606741a239b9ff14eadfababd7b"></span><code class="descname">SPI_FLASH_MMAP_DATA</code><a class="headerlink" href="spi_flash.html#_CPPv219SPI_FLASH_MMAP_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>map to data memory (Vaddr0), allows byte-aligned access, 4 MB total </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219SPI_FLASH_MMAP_INST">
+<span id="SPI_FLASH_MMAP_INST"></span><span class="target" id="esp__spi__flash_8h_1aa42bc94be93468811b9b2014039a4534a97ab1deabb3e0febd25c23bef5ce1a3f"></span><code class="descname">SPI_FLASH_MMAP_INST</code><a class="headerlink" href="spi_flash.html#_CPPv219SPI_FLASH_MMAP_INST" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>map to instruction memory (Vaddr1-3), allows only 4-byte-aligned access, 11 MB total </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-partition-table">
+<h2>API Reference - Partition Table<a class="headerlink" href="spi_flash.html#api-reference-partition-table" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Header File<a class="headerlink" href="spi_flash.html#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/spi_flash/include/esp_partition.h">spi_flash/include/esp_partition.h</a></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Functions<a class="headerlink" href="spi_flash.html#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv218esp_partition_find20esp_partition_type_t23esp_partition_subtype_tPKc">
+<span id="esp_partition_find__esp_partition_type_t.esp_partition_subtype_t.cCP"></span><span class="target" id="esp__partition_8h_1a85dcccff0ad74060831ce3d33b59270c"></span><a class="reference internal" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="esp_partition_iterator_t">esp_partition_iterator_t</a> <code class="descclassname"></code><code class="descname">esp_partition_find</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv220esp_partition_type_t" title="esp_partition_type_t">esp_partition_type_t</a> <em>type</em>, <a class="reference internal" href="spi_flash.html#_CPPv223esp_partition_subtype_t" title="esp_partition_subtype_t">esp_partition_subtype_t</a> <em>subtype</em>, <em class="property">const</em> char *<em>label</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv218esp_partition_find20esp_partition_type_t23esp_partition_subtype_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find partition based on one or more parameters. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>iterator which can be used to enumerate all the partitions found, or NULL if no partitions were found. Iterator obtained through this function has to be released using esp_partition_iterator_release when not used any more. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">type</span></code>: Partition type, one of esp_partition_type_t values </li>
+<li><code class="docutils literal"><span class="pre">subtype</span></code>: Partition subtype, one of esp_partition_subtype_t values. To find all partitions of given type, use ESP_PARTITION_SUBTYPE_ANY. </li>
+<li><code class="docutils literal"><span class="pre">label</span></code>: (optional) Partition label. Set this value if looking for partition with a specific name. Pass NULL otherwise.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_partition_find_first20esp_partition_type_t23esp_partition_subtype_tPKc">
+<span id="esp_partition_find_first__esp_partition_type_t.esp_partition_subtype_t.cCP"></span><span class="target" id="esp__partition_8h_1a7d77af6e5cb9311468e8bdd2a502ac15"></span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_partition_find_first</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv220esp_partition_type_t" title="esp_partition_type_t">esp_partition_type_t</a> <em>type</em>, <a class="reference internal" href="spi_flash.html#_CPPv223esp_partition_subtype_t" title="esp_partition_subtype_t">esp_partition_subtype_t</a> <em>subtype</em>, <em class="property">const</em> char *<em>label</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv224esp_partition_find_first20esp_partition_type_t23esp_partition_subtype_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find first partition based on one or more parameters. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>pointer to <a class="reference internal" href="spi_flash.html#structesp__partition__t"><span class="std std-ref">esp_partition_t</span></a> structure, or NULL if no partition is found. This pointer is valid for the lifetime of the application. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">type</span></code>: Partition type, one of esp_partition_type_t values </li>
+<li><code class="docutils literal"><span class="pre">subtype</span></code>: Partition subtype, one of esp_partition_subtype_t values. To find all partitions of given type, use ESP_PARTITION_SUBTYPE_ANY. </li>
+<li><code class="docutils literal"><span class="pre">label</span></code>: (optional) Partition label. Set this value if looking for partition with a specific name. Pass NULL otherwise.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_partition_get24esp_partition_iterator_t">
+<span id="esp_partition_get__esp_partition_iterator_t"></span><span class="target" id="esp__partition_8h_1a83e78791a597dedefe138c98b5193e94"></span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_partition_get</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="esp_partition_iterator_t">esp_partition_iterator_t</a> <em>iterator</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv217esp_partition_get24esp_partition_iterator_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get <a class="reference internal" href="spi_flash.html#structesp__partition__t"><span class="std std-ref">esp_partition_t</span></a> structure for given partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>pointer to <a class="reference internal" href="spi_flash.html#structesp__partition__t"><span class="std std-ref">esp_partition_t</span></a> structure. This pointer is valid for the lifetime of the application. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">iterator</span></code>: Iterator obtained using esp_partition_find. Must be non-NULL.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_partition_next24esp_partition_iterator_t">
+<span id="esp_partition_next__esp_partition_iterator_t"></span><span class="target" id="esp__partition_8h_1ad9b6d627b971e7f9ee5d75c42a5ffd55"></span><a class="reference internal" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="esp_partition_iterator_t">esp_partition_iterator_t</a> <code class="descclassname"></code><code class="descname">esp_partition_next</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="esp_partition_iterator_t">esp_partition_iterator_t</a> <em>iterator</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv218esp_partition_next24esp_partition_iterator_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move partition iterator to the next partition found. </p>
+<p>Any copies of the iterator will be invalid after this call.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>NULL if no partition was found, valid esp_partition_iterator_t otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">iterator</span></code>: Iterator obtained using esp_partition_find. Must be non-NULL.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230esp_partition_iterator_release24esp_partition_iterator_t">
+<span id="esp_partition_iterator_release__esp_partition_iterator_t"></span><span class="target" id="esp__partition_8h_1a2aab4e64009b62333bd848d60d4511c9"></span>void <code class="descclassname"></code><code class="descname">esp_partition_iterator_release</code><span class="sig-paren">(</span><a class="reference internal" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="esp_partition_iterator_t">esp_partition_iterator_t</a> <em>iterator</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv230esp_partition_iterator_release24esp_partition_iterator_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Release partition iterator. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">iterator</span></code>: Iterator obtained using esp_partition_find. Must be non-NULL. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_partition_verifyPK15esp_partition_t">
+<span id="esp_partition_verify__esp_partition_tCP"></span><span class="target" id="esp__partition_8h_1ac7aa68544327a90a6961ba77c00ad008"></span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_partition_verify</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv220esp_partition_verifyPK15esp_partition_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Verify partition data. </p>
+<p>Given a pointer to partition data, verify this partition exists in the partition table (all fields match.)</p>
+<p>This function is also useful to take partition data which may be in a RAM buffer and convert it to a pointer to the permanent partition data stored in flash.</p>
+<p>Pointers returned from this function can be compared directly to the address of any pointer returned from <a class="reference internal" href="spi_flash.html#esp__partition_8h_1a83e78791a597dedefe138c98b5193e94"><span class="std std-ref">esp_partition_get()</span></a>, as a test for equality.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>If partition not found, returns NULL.</li>
+<li>If found, returns a pointer to the <a class="reference internal" href="spi_flash.html#structesp__partition__t"><span class="std std-ref">esp_partition_t</span></a> structure in flash. This pointer is always valid for the lifetime of the application. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to partition data to verify. Must be non-NULL. All fields of this structure must match the partition table entry in flash for this function to return a successful match.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_partition_readPK15esp_partition_t6size_tPv6size_t">
+<span id="esp_partition_read__esp_partition_tCP.s.voidP.s"></span><span class="target" id="esp__partition_8h_1a27e1a0de4bbe8d79f4bf243b6d001b2f"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_partition_read</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, size_t <em>src_offset</em>, void *<em>dst</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv218esp_partition_readPK15esp_partition_t6size_tPv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data from the partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK, if data was read successfully; ESP_ERR_INVALID_ARG, if src_offset exceeds partition size; ESP_ERR_INVALID_SIZE, if read would go out of bounds of the partition; or one of error codes from lower-level flash driver. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to partition structure obtained using esp_partition_find_first or esp_partition_get. Must be non-NULL. </li>
+<li><code class="docutils literal"><span class="pre">dst</span></code>: Pointer to the buffer where data should be stored. Pointer must be non-NULL and buffer must be at least &#8216;size&#8217; bytes long. </li>
+<li><code class="docutils literal"><span class="pre">src_offset</span></code>: Address of the data to be read, relative to the beginning of the partition. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of data to be read, in bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_partition_writePK15esp_partition_t6size_tPKv6size_t">
+<span id="esp_partition_write__esp_partition_tCP.s.voidCP.s"></span><span class="target" id="esp__partition_8h_1a03828b180e5284655d5356c9fa1e0304"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_partition_write</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, size_t <em>dst_offset</em>, <em class="property">const</em> void *<em>src</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv219esp_partition_writePK15esp_partition_t6size_tPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write data to the partition. </p>
+<p>Before writing data to flash, corresponding region of flash needs to be erased. This can be done using esp_partition_erase_range function.</p>
+<p>Partitions marked with an encryption flag will automatically be written via the spi_flash_write_encrypted() function. If writing to an encrypted partition, all write offsets and lengths must be multiples of 16 bytes. See the spi_flash_write_encrypted() function for more details. Unencrypted partitions do not have this restriction.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Prior to writing to flash memory, make sure it has been erased with esp_partition_erase_range call.</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK, if data was written successfully; ESP_ERR_INVALID_ARG, if dst_offset exceeds partition size; ESP_ERR_INVALID_SIZE, if write would go out of bounds of the partition; or one of error codes from lower-level flash driver. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to partition structure obtained using esp_partition_find_first or esp_partition_get. Must be non-NULL. </li>
+<li><code class="docutils literal"><span class="pre">dst_offset</span></code>: Address where the data should be written, relative to the beginning of the partition. </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: Pointer to the source buffer. Pointer must be non-NULL and buffer must be at least &#8216;size&#8217; bytes long. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of data to be written, in bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_partition_erase_rangePK15esp_partition_t8uint32_t8uint32_t">
+<span id="esp_partition_erase_range__esp_partition_tCP.uint32_t.uint32_t"></span><span class="target" id="esp__partition_8h_1af9fb1faa49557faf84313020caeb54db"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_partition_erase_range</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, uint32_t <em>start_addr</em>, uint32_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv225esp_partition_erase_rangePK15esp_partition_t8uint32_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase part of the partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK, if the range was erased successfully; ESP_ERR_INVALID_ARG, if iterator or dst are NULL; ESP_ERR_INVALID_SIZE, if erase would go out of bounds of the partition; or one of error codes from lower-level flash driver. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to partition structure obtained using esp_partition_find_first or esp_partition_get. Must be non-NULL. </li>
+<li><code class="docutils literal"><span class="pre">start_addr</span></code>: Address where erase operation should start. Must be aligned to 4 kilobytes. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of the range which should be erased, in bytes. Must be divisible by 4 kilobytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_partition_mmapPK15esp_partition_t8uint32_t8uint32_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t">
+<span id="esp_partition_mmap__esp_partition_tCP.uint32_t.uint32_t.spi_flash_mmap_memory_t.voidCPP.spi_flash_mmap_handle_tP"></span><span class="target" id="esp__partition_8h_1a5c5609ab39a85fac9509e9708c0118af"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_partition_mmap</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, uint32_t <em>offset</em>, uint32_t <em>size</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_memory_t" title="spi_flash_mmap_memory_t">spi_flash_mmap_memory_t</a> <em>memory</em>, <em class="property">const</em> void **<em>out_ptr</em>, <a class="reference internal" href="spi_flash.html#_CPPv223spi_flash_mmap_handle_t" title="spi_flash_mmap_handle_t">spi_flash_mmap_handle_t</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv218esp_partition_mmapPK15esp_partition_t8uint32_t8uint32_t23spi_flash_mmap_memory_tPPKvP23spi_flash_mmap_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure MMU to map partition into data memory. </p>
+<p>Unlike spi_flash_mmap function, which requires a 64kB aligned base address, this function doesn&#8217;t impose such a requirement. If offset results in a flash address which is not aligned to 64kB boundary, address will be rounded to the lower 64kB boundary, so that mapped region includes requested range. Pointer returned via out_ptr argument will be adjusted to point to the requested offset (not necessarily to the beginning of mmap-ed region).</p>
+<p>To release mapped memory, pass handle returned via out_handle argument to spi_flash_munmap function.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK, if successful </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to partition structure obtained using esp_partition_find_first or esp_partition_get. Must be non-NULL. </li>
+<li><code class="docutils literal"><span class="pre">offset</span></code>: Offset from the beginning of partition where mapping should start. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of the area to be mapped. </li>
+<li><code class="docutils literal"><span class="pre">memory</span></code>: Memory space where the region should be mapped </li>
+<li><code class="docutils literal"><span class="pre">out_ptr</span></code>: Output, pointer to the mapped memory region </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: Output, handle which should be used for spi_flash_munmap call</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id4">
+<h3>Structures<a class="headerlink" href="spi_flash.html#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv215esp_partition_t">
+<span id="esp_partition_t"></span><span class="target" id="structesp__partition__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">esp_partition_t</code><a class="headerlink" href="spi_flash.html#_CPPv215esp_partition_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>partition information structure </p>
+<p>This is not the format in flash, that format is esp_partition_info_t.</p>
+<p>However, this is the format used by this API. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t4typeE">
+<span id="esp_partition_t::type__esp_partition_type_t"></span><span class="target" id="structesp__partition__t_1a30655be4d00e92774984a057c95f7cac"></span><a class="reference internal" href="spi_flash.html#_CPPv220esp_partition_type_t" title="esp_partition_type_t">esp_partition_type_t</a> <code class="descname">type</code><a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t4typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>partition type (app/data) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t7subtypeE">
+<span id="esp_partition_t::subtype__esp_partition_subtype_t"></span><span class="target" id="structesp__partition__t_1a6a7857c049c3c5c0bfa401eff76b294a"></span><a class="reference internal" href="spi_flash.html#_CPPv223esp_partition_subtype_t" title="esp_partition_subtype_t">esp_partition_subtype_t</a> <code class="descname">subtype</code><a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t7subtypeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>partition subtype </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t7addressE">
+<span id="esp_partition_t::address__uint32_t"></span><span class="target" id="structesp__partition__t_1a05237c6335fc8b7fe9a8c4200405f4e2"></span>uint32_t <code class="descname">address</code><a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t7addressE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>starting address of the partition in flash </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t4sizeE">
+<span id="esp_partition_t::size__uint32_t"></span><span class="target" id="structesp__partition__t_1a9c3481b9c4f6d6aede019d8719f87937"></span>uint32_t <code class="descname">size</code><a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t4sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>size of the partition, in bytes </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t5labelE">
+<span id="esp_partition_t::label__cA"></span><span class="target" id="structesp__partition__t_1addb88484aac7fbf7e7f777fbf7d5397d"></span>char <code class="descname">label</code>[17]<a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t5labelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>partition label, zero-terminated ASCII string </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N15esp_partition_t9encryptedE">
+<span id="esp_partition_t::encrypted__b"></span><span class="target" id="structesp__partition__t_1a5d1eb6c681b4010e7abc70e8ffd89320"></span>bool <code class="descname">encrypted</code><a class="headerlink" href="spi_flash.html#_CPPv2N15esp_partition_t9encryptedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>flag is set to true if partition is encrypted </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="id5">
+<h3>Macros<a class="headerlink" href="spi_flash.html#id5" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.ESP_PARTITION_SUBTYPE_OTA">
+<span class="target" id="esp__partition_8h_1aeb6f82719f3e4d4b46af727fcefa0f5b"></span><code class="descname">ESP_PARTITION_SUBTYPE_OTA</code><span class="sig-paren">(</span>i<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#c.ESP_PARTITION_SUBTYPE_OTA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience macro to get esp_partition_subtype_t value for the i-th OTA partition. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="id6">
+<h3>Type Definitions<a class="headerlink" href="spi_flash.html#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv224esp_partition_iterator_t">
+<span id="esp_partition_iterator_t"></span><span class="target" id="esp__partition_8h_1a598151a683968d1b9051593f83b44798"></span><em class="property">typedef </em><em class="property">struct</em> esp_partition_iterator_opaque_ *<code class="descclassname"></code><code class="descname">esp_partition_iterator_t</code><a class="headerlink" href="spi_flash.html#_CPPv224esp_partition_iterator_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opaque partition iterator type. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="id7">
+<h3>Enumerations<a class="headerlink" href="spi_flash.html#id7" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv220esp_partition_type_t">
+<span id="esp_partition_type_t"></span><span class="target" id="esp__partition_8h_1aafc4f41a0b5bab81d1f89163cc950537"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_partition_type_t</code><a class="headerlink" href="spi_flash.html#_CPPv220esp_partition_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Partition type. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Keep this enum in sync with PartitionDefinition class gen_esp32part.py </dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv222ESP_PARTITION_TYPE_APP">
+<span id="ESP_PARTITION_TYPE_APP"></span><span class="target" id="esp__partition_8h_1aafc4f41a0b5bab81d1f89163cc950537a868e0eb3f067099e5ca77715cfbb1de5"></span><code class="descname">ESP_PARTITION_TYPE_APP</code> = 0x00<a class="headerlink" href="spi_flash.html#_CPPv222ESP_PARTITION_TYPE_APP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Application partition type. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv223ESP_PARTITION_TYPE_DATA">
+<span id="ESP_PARTITION_TYPE_DATA"></span><span class="target" id="esp__partition_8h_1aafc4f41a0b5bab81d1f89163cc950537a837281927c13d663ca535936a9fdf62e"></span><code class="descname">ESP_PARTITION_TYPE_DATA</code> = 0x01<a class="headerlink" href="spi_flash.html#_CPPv223ESP_PARTITION_TYPE_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Data partition type. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv223esp_partition_subtype_t">
+<span id="esp_partition_subtype_t"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">esp_partition_subtype_t</code><a class="headerlink" href="spi_flash.html#_CPPv223esp_partition_subtype_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Partition subtype. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Keep this enum in sync with PartitionDefinition class gen_esp32part.py </dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv233ESP_PARTITION_SUBTYPE_APP_FACTORY">
+<span id="ESP_PARTITION_SUBTYPE_APP_FACTORY"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a63efb47b43cb77d963900534c063e78b"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_FACTORY</code> = 0x00<a class="headerlink" href="spi_flash.html#_CPPv233ESP_PARTITION_SUBTYPE_APP_FACTORY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Factory application partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv233ESP_PARTITION_SUBTYPE_APP_OTA_MIN">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_MIN"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a1ee9813850079c62e4d080e74fa4cf38"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_MIN</code> = 0x10<a class="headerlink" href="spi_flash.html#_CPPv233ESP_PARTITION_SUBTYPE_APP_OTA_MIN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Base for OTA partition subtypes. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_0">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_0"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a94acc8e6e9d53ab36edb4ca653d55acc"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_0</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 0<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 0. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_1">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_1"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a0b315fba0c30b924f72a0f016b52a9c6"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_1</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 1<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 1. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_2">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_2"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8abef5828758d755258c177efb9389f5fa"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_2</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 2<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 2. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_3">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_3"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a8668c6c13161c996b0359e4cd5f87811"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_3</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 3<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 3. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_4">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_4"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a2d60b4dc860e22e625e0e1cb7a15f289"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_4</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 4<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 4. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_5">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_5"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8ab10a50ff0b3baf935161fc20eb8170dd"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_5</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 5<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 5. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_6">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_6"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8adc5b9fdd0085e5b1b1432141284ba67e"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_6</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 6<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 6. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_7">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_7"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a9c4b872476694f7c5ade75ae81f49293"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_7</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 7<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 7. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_8">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_8"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a6d3aaa8561a044e064c400fd569d2b93"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_8</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 8<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_8" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 8. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_9">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_9"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a29d06b28954a964f67934479d02f6ebd"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_9</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 9<a class="headerlink" href="spi_flash.html#_CPPv231ESP_PARTITION_SUBTYPE_APP_OTA_9" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 9. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_10">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_10"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a093d566dfbb5dac6f252c5e6d073f779"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_10</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 10<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_10" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 10. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_11">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_11"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8ad6122b3538eb2e3fb4e6c6b9a6c77509"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_11</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 11<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_11" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 11. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_12">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_12"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a5131fe73e099b8f56911bada831ac1cb"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_12</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 12<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_12" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 12. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_13">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_13"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a80fc01aa974a4ecc6c1ad44597a1b16f"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_13</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 13<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_13" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 13. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_14">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_14"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8aa31b085675c286dd9e78e1e842138d62"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_14</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 14<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_14" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 14. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_15">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_15"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a57ec8c942e130d9360c650934e5eca45"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_15</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 15<a class="headerlink" href="spi_flash.html#_CPPv232ESP_PARTITION_SUBTYPE_APP_OTA_15" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA partition 15. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv233ESP_PARTITION_SUBTYPE_APP_OTA_MAX">
+<span id="ESP_PARTITION_SUBTYPE_APP_OTA_MAX"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8aeeb072771773144b09fe2b1a282865fc"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_OTA_MAX</code> = ESP_PARTITION_SUBTYPE_APP_OTA_MIN + 16<a class="headerlink" href="spi_flash.html#_CPPv233ESP_PARTITION_SUBTYPE_APP_OTA_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Max subtype of OTA partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_PARTITION_SUBTYPE_APP_TEST">
+<span id="ESP_PARTITION_SUBTYPE_APP_TEST"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a2c773d597e5fcc60d60220604165965a"></span><code class="descname">ESP_PARTITION_SUBTYPE_APP_TEST</code> = 0x20<a class="headerlink" href="spi_flash.html#_CPPv230ESP_PARTITION_SUBTYPE_APP_TEST" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Test application partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_PARTITION_SUBTYPE_DATA_OTA">
+<span id="ESP_PARTITION_SUBTYPE_DATA_OTA"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8afb1a03b580422306d383e2ce1627a5dd"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_OTA</code> = 0x00<a class="headerlink" href="spi_flash.html#_CPPv230ESP_PARTITION_SUBTYPE_DATA_OTA" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>OTA selection partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_PARTITION_SUBTYPE_DATA_PHY">
+<span id="ESP_PARTITION_SUBTYPE_DATA_PHY"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a65de023e705d5c27d2703a14bb17083f"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_PHY</code> = 0x01<a class="headerlink" href="spi_flash.html#_CPPv230ESP_PARTITION_SUBTYPE_DATA_PHY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PHY init data partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_PARTITION_SUBTYPE_DATA_NVS">
+<span id="ESP_PARTITION_SUBTYPE_DATA_NVS"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a0595fd805d8f4edbae3db5304a525da8"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_NVS</code> = 0x02<a class="headerlink" href="spi_flash.html#_CPPv230ESP_PARTITION_SUBTYPE_DATA_NVS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>NVS partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv235ESP_PARTITION_SUBTYPE_DATA_COREDUMP">
+<span id="ESP_PARTITION_SUBTYPE_DATA_COREDUMP"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8afa886fbd998f69493d28dd3e332cc20c"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_COREDUMP</code> = 0x03<a class="headerlink" href="spi_flash.html#_CPPv235ESP_PARTITION_SUBTYPE_DATA_COREDUMP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>COREDUMP partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv235ESP_PARTITION_SUBTYPE_DATA_ESPHTTPD">
+<span id="ESP_PARTITION_SUBTYPE_DATA_ESPHTTPD"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8aae08749a14c93787742fee0c16389cd7"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_ESPHTTPD</code> = 0x80<a class="headerlink" href="spi_flash.html#_CPPv235ESP_PARTITION_SUBTYPE_DATA_ESPHTTPD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ESPHTTPD partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv230ESP_PARTITION_SUBTYPE_DATA_FAT">
+<span id="ESP_PARTITION_SUBTYPE_DATA_FAT"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8ae552044cc1a2cd41ad4585aeb8ccb4c6"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_FAT</code> = 0x81<a class="headerlink" href="spi_flash.html#_CPPv230ESP_PARTITION_SUBTYPE_DATA_FAT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FAT partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv233ESP_PARTITION_SUBTYPE_DATA_SPIFFS">
+<span id="ESP_PARTITION_SUBTYPE_DATA_SPIFFS"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8aef73e9686eb0a3a611f077105d18e2a4"></span><code class="descname">ESP_PARTITION_SUBTYPE_DATA_SPIFFS</code> = 0x82<a class="headerlink" href="spi_flash.html#_CPPv233ESP_PARTITION_SUBTYPE_DATA_SPIFFS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>SPIFFS partition. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv225ESP_PARTITION_SUBTYPE_ANY">
+<span id="ESP_PARTITION_SUBTYPE_ANY"></span><span class="target" id="esp__partition_8h_1aff78bd7a13309ceefda89b36740da4b8a56d6a46e48c44698474b46d53aa3d1cc"></span><code class="descname">ESP_PARTITION_SUBTYPE_ANY</code> = 0xff<a class="headerlink" href="spi_flash.html#_CPPv225ESP_PARTITION_SUBTYPE_ANY" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Used to search for partitions with any subtype. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-flash-encrypt">
+<h2>API Reference - Flash Encrypt<a class="headerlink" href="spi_flash.html#api-reference-flash-encrypt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Header File<a class="headerlink" href="spi_flash.html#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/bootloader_support/include/esp_flash_encrypt.h">bootloader_support/include/esp_flash_encrypt.h</a></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>Functions<a class="headerlink" href="spi_flash.html#id9" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv228esp_flash_encryption_enabledv">
+<span id="esp_flash_encryption_enabled__void"></span><span class="target" id="esp__flash__encrypt_8h_1a45e3a0e0dd177785f6c6cde2b47948e8"></span><em class="property">static</em> bool <code class="descclassname"></code><code class="descname">esp_flash_encryption_enabled</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv228esp_flash_encryption_enabledv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Is flash encryption currently enabled in hardware? </p>
+<p>Flash encryption is enabled if the FLASH_CRYPT_CNT efuse has an odd number of bits set.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if flash encryption is enabled. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv234esp_flash_encrypt_check_and_updatev">
+<span id="esp_flash_encrypt_check_and_update__void"></span><span class="target" id="esp__flash__encrypt_8h_1a376fec1755c5f2354e9b1a5353124fa7"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_flash_encrypt_check_and_update</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv234esp_flash_encrypt_check_and_updatev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_flash_encrypt_region8uint32_t6size_t">
+<span id="esp_flash_encrypt_region__uint32_t.s"></span><span class="target" id="esp__flash__encrypt_8h_1adb91c8abee5d745828b9f7f9b4b08bc8"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_flash_encrypt_region</code><span class="sig-paren">(</span>uint32_t <em>src_addr</em>, size_t <em>data_length</em><span class="sig-paren">)</span><a class="headerlink" href="spi_flash.html#_CPPv224esp_flash_encrypt_region8uint32_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Encrypt-in-place a block of flash sectors. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK if all operations succeeded, ESP_ERR_FLASH_OP_FAIL if SPI flash fails, ESP_ERR_FLASH_OP_TIMEOUT if flash times out. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src_addr</span></code>: Source offset in flash. Should be multiple of 4096 bytes. </li>
+<li><code class="docutils literal"><span class="pre">data_length</span></code>: Length of data to encrypt in bytes. Will be rounded up to next multiple of 4096 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="nvs_flash.html" class="btn btn-neutral float-right" title="Non-volatile storage library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Storage API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

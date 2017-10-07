@@ -1,0 +1,1074 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ULP coprocessor instruction set &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="ULP coprocessor programming" href="ulp.html"/>
+        <link rel="next" title="Programming ULP coprocessor using C macros" href="ulp_macros.html"/>
+        <link rel="prev" title="ULP coprocessor programming" href="ulp.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general-notes.html">General Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deep-sleep-stub.html">Deep Sleep Wake Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dump.html">ESP32 Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/flash-encryption.html">Flash Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freertos-smp.html">FreeRTOS SMP Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hlinterrupts.html">High Level Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/secure-boot.html">Secure Boot</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ulp.html">ULP Coprocessor</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="ulp_instruction_set.html#">Instruction set reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#note-about-addressing">Note about addressing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#nop-no-operation"><strong>NOP</strong> - no operation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#add-add-to-register"><strong>ADD</strong> - Add to register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#sub-subtract-from-register"><strong>SUB</strong> - Subtract from register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#and-logical-and-of-two-operands"><strong>AND</strong> - Logical AND of two operands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#or-logical-or-of-two-operands"><strong>OR</strong> - Logical OR of two operands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#lsh-logical-shift-left"><strong>LSH</strong> - Logical Shift Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#rsh-logical-shift-right"><strong>RSH</strong> - Logical Shift Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#move-move-to-register"><strong>MOVE</strong> – Move to register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#st-store-data-to-the-memory"><strong>ST</strong> – Store data to the memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#ld-load-data-from-the-memory"><strong>LD</strong> – Load data from the memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#jump-jump-to-an-absolute-address"><strong>JUMP</strong> – Jump to an absolute address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#jumpr-jump-to-a-relative-offset-condition-based-on-r0"><strong>JUMPR</strong> – Jump to a relative offset (condition based on R0)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#jumps-jump-to-a-relative-address-condition-based-on-stage-count"><strong>JUMPS</strong> – Jump to a relative address (condition based on stage count)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#stage-rst-reset-stage-count-register"><strong>STAGE_RST</strong> – Reset stage count register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#stage-inc-increment-stage-count-register"><strong>STAGE_INC</strong> – Increment stage count register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#stage-dec-decrement-stage-count-register"><strong>STAGE_DEC</strong> – Decrement stage count register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#halt-end-the-program"><strong>HALT</strong> – End the program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#wake-wakeup-the-chip"><strong>WAKE</strong> – wakeup the chip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#sleep-set-ulp-wakeup-timer-period"><strong>SLEEP</strong> – set ULP wakeup timer period</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#wait-wait-some-number-of-cycles"><strong>WAIT</strong> – wait some number of cycles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#tsens-do-measurement-with-temperature-sensor"><strong>TSENS</strong> – do measurement with temperature sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#adc-do-measurement-with-adc"><strong>ADC</strong> – do measurement with ADC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#reg-rd-read-from-peripheral-register"><strong>REG_RD</strong> – read from peripheral register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#reg-wr-write-to-peripheral-register"><strong>REG_WR</strong> – write to peripheral register</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ulp_instruction_set.html#convenience-macros-for-peripheral-registers-access">Convenience macros for peripheral registers access</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ulp_macros.html">Programming using macros (legacy)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html#installing-the-toolchain">Installing the toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html#compiling-ulp-code">Compiling ULP code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html#accessing-ulp-program-variables">Accessing ULP program variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html#starting-the-ulp-program">Starting the ULP program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html#ulp-program-flow">ULP program flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unit-tests.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="romconsole.html">ROM debug console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi.html">WiFi Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-ram.html">External SPI-connected RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API Guides</a> &raquo;</li>
+        
+          <li><a href="ulp.html">ULP coprocessor programming</a> &raquo;</li>
+        
+      <li>ULP coprocessor instruction set</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api-guides/ulp_instruction_set.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ulp-coprocessor-instruction-set">
+<h1>ULP coprocessor instruction set<a class="headerlink" href="ulp_instruction_set.html#ulp-coprocessor-instruction-set" title="Permalink to this headline">¶</a></h1>
+<p>This document provides details about the instructions used by ESP32 ULP coprocessor assembler.</p>
+<p>ULP coprocessor has 4 16-bit general purpose registers, labeled R0, R1, R2, R3. It also has an 8-bit counter register (stage_cnt) which can be used to implement loops. Stage count regiter is accessed using special instructions.</p>
+<p>ULP coprocessor can access 8k bytes of RTC_SLOW_MEM memory region. Memory is addressed in 32-bit word units. It can also access peripheral registers in RTC_CNTL, RTC_IO, and SENS peripherals.</p>
+<p>All instructions are 32-bit. Jump instructions, ALU instructions, peripheral register and memory access instructions are executed in 1 cycle. Instructions which work with peripherals (TSENS, ADC, I2C) take variable number of cycles, depending on peripheral operation.</p>
+<p>The instruction syntax is case insensitive. Upper and lower case letters can be used and intermixed arbitrarily. This is true both for register names and instruction names.</p>
+<div class="section" id="note-about-addressing">
+<h2>Note about addressing<a class="headerlink" href="ulp_instruction_set.html#note-about-addressing" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 ULP coprocessor&#8217;s JUMP, ST, LD instructions which take register as an argument (jump address, store/load base address) expect the argument to be expressed in 32-bit words.</p>
+<p>Consider the following example program:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">entry</span><span class="p">:</span>
+        <span class="n">NOP</span>
+        <span class="n">NOP</span>
+        <span class="n">NOP</span>
+        <span class="n">NOP</span>
+<span class="n">loop</span><span class="p">:</span>
+        <span class="n">MOVE</span> <span class="n">R1</span><span class="p">,</span> <span class="n">loop</span>
+        <span class="n">JUMP</span> <span class="n">R1</span>
+</pre></div>
+</div>
+<p>When this program is assembled and linked, address of label <code class="docutils literal"><span class="pre">loop</span></code> will be equal to 16 (expressed in bytes). However <cite>JUMP</cite> instruction expects the address stored in register to be expressed in 32-bit words. To account for this common use case, assembler will convert the address of label <cite>loop</cite> from bytes to words, when generating <code class="docutils literal"><span class="pre">MOVE</span></code> instruction, so the code generated code will be equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0000</span>    <span class="n">NOP</span>
+<span class="mi">0004</span>    <span class="n">NOP</span>
+<span class="mi">0008</span>    <span class="n">NOP</span>
+<span class="mi">000</span><span class="n">c</span>    <span class="n">NOP</span>
+<span class="mi">0010</span>    <span class="n">MOVE</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">4</span>
+<span class="mi">0014</span>    <span class="n">JUMP</span> <span class="n">R1</span>
+</pre></div>
+</div>
+<p>The other case is when the argument of <code class="docutils literal"><span class="pre">MOVE</span></code> instruction is not a label but a constant. In this case assembler will use the value as is, without any conversion:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">set</span>        <span class="n">val</span><span class="p">,</span> <span class="mh">0x10</span>
+<span class="n">MOVE</span>        <span class="n">R1</span><span class="p">,</span> <span class="n">val</span>
+</pre></div>
+</div>
+<p>In this case, value loaded into R1 will be <code class="docutils literal"><span class="pre">0x10</span></code>.</p>
+<p>Similar considerations apply to <code class="docutils literal"><span class="pre">LD</span></code> and <code class="docutils literal"><span class="pre">ST</span></code> instructions. Consider the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="o">.</span><span class="k">global</span> <span class="n">array</span>
+<span class="n">array</span><span class="p">:</span>  <span class="o">.</span><span class="n">long</span> <span class="mi">0</span>
+        <span class="o">.</span><span class="n">long</span> <span class="mi">0</span>
+        <span class="o">.</span><span class="n">long</span> <span class="mi">0</span>
+        <span class="o">.</span><span class="n">long</span> <span class="mi">0</span>
+
+        <span class="n">MOVE</span> <span class="n">R1</span><span class="p">,</span> <span class="n">array</span>
+        <span class="n">MOVE</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x1234</span>
+        <span class="n">ST</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span>      <span class="o">//</span> <span class="n">write</span> <span class="n">value</span> <span class="n">of</span> <span class="n">R2</span> <span class="n">into</span> <span class="n">the</span> <span class="n">first</span> <span class="n">array</span> <span class="n">element</span><span class="p">,</span>
+                          <span class="o">//</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">ST</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">4</span>      <span class="o">//</span> <span class="n">write</span> <span class="n">value</span> <span class="n">of</span> <span class="n">R2</span> <span class="n">into</span> <span class="n">the</span> <span class="n">second</span> <span class="n">array</span> <span class="n">element</span>
+                          <span class="o">//</span> <span class="p">(</span><span class="mi">4</span> <span class="n">byte</span> <span class="n">offset</span><span class="p">),</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">ADD</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">2</span>     <span class="o">//</span> <span class="n">this</span> <span class="n">increments</span> <span class="n">address</span> <span class="n">by</span> <span class="mi">2</span> <span class="n">words</span> <span class="p">(</span><span class="mi">8</span> <span class="nb">bytes</span><span class="p">)</span>
+        <span class="n">ST</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span>      <span class="o">//</span> <span class="n">write</span> <span class="n">value</span> <span class="n">of</span> <span class="n">R2</span> <span class="n">into</span> <span class="n">the</span> <span class="n">third</span> <span class="n">array</span> <span class="n">element</span><span class="p">,</span>
+                          <span class="o">//</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nop-no-operation">
+<h2><strong>NOP</strong> - no operation<a class="headerlink" href="ulp_instruction_set.html#nop-no-operation" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax:</strong></dt>
+<dd><strong>NOP</strong></dd>
+<dt><strong>Operands:</strong></dt>
+<dd>None</dd>
+<dt><strong>Description:</strong></dt>
+<dd>No operation is performed. Only the PC is incremented.</dd>
+</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>    <span class="n">NOP</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-add-to-register">
+<h2><strong>ADD</strong> - Add to register<a class="headerlink" href="ulp_instruction_set.html#add-add-to-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax:</strong></dt>
+<dd><p class="first"><strong>ADD</strong>      <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>ADD</strong>      <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands:</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> - Register R[0..3]</li>
+<li><em>Rsrc1</em> - Register R[0..3]</li>
+<li><em>Rsrc2</em> - Register R[0..3]</li>
+<li><em>Imm</em> - 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description:</strong></dt>
+<dd>The instruction adds source register to another source register or to a 16-bit signed value and stores result to the destination register.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>    <span class="n">ADD</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>        <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">+</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>    <span class="n">Add</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x1234</span>    <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">+</span> <span class="mh">0x1234</span>
+
+<span class="mi">3</span><span class="p">:</span>    <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>     <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+      <span class="n">Add</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>    <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">+</span> <span class="n">value1</span>
+
+
+<span class="mi">4</span><span class="p">:</span>    <span class="o">.</span><span class="k">global</span> <span class="n">label</span>         <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+      <span class="n">Add</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>     <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">+</span> <span class="n">label</span>
+        <span class="o">...</span>
+      <span class="n">label</span><span class="p">:</span> <span class="n">nop</span>            <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sub-subtract-from-register">
+<h2><strong>SUB</strong> - Subtract from register<a class="headerlink" href="ulp_instruction_set.html#sub-subtract-from-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax:</strong></dt>
+<dd><p class="first"><strong>SUB</strong> <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>SUB</strong> <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands:</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em>  - Register R[0..3]</li>
+<li><em>Rsrc1</em> - Register R[0..3]</li>
+<li><em>Rsrc2</em> - Register R[0..3]</li>
+<li><em>Imm</em>   - 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description:</strong></dt>
+<dd>The instruction subtracts the source register from another source register or subtracts 16-bit signed value from a source register, and stores result to the destination register.</dd>
+</dl>
+<p><strong>Examples:</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>         <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>             <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">-</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>         <span class="n">sub</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x1234</span>         <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">-</span> <span class="mh">0x1234</span>
+
+<span class="mi">3</span><span class="p">:</span>         <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>          <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+           <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>         <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">-</span> <span class="n">value1</span>
+<span class="mi">4</span><span class="p">:</span>         <span class="o">.</span><span class="k">global</span> <span class="n">label</span>              <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+           <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>          <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">-</span> <span class="n">label</span>
+             <span class="o">....</span>
+  <span class="n">label</span><span class="p">:</span>   <span class="n">nop</span>                        <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and-logical-and-of-two-operands">
+<h2><strong>AND</strong> - Logical AND of two operands<a class="headerlink" href="ulp_instruction_set.html#and-logical-and-of-two-operands" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax:</strong></dt>
+<dd><p class="first"><strong>AND</strong> <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>AND</strong> <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands:</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> - Register R[0..3]</li>
+<li><em>Rsrc1</em> - Register R[0..3]</li>
+<li><em>Rsrc2</em> - Register R[0..3]</li>
+<li><em>Imm</em> - 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description:</strong></dt>
+<dd>The instruction does logical AND of a source register and another source register or 16-bit signed value and stores result to the destination register.</dd>
+</dl>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">AND</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>          <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&amp;</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="n">AND</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x1234</span>      <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&amp;</span> <span class="mh">0x1234</span>
+
+<span class="mi">3</span><span class="p">:</span>        <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>       <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+          <span class="n">AND</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>      <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&amp;</span> <span class="n">value1</span>
+
+<span class="mi">4</span><span class="p">:</span>        <span class="o">.</span><span class="k">global</span> <span class="n">label</span>           <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+          <span class="n">AND</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>       <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&amp;</span> <span class="n">label</span>
+              <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                     <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="or-logical-or-of-two-operands">
+<h2><strong>OR</strong> - Logical OR of two operands<a class="headerlink" href="ulp_instruction_set.html#or-logical-or-of-two-operands" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><p class="first"><strong>OR</strong> <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>OR</strong> <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> - Register R[0..3]</li>
+<li><em>Rsrc1</em> - Register R[0..3]</li>
+<li><em>Rsrc2</em> - Register R[0..3]</li>
+<li><em>Imm</em> - 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction does logical OR of a source register and another source register or 16-bit signed value and stores result to the destination register.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>       <span class="n">OR</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>           <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> \<span class="o">|</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>       <span class="n">OR</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x1234</span>       <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> \<span class="o">|</span> <span class="mh">0x1234</span>
+
+<span class="mi">3</span><span class="p">:</span>       <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>       <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+         <span class="n">OR</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>       <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> \<span class="o">|</span> <span class="n">value1</span>
+
+<span class="mi">4</span><span class="p">:</span>       <span class="o">.</span><span class="k">global</span> <span class="n">label</span>           <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+         <span class="n">OR</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>        <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> \<span class="o">|</span><span class="n">label</span>
+         <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span> <span class="n">nop</span>                     <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lsh-logical-shift-left">
+<h2><strong>LSH</strong> - Logical Shift Left<a class="headerlink" href="ulp_instruction_set.html#lsh-logical-shift-left" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><p class="first"><strong>LSH</strong> <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>LSH</strong> <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> - Register R[0..3]</li>
+<li><em>Rsrc1</em> - Register R[0..3]</li>
+<li><em>Rsrc2</em> - Register R[0..3]</li>
+<li><em>Imm</em> - 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction does logical shift to left of source register to number of bits from another source register or 16-bit signed value and store result to the destination register.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>       <span class="n">LSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>            <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&lt;&lt;</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>       <span class="n">LSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x03</span>          <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&lt;&lt;</span> <span class="mh">0x03</span>
+
+<span class="mi">3</span><span class="p">:</span>       <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>         <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+         <span class="n">LSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>        <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&lt;&lt;</span> <span class="n">value1</span>
+
+<span class="mi">4</span><span class="p">:</span>       <span class="o">.</span><span class="k">global</span> <span class="n">label</span>             <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+         <span class="n">LSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>         <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&lt;&lt;</span> <span class="n">label</span>
+         <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                       <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rsh-logical-shift-right">
+<h2><strong>RSH</strong> - Logical Shift Right<a class="headerlink" href="ulp_instruction_set.html#rsh-logical-shift-right" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><p class="first"><strong>RSH</strong> <em>Rdst, Rsrc1, Rsrc2</em></p>
+<p class="last"><strong>RSH</strong> <em>Rdst, Rsrc1, imm</em></p>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><em>Rdst</em> - Register R[0..3]
+<em>Rsrc1</em> - Register R[0..3]
+<em>Rsrc2</em> - Register R[0..3]
+<em>Imm</em> - 16-bit signed value</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction does logical shift to right of source register to number of bits from another source register or 16-bit signed value and store result to the destination register.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">RSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span>              <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="n">RSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x03</span>            <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="mh">0x03</span>
+
+<span class="mi">3</span><span class="p">:</span>        <span class="o">.</span><span class="n">set</span> <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>           <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+          <span class="n">RSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">value1</span>          <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="n">value1</span>
+
+<span class="mi">4</span><span class="p">:</span>        <span class="o">.</span><span class="k">global</span> <span class="n">label</span>               <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+          <span class="n">RSH</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">label</span>           <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="n">label</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                         <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">variable</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="move-move-to-register">
+<h2><strong>MOVE</strong> – Move to register<a class="headerlink" href="ulp_instruction_set.html#move-move-to-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><p class="first"><strong>MOVE</strong>     <em>Rdst, Rsrc</em></p>
+<p class="last"><strong>MOVE</strong>     <em>Rdst, imm</em></p>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> – Register R[0..3]</li>
+<li><em>Rsrc</em> – Register R[0..3]</li>
+<li><em>Imm</em>  – 16-bit signed value</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction move to destination register value from source register or 16-bit signed value.</p>
+<p class="last">Note that when a label is used as an immediate, the address of the label will be converted from bytes to words. This is because LD, ST, and JUMP instructions expect the address register value to be expressed in words rather than bytes. To avoid using an extra instruction</p>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">MOVE</span>       <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span>            <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="n">R3</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="n">MOVE</span>       <span class="n">R1</span><span class="p">,</span> <span class="mh">0x03</span>          <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">&gt;&gt;</span> <span class="mh">0x03</span>
+
+<span class="mi">3</span><span class="p">:</span>        <span class="o">.</span><span class="n">set</span>       <span class="n">value1</span><span class="p">,</span> <span class="mh">0x03</span>      <span class="o">//</span><span class="n">constant</span> <span class="n">value1</span><span class="o">=</span><span class="mh">0x03</span>
+          <span class="n">MOVE</span>       <span class="n">R1</span><span class="p">,</span> <span class="n">value1</span>        <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">value1</span>
+
+<span class="mi">4</span><span class="p">:</span>        <span class="o">.</span><span class="k">global</span>     <span class="n">label</span>            <span class="o">//</span><span class="n">declaration</span> <span class="n">of</span> <span class="n">label</span>
+          <span class="n">MOVE</span>        <span class="n">R1</span><span class="p">,</span> <span class="n">label</span>        <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">address_of</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+          <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                          <span class="o">//</span><span class="n">definition</span> <span class="n">of</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="st-store-data-to-the-memory">
+<h2><strong>ST</strong> – Store data to the memory<a class="headerlink" href="ulp_instruction_set.html#st-store-data-to-the-memory" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>ST</strong>     <em>Rsrc, Rdst, offset</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rsrc</em> – Register R[0..3], holds the 16-bit value to store</li>
+<li><em>Rdst</em> – Register R[0..3], address of the destination, in 32-bit words</li>
+<li><em>Offset</em> – 10-bit signed value, offset in bytes</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction stores the 16-bit value of Rsrc to the lower half-word of memory with address Rdst+offset. The upper half-word is written with the current program counter (PC), expressed in words, shifted left by 5 bits:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Mem</span><span class="p">[</span><span class="n">Rdst</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">/</span> <span class="mi">4</span><span class="p">]{</span><span class="mi">31</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="n">PC</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="s1">&#39;b0, Rsrc[15:0]}</span>
+</pre></div>
+</div>
+<p class="last">The application can use higher 16 bits to determine which instruction in the ULP program has written any particular word into memory.</p>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">ST</span>  <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x12</span>        <span class="o">//</span><span class="n">MEM</span><span class="p">[</span><span class="n">R2</span><span class="o">+</span><span class="mh">0x12</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">.</span><span class="n">data</span>                   <span class="o">//</span><span class="n">Data</span> <span class="n">section</span> <span class="n">definition</span>
+  <span class="n">Addr1</span><span class="p">:</span>  <span class="o">.</span><span class="n">word</span>     <span class="mi">123</span>           <span class="o">//</span> <span class="n">Define</span> <span class="n">label</span> <span class="n">Addr1</span> <span class="mi">16</span> <span class="n">bit</span>
+          <span class="o">.</span><span class="n">set</span>      <span class="n">offs</span><span class="p">,</span> <span class="mh">0x00</span>    <span class="o">//</span> <span class="n">Define</span> <span class="n">constant</span> <span class="n">offs</span>
+          <span class="o">.</span><span class="n">text</span>                   <span class="o">//</span><span class="n">Text</span> <span class="n">section</span> <span class="n">definition</span>
+          <span class="n">MOVE</span>      <span class="n">R1</span><span class="p">,</span> <span class="mi">1</span>         <span class="o">//</span> <span class="n">R1</span> <span class="o">=</span> <span class="mi">1</span>
+          <span class="n">MOVE</span>      <span class="n">R2</span><span class="p">,</span> <span class="n">Addr1</span>     <span class="o">//</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">Addr1</span>
+          <span class="n">ST</span>        <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">offs</span>  <span class="o">//</span> <span class="n">MEM</span><span class="p">[</span><span class="n">R2</span> <span class="o">+</span>  <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span>
+                                  <span class="o">//</span> <span class="n">MEM</span><span class="p">[</span><span class="n">Addr1</span> <span class="o">+</span> <span class="mi">0</span><span class="p">]</span> <span class="n">will</span> <span class="n">be</span> <span class="mi">32</span><span class="s1">&#39;h600001</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ld-load-data-from-the-memory">
+<h2><strong>LD</strong> – Load data from the memory<a class="headerlink" href="ulp_instruction_set.html#ld-load-data-from-the-memory" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>LD</strong>      <em>Rdst, Rsrc, offset</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><p class="first"><em>Rdst</em>  – Register R[0..3], destination</p>
+<p><em>Rsrc</em> – Register R[0..3], holds address of destination, in 32-bit words</p>
+<p class="last"><em>Offset</em> – 10-bit signed value, offset in bytes</p>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction loads lower 16-bit half-word from memory with address Rsrc+offset into the destination register Rdst:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">Rdst</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Mem</span><span class="p">[</span><span class="n">Rsrc</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">/</span> <span class="mi">4</span><span class="p">][</span><span class="mi">15</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">LD</span>  <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mh">0x12</span>            <span class="o">//</span><span class="n">R1</span> <span class="o">=</span> <span class="n">MEM</span><span class="p">[</span><span class="n">R2</span><span class="o">+</span><span class="mh">0x12</span><span class="p">]</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">.</span><span class="n">data</span>                       <span class="o">//</span><span class="n">Data</span> <span class="n">section</span> <span class="n">definition</span>
+  <span class="n">Addr1</span><span class="p">:</span>  <span class="o">.</span><span class="n">word</span>     <span class="mi">123</span>               <span class="o">//</span> <span class="n">Define</span> <span class="n">label</span> <span class="n">Addr1</span> <span class="mi">16</span> <span class="n">bit</span>
+          <span class="o">.</span><span class="n">set</span>      <span class="n">offs</span><span class="p">,</span> <span class="mh">0x00</span>        <span class="o">//</span> <span class="n">Define</span> <span class="n">constant</span> <span class="n">offs</span>
+          <span class="o">.</span><span class="n">text</span>                       <span class="o">//</span><span class="n">Text</span> <span class="n">section</span> <span class="n">definition</span>
+          <span class="n">MOVE</span>      <span class="n">R1</span><span class="p">,</span> <span class="mi">1</span>             <span class="o">//</span> <span class="n">R1</span> <span class="o">=</span> <span class="mi">1</span>
+          <span class="n">MOVE</span>      <span class="n">R2</span><span class="p">,</span> <span class="n">Addr1</span>         <span class="o">//</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">Addr1</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">(</span><span class="n">address</span> <span class="n">of</span> <span class="n">label</span> <span class="ow">is</span> <span class="n">converted</span> <span class="n">into</span> <span class="n">words</span><span class="p">)</span>
+          <span class="n">LD</span>        <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">offs</span>      <span class="o">//</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">MEM</span><span class="p">[</span><span class="n">R2</span> <span class="o">+</span>  <span class="mi">0</span><span class="p">]</span>
+                                      <span class="o">//</span> <span class="n">R1</span> <span class="n">will</span> <span class="n">be</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jump-jump-to-an-absolute-address">
+<h2><strong>JUMP</strong> – Jump to an absolute address<a class="headerlink" href="ulp_instruction_set.html#jump-jump-to-an-absolute-address" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><p class="first"><strong>JUMP</strong>        <em>Rdst</em></p>
+<p><strong>JUMP</strong>        <em>ImmAddr</em></p>
+<p><strong>JUMP</strong>        <em>Rdst, Condition</em></p>
+<p class="last"><strong>JUMP</strong>        <em>ImmAddr, Condition</em></p>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> – Register R[0..3] containing address to jump to (expressed in 32-bit words)</li>
+<li><em>ImmAddr</em> – 13 bits address (expressed in bytes), aligned to 4 bytes</li>
+<li><dl class="first docutils">
+<dt><em>Condition</em>:</dt>
+<dd><ul class="first last">
+<li>EQ – jump if last ALU operation result was zero</li>
+<li>OV – jump if last ALU has set overflow flag</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction makes jump to the specified address. Jump can be either unconditional or based on an ALU flag.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">JUMP</span>       <span class="n">R1</span>            <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">R1</span> <span class="p">(</span><span class="n">address</span> <span class="ow">in</span> <span class="n">R1</span> <span class="ow">is</span> <span class="ow">in</span> <span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="n">words</span><span class="p">)</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="n">JUMP</span>       <span class="mh">0x120</span><span class="p">,</span> <span class="n">EQ</span>     <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="n">address</span> <span class="mh">0x120</span> <span class="p">(</span><span class="ow">in</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">if</span> <span class="n">ALU</span> <span class="n">result</span> <span class="ow">is</span> <span class="n">zero</span>
+
+<span class="mi">3</span><span class="p">:</span>        <span class="n">JUMP</span>       <span class="n">label</span>         <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="n">label</span>
+          <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                      <span class="o">//</span> <span class="n">Definition</span> <span class="n">of</span> <span class="n">label</span>
+
+<span class="mi">4</span><span class="p">:</span>        <span class="o">.</span><span class="k">global</span>    <span class="n">label</span>         <span class="o">//</span> <span class="n">Declaration</span> <span class="n">of</span> <span class="k">global</span> <span class="n">label</span>
+
+          <span class="n">MOVE</span>       <span class="n">R1</span><span class="p">,</span> <span class="n">label</span>     <span class="o">//</span> <span class="n">R1</span> <span class="o">=</span> <span class="n">label</span> <span class="p">(</span><span class="n">value</span> <span class="n">loaded</span> <span class="n">into</span> <span class="n">R1</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">words</span><span class="p">)</span>
+          <span class="n">JUMP</span>       <span class="n">R1</span>            <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="n">label</span>
+          <span class="o">...</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">nop</span>                      <span class="o">//</span> <span class="n">Definition</span> <span class="n">of</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jumpr-jump-to-a-relative-offset-condition-based-on-r0">
+<h2><strong>JUMPR</strong> – Jump to a relative offset (condition based on R0)<a class="headerlink" href="ulp_instruction_set.html#jumpr-jump-to-a-relative-offset-condition-based-on-r0" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>JUMPR</strong>        <em>Step, Threshold, Condition</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Step</em>          – relative shift from current position, in bytes</li>
+<li><em>Threshold</em>     – threshold value for branch condition</li>
+<li><dl class="first docutils">
+<dt><em>Condition</em>:</dt>
+<dd><ul class="first last">
+<li><em>GE</em> (greater or equal) – jump if value in R0 &gt;= threshold</li>
+<li><em>LT</em> (less than) – jump if value in R0 &lt; threshold</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction makes a jump to a relative address if condition is true. Condition is the result of comparison of R0 register value and the threshold value.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span><span class="n">pos</span><span class="p">:</span>    <span class="n">JUMPR</span>       <span class="mi">16</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">GE</span>   <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="n">address</span> <span class="p">(</span><span class="n">position</span> <span class="o">+</span> <span class="mi">16</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">R0</span> <span class="o">&gt;=</span> <span class="mi">20</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">//</span> <span class="n">Down</span> <span class="n">counting</span> <span class="n">loop</span> <span class="n">using</span> <span class="n">R0</span> <span class="n">register</span>
+          <span class="n">MOVE</span>        <span class="n">R0</span><span class="p">,</span> <span class="mi">16</span>       <span class="o">//</span> <span class="n">load</span> <span class="mi">16</span> <span class="n">into</span> <span class="n">R0</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">SUB</span>         <span class="n">R0</span><span class="p">,</span> <span class="n">R0</span><span class="p">,</span> <span class="mi">1</span>    <span class="o">//</span> <span class="n">R0</span><span class="o">--</span>
+          <span class="n">NOP</span>                      <span class="o">//</span> <span class="n">do</span> <span class="n">something</span>
+          <span class="n">JUMPR</span>       <span class="n">label</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">GE</span> <span class="o">//</span> <span class="n">jump</span> <span class="n">to</span> <span class="n">label</span> <span class="k">if</span> <span class="n">R0</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="jumps-jump-to-a-relative-address-condition-based-on-stage-count">
+<h2><strong>JUMPS</strong> – Jump to a relative address (condition based on stage count)<a class="headerlink" href="ulp_instruction_set.html#jumps-jump-to-a-relative-address-condition-based-on-stage-count" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>JUMPS</strong>        <em>Step, Threshold, Condition</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Step</em>       – relative shift from current position, in bytes</li>
+<li><em>Threshold</em>  – threshold value for branch condition</li>
+<li><dl class="first docutils">
+<dt><em>Condition</em>:</dt>
+<dd><ul class="first last">
+<li><em>EQ</em> (equal) – jump if value in stage_cnt == threshold</li>
+<li><em>LT</em> (less than) –  jump if value in stage_cnt &lt; threshold</li>
+<li><em>GT</em> (greater than) –  jump if value in stage_cnt &gt; threshold</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction makes a jump to a relative address if condition is true. Condition is the result of comparison of count register value and threshold value.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span><span class="n">pos</span><span class="p">:</span>    <span class="n">JUMPS</span>     <span class="mi">16</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">EQ</span>     <span class="o">//</span> <span class="n">Jump</span> <span class="n">to</span> <span class="p">(</span><span class="n">position</span> <span class="o">+</span> <span class="mi">16</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">if</span> <span class="n">stage_cnt</span> <span class="o">==</span> <span class="mi">20</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">//</span> <span class="n">Up</span> <span class="n">counting</span> <span class="n">loop</span> <span class="n">using</span> <span class="n">stage</span> <span class="n">count</span> <span class="n">register</span>
+          <span class="n">STAGE_RST</span>                  <span class="o">//</span> <span class="nb">set</span> <span class="n">stage_cnt</span> <span class="n">to</span> <span class="mi">0</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">STAGE_INC</span>  <span class="mi">1</span>               <span class="o">//</span> <span class="n">stage_cnt</span><span class="o">++</span>
+          <span class="n">NOP</span>                        <span class="o">//</span> <span class="n">do</span> <span class="n">something</span>
+          <span class="n">JUMPS</span>       <span class="n">label</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">LT</span>  <span class="o">//</span> <span class="n">jump</span> <span class="n">to</span> <span class="n">label</span> <span class="k">if</span> <span class="n">stage_cnt</span> <span class="o">&lt;</span> <span class="mi">16</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stage-rst-reset-stage-count-register">
+<h2><strong>STAGE_RST</strong> – Reset stage count register<a class="headerlink" href="ulp_instruction_set.html#stage-rst-reset-stage-count-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>STAGE_RST</strong></dd>
+<dt><strong>Operands</strong></dt>
+<dd>No operands</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction sets the stage count register to 0</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>       <span class="n">STAGE_RST</span>      <span class="o">//</span> <span class="n">Reset</span> <span class="n">stage</span> <span class="n">count</span> <span class="n">register</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stage-inc-increment-stage-count-register">
+<h2><strong>STAGE_INC</strong> – Increment stage count register<a class="headerlink" href="ulp_instruction_set.html#stage-inc-increment-stage-count-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>STAGE_INC</strong>      <em>Value</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Value</em> – 8 bits value</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction increments stage count register by given value.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">STAGE_INC</span>      <span class="mi">10</span>          <span class="o">//</span> <span class="n">stage_cnt</span> <span class="o">+=</span> <span class="mi">10</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">//</span> <span class="n">Up</span> <span class="n">counting</span> <span class="n">loop</span> <span class="n">example</span><span class="p">:</span>
+          <span class="n">STAGE_RST</span>                  <span class="o">//</span> <span class="nb">set</span> <span class="n">stage_cnt</span> <span class="n">to</span> <span class="mi">0</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">STAGE_INC</span>  <span class="mi">1</span>               <span class="o">//</span> <span class="n">stage_cnt</span><span class="o">++</span>
+          <span class="n">NOP</span>                        <span class="o">//</span> <span class="n">do</span> <span class="n">something</span>
+          <span class="n">JUMPS</span>      <span class="n">label</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">LT</span>   <span class="o">//</span> <span class="n">jump</span> <span class="n">to</span> <span class="n">label</span> <span class="k">if</span> <span class="n">stage_cnt</span> <span class="o">&lt;</span> <span class="mi">16</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stage-dec-decrement-stage-count-register">
+<h2><strong>STAGE_DEC</strong> – Decrement stage count register<a class="headerlink" href="ulp_instruction_set.html#stage-dec-decrement-stage-count-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>STAGE_DEC</strong>      <em>Value</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Value</em> – 8 bits value</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction decrements stage count register by given value.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">STAGE_DEC</span>      <span class="mi">10</span>        <span class="o">//</span> <span class="n">stage_cnt</span> <span class="o">-=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">//</span> <span class="n">Down</span> <span class="n">counting</span> <span class="n">loop</span> <span class="n">exaple</span>
+          <span class="n">STAGE_RST</span>                <span class="o">//</span> <span class="nb">set</span> <span class="n">stage_cnt</span> <span class="n">to</span> <span class="mi">0</span>
+          <span class="n">STAGE_INC</span>  <span class="mi">16</span>            <span class="o">//</span> <span class="n">increment</span> <span class="n">stage_cnt</span> <span class="n">to</span> <span class="mi">16</span>
+  <span class="n">label</span><span class="p">:</span>  <span class="n">STAGE_DEC</span>  <span class="mi">1</span>             <span class="o">//</span> <span class="n">stage_cnt</span><span class="o">--</span><span class="p">;</span>
+          <span class="n">NOP</span>                      <span class="o">//</span> <span class="n">do</span> <span class="n">something</span>
+          <span class="n">JUMPS</span>      <span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">GT</span>  <span class="o">//</span> <span class="n">jump</span> <span class="n">to</span> <span class="n">label</span> <span class="k">if</span> <span class="n">stage_cnt</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="halt-end-the-program">
+<h2><strong>HALT</strong> – End the program<a class="headerlink" href="ulp_instruction_set.html#halt-end-the-program" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>HALT</strong></dd>
+<dt><strong>Operands</strong></dt>
+<dd>No operands</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction halt the processor to the power down mode</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>       <span class="n">HALT</span>      <span class="o">//</span> <span class="n">Move</span> <span class="n">chip</span> <span class="n">to</span> <span class="n">powerdown</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wake-wakeup-the-chip">
+<h2><strong>WAKE</strong> – wakeup the chip<a class="headerlink" href="ulp_instruction_set.html#wake-wakeup-the-chip" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>WAKE</strong></dd>
+<dt><strong>Operands</strong></dt>
+<dd>No operands</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction sends an interrupt from ULP to RTC controller.</p>
+<ul class="last simple">
+<li>If the SoC is in deep sleep mode, and ULP wakeup is enabled, this causes the SoC to wake up.</li>
+<li>If the SoC is not in deep sleep mode, and ULP interrupt bit (RTC_CNTL_ULP_CP_INT_ENA) is set in RTC_CNTL_INT_ENA_REG register, RTC interrupt will be triggered.</li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">WAKE</span>                      <span class="o">//</span> <span class="n">Trigger</span> <span class="n">wake</span> <span class="n">up</span>
+          <span class="n">REG_WR</span> <span class="mh">0x006</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">0</span>   <span class="o">//</span> <span class="n">Stop</span> <span class="n">ULP</span> <span class="n">timer</span> <span class="p">(</span><span class="n">clear</span> <span class="n">RTC_CNTL_ULP_CP_SLP_TIMER_EN</span><span class="p">)</span>
+          <span class="n">HALT</span>                      <span class="o">//</span> <span class="n">Stop</span> <span class="n">the</span> <span class="n">ULP</span> <span class="n">program</span>
+          <span class="o">//</span> <span class="n">After</span> <span class="n">these</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">SoC</span> <span class="n">will</span> <span class="n">wake</span> <span class="n">up</span><span class="p">,</span>
+          <span class="o">//</span> <span class="ow">and</span> <span class="n">ULP</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">run</span> <span class="n">again</span> <span class="n">until</span> <span class="n">started</span> <span class="n">by</span> <span class="n">the</span> <span class="n">main</span> <span class="n">program</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sleep-set-ulp-wakeup-timer-period">
+<h2><strong>SLEEP</strong> – set ULP wakeup timer period<a class="headerlink" href="ulp_instruction_set.html#sleep-set-ulp-wakeup-timer-period" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>SLEEP</strong>   <em>sleep_reg</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>sleep_reg</em> – 0..4, selects one of <code class="docutils literal"><span class="pre">SENS_ULP_CP_SLEEP_CYCx_REG</span></code> registers.</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction selects which of the <code class="docutils literal"><span class="pre">SENS_ULP_CP_SLEEP_CYCx_REG</span></code> (x = 0..4) register values is to be used by the ULP wakeup timer as wakeup period. By default, the value from <code class="docutils literal"><span class="pre">SENS_ULP_CP_SLEEP_CYC0_REG</span></code> is used.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">SLEEP</span>     <span class="mi">1</span>         <span class="o">//</span> <span class="n">Use</span> <span class="n">period</span> <span class="nb">set</span> <span class="ow">in</span> <span class="n">SENS_ULP_CP_SLEEP_CYC1_REG</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">.</span><span class="n">set</span> <span class="n">sleep_reg</span><span class="p">,</span> <span class="mi">4</span>   <span class="o">//</span> <span class="n">Set</span> <span class="n">constant</span>
+          <span class="n">SLEEP</span>  <span class="n">sleep_reg</span>    <span class="o">//</span> <span class="n">Use</span> <span class="n">period</span> <span class="nb">set</span> <span class="ow">in</span> <span class="n">SENS_ULP_CP_SLEEP_CYC4_REG</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wait-wait-some-number-of-cycles">
+<h2><strong>WAIT</strong> – wait some number of cycles<a class="headerlink" href="ulp_instruction_set.html#wait-wait-some-number-of-cycles" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>WAIT</strong>   <em>Cycles</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Cycles</em> – number of cycles for wait</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction delays for given number of cycles.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">WAIT</span>     <span class="mi">10</span>         <span class="o">//</span> <span class="n">Do</span> <span class="n">nothing</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">cycles</span>
+
+<span class="mi">2</span><span class="p">:</span>        <span class="o">.</span><span class="n">set</span>  <span class="n">wait_cnt</span><span class="p">,</span> <span class="mi">10</span>  <span class="o">//</span> <span class="n">Set</span> <span class="n">a</span> <span class="n">constant</span>
+          <span class="n">WAIT</span>  <span class="n">wait_cnt</span>      <span class="o">//</span> <span class="n">wait</span> <span class="k">for</span> <span class="mi">10</span> <span class="n">cycles</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tsens-do-measurement-with-temperature-sensor">
+<h2><strong>TSENS</strong> – do measurement with temperature sensor<a class="headerlink" href="ulp_instruction_set.html#tsens-do-measurement-with-temperature-sensor" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>TSENS</strong>   <em>Rdst, Wait_Delay</em></li>
+</ul>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> – Destination Register R[0..3], result will be stored to this register</li>
+<li><em>Wait_Delay</em> – number of cycles used to perform the measurement</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction performs measurement using TSENS and stores the result into a general purpose register.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">TSENS</span>     <span class="n">R1</span><span class="p">,</span> <span class="mi">1000</span>     <span class="o">//</span> <span class="n">Measure</span> <span class="n">temperature</span> <span class="n">sensor</span> <span class="k">for</span> <span class="mi">1000</span> <span class="n">cycles</span><span class="p">,</span>
+                                 <span class="o">//</span> <span class="ow">and</span> <span class="n">store</span> <span class="n">result</span> <span class="n">to</span> <span class="n">R1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adc-do-measurement-with-adc">
+<h2><strong>ADC</strong> – do measurement with ADC<a class="headerlink" href="ulp_instruction_set.html#adc-do-measurement-with-adc" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>ADC</strong>   <em>Rdst, Sar_sel, Mux</em></li>
+<li><strong>ADC</strong>   <em>Rdst, Sar_sel, Mux, 0</em> — deprecated form</li>
+</ul>
+</dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Rdst</em> – Destination Register R[0..3], result will be stored to this register</li>
+<li><em>Sar_sel</em> – Select ADC: 0 = SARADC1, 1 = SARADC2</li>
+<li><em>Mux</em>  -  selected PAD, SARADC Pad[Mux+1] is enabled</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd>The instruction makes measurements from ADC.</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">ADC</span>      <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>      <span class="o">//</span> <span class="n">Measure</span> <span class="n">value</span> <span class="n">using</span> <span class="n">ADC1</span> <span class="n">pad</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">store</span> <span class="n">result</span> <span class="n">into</span> <span class="n">R1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reg-rd-read-from-peripheral-register">
+<h2><strong>REG_RD</strong> – read from peripheral register<a class="headerlink" href="ulp_instruction_set.html#reg-rd-read-from-peripheral-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>REG_RD</strong>   <em>Addr, High, Low</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Addr</em> – register address, in 32-bit words</li>
+<li><em>High</em> – High part of R0</li>
+<li><em>Low</em> – Low part of R0</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction reads up to 16 bits from a peripheral register into a general purpose register: <code class="docutils literal"><span class="pre">R0</span> <span class="pre">=</span> <span class="pre">REG[Addr][High:Low]</span></code>.</p>
+<p>This instruction can access registers in RTC_CNTL, RTC_IO, and SENS peripherals. Address of the the register, as seen from the ULP,
+can be calculated from the address of the same register on the DPORT bus as follows:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">addr_ulp</span> <span class="o">=</span> <span class="p">(</span><span class="n">addr_dport</span> <span class="o">-</span> <span class="n">DR_REG_RTCCNTL_BASE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">REG_RD</span>      <span class="mh">0x120</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span>     <span class="o">//</span> <span class="n">load</span> <span class="mi">4</span> <span class="n">bits</span><span class="p">:</span> <span class="n">R0</span> <span class="o">=</span> <span class="p">{</span><span class="mi">12</span><span class="s1">&#39;b0, REG[0x120][7:4]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reg-wr-write-to-peripheral-register">
+<h2><strong>REG_WR</strong> – write to peripheral register<a class="headerlink" href="ulp_instruction_set.html#reg-wr-write-to-peripheral-register" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Syntax</strong></dt>
+<dd><strong>REG_WR</strong>   <em>Addr, High, Low, Data</em></dd>
+<dt><strong>Operands</strong></dt>
+<dd><ul class="first last simple">
+<li><em>Addr</em> – register address, in 32-bit words.</li>
+<li><em>High</em> – High part of R0</li>
+<li><em>Low</em> – Low part of R0</li>
+<li><em>Data</em> – value to write, 8 bits</li>
+</ul>
+</dd>
+<dt><strong>Description</strong></dt>
+<dd><p class="first">The instruction writes up to 8 bits from a general purpose register into a peripheral register. <code class="docutils literal"><span class="pre">REG[Addr][High:Low]</span> <span class="pre">=</span> <span class="pre">data</span></code></p>
+<p>This instruction can access registers in RTC_CNTL, RTC_IO, and SENS peripherals. Address of the the register, as seen from the ULP,
+can be calculated from the address of the same register on the DPORT bus as follows:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">addr_ulp</span> <span class="o">=</span> <span class="p">(</span><span class="n">addr_dport</span> <span class="o">-</span> <span class="n">DR_REG_RTCCNTL_BASE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span>        <span class="n">REG_WR</span>      <span class="mh">0x120</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mh">0x10</span>   <span class="o">//</span> <span class="nb">set</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">:</span> <span class="n">REG</span><span class="p">[</span><span class="mh">0x120</span><span class="p">][</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convenience-macros-for-peripheral-registers-access">
+<h2>Convenience macros for peripheral registers access<a class="headerlink" href="ulp_instruction_set.html#convenience-macros-for-peripheral-registers-access" title="Permalink to this headline">¶</a></h2>
+<p>ULP source files are passed through C preprocessor before the assembler. This allows certain macros to be used to facilitate access to peripheral registers.</p>
+<p>Some existing macros are defined in <code class="docutils literal"><span class="pre">soc/soc_ulp.h</span></code> header file. These macros allow access to the fields of peripheral registers by their names.
+Peripheral registers names which can be used with these macros are the ones defined in <code class="docutils literal"><span class="pre">soc/rtc_cntl_reg.h</span></code>, <code class="docutils literal"><span class="pre">soc/rtc_io_reg.h</span></code>, and <code class="docutils literal"><span class="pre">soc/sens_reg.h</span></code>.</p>
+<dl class="docutils">
+<dt>READ_RTC_REG(rtc_reg, low_bit, bit_width)</dt>
+<dd><p class="first">Read up to 16 bits from rtc_reg[low_bit + bit_width - 1 : low_bit] into R0. For example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;soc/soc_ulp.h&quot;</span>
+<span class="c1">#include &quot;soc/rtc_cntl_reg.h&quot;</span>
+
+<span class="o">/*</span> <span class="n">Read</span> <span class="mi">16</span> <span class="n">lower</span> <span class="n">bits</span> <span class="n">of</span> <span class="n">RTC_CNTL_TIME0_REG</span> <span class="n">into</span> <span class="n">R0</span> <span class="o">*/</span>
+<span class="n">READ_RTC_REG</span><span class="p">(</span><span class="n">RTC_CNTL_TIME0_REG</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>READ_RTC_FIELD(rtc_reg, field)</dt>
+<dd><p class="first">Read from a field in rtc_reg into R0, up to 16 bits. For example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;soc/soc_ulp.h&quot;</span>
+<span class="c1">#include &quot;soc/sens_reg.h&quot;</span>
+
+<span class="o">/*</span> <span class="n">Read</span> <span class="mi">8</span><span class="o">-</span><span class="n">bit</span> <span class="n">SENS_TSENS_OUT</span> <span class="n">field</span> <span class="n">of</span> <span class="n">SENS_SAR_SLAVE_ADDR3_REG</span> <span class="n">into</span> <span class="n">R0</span> <span class="o">*/</span>
+<span class="n">READ_RTC_FIELD</span><span class="p">(</span><span class="n">SENS_SAR_SLAVE_ADDR3_REG</span><span class="p">,</span> <span class="n">SENS_TSENS_OUT</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>WRITE_RTC_REG(rtc_reg, low_bit, bit_width, value)</dt>
+<dd><p class="first">Write immediate value into rtc_reg[low_bit + bit_width - 1 : low_bit], bit_width &lt;= 8. For example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;soc/soc_ulp.h&quot;</span>
+<span class="c1">#include &quot;soc/rtc_io_reg.h&quot;</span>
+
+<span class="o">/*</span> <span class="n">Set</span> <span class="n">BIT</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">of</span> <span class="n">RTC_GPIO_OUT_DATA_W1TS</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">RTC_GPIO_OUT_W1TS_REG</span> <span class="o">*/</span>
+<span class="n">WRITE_RTC_REG</span><span class="p">(</span><span class="n">RTC_GPIO_OUT_W1TS_REG</span><span class="p">,</span> <span class="n">RTC_GPIO_OUT_DATA_W1TS_S</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>WRITE_RTC_FIELD(rtc_reg, field, value)</dt>
+<dd><p class="first">Write immediate value into a field in rtc_reg, up to 8 bits. For example:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;soc/soc_ulp.h&quot;</span>
+<span class="c1">#include &quot;soc/rtc_cntl_reg.h&quot;</span>
+
+<span class="o">/*</span> <span class="n">Set</span> <span class="n">RTC_CNTL_ULP_CP_SLP_TIMER_EN</span> <span class="n">field</span> <span class="n">of</span> <span class="n">RTC_CNTL_STATE0_REG</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*/</span>
+<span class="n">WRITE_RTC_FIELD</span><span class="p">(</span><span class="n">RTC_CNTL_STATE0_REG</span><span class="p">,</span> <span class="n">RTC_CNTL_ULP_CP_SLP_TIMER_EN</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ulp_macros.html" class="btn btn-neutral float-right" title="Programming ULP coprocessor using C macros" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ulp.html" class="btn btn-neutral" title="ULP coprocessor programming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

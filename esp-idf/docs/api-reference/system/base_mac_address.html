@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Base MAC address &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="System API" href="index.html"/>
+        <link rel="next" title="Application Level Tracing" href="app_trace.html"/>
+        <link rel="prev" title="Logging library" href="log.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mem_alloc.html">Heap Memory Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_debug.html">Heap Memory Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr_alloc.html">Interrupt Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wdts.html">Watchdogs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota.html">Over The Air Updates (OTA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep_modes.html">Sleep Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Logging</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="base_mac_address.html#">Base MAC address</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="base_mac_address.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base_mac_address.html#api-reference">API Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base_mac_address.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">System API</a> &raquo;</li>
+        
+      <li>Base MAC address</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/system/base_mac_address.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="base-mac-address">
+<h1>Base MAC address<a class="headerlink" href="base_mac_address.html#base-mac-address" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="base_mac_address.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>Serveral MAC addresses (universally administered by IEEE) are uniquely assigned to the networking interfaces (WiFi/BT/Ethernet).
+The final octet of each universally administered MAC address increases by one. Only the first one which is called base MAC address
+of them is stored in EFUSE or external storage, the others are generated from it. Here, &#8216;generate&#8217; means adding 0, 1, 2 and 3
+(respectively) to the final octet of the base MAC address.</p>
+<p>If the universally administered MAC addresses are not enough for all of the networking interfaces. Local administered MAC addresses
+which are derived from universally administered MAC addresses are assigned to the reset of networking interfaces.</p>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local">definition of local vs universal MAC address can be found on Wikipedia</a>.</p>
+<p>The number of universally administered MAC address can be configured using <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code>.</p>
+<div class="section" id="id1">
+<h3>Base MAC address<a class="headerlink" href="base_mac_address.html#id1" title="Permalink to this headline">¶</a></h3>
+<p>If using the default base MAC address factory programmed by Espressif in BLK0 of EFUSE, nothing needs to be done.</p>
+<p>If using a custom base MAC address stored in BLK3 of EFUSE, call API <code class="docutils literal"><span class="pre">esp_efuse_mac_get_custom()</span></code> to get the base MAC address
+which is stored in BLK3 of EFUSE. If correct MAC address is returned, then call <code class="docutils literal"><span class="pre">esp_base_mac_addr_set()</span></code> to set the base MAC
+address for system to generate the MAC addresses used by the networking interfaces(WiFi/BT/Ethernet).
+There are 192 bits storage spaces for custom to store base MAC address in BLK3 of EFUSE. They are EFUSE_BLK3_RDATA0,
+EFUSE_BLK3_RDATA1, EFUSE_BLK3_RDATA2, EFUSE_BLK3_RDATA3, EFUSE_BLK3_RDATA4 and EFUSE_BLK3_RDATA5, each of them is 32 bits
+register. The format of the 192 bits storage spaces is:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>------------------------------------------------------
+Field       |Bits |Range     |Description
+------------------------------------------------------
+version     |8    |[191:184] |1: useful. 0: useless
+------------------------------------------------------
+reserve     |112  |[183:72]  |reserved
+------------------------------------------------------
+mac address |64   |[71:8]    |base MAC address
+------------------------------------------------------
+mac crc     |8    |[7:0]     |crc of base MAC address
+------------------------------------------------------
+</pre></div>
+</div>
+<p>If using base MAC address stored in external storage, firstly get the base MAC address stored in external storage, then call
+API <code class="docutils literal"><span class="pre">esp_base_mac_addr_set()</span></code> to set the base MAC address for system to generate the MAC addresses used by the networking
+interfaces(WiFi/BT/Ethernet).</p>
+<p>All of the steps must be done before initializing the networking interfaces(WiFi/BT/Ethernet). It is recommended to do it in
+<code class="docutils literal"><span class="pre">app_main()</span></code> which can be referenced in <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/system/base_mac_address">system/base_mac_address</a>.</p>
+</div>
+<div class="section" id="number-of-universally-administered-mac-address">
+<h3>Number of universally administered MAC address<a class="headerlink" href="base_mac_address.html#number-of-universally-administered-mac-address" title="Permalink to this headline">¶</a></h3>
+<p>If the number of universal MAC addresses is two, only two interfaces (WiFi station and Bluetooth) receive a universally
+administered MAC address. These are generated sequentially by adding 0 and 1 (respectively) to the base MAC address.
+The remaining two interfaces (WiFi softap and Ethernet) receive local MAC addresses. These are derived from the universal
+WiFi station and Bluetooth MAC addresses, respectively.</p>
+<p>If the number of universal MAC addresses is four, all four interfaces (WiFi station, WiFi softap, Bluetooth and Ethernet)
+receive a universally administered MAC address. These are generated sequentially by adding 0, 1, 2 and 3 (respectively)
+to the final octet of the base MAC address.</p>
+<p>When using the default (Espressif-assigned) base MAC address, either setting can be used. When using a custom universal MAC
+address range, the correct setting will depend on the allocation of MAC addresses in this range (either 2 or 4 per device.)</p>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="base_mac_address.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-files">
+<h3>Header Files<a class="headerlink" href="base_mac_address.html#header-files" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/esp32/include/esp_system.h">esp32/include/esp_system.h</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="base_mac_address.html#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv221esp_base_mac_addr_setP7uint8_t">
+<span id="esp_base_mac_addr_set__uint8_tP"></span><span class="target" id="esp__system_8h_1ae77083b3d9841751e82205a100533511"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_base_mac_addr_set</code><span class="sig-paren">(</span>uint8_t *<em>mac</em><span class="sig-paren">)</span><a class="headerlink" href="base_mac_address.html#_CPPv221esp_base_mac_addr_setP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set base MAC address with the MAC address which is stored in BLK3 of EFUSE or external storage e.g. flash and EEPROM. </p>
+<p>Base MAC address is used to generate the MAC addresses used by the networking interfaces. If using base MAC address stored in BLK3 of EFUSE or external storage, call this API to set base MAC address with the MAC address which is stored in BLK3 of EFUSE or external storage before initializing WiFi/BT/Ethernet.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK on success </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mac</span></code>: base MAC address, length: 6 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_efuse_mac_get_customP7uint8_t">
+<span id="esp_efuse_mac_get_custom__uint8_tP"></span><span class="target" id="esp__system_8h_1a937bad6469087851cf90875f3508be43"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_efuse_mac_get_custom</code><span class="sig-paren">(</span>uint8_t *<em>mac</em><span class="sig-paren">)</span><a class="headerlink" href="base_mac_address.html#_CPPv224esp_efuse_mac_get_customP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return base MAC address which was previously written to BLK3 of EFUSE. </p>
+<p>Base MAC address is used to generate the MAC addresses used by the networking interfaces. This API returns the custom base MAC address which was previously written to BLK3 of EFUSE. Writing this EFUSE allows setting of a different (non-Espressif) base MAC address. It is also possible to store a custom base MAC address elsewhere, see esp_base_mac_addr_set() for details.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK on success ESP_ERR_INVALID_VERSION An invalid MAC version field was read from BLK3 of EFUSE ESP_ERR_INVALID_CRC An invalid MAC CRC was read from BLK3 of EFUSE </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mac</span></code>: base MAC address, length: 6 bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="app_trace.html" class="btn btn-neutral float-right" title="Application Level Tracing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="log.html" class="btn btn-neutral" title="Logging library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

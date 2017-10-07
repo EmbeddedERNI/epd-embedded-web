@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Flash Encryption &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="API Guides" href="../api-guides/index.html"/>
+        <link rel="next" title="ESP-IDF FreeRTOS SMP Changes" href="../api-guides/freertos-smp.html"/>
+        <link rel="prev" title="ESP32 Core Dump" href="../api-guides/core_dump.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api-guides/index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/general-notes.html">General Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/deep-sleep-stub.html">Deep Sleep Wake Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/core_dump.html">ESP32 Core Dump</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="flash-encryption.html#">Flash Encryption</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#flash-encryption-initialisation">Flash Encryption Initialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#using-encrypted-flash">Using Encrypted Flash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#scope-of-flash-encryption">Scope of Flash Encryption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#reading-encrypted-flash">Reading Encrypted Flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#writing-encrypted-flash">Writing Encrypted Flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#updating-encrypted-flash">Updating Encrypted Flash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#ota-updates">OTA Updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#serial-flashing">Serial Flashing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#reflashing-via-pregenerated-flash-encryption-key">Reflashing via Pregenerated Flash Encryption Key</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#disabling-flash-encryption">Disabling Flash Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#limitations-of-flash-encryption">Limitations of Flash Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#flash-encryption-advanced-features">Flash Encryption Advanced Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#encrypted-partition-flag">Encrypted Partition Flag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#enabling-uart-bootloader-encryption-decryption">Enabling UART Bootloader Encryption/Decryption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#setting-flash-crypt-config">Setting FLASH_CRYPT_CONFIG</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="flash-encryption.html#technical-details">Technical Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#flash-crypt-cnt-efuse">FLASH_CRYPT_CNT efuse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flash-encryption.html#flash-encryption-algorithm">Flash Encryption Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/freertos-smp.html">FreeRTOS SMP Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/hlinterrupts.html">High Level Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-boot.html">Secure Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/ulp.html">ULP Coprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/unit-tests.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/app_trace.html">Application Level Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/console.html">Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/romconsole.html">ROM debug console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/wifi.html">WiFi Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api-guides/external-ram.html">External SPI-connected RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../api-guides/index.html">API Guides</a> &raquo;</li>
+        
+      <li>Flash Encryption</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/flash-encryption.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flash-encryption">
+<h1>Flash Encryption<a class="headerlink" href="flash-encryption.html#flash-encryption" title="Permalink to this headline">¶</a></h1>
+<p>Flash Encryption is a feature for encrypting the contents of the ESP32&#8217;s attached SPI flash. When flash encryption is enabled, physical readout of the SPI flash is not sufficient to recover most flash contents.</p>
+<p>Flash Encryption is separate from the <a class="reference internal" href="secure-boot.html"><span class="doc">Secure Boot</span></a> feature, and you can use flash encryption without enabling secure boot. However we recommend using both features together for a secure environment.</p>
+<p><strong>IMPORTANT: Enabling flash encryption limits your options for further updates of your ESP32. Make sure to read this document (including :ref:`flash-encryption-limitations`) and understand the implications of enabling flash encryption.</strong></p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="flash-encryption.html#background" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The contents of the flash are encrypted using AES with a 256 bit key. The flash encryption key is stored in efuse internal to the chip, and is (by default) protected from software access.</p>
+</li>
+<li><p class="first">Flash access is transparent via the flash cache mapping feature of ESP32 - any flash regions which are mapped to the address space will be transparently decrypted when read.</p>
+</li>
+<li><p class="first">Encryption is applied by flashing the ESP32 with plaintext data, and (if encryption is enabled) the bootloader encrypts the data in place on first boot.</p>
+</li>
+<li><p class="first">Not all of the flash is encrypted. The following kinds of flash data are encrypted:</p>
+<ul>
+<li><p class="first">Bootloader</p>
+</li>
+<li><p class="first">Secure boot bootloader digest (if secure boot is enabled)</p>
+</li>
+<li><p class="first">Partition Table</p>
+</li>
+<li><p class="first">All &#8220;app&#8221; type partitions</p>
+</li>
+<li><p class="first">Any partition marked with the &#8220;encrypt&#8221; flag in the partition table</p>
+<blockquote>
+<div><p>It may be desirable for some data partitions to remain unencrypted for ease of access, or to use flash-friendly update algorithms that are ineffective if the data is encrypted. &#8220;NVS&#8221; partitions for non-volatile storage cannot be encrypted.</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">The flash encryption key is stored in efuse key block 1, internal to the ESP32 chip. By default, this key is read- and write-protected so software cannot access it or change it.</p>
+</li>
+<li><p class="first">The <cite>flash encryption algorithm</cite> is AES-256, where the key is &#8220;tweaked&#8221; with the offset address of each 32 byte block of flash. This means every 32 byte block (two consecutive 16 byte AES blocks) is encrypted with a unique key derived from the flash encryption key.</p>
+</li>
+<li><p class="first">Although software running on the chip can transparently decrypt flash contents, by default it is made impossible for the UART bootloader to decrypt (or encrypt) data when flash encryption is enabled.</p>
+</li>
+<li><p class="first">If flash encrption may be enabled, the programmer must take certain precautions when writing code that <a class="reference internal" href="flash-encryption.html#using-encrypted-flash"><span class="std std-ref">uses encrypted flash</span></a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="flash-encryption-initialisation">
+<span id="id1"></span><h2>Flash Encryption Initialisation<a class="headerlink" href="flash-encryption.html#flash-encryption-initialisation" title="Permalink to this headline">¶</a></h2>
+<p>This is the default (and recommended) flash encryption initialisation process. It is possible to customise this process for development or other purposes, see <a class="reference internal" href="flash-encryption.html#flash-encryption-advanced-features"><span class="std std-ref">Flash Encryption Advanced Features</span></a> for details.</p>
+<p><strong>IMPORTANT: Once flash encryption is enabled on first boot, the hardware allows a maximum of 3 subsequent flash updates via serial re-flashing.</strong> A special procedure (documented in <a class="reference internal" href="flash-encryption.html#updating-encrypted-flash-serial"><span class="std std-ref">Serial Flashing</span></a>) must be followed to perform these updates.</p>
+<ul class="simple">
+<li>If secure boot is enabled, no physical re-flashes are possible.</li>
+<li>OTA updates can be used to update flash content without counting towards this limit.</li>
+<li>When enabling flash encryption in development, use a <cite>pregenerated flash encryption key</cite> to allow physically re-flashing an unlimited number of times with pre-encrypted data.**</li>
+</ul>
+<p>Process to enable flash encryption:</p>
+<ul class="simple">
+<li>The bootloader must be compiled with flash encryption support enabled. In <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code>, navigate to &#8220;Security Features&#8221; and select &#8220;Yes&#8221; for &#8220;Enable flash encryption on boot&#8221;.</li>
+<li>If enabling Secure Boot at the same time, it is best to simultaneously select those options now. Read the <a class="reference internal" href="secure-boot.html"><span class="doc">Secure Boot</span></a> documentation first.</li>
+<li>Build and flash the bootloader, partition table and factory app image as normal. These partitions are initially written to the flash unencrypted.</li>
+<li>On first boot, the bootloader sees <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> is set to 0 (factory default) so it generates a flash encryption key using the hardware random number generator. This key is stored in efuse. The key is read and write protected against further software access.</li>
+<li>All of the encrypted partitions are then encrypted in-place by the bootloader. Encrypting in-place can take some time (up to a minute for large partitions.)</li>
+</ul>
+<p><strong>IMPORTANT: Do not interrupt power to the ESP32 while the first boot encryption pass is running. If power is interrupted, the flash contents will be corrupted and require flashing with unencrypted data again. A  reflash like this will not count towards the flashing limit.</strong></p>
+<ul class="simple">
+<li>Once flashing is complete. efuses are blown (by default) to disable encrypted flash access while the UART bootloader is running. See <a class="reference internal" href="flash-encryption.html#uart-bootloader-encryption"><span class="std std-ref">Enabling UART Bootloader Encryption/Decryption</span></a> for advanced details.</li>
+<li>The <code class="docutils literal"><span class="pre">FLASH_CRYPT_CONFIG</span></code> efuse is also burned to the maximum value (<code class="docutils literal"><span class="pre">0xF</span></code>) to maximise the number of key bits which are tweaked in the flash algorithm. See <a class="reference internal" href="flash-encryption.html#setting-flash-crypt-config"><span class="std std-ref">Setting FLASH_CRYPT_CONFIG</span></a> for advanced details.</li>
+<li>Finally, the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> is burned with the initial value 1. It is this efuse which activates the transparent flash encryption layer, and limits the number of subsequent reflashes. See the <a class="reference internal" href="flash-encryption.html#updating-encrypted-flash"><span class="std std-ref">Updating Encrypted Flash</span></a> section for details about <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a>.</li>
+<li>The bootloader resets itself to reboot from the newly encrypted flash.</li>
+</ul>
+</div>
+<div class="section" id="using-encrypted-flash">
+<span id="id2"></span><h2>Using Encrypted Flash<a class="headerlink" href="flash-encryption.html#using-encrypted-flash" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 app code can check if flash encryption is currently enabled by calling <code class="xref py py-func docutils literal"><span class="pre">esp_flash_encryption_enabled()</span></code>.</p>
+<p>Once flash encryption is enabled, some care needs to be taken when accessing flash contents from code.</p>
+<div class="section" id="scope-of-flash-encryption">
+<h3>Scope of Flash Encryption<a class="headerlink" href="flash-encryption.html#scope-of-flash-encryption" title="Permalink to this headline">¶</a></h3>
+<p>Whenever the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> is set to a value with an odd number of bits set, all flash content which is accessed via the MMU&#8217;s flash cache is transparently decrypted. This includes:</p>
+<ul class="simple">
+<li>Executable application code in flash (IROM).</li>
+<li>All read-only data stored in flash (DROM).</li>
+<li>Any data accessed via <code class="xref py py-func docutils literal"><span class="pre">esp_spi_flash_mmap()</span></code>.</li>
+<li>The software bootloader image when it is read by the ROM bootloader.</li>
+</ul>
+<p><strong>IMPORTANT: The MMU flash cache unconditionally decrypts all data. Data which is stored unencrypted in the flash will be &#8220;transparently decrypted&#8221; via the flash cache and appear to software like random garbage.</strong></p>
+</div>
+<div class="section" id="reading-encrypted-flash">
+<h3>Reading Encrypted Flash<a class="headerlink" href="flash-encryption.html#reading-encrypted-flash" title="Permalink to this headline">¶</a></h3>
+<p>To read data without using a flash cache MMU mapping, we recommend using the partition read function <code class="xref py py-func docutils literal"><span class="pre">esp_partition_read()</span></code>. When using this function, data will only be decrypted when it is read from an encrypted partition. Other partitions will be read unencrypted. In this way, software can access encrypted and non-encrypted flash in the same way.</p>
+<p>Data which is read via other SPI read APIs are not decrypted:</p>
+<ul class="simple">
+<li>Data read via <code class="xref py py-func docutils literal"><span class="pre">esp_spi_flash_read()</span></code> is not decrypted</li>
+<li>Data read via ROM function <code class="xref py py-func docutils literal"><span class="pre">SPIRead()</span></code> is not decrypted (this function is not supported in esp-idf apps).</li>
+<li>Data stored using the Non-Volatile Storage (NVS) API is always stored and read decrypted.</li>
+</ul>
+</div>
+<div class="section" id="writing-encrypted-flash">
+<h3>Writing Encrypted Flash<a class="headerlink" href="flash-encryption.html#writing-encrypted-flash" title="Permalink to this headline">¶</a></h3>
+<p>Where possible, we recommend using the partition write function <code class="docutils literal"><span class="pre">esp_partition_write</span></code>. When using this function, data will only be encrypted when writing to encrypted partitions. Data will be written to other partitions unencrypted. In this way, software can access encrypted and non-encrypted flash in the same way.</p>
+<p>The <code class="docutils literal"><span class="pre">esp_spi_flash_write</span></code> function will write data when the write_encrypted parameter is set to true. Otherwise, data will be written unencrypted.</p>
+<p>The ROM function <code class="docutils literal"><span class="pre">esp_rom_spiflash_write_encrypted</span></code> will write encrypted data to flash, the ROM function <code class="docutils literal"><span class="pre">SPIWrite</span></code> will write unencrypted to flash. (these function are not supported in esp-idf apps).</p>
+<p>The minimum write size for unencrypted data is 4 bytes (and the alignment is 4 bytes). Because data is encrypted in blocks, the minimum write size for encrypted data is 16 bytes (and the alignment is 16 bytes.)</p>
+</div>
+</div>
+<div class="section" id="updating-encrypted-flash">
+<span id="id3"></span><h2>Updating Encrypted Flash<a class="headerlink" href="flash-encryption.html#updating-encrypted-flash" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ota-updates">
+<span id="updating-encrypted-flash-ota"></span><h3>OTA Updates<a class="headerlink" href="flash-encryption.html#ota-updates" title="Permalink to this headline">¶</a></h3>
+<p>OTA updates to encrypted partitions will automatically write encrypted, as long as the <code class="docutils literal"><span class="pre">esp_partition_write</span></code> function is used.</p>
+</div>
+<div class="section" id="serial-flashing">
+<span id="updating-encrypted-flash-serial"></span><h3>Serial Flashing<a class="headerlink" href="flash-encryption.html#serial-flashing" title="Permalink to this headline">¶</a></h3>
+<p>Provided secure boot is not used, the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> allows the flash to be updated with new plaintext data via serial flashing (or other physical methods), up to 3 additional times.</p>
+<p>The process involves flashing plaintext data, and then bumping the value of <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> which causes the bootloader to re-encrypt this data.</p>
+<div class="section" id="limited-updates">
+<h4>Limited Updates<a class="headerlink" href="flash-encryption.html#limited-updates" title="Permalink to this headline">¶</a></h4>
+<p>Only 4 serial flash update cycles of this kind are possible, including the initial encrypted flash.</p>
+<p>After the fourth time encryption is disabled, <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> has the maximum value <cite>0xFF</cite> and encryption is permanently disabled.</p>
+<p>Using <a class="reference internal" href="flash-encryption.html#updating-encrypted-flash-ota"><span class="std std-ref">OTA Updates</span></a> or <a class="reference internal" href="flash-encryption.html#pregenerated-flash-encryption-key"><span class="std std-ref">Reflashing via Pregenerated Flash Encryption Key</span></a> allows you to exceed this limit.</p>
+</div>
+<div class="section" id="cautions-with-serial-flashing">
+<h4>Cautions With Serial Flashing<a class="headerlink" href="flash-encryption.html#cautions-with-serial-flashing" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>When reflashing via serial, reflash every partition that was initially written with plaintext data (including bootloader). It is possible to skip app partitions which are not the &#8220;currently selected&#8221; OTA partition (these will not be re-encrypted unless a plaintext app image is found there.) However any partition marked with the &#8220;encrypt&#8221; flag will be unconditionally re-encrypted, meaning that any already encrypted data will be encrypted twice and corrupted.<ul>
+<li>Using <code class="docutils literal"><span class="pre">make</span> <span class="pre">flash</span></code> should flash all partitions which need to be flashed.</li>
+</ul>
+</li>
+<li>If secure boot is enabled, you can&#8217;t reflash via serial at all unless you used the &#8220;Reflashable&#8221; option for Secure Boot, pre-generated a key and burned it to the ESP32 (refer to <a class="reference internal" href="secure-boot.html"><span class="doc">Secure Boot</span></a> docs.). In this case you can re-flash a plaintext secure boot digest and bootloader image at offset 0x0. It is necessary to re-flash this digest before flashing other plaintext data.</li>
+</ul>
+</div>
+<div class="section" id="serial-re-flashing-procedure">
+<h4>Serial Re-Flashing Procedure<a class="headerlink" href="flash-encryption.html#serial-re-flashing-procedure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Build the application as usual.</li>
+<li>Flash the device with plaintext data as usual (<code class="docutils literal"><span class="pre">make</span> <span class="pre">flash</span></code> or <code class="docutils literal"><span class="pre">esptool.py</span></code> commands.) Flash all previously encrypted partitions, including the bootloader (see previous section).</li>
+<li>At this point, the device will fail to boot (message is <code class="docutils literal"><span class="pre">flash</span> <span class="pre">read</span> <span class="pre">err,</span> <span class="pre">1000</span></code>) because it expects to see an encrypted bootloader, but the bootloader is plaintext.</li>
+<li>Burn the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> by running the command <code class="docutils literal"><span class="pre">espefuse.py</span> <span class="pre">burn_efuse</span> <span class="pre">FLASH_CRYPT_CNT</span></code>. espefuse.py will automatically increment the bit count by 1, which disables encryption.</li>
+<li>Reset the device and it will re-encrypt plaintext partitions, then burn the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> again to re-enable encryption.</li>
+</ul>
+</div>
+<div class="section" id="disabling-serial-updates">
+<h4>Disabling Serial Updates<a class="headerlink" href="flash-encryption.html#disabling-serial-updates" title="Permalink to this headline">¶</a></h4>
+<p>To prevent further plaintext updates via serial, use espefuse.py to write protect the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> after flash encryption has been enabled (ie after first boot is complete):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espefuse</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="n">PORT</span> <span class="n">write_protect_efuse</span> <span class="n">FLASH_CRYPT_CNT</span>
+</pre></div>
+</div>
+<p>This prevents any further modifications to disable or re-enable flash encryption.</p>
+</div>
+</div>
+<div class="section" id="reflashing-via-pregenerated-flash-encryption-key">
+<span id="pregenerated-flash-encryption-key"></span><h3>Reflashing via Pregenerated Flash Encryption Key<a class="headerlink" href="flash-encryption.html#reflashing-via-pregenerated-flash-encryption-key" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to pregenerate a flash encryption key on the host computer and burn it into the ESP32&#8217;s efuse key block. This allows data to be pre-encrypted on the host and flashed to the ESP32 without needing a plaintext flash update.</p>
+<p>This is useful for development, because it removes the 4 time reflashing limit. It also allows reflashing with secure boot enabled, because the bootloader doesn&#8217;t need to be reflashed each time.</p>
+<p><strong>IMPORTANT This method is intended to assist with development only, not for production devices. If pre-generating flash encryption for production, ensure the keys are generated from a high quality random number source and do not share the same flash encryption key across multiple devices.</strong></p>
+<div class="section" id="pregenerating-a-flash-encryption-key">
+<h4>Pregenerating a Flash Encryption Key<a class="headerlink" href="flash-encryption.html#pregenerating-a-flash-encryption-key" title="Permalink to this headline">¶</a></h4>
+<p>Flash encryption keys are 32 bytes of random data. You can generate a random key with espsecure.py:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espsecure</span><span class="o">.</span><span class="n">py</span> <span class="n">generate_flash_encryption_key</span> <span class="n">my_flash_encryption_key</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>(The randomness of this data is only as good as the OS and it&#8217;s Python installation&#8217;s random data source.)</p>
+<p>Alternatively, if you&#8217;re using <a class="reference internal" href="secure-boot.html"><span class="doc">secure boot</span></a> and have a secure boot signing key then you can generate a deterministic SHA-256 digest of the secure boot private signing key and use this as the flash encryption key:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espsecure</span><span class="o">.</span><span class="n">py</span> <span class="n">digest_private</span><span class="o">-</span><span class="n">key</span> <span class="o">--</span><span class="n">keyfile</span> <span class="n">secure_boot_signing_key</span><span class="o">.</span><span class="n">pem</span> <span class="n">my_flash_encryption_key</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>(The same 32 bytes is used as the secure boot digest key if you enable <a class="reference internal" href="secure-boot.html#secure-boot-reflashable"><span class="std std-ref">reflashable mode</span></a> for secure boot.)</p>
+<p>Generating the flash encryption key from the secure boot signing key in this way means that you only need to store one key file. However this method is <strong>not at all suitable</strong> for production devices.</p>
+</div>
+<div class="section" id="burning-flash-encryption-key">
+<h4>Burning Flash Encryption Key<a class="headerlink" href="flash-encryption.html#burning-flash-encryption-key" title="Permalink to this headline">¶</a></h4>
+<p>Once you have generated a flash encryption key, you need to burn it to the ESP32&#8217;s efuse key block. <strong>This must be done before first encrypted boot</strong>, otherwise the ESP32 will generate a random key that software can&#8217;t access or modify.</p>
+<p>To burn a key to the device (one time only):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espefuse</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="n">PORT</span> <span class="n">burn_key</span> <span class="n">flash_encryption</span> <span class="n">my_flash_encryption_key</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="first-flash-with-pregenerated-key">
+<h4>First Flash with pregenerated key<a class="headerlink" href="flash-encryption.html#first-flash-with-pregenerated-key" title="Permalink to this headline">¶</a></h4>
+<p>After flashing the key, follow the same steps as for default <a class="reference internal" href="flash-encryption.html#flash-encryption-initialisation"><span class="std std-ref">Flash Encryption Initialisation</span></a> and flash a plaintext image for the first boot. The bootloader will enable flash encryption using the pre-burned key and encrypt all partitions.</p>
+</div>
+<div class="section" id="reflashing-with-pregenerated-key">
+<h4>Reflashing with pregenerated key<a class="headerlink" href="flash-encryption.html#reflashing-with-pregenerated-key" title="Permalink to this headline">¶</a></h4>
+<p>After encryption is enabled on first boot, reflashing an encrypted image requires an additional manual step. This is where we pre-encrypt the data that we wish to update in flash.</p>
+<p>Suppose that this is the normal command used to flash plaintext data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">esptool</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="o">--</span><span class="n">baud</span> <span class="mi">115200</span> <span class="n">write_flash</span> <span class="mh">0x10000</span> <span class="n">build</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">app</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>Binary app image <code class="docutils literal"><span class="pre">build/my-app.bin</span></code> is written to offset <code class="docutils literal"><span class="pre">0x10000</span></code>. This file name and offset need to be used to encrypt the data, as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espsecure</span><span class="o">.</span><span class="n">py</span> <span class="n">encrypt_flash_data</span> <span class="o">--</span><span class="n">keyfile</span> <span class="n">my_flash_encryption_key</span><span class="o">.</span><span class="n">bin</span> <span class="o">--</span><span class="n">address</span> <span class="mh">0x10000</span> <span class="o">-</span><span class="n">o</span> <span class="n">build</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">app</span><span class="o">-</span><span class="n">encrypted</span><span class="o">.</span><span class="n">bin</span> <span class="n">build</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">app</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>This example command will encrypts <code class="docutils literal"><span class="pre">my-app.bin</span></code> using the supplied key, and produce an encrypted file <code class="docutils literal"><span class="pre">my-app-encrypted.bin</span></code>. Be sure that the address argument matches the address where you plan to flash the binary.</p>
+<p>Then, flash the encrypted binary with esptool.py:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">esptool</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ttyUSB0</span> <span class="o">--</span><span class="n">baud</span> <span class="mi">115200</span> <span class="n">write_flash</span> <span class="mh">0x10000</span> <span class="n">build</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">app</span><span class="o">-</span><span class="n">encrypted</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>No further steps or efuse manipulation is necessary, because the data is already encrypted when we flash it.</p>
+</div>
+</div>
+</div>
+<div class="section" id="disabling-flash-encryption">
+<h2>Disabling Flash Encryption<a class="headerlink" href="flash-encryption.html#disabling-flash-encryption" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;ve accidentally enabled flash encryption for some reason, the next flash of plaintext data will soft-brick the ESP32 (the device will reboot continously, printing the error <code class="docutils literal"><span class="pre">flash</span> <span class="pre">read</span> <span class="pre">err,</span> <span class="pre">1000</span></code>).</p>
+<p>You can disable flash encryption again by writing <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a>:</p>
+<ul class="simple">
+<li>First, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code> and uncheck &#8220;Enable flash encryption boot&#8221; under &#8220;Security Features&#8221;.</li>
+<li>Exit menuconfig and save the new configuration.</li>
+<li>Run <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code> again and double-check you really disabled this option! <em>If this option is left enabled, the bootloader will immediately re-enable encryption when it boots</em>.</li>
+<li>Run <code class="docutils literal"><span class="pre">make</span> <span class="pre">flash</span></code> to build and flash a new bootloader and app, without flash encryption enabled.</li>
+<li><dl class="first docutils">
+<dt>Run <code class="docutils literal"><span class="pre">espefuse.py</span></code> (in <code class="docutils literal"><span class="pre">components/esptool_py/esptool</span></code>) to disable the <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a>)::</dt>
+<dd>espefuse.py burn_efuse FLASH_CRYPT_CNT</dd>
+</dl>
+</li>
+</ul>
+<p>Reset the ESP32 and flash encryption should be disabled, the bootloader will boot as normal.</p>
+</div>
+<div class="section" id="limitations-of-flash-encryption">
+<span id="flash-encryption-limitations"></span><h2>Limitations of Flash Encryption<a class="headerlink" href="flash-encryption.html#limitations-of-flash-encryption" title="Permalink to this headline">¶</a></h2>
+<p>Flash Encryption prevents plaintext readout of the encrypted flash, to protect firmware against unauthorised readout and modification. It is important to understand the limitations of the flash encryption system:</p>
+<ul class="simple">
+<li>Flash encryption is only as strong as the key. For this reason, we recommend keys are generated on the device during first boot (default behaviour). If generating keys off-device (see <a class="reference internal" href="flash-encryption.html#pregenerated-flash-encryption-key"><span class="std std-ref">Reflashing via Pregenerated Flash Encryption Key</span></a>), ensure proper procedure is followed.</li>
+<li>Not all data is stored encrypted. If storing data on flash, check if the method you are using (library, API, etc.) supports flash encryption.</li>
+<li>Flash encryption does not prevent an attacker from understanding the high-level layout of the flash. This is because the same AES key is used for every pair of adjacent 16 byte AES blocks. When these adjacent 16 byte blocks contain identical content (such as empty or padding areas), these blocks will encrypt to produce matching pairs of encrypted blocks. This may allow an attacker to make high-level comparisons between encrypted devices (ie to tell if two devices are probably running the same firmware version).</li>
+<li>For the same reason, an attacker can always tell when a pair of adjacent 16 byte blocks (32 byte aligned) contain identical content. Keep this in mind if storing sensitive data on the flash, design your flash storage so this doesn&#8217;t happen (using a counter byte or some other non-identical value every 16 bytes is sufficient).</li>
+<li>Flash encryption alone may not prevent an attacker from modifying the firmware of the device. To prevent unauthorised firmware from runningon the device, use flash encryption in combination with <a class="reference internal" href="secure-boot.html"><span class="doc">Secure Boot</span></a>.</li>
+</ul>
+</div>
+<div class="section" id="flash-encryption-advanced-features">
+<span id="id4"></span><h2>Flash Encryption Advanced Features<a class="headerlink" href="flash-encryption.html#flash-encryption-advanced-features" title="Permalink to this headline">¶</a></h2>
+<p>The following information is useful for advanced use of flash encryption:</p>
+<div class="section" id="encrypted-partition-flag">
+<h3>Encrypted Partition Flag<a class="headerlink" href="flash-encryption.html#encrypted-partition-flag" title="Permalink to this headline">¶</a></h3>
+<p>Some partitions are encrypted by default. Otherwise, it is possible to mark any partition as requiring encryption:</p>
+<p>In the <a class="reference internal" href="../api-guides/partition-tables.html"><span class="doc">partition table</span></a> description CSV files, there is a field for flags.</p>
+<p>Usually left blank, if you write &#8220;encrypted&#8221; in this field then the partition will be marked as encrypted in the partition table, and data written here will be treated as encrypted (same as an app partition):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Name,   Type, SubType, Offset,  Size, Flags</span>
+<span class="n">nvs</span><span class="p">,</span>      <span class="n">data</span><span class="p">,</span> <span class="n">nvs</span><span class="p">,</span>     <span class="mh">0x9000</span><span class="p">,</span>  <span class="mh">0x6000</span>
+<span class="n">phy_init</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">phy</span><span class="p">,</span>     <span class="mh">0xf000</span><span class="p">,</span>  <span class="mh">0x1000</span>
+<span class="n">factory</span><span class="p">,</span>  <span class="n">app</span><span class="p">,</span>  <span class="n">factory</span><span class="p">,</span> <span class="mh">0x10000</span><span class="p">,</span> <span class="mi">1</span><span class="n">M</span>
+<span class="n">secret_data</span><span class="p">,</span> <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x20000</span><span class="p">,</span> <span class="mi">256</span><span class="n">K</span><span class="p">,</span> <span class="n">encrypted</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>None of the default partition tables include any encrypted data partitions.</li>
+<li>It is not necessary to mark &#8220;app&#8221; partitions as encrypted, they are always treated as encrypted.</li>
+<li>The &#8220;encrypted&#8221; flag does nothing if flash encryption is not enabled.</li>
+<li>It is possible to mark the optional <code class="docutils literal"><span class="pre">phy</span></code> partition with <code class="docutils literal"><span class="pre">phy_init</span></code> data as encrypted, if you wish to protect this data from physical access readout or modification.</li>
+<li>It is not possible to mark the <code class="docutils literal"><span class="pre">nvs</span></code> partition as encrypted.</li>
+</ul>
+</div>
+<div class="section" id="enabling-uart-bootloader-encryption-decryption">
+<span id="uart-bootloader-encryption"></span><h3>Enabling UART Bootloader Encryption/Decryption<a class="headerlink" href="flash-encryption.html#enabling-uart-bootloader-encryption-decryption" title="Permalink to this headline">¶</a></h3>
+<p>By default, on first boot the flash encryption process will burn efuses <code class="docutils literal"><span class="pre">DISABLE_DL_ENCRYPT</span></code>, <code class="docutils literal"><span class="pre">DISABLE_DL_DECRYPT</span></code> and <code class="docutils literal"><span class="pre">DISABLE_DL_CACHE</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DISABLE_DL_ENCRYPT</span></code> disables the flash encryption operations when running in UART bootloader boot mode.</li>
+<li><code class="docutils literal"><span class="pre">DISABLE_DL_DECRYPT</span></code> disables transparent flash decryption when running in UART bootloader mode, even if <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> is set to enable it in normal operation.</li>
+<li><code class="docutils literal"><span class="pre">DISABLE_DL_CACHE</span></code> disables the entire MMU flash cache when running in UART bootloader mode.</li>
+</ul>
+<p>It is possible to burn only some of these efuses, and write-protect the rest (with unset value 0) before the first boot, in order to preserve them. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">espefuse</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="n">PORT</span> <span class="n">burn_efuse</span> <span class="n">DISABLE_DL_DECRYPT</span>
+<span class="n">espefuse</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">port</span> <span class="n">PORT</span> <span class="n">write_protect_efuse</span> <span class="n">DISABLE_DL_ENCRYPT</span>
+</pre></div>
+</div>
+<p>(Note that all 3 of these efuses are disabled via one write protect bit, so write protecting one will write protect all of them. For this reason, it&#8217;s necessary to set any bits before write-protecting.)</p>
+<p><strong>IMPORTANT</strong>: Write protecting these efuses to keep them unset is not currently very useful, as <code class="docutils literal"><span class="pre">esptool.py</span></code> does not support writing or reading encrypted flash.</p>
+<p><strong>IMPORTANT</strong>: If <code class="docutils literal"><span class="pre">DISABLE_DL_DECRYPT</span></code> is left unset (0) this effectively makes flash encryption useless, as an attacker with physical access can use UART bootloader mode (with custom stub code) to read out the flash contents.</p>
+</div>
+<div class="section" id="setting-flash-crypt-config">
+<span id="id5"></span><h3>Setting FLASH_CRYPT_CONFIG<a class="headerlink" href="flash-encryption.html#setting-flash-crypt-config" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">FLASH_CRYPT_CONFIG</span></code> efuse determines the number of bits in the flash encryption key which are &#8220;tweaked&#8221; with the block offset. See <a class="reference internal" href="flash-encryption.html#flash-encryption-algorithm"><span class="std std-ref">Flash Encryption Algorithm</span></a> for details.</p>
+<p>First boot of the bootloader always sets this value to the maximum <cite>0xF</cite>.</p>
+<p>It is possible to write these efuse manually, and write protect it before first boot in order to select different tweak values. This is not recommended.</p>
+<p>It is strongly recommended to never write protect <code class="docutils literal"><span class="pre">FLASH_CRYPT_CONFIG</span></code> when it the value is zero. If this efuse is set to zero, no bits in the flash encryption key are tweaked and the flash encryption algorithm is equivalent to AES ECB mode.</p>
+</div>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details<a class="headerlink" href="flash-encryption.html#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>The following sections provide some reference information about the operation of flash encryption.</p>
+<div class="section" id="flash-crypt-cnt-efuse">
+<span id="flash-crypt-cnt"></span><h3>FLASH_CRYPT_CNT efuse<a class="headerlink" href="flash-encryption.html#flash-crypt-cnt-efuse" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">FLASH_CRYPT_CNT</span></code> is an 8-bit efuse field which controls flash encryption. Flash encryption enables or disables based on the number of bits in this efuse which are set to &#8220;1&#8221;:</p>
+<ul class="simple">
+<li>When an even number of bits (0,2,4,6,8) are set: Flash encryption is disabled, any encrypted data cannot be decrypted.<ul>
+<li>If the bootloader was built with &#8220;Enable flash encryption on boot&#8221; then it will see this situation and immediately re-encrypt the flash wherever it finds unencrypted data. Once done, it sets another bit in the efuse to &#8216;1&#8217; meaning an odd number of bits are now set.<ol class="arabic">
+<li>On first plaintext boot, bit count has brand new value 0 and bootloader changes it to bit count 1 (value 0x01) following encryption.</li>
+<li>After next plaintext flash update, bit count is manually updated to 2 (value 0x03). After re-encrypting the bootloader changes efuse bit count to 3 (value 0x07).</li>
+<li>After next plaintext flash, bit count is manually updated to 4 (value 0x0F). After re-encrypting the bootloader changes efuse bit count to 5 (value 0x1F).</li>
+<li>After final plaintext flash, bit count is manually updated to 6 (value 0x3F). After re-encrypting the bootloader changes efuse bit count to 7 (value 0x7F).</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>When an odd number of bits (1,3,5,7) are set: Transparent reading of encrypted flash is enabled.</li>
+<li>After all 8 bits are set (efuse value 0xFF): Transparent reading of encrypted flash is disabled, any encrypted data is permanently inaccessible. Bootloader will normally detect this condition and halt. To avoid use of this state to load unauthorised code, secure boot must be used or <a class="reference internal" href="flash-encryption.html#flash-crypt-cnt"><span class="std std-ref">FLASH_CRYPT_CNT efuse</span></a> must be write-protected.</li>
+</ul>
+</div>
+<div class="section" id="flash-encryption-algorithm">
+<span id="id6"></span><h3>Flash Encryption Algorithm<a class="headerlink" href="flash-encryption.html#flash-encryption-algorithm" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">AES-256 operates on 16 byte blocks of data. The flash encryption engine encrypts and decrypts data in 32 byte blocks, two AES blocks in series.</p>
+</li>
+<li><p class="first">AES algorithm is used inverted in flash encryption, so the flash encryption &#8220;encrypt&#8221; operation is AES decrypt and the &#8220;decrypt&#8221; operation is AES encrypt. This is for performance reasons and does not alter the effectiveness of the algorithm.</p>
+</li>
+<li><p class="first">The main flash encryption key is stored in efuse (BLOCK1) and by default is protected from further writes or software readout.</p>
+</li>
+<li><p class="first">Each 32 byte block (two adjacent 16 byte AES blocks) is encrypted with a unique key. The key is derived from the main flash encryption key in efuse, XORed with the offset of this block in the flash (a &#8220;key tweak&#8221;).</p>
+</li>
+<li><p class="first">The specific tweak depends on the setting of <code class="docutils literal"><span class="pre">FLASH_CRYPT_CONFIG</span></code> efuse. This is a 4 bit efuse, where each bit enables XORing of a particular range of the key bits:</p>
+<ul class="simple">
+<li>Bit 1, bits 0-66 of the key are XORed.</li>
+<li>Bit 2, bits 67-131 of the key are XORed.</li>
+<li>Bit 3, bits 132-194 of the key are XORed.</li>
+<li>Bit 4, bits 195-256 of the key are XORed.</li>
+</ul>
+<p>It is recommended that <code class="docutils literal"><span class="pre">FLASH_CRYPT_CONFIG</span></code> is always left to set the default value <cite>0xF</cite>, so that all key bits are XORed with the block offset. See <a class="reference internal" href="flash-encryption.html#setting-flash-crypt-config"><span class="std std-ref">Setting FLASH_CRYPT_CONFIG</span></a> for details.</p>
+</li>
+<li><p class="first">The high 19 bits of the block offset (bit 5 to bit 23) are XORed with the main flash encryption key. This range is chosen for two reasons: the maximum flash size is 16MB (24 bits), and each block is 32 bytes so the least significant 5 bits are always zero.</p>
+</li>
+<li><p class="first">There is a particular mapping from each of the 19 block offset bits to the 256 bits of the flash encryption key, to determine which bit is XORed with which. See the variable <code class="docutils literal"><span class="pre">_FLASH_ENCRYPTION_TWEAK_PATTERN</span></code> in the espsecure.py source code for the complete mapping.</p>
+</li>
+<li><p class="first">To see the full flash encryption algorithm implemented in Python, refer to the <cite>_flash_encryption_operation()</cite> function in the espsecure.py source code.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api-guides/freertos-smp.html" class="btn btn-neutral float-right" title="ESP-IDF FreeRTOS SMP Changes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../api-guides/core_dump.html" class="btn btn-neutral" title="ESP32 Core Dump" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

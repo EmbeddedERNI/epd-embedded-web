@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pulse Counter &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Peripherals API" href="index.html"/>
+        <link rel="next" title="RMT" href="rmt.html"/>
+        <link rel="prev" title="MCPWM" href="mcpwm.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc.html">ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO (including RTC low power I/O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">MCPWM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="pcnt.html#">Pulse Counter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pcnt.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pcnt.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pcnt.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../storage/sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sigmadelta.html">Sigma-delta Modulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="touch_pad.html">Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">UART</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Peripherals API</a> &raquo;</li>
+        
+      <li>Pulse Counter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/peripherals/pcnt.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pulse-counter">
+<h1>Pulse Counter<a class="headerlink" href="pcnt.html#pulse-counter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="pcnt.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>The PCNT (Pulse Counter) module is designed to count the number of rising and/or falling edges of an input signal. Each pulse counter unit has a 16-bit signed counter register and two channels that can be configured to either increment or decrement the counter. Each channel has a signal input that accepts signal edges to be detected, as well as a control input that can be used to enable or disable the signal input. The inputs have optional filters that can be used to discard unwanted glitches in the signal.</p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="pcnt.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>Pulse counter with control signal and event interrupt example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/pcnt">peripherals/pcnt</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="pcnt.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="pcnt.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/driver/include/driver/pcnt.h">driver/include/driver/pcnt.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="pcnt.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv216pcnt_unit_configPK13pcnt_config_t">
+<span id="pcnt_unit_config__pcnt_config_tCP"></span><span class="target" id="pcnt_8h_1a11ff0cf270bdc47fdc70489d49657c55"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_unit_config</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="pcnt.html#_CPPv213pcnt_config_t" title="pcnt_config_t">pcnt_config_t</a> *<em>pcnt_config</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv216pcnt_unit_configPK13pcnt_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure Pulse Counter unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_config</span></code>: Pointer of Pulse Counter unit configure parameter</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222pcnt_get_counter_value11pcnt_unit_tP7int16_t">
+<span id="pcnt_get_counter_value__pcnt_unit_t.int16_tP"></span><span class="target" id="pcnt_8h_1a293795790d2b68f894bc6557b72eee49"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_get_counter_value</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em>, int16_t *<em>count</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv222pcnt_get_counter_value11pcnt_unit_tP7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get pulse counter value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: Pulse Counter unit number </li>
+<li><code class="docutils literal"><span class="pre">count</span></code>: Pointer to accept counter value</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218pcnt_counter_pause11pcnt_unit_t">
+<span id="pcnt_counter_pause__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1a0ea4698bf645e68cd330c2711328ea13"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_counter_pause</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv218pcnt_counter_pause11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pause PCNT counter of PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: PCNT unit number</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219pcnt_counter_resume11pcnt_unit_t">
+<span id="pcnt_counter_resume__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1ab43d72a6993f599aea2e070559d33638"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_counter_resume</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv219pcnt_counter_resume11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resume counting for PCNT counter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: PCNT unit number, select from pcnt_unit_t</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218pcnt_counter_clear11pcnt_unit_t">
+<span id="pcnt_counter_clear__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1ad52485ddd6d5a0265659021d6b62ee5e"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_counter_clear</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv218pcnt_counter_clear11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear and reset PCNT counter value to zero. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: PCNT unit number, select from pcnt_unit_t</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216pcnt_intr_enable11pcnt_unit_t">
+<span id="pcnt_intr_enable__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1ab4ec369a1293ba53077be9c9570d7eb0"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_intr_enable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv216pcnt_intr_enable11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable PCNT interrupt for PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Each Pulse counter unit has five watch point events that share the same interrupt. Configure events with pcnt_event_enable() and pcnt_event_disable()</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: PCNT unit number</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217pcnt_intr_disable11pcnt_unit_t">
+<span id="pcnt_intr_disable__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1a9b3ff5f53084c7f5866abd7b0813fabd"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_intr_disable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>pcnt_unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv217pcnt_intr_disable11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable PCNT interrupt for PCNT uint. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">pcnt_unit</span></code>: PCNT unit number</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217pcnt_event_enable11pcnt_unit_t15pcnt_evt_type_t">
+<span id="pcnt_event_enable__pcnt_unit_t.pcnt_evt_type_t"></span><span class="target" id="pcnt_8h_1abc5fc0954f19c64885c3ea7fcaccfe7e"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_event_enable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv215pcnt_evt_type_t" title="pcnt_evt_type_t">pcnt_evt_type_t</a> <em>evt_type</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv217pcnt_event_enable11pcnt_unit_t15pcnt_evt_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable PCNT event of PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">evt_type</span></code>: Watch point event type. All enabled events share the same interrupt (one interrupt per pulse counter unit). </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218pcnt_event_disable11pcnt_unit_t15pcnt_evt_type_t">
+<span id="pcnt_event_disable__pcnt_unit_t.pcnt_evt_type_t"></span><span class="target" id="pcnt_8h_1adc924cb00f2266f2884a38dc656e744f"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_event_disable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv215pcnt_evt_type_t" title="pcnt_evt_type_t">pcnt_evt_type_t</a> <em>evt_type</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv218pcnt_event_disable11pcnt_unit_t15pcnt_evt_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable PCNT event of PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">evt_type</span></code>: Watch point event type. All enabled events share the same interrupt (one interrupt per pulse counter unit). </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220pcnt_set_event_value11pcnt_unit_t15pcnt_evt_type_t7int16_t">
+<span id="pcnt_set_event_value__pcnt_unit_t.pcnt_evt_type_t.int16_t"></span><span class="target" id="pcnt_8h_1aa5ebecc3a1ab9f915d80498e7decad63"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_set_event_value</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv215pcnt_evt_type_t" title="pcnt_evt_type_t">pcnt_evt_type_t</a> <em>evt_type</em>, int16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv220pcnt_set_event_value11pcnt_unit_t15pcnt_evt_type_t7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set PCNT event value of PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">evt_type</span></code>: Watch point event type. All enabled events share the same interrupt (one interrupt per pulse counter unit).</li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Counter value for PCNT event</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220pcnt_get_event_value11pcnt_unit_t15pcnt_evt_type_tP7int16_t">
+<span id="pcnt_get_event_value__pcnt_unit_t.pcnt_evt_type_t.int16_tP"></span><span class="target" id="pcnt_8h_1a9c0c3c6dc29232ba31494dc06a12d6dd"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_get_event_value</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv215pcnt_evt_type_t" title="pcnt_evt_type_t">pcnt_evt_type_t</a> <em>evt_type</em>, int16_t *<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv220pcnt_get_event_value11pcnt_unit_t15pcnt_evt_type_tP7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get PCNT event value of PCNT unit. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">evt_type</span></code>: Watch point event type. All enabled events share the same interrupt (one interrupt per pulse counter unit). </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Pointer to accept counter value for PCNT event</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217pcnt_isr_registerPFvPvEPviP17pcnt_isr_handle_t">
+<span class="target" id="pcnt_8h_1a0c6a645cb722c0fbd87dde7ae0cf2f83"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_isr_register</code><span class="sig-paren">(</span>void (*<em>fn</em>)<span class="sig-paren">(</span>void *<span class="sig-paren">)</span>, void *<em>arg</em>, int <em>intr_alloc_flags</em>, <a class="reference internal" href="pcnt.html#_CPPv217pcnt_isr_handle_t" title="pcnt_isr_handle_t">pcnt_isr_handle_t</a> *<em>handle</em>, <span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv217pcnt_isr_registerPFvPvEPviP17pcnt_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register PCNT interrupt handler, the handler is an ISR. The handler will be attached to the same CPU core that this function is running on. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Function pointer error. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fn</span></code>: Interrupt handler function. </li>
+<li><code class="docutils literal"><span class="pre">arg</span></code>: Parameter for handler function </li>
+<li><code class="docutils literal"><span class="pre">intr_alloc_flags</span></code>: Flags used to allocate the interrupt. One or multiple (ORred) ESP_INTR_FLAG_* values. See esp_intr_alloc.h for more info. </li>
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Pointer to return handle. If non-NULL, a handle for the interrupt will be returned here.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212pcnt_set_pin11pcnt_unit_t14pcnt_channel_tii">
+<span id="pcnt_set_pin__pcnt_unit_t.pcnt_channel_t.i.i"></span><span class="target" id="pcnt_8h_1ad2b10e9644117cdd517916c7d09e8f37"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_set_pin</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv214pcnt_channel_t" title="pcnt_channel_t">pcnt_channel_t</a> <em>channel</em>, int <em>pulse_io</em>, int <em>ctrl_io</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv212pcnt_set_pin11pcnt_unit_t14pcnt_channel_tii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure PCNT pulse signal input pin and control input pin. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Set to PCNT_PIN_NOT_USED if unused. </dd>
+<dt><strong>Note</strong></dt>
+<dd>Set to PCNT_PIN_NOT_USED if unused.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">channel</span></code>: PCNT channel number </li>
+<li><code class="docutils literal"><span class="pre">pulse_io</span></code>: Pulse signal input GPIO </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ctrl_io</span></code>: Control signal input GPIO </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218pcnt_filter_enable11pcnt_unit_t">
+<span id="pcnt_filter_enable__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1a3d082c91da3174ccaa4f06994d995f61"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_filter_enable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv218pcnt_filter_enable11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable PCNT input filter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219pcnt_filter_disable11pcnt_unit_t">
+<span id="pcnt_filter_disable__pcnt_unit_t"></span><span class="target" id="pcnt_8h_1aa80d43240af684b6e1daaac5b007d51c"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_filter_disable</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv219pcnt_filter_disable11pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable PCNT input filter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221pcnt_set_filter_value11pcnt_unit_t8uint16_t">
+<span id="pcnt_set_filter_value__pcnt_unit_t.uint16_t"></span><span class="target" id="pcnt_8h_1a4f1a68d29886785964653fc3f5d55f48"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_set_filter_value</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, uint16_t <em>filter_val</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv221pcnt_set_filter_value11pcnt_unit_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set PCNT filter value. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>filter_val is a 10-bit value, so the maximum filter_val should be limited to 1023.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">filter_val</span></code>: PCNT signal filter value, counter in APB_CLK cycles. Any pulses lasting shorter than this will be ignored when the filter is enabled. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221pcnt_get_filter_value11pcnt_unit_tP8uint16_t">
+<span id="pcnt_get_filter_value__pcnt_unit_t.uint16_tP"></span><span class="target" id="pcnt_8h_1aa310c27d8e0ad49d2305ff3d4f4030b5"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_get_filter_value</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, uint16_t *<em>filter_val</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv221pcnt_get_filter_value11pcnt_unit_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get PCNT filter value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">filter_val</span></code>: Pointer to accept PCNT filter value.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213pcnt_set_mode11pcnt_unit_t14pcnt_channel_t17pcnt_count_mode_t17pcnt_count_mode_t16pcnt_ctrl_mode_t16pcnt_ctrl_mode_t">
+<span id="pcnt_set_mode__pcnt_unit_t.pcnt_channel_t.pcnt_count_mode_t.pcnt_count_mode_t.pcnt_ctrl_mode_t.pcnt_ctrl_mode_t"></span><span class="target" id="pcnt_8h_1ae845958e0b0dbfdff1702d9f4feee8c6"></span>esp_err_t <code class="descclassname"></code><code class="descname">pcnt_set_mode</code><span class="sig-paren">(</span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <em>unit</em>, <a class="reference internal" href="pcnt.html#_CPPv214pcnt_channel_t" title="pcnt_channel_t">pcnt_channel_t</a> <em>channel</em>, <a class="reference internal" href="pcnt.html#_CPPv217pcnt_count_mode_t" title="pcnt_count_mode_t">pcnt_count_mode_t</a> <em>pos_mode</em>, <a class="reference internal" href="pcnt.html#_CPPv217pcnt_count_mode_t" title="pcnt_count_mode_t">pcnt_count_mode_t</a> <em>neg_mode</em>, <a class="reference internal" href="pcnt.html#_CPPv216pcnt_ctrl_mode_t" title="pcnt_ctrl_mode_t">pcnt_ctrl_mode_t</a> <em>hctrl_mode</em>, <a class="reference internal" href="pcnt.html#_CPPv216pcnt_ctrl_mode_t" title="pcnt_ctrl_mode_t">pcnt_ctrl_mode_t</a> <em>lctrl_mode</em><span class="sig-paren">)</span><a class="headerlink" href="pcnt.html#_CPPv213pcnt_set_mode11pcnt_unit_t14pcnt_channel_t17pcnt_count_mode_t17pcnt_count_mode_t16pcnt_ctrl_mode_t16pcnt_ctrl_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set PCNT counter mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">unit</span></code>: PCNT unit number </li>
+<li><code class="docutils literal"><span class="pre">channel</span></code>: PCNT channel number </li>
+<li><code class="docutils literal"><span class="pre">pos_mode</span></code>: Counter mode when detecting positive edge </li>
+<li><code class="docutils literal"><span class="pre">neg_mode</span></code>: Counter mode when detecting negative edge </li>
+<li><code class="docutils literal"><span class="pre">hctrl_mode</span></code>: Counter mode when control signal is high level </li>
+<li><code class="docutils literal"><span class="pre">lctrl_mode</span></code>: Counter mode when control signal is low level</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="pcnt.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv213pcnt_config_t">
+<span id="pcnt_config_t"></span><span class="target" id="structpcnt__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">pcnt_config_t</code><a class="headerlink" href="pcnt.html#_CPPv213pcnt_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pulse Counter configure struct. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t14pulse_gpio_numE">
+<span id="pcnt_config_t::pulse_gpio_num__i"></span><span class="target" id="structpcnt__config__t_1ae9fd768a15451055fe8667200d6ada79"></span>int <code class="descname">pulse_gpio_num</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t14pulse_gpio_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pulse input gpio_num, if you want to use gpio16, pulse_gpio_num = 16, a negative value will be ignored </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t13ctrl_gpio_numE">
+<span id="pcnt_config_t::ctrl_gpio_num__i"></span><span class="target" id="structpcnt__config__t_1ac9ce5a11ea354edc788c52281f61bd01"></span>int <code class="descname">ctrl_gpio_num</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t13ctrl_gpio_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Contol signal input gpio_num, a negative value will be ignored </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t10lctrl_modeE">
+<span id="pcnt_config_t::lctrl_mode__pcnt_ctrl_mode_t"></span><span class="target" id="structpcnt__config__t_1aca86e8ff2bf78154d8255d53604ab353"></span><a class="reference internal" href="pcnt.html#_CPPv216pcnt_ctrl_mode_t" title="pcnt_ctrl_mode_t">pcnt_ctrl_mode_t</a> <code class="descname">lctrl_mode</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t10lctrl_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT low control mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t10hctrl_modeE">
+<span id="pcnt_config_t::hctrl_mode__pcnt_ctrl_mode_t"></span><span class="target" id="structpcnt__config__t_1a7df7becc20bf8eedc34600d2834a3c6c"></span><a class="reference internal" href="pcnt.html#_CPPv216pcnt_ctrl_mode_t" title="pcnt_ctrl_mode_t">pcnt_ctrl_mode_t</a> <code class="descname">hctrl_mode</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t10hctrl_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT high control mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t8pos_modeE">
+<span id="pcnt_config_t::pos_mode__pcnt_count_mode_t"></span><span class="target" id="structpcnt__config__t_1a334caadf0f7d6a60692cc28126cb5591"></span><a class="reference internal" href="pcnt.html#_CPPv217pcnt_count_mode_t" title="pcnt_count_mode_t">pcnt_count_mode_t</a> <code class="descname">pos_mode</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t8pos_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT positive edge count mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t8neg_modeE">
+<span id="pcnt_config_t::neg_mode__pcnt_count_mode_t"></span><span class="target" id="structpcnt__config__t_1aef67cf9e3208dc8fbcf2cbef17ba6056"></span><a class="reference internal" href="pcnt.html#_CPPv217pcnt_count_mode_t" title="pcnt_count_mode_t">pcnt_count_mode_t</a> <code class="descname">neg_mode</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t8neg_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT negative edge count mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t13counter_h_limE">
+<span id="pcnt_config_t::counter_h_lim__int16_t"></span><span class="target" id="structpcnt__config__t_1a12f9236238d07c3c421c6a0b43d3341a"></span>int16_t <code class="descname">counter_h_lim</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t13counter_h_limE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Maximum counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t13counter_l_limE">
+<span id="pcnt_config_t::counter_l_lim__int16_t"></span><span class="target" id="structpcnt__config__t_1afe2aa44c06763f26bfa9df6cb72d0d2c"></span>int16_t <code class="descname">counter_l_lim</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t13counter_l_limE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Minimum counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t4unitE">
+<span id="pcnt_config_t::unit__pcnt_unit_t"></span><span class="target" id="structpcnt__config__t_1ad28c1fed0681bb288c9145789c4f6e6c"></span><a class="reference internal" href="pcnt.html#_CPPv211pcnt_unit_t" title="pcnt_unit_t">pcnt_unit_t</a> <code class="descname">unit</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t4unitE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13pcnt_config_t7channelE">
+<span id="pcnt_config_t::channel__pcnt_channel_t"></span><span class="target" id="structpcnt__config__t_1a5d986e16c7ded3559b196d9701f1fce5"></span><a class="reference internal" href="pcnt.html#_CPPv214pcnt_channel_t" title="pcnt_channel_t">pcnt_channel_t</a> <code class="descname">channel</code><a class="headerlink" href="pcnt.html#_CPPv2N13pcnt_config_t7channelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>the PCNT channel </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="pcnt.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.PCNT_PIN_NOT_USED">
+<span class="target" id="pcnt_8h_1ae1e0b2a18cdfe1fb1d8e7d6f154ddf95"></span><code class="descname">PCNT_PIN_NOT_USED</code><a class="headerlink" href="pcnt.html#c.PCNT_PIN_NOT_USED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pin are not used </p>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="pcnt.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv217pcnt_isr_handle_t">
+<span id="pcnt_isr_handle_t"></span><span class="target" id="pcnt_8h_1a4abe5e1f13f84d59fd620fe2b548b487"></span><em class="property">typedef </em><a class="reference internal" href="../system/intr_alloc.html#_CPPv213intr_handle_t" title="intr_handle_t">intr_handle_t</a> <code class="descclassname"></code><code class="descname">pcnt_isr_handle_t</code><a class="headerlink" href="pcnt.html#_CPPv217pcnt_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="pcnt.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv216pcnt_ctrl_mode_t">
+<span id="pcnt_ctrl_mode_t"></span><span class="target" id="pcnt_8h_1a3668244ef8292bdc6b7400873c82446f"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">pcnt_ctrl_mode_t</code><a class="headerlink" href="pcnt.html#_CPPv216pcnt_ctrl_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214PCNT_MODE_KEEP">
+<span id="PCNT_MODE_KEEP"></span><span class="target" id="pcnt_8h_1a3668244ef8292bdc6b7400873c82446fab8a754e53fe60ecd0d4dd2fb5550115d"></span><code class="descname">PCNT_MODE_KEEP</code> = 0<a class="headerlink" href="pcnt.html#_CPPv214PCNT_MODE_KEEP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Control mode: won&#8217;t change counter mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217PCNT_MODE_REVERSE">
+<span id="PCNT_MODE_REVERSE"></span><span class="target" id="pcnt_8h_1a3668244ef8292bdc6b7400873c82446fa934676397778a914bbf2a87d084c1b72"></span><code class="descname">PCNT_MODE_REVERSE</code> = 1<a class="headerlink" href="pcnt.html#_CPPv217PCNT_MODE_REVERSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Control mode: invert counter mode(increase -&gt; decrease, decrease -&gt; increase); </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217PCNT_MODE_DISABLE">
+<span id="PCNT_MODE_DISABLE"></span><span class="target" id="pcnt_8h_1a3668244ef8292bdc6b7400873c82446fa40e61d476d002ef3d2a54d0200d83bf8"></span><code class="descname">PCNT_MODE_DISABLE</code> = 2<a class="headerlink" href="pcnt.html#_CPPv217PCNT_MODE_DISABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Control mode: Inhibit counter(counter value will not change in this condition) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213PCNT_MODE_MAX">
+<span id="PCNT_MODE_MAX"></span><span class="target" id="pcnt_8h_1a3668244ef8292bdc6b7400873c82446fa1c7213a89ecce1169aeafe6b0b5e5031"></span><code class="descname">PCNT_MODE_MAX</code><a class="headerlink" href="pcnt.html#_CPPv213PCNT_MODE_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217pcnt_count_mode_t">
+<span id="pcnt_count_mode_t"></span><span class="target" id="pcnt_8h_1a0b8cdb72670b80438088f7a2363309a1"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">pcnt_count_mode_t</code><a class="headerlink" href="pcnt.html#_CPPv217pcnt_count_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214PCNT_COUNT_DIS">
+<span id="PCNT_COUNT_DIS"></span><span class="target" id="pcnt_8h_1a0b8cdb72670b80438088f7a2363309a1aaa29f3cb0f4eba928ccf343795197332"></span><code class="descname">PCNT_COUNT_DIS</code> = 0<a class="headerlink" href="pcnt.html#_CPPv214PCNT_COUNT_DIS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter mode: Inhibit counter(counter value will not change in this condition) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214PCNT_COUNT_INC">
+<span id="PCNT_COUNT_INC"></span><span class="target" id="pcnt_8h_1a0b8cdb72670b80438088f7a2363309a1a9fd578a8fc0e2c45f15dbb8c4fa52d68"></span><code class="descname">PCNT_COUNT_INC</code> = 1<a class="headerlink" href="pcnt.html#_CPPv214PCNT_COUNT_INC" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter mode: Increase counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214PCNT_COUNT_DEC">
+<span id="PCNT_COUNT_DEC"></span><span class="target" id="pcnt_8h_1a0b8cdb72670b80438088f7a2363309a1a99e801b3d197f9b78092632889e86fe3"></span><code class="descname">PCNT_COUNT_DEC</code> = 2<a class="headerlink" href="pcnt.html#_CPPv214PCNT_COUNT_DEC" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter mode: Decrease counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214PCNT_COUNT_MAX">
+<span id="PCNT_COUNT_MAX"></span><span class="target" id="pcnt_8h_1a0b8cdb72670b80438088f7a2363309a1a83a944eacdacfb4b2dc8985e86ec592a"></span><code class="descname">PCNT_COUNT_MAX</code><a class="headerlink" href="pcnt.html#_CPPv214PCNT_COUNT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv211pcnt_unit_t">
+<span id="pcnt_unit_t"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">pcnt_unit_t</code><a class="headerlink" href="pcnt.html#_CPPv211pcnt_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_0">
+<span id="PCNT_UNIT_0"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8a53b7d2bb80f98dd62126fb92b14466d6"></span><code class="descname">PCNT_UNIT_0</code> = 0<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit0 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_1">
+<span id="PCNT_UNIT_1"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8a371f76045948471e771aa4701b30d334"></span><code class="descname">PCNT_UNIT_1</code> = 1<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit1 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_2">
+<span id="PCNT_UNIT_2"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8a40798d118f093a8ce5a4c5fee6a0218e"></span><code class="descname">PCNT_UNIT_2</code> = 2<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit2 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_3">
+<span id="PCNT_UNIT_3"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8ae191291c5739b517045a4e2200df48e5"></span><code class="descname">PCNT_UNIT_3</code> = 3<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit3 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_4">
+<span id="PCNT_UNIT_4"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8ad18fda49e0c2663888a817c1a379f180"></span><code class="descname">PCNT_UNIT_4</code> = 4<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit4 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_5">
+<span id="PCNT_UNIT_5"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8ac74a7598c426fa44a55fb386d6649a0c"></span><code class="descname">PCNT_UNIT_5</code> = 5<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit5 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_6">
+<span id="PCNT_UNIT_6"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8a9ecad16a96c52814cbf4f5ec953de31d"></span><code class="descname">PCNT_UNIT_6</code> = 6<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit6 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211PCNT_UNIT_7">
+<span id="PCNT_UNIT_7"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8aa9531e3843f8855d0f7a3f9d54fb6a09"></span><code class="descname">PCNT_UNIT_7</code> = 7<a class="headerlink" href="pcnt.html#_CPPv211PCNT_UNIT_7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT unit7 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213PCNT_UNIT_MAX">
+<span id="PCNT_UNIT_MAX"></span><span class="target" id="pcnt_8h_1accf26d94cdc5bd677f50549fff8098d8a10ebe86bd7a502b70ce36058a1dd30d6"></span><code class="descname">PCNT_UNIT_MAX</code><a class="headerlink" href="pcnt.html#_CPPv213PCNT_UNIT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv214pcnt_channel_t">
+<span id="pcnt_channel_t"></span><span class="target" id="pcnt_8h_1ad4436998de7031466cc262c401f1232a"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">pcnt_channel_t</code><a class="headerlink" href="pcnt.html#_CPPv214pcnt_channel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214PCNT_CHANNEL_0">
+<span id="PCNT_CHANNEL_0"></span><span class="target" id="pcnt_8h_1ad4436998de7031466cc262c401f1232aa394bd85e7b99785511b502bdee19612f"></span><code class="descname">PCNT_CHANNEL_0</code> = 0x00<a class="headerlink" href="pcnt.html#_CPPv214PCNT_CHANNEL_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT channel0 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214PCNT_CHANNEL_1">
+<span id="PCNT_CHANNEL_1"></span><span class="target" id="pcnt_8h_1ad4436998de7031466cc262c401f1232aa8152c783e986e18a10037818967d40e0"></span><code class="descname">PCNT_CHANNEL_1</code> = 0x01<a class="headerlink" href="pcnt.html#_CPPv214PCNT_CHANNEL_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT channel1 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216PCNT_CHANNEL_MAX">
+<span id="PCNT_CHANNEL_MAX"></span><span class="target" id="pcnt_8h_1ad4436998de7031466cc262c401f1232aa7ea5cc6f16ef62811da490c509076404"></span><code class="descname">PCNT_CHANNEL_MAX</code><a class="headerlink" href="pcnt.html#_CPPv216PCNT_CHANNEL_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv215pcnt_evt_type_t">
+<span id="pcnt_evt_type_t"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09bee"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">pcnt_evt_type_t</code><a class="headerlink" href="pcnt.html#_CPPv215pcnt_evt_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214PCNT_EVT_L_LIM">
+<span id="PCNT_EVT_L_LIM"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beea2c2605dd94f7efe103fad32dcc55ca08"></span><code class="descname">PCNT_EVT_L_LIM</code> = 0<a class="headerlink" href="pcnt.html#_CPPv214PCNT_EVT_L_LIM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT watch point event: Minimum counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214PCNT_EVT_H_LIM">
+<span id="PCNT_EVT_H_LIM"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beea2f628c65f24363f52e8086618c52669f"></span><code class="descname">PCNT_EVT_H_LIM</code> = 1<a class="headerlink" href="pcnt.html#_CPPv214PCNT_EVT_H_LIM" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT watch point event: Maximum counter value </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216PCNT_EVT_THRES_0">
+<span id="PCNT_EVT_THRES_0"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beeaac908719034675876c5534d401705ed6"></span><code class="descname">PCNT_EVT_THRES_0</code> = 2<a class="headerlink" href="pcnt.html#_CPPv216PCNT_EVT_THRES_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT watch point event: threshold0 value event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216PCNT_EVT_THRES_1">
+<span id="PCNT_EVT_THRES_1"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beea901d75dc0e1d16d4824b4950d5b3c6f5"></span><code class="descname">PCNT_EVT_THRES_1</code> = 3<a class="headerlink" href="pcnt.html#_CPPv216PCNT_EVT_THRES_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT watch point event: threshold1 value event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213PCNT_EVT_ZERO">
+<span id="PCNT_EVT_ZERO"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beea7bce9409ff1878d2ce81401eb3b56b7f"></span><code class="descname">PCNT_EVT_ZERO</code> = 4<a class="headerlink" href="pcnt.html#_CPPv213PCNT_EVT_ZERO" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>PCNT watch point event: counter value zero event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv212PCNT_EVT_MAX">
+<span id="PCNT_EVT_MAX"></span><span class="target" id="pcnt_8h_1a7841ae5c97b9e304e955d67581e09beea4afca132132d62a24234a6627c5f8352"></span><code class="descname">PCNT_EVT_MAX</code><a class="headerlink" href="pcnt.html#_CPPv212PCNT_EVT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rmt.html" class="btn btn-neutral float-right" title="RMT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mcpwm.html" class="btn btn-neutral" title="MCPWM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

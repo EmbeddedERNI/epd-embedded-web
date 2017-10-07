@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ESP32 Core Dump &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="API Guides" href="index.html"/>
+        <link rel="next" title="Flash Encryption" href="../security/flash-encryption.html"/>
+        <link rel="prev" title="Deep Sleep Wake Stubs" href="deep-sleep-stub.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="general-notes.html">General Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deep-sleep-stub.html">Deep Sleep Wake Stubs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="core_dump.html#">ESP32 Core Dump</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core_dump.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core_dump.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core_dump.html#save-core-dump-to-flash">Save core dump to flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core_dump.html#print-core-dump-to-uart">Print core dump to UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="core_dump.html#running-espcoredump-py">Running &#8216;espcoredump.py&#8217;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../security/flash-encryption.html">Flash Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="freertos-smp.html">FreeRTOS SMP Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hlinterrupts.html">High Level Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/secure-boot.html">Secure Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ulp.html">ULP Coprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit-tests.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="romconsole.html">ROM debug console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi.html">WiFi Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-ram.html">External SPI-connected RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API Guides</a> &raquo;</li>
+        
+      <li>ESP32 Core Dump</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api-guides/core_dump.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="esp32-core-dump">
+<h1>ESP32 Core Dump<a class="headerlink" href="core_dump.html#esp32-core-dump" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="core_dump.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>ESP-IDF provides support to generate core dumps on unrecoverable software errors. This useful technique allows post-mortem analysis of software state at the moment of failure.
+Upon the crash system enters panic state, prints some information and halts or reboots depending configuration. User can choose to generate core dump in order to analyse
+the reason of failure on PC later on. Core dump contains snapshots of all tasks in the system at the moment of failure. Snapshots include tasks control blocks (TCB) and stacks.
+So it is possible to find out what task, at what instruction (line of code) and what callstack of that task lead to the crash.
+ESP-IDF provides special script <cite>espcoredump.py</cite> to help users to retrieve and analyse core dumps. This tool provides two commands for core dumps analysis:</p>
+<ul class="simple">
+<li>info_corefile - prints crashed task&#8217;s registers, callstack, list of available tasks in the system, memory regions and contents of memory stored in core dump (TCBs and stacks)</li>
+<li>dbg_corefile - creates core dump ELF file and runs GDB debug session with this file. User can examine memory, variables and tasks states manually. Note that since not all memory is saved in core dump only values of variables allocated on stack will be meaningfull</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="core_dump.html#configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of core dump related configuration options which user can choose in configuration menu of the application (<cite>make menuconfig</cite>).</p>
+<ol class="arabic simple">
+<li>Core dump data destination (<cite>Components -&gt; ESP32-specific config -&gt; Core dump destination</cite>):</li>
+</ol>
+<ul class="simple">
+<li>Disable core dump generation</li>
+<li>Save core dump to flash</li>
+<li>Print core dump to UART</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Logging level of core dump module (<cite>Components -&gt; ESP32-specific config -&gt; Core dump module logging level</cite>). Value is a number from 0 (no output) to 5 (most verbose).</li>
+<li>Delay before core dump will be printed to UART (<cite>Components -&gt; ESP32-specific config -&gt; Core dump print to UART delay</cite>). Value is in ms.</li>
+</ol>
+</div>
+<div class="section" id="save-core-dump-to-flash">
+<h2>Save core dump to flash<a class="headerlink" href="core_dump.html#save-core-dump-to-flash" title="Permalink to this headline">¶</a></h2>
+<p>When this option is selected core dumps are saved to special partition on flash. When using default partition table files which are provided with ESP-IDF it automatically
+allocates necessary space on flash, But if user wants to use its own layout file together with core dump feature it should define separate partition for core dump
+as it is shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Name,   Type, SubType, Offset,  Size</span>
+<span class="c1"># Note: if you change the phy_init or app partition offset, make sure to change the offset in Kconfig.projbuild</span>
+<span class="n">nvs</span><span class="p">,</span>      <span class="n">data</span><span class="p">,</span> <span class="n">nvs</span><span class="p">,</span>     <span class="mh">0x9000</span><span class="p">,</span>  <span class="mh">0x6000</span>
+<span class="n">phy_init</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">phy</span><span class="p">,</span>     <span class="mh">0xf000</span><span class="p">,</span>  <span class="mh">0x1000</span>
+<span class="n">factory</span><span class="p">,</span>  <span class="n">app</span><span class="p">,</span>  <span class="n">factory</span><span class="p">,</span> <span class="mh">0x10000</span><span class="p">,</span> <span class="mi">1</span><span class="n">M</span>
+<span class="n">coredump</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">coredump</span><span class="p">,,</span>        <span class="mi">64</span><span class="n">K</span>
+</pre></div>
+</div>
+<p>There are no special requrements for partition name. It can be choosen according to the user application needs, but partition type should be &#8216;data&#8217; and
+sub-type should be &#8216;coredump&#8217;. Also when choosing partition size note that core dump data structure introduces constant overhead of 20 bytes and per-task overhead of 12 bytes.
+This overhead does not include size of TCB and stack for every task. So partirion size should be at least 20 + max tasks number x (12 + TCB size + max task stack size) bytes.</p>
+<p>The example of generic command to analyze core dump from flash is: <cite>espcoredump.py -p &lt;/path/to/serial/port&gt; info_corefile &lt;/path/to/program/elf/file&gt;</cite>
+or <cite>espcoredump.py -p &lt;/path/to/serial/port&gt; dbg_corefile &lt;/path/to/program/elf/file&gt;</cite></p>
+</div>
+<div class="section" id="print-core-dump-to-uart">
+<h2>Print core dump to UART<a class="headerlink" href="core_dump.html#print-core-dump-to-uart" title="Permalink to this headline">¶</a></h2>
+<p>When this option is selected base64-encoded core dumps are printed on UART upon system panic. In this case user should save core dump text body to some file manually and
+then run the following command: <cite>espcoredump.py info_corefile -t b64 -c &lt;/path/to/saved/base64/text&gt; &lt;/path/to/program/elf/file&gt;</cite>
+or <cite>espcoredump.py dbg_corefile -t b64 -c &lt;/path/to/saved/base64/text&gt; &lt;/path/to/program/elf/file&gt;</cite></p>
+<p>Base64-encoded body of core dump will be between the following header and footer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">=================</span> <span class="n">CORE</span> <span class="n">DUMP</span> <span class="n">START</span> <span class="o">=================</span>
+<span class="o">&lt;</span><span class="n">body</span> <span class="n">of</span> <span class="n">base64</span><span class="o">-</span><span class="n">encoded</span> <span class="n">core</span> <span class="n">dump</span><span class="p">,</span> <span class="n">save</span> <span class="n">it</span> <span class="n">to</span> <span class="n">file</span> <span class="n">on</span> <span class="n">disk</span><span class="o">&gt;</span>
+<span class="o">=================</span> <span class="n">CORE</span> <span class="n">DUMP</span> <span class="n">END</span> <span class="o">===================</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-espcoredump-py">
+<h2>Running &#8216;espcoredump.py&#8217;<a class="headerlink" href="core_dump.html#running-espcoredump-py" title="Permalink to this headline">¶</a></h2>
+<p>Generic command syntax:</p>
+<p><cite>espcoredump.py [options] command [args]</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Script Options:</th><td class="field-body"><ul class="first simple">
+<li>&#8211;chip,-c {auto,esp32}. Target chip type. Supported values are <cite>auto</cite> and <cite>esp32</cite>.</li>
+<li>&#8211;port,-p PORT. Serial port device.</li>
+<li>&#8211;baud,-b BAUD. Serial port baud rate used when flashing/reading.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Commands:</th><td class="field-body"><ul class="first simple">
+<li>info_corefile. Retrieve core dump and print useful info.</li>
+<li>dbg_corefile. Retrieve core dump and start GDB session with it.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Command Arguments:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li>&#8211;gdb,-g GDB.                 Path to gdb to use for data retrieval.</li>
+<li>&#8211;core,-c CORE.               Path to core dump file to use (if skipped core dump will be read from flash).</li>
+<li>&#8211;core-format,-t CORE_FORMAT. Specifies that file passed with &#8220;-c&#8221; is an ELF (&#8220;elf&#8221;), dumped raw binary (&#8220;raw&#8221;) or base64-encoded (&#8220;b64&#8221;) format.</li>
+<li>&#8211;off,-o OFF.                 Ofsset of coredump partition in flash (type &#8220;make partition_table&#8221; to see it).</li>
+<li>&#8211;save-core,-s SAVE_CORE.     Save core to file. Othwerwise temporary core file will be deleted. Ignored with &#8220;-c&#8221;.</li>
+<li>&#8211;print-mem,-m                Print memory dump. Used only with &#8220;info_corefile&#8221;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../security/flash-encryption.html" class="btn btn-neutral float-right" title="Flash Encryption" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deep-sleep-stub.html" class="btn btn-neutral" title="Deep Sleep Wake Stubs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

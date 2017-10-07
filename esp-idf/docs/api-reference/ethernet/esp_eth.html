@@ -1,0 +1,1038 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ETHERNET &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Ethernet API" href="index.html"/>
+        <link rel="next" title="Peripherals API" href="../peripherals/index.html"/>
+        <link rel="prev" title="Ethernet API" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Ethernet</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="esp_eth.html#">Ethernet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#phy-interfaces">PHY Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#api-reference-ethernet">API Reference - Ethernet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#api-reference-phy-common">API Reference - PHY Common</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#api-reference-phy-tlk110">API Reference - PHY TLK110</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_eth.html#api-reference-phy-lan8720">API Reference - PHY LAN8720</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Ethernet API</a> &raquo;</li>
+        
+      <li>ETHERNET</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/ethernet/esp_eth.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ethernet">
+<h1>ETHERNET<a class="headerlink" href="esp_eth.html#ethernet" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="esp_eth.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>Ethernet example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/ethernet/ethernet">ethernet/ethernet</a>.</p>
+</div>
+<div class="section" id="phy-interfaces">
+<h2>PHY Interfaces<a class="headerlink" href="esp_eth.html#phy-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>The configured PHY model(s) are set in software by configuring the eth_config_t structure for the given PHY.</p>
+<p>Headers include a default configuration structure. These default configurations will need some members overriden or re-set before they can be used for a particular PHY hardware configuration. Consult the Ethernet example to see how this is done.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy.h">ethernet/include/eth_phy/phy.h</a> (common)</li>
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy_tlk110.h">ethernet/include/eth_phy/phy_tlk110.h</a></li>
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy_lan8720.h">ethernet/include/eth_phy/phy_lan8720.h</a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="phy-configuration-constants">
+<h3>PHY Configuration Constants<a class="headerlink" href="esp_eth.html#phy-configuration-constants" title="Permalink to this headline">¶</a></h3>
+<dl class="member">
+<dt id="_CPPv234phy_tlk110_default_ethernet_config">
+<span id="phy_tlk110_default_ethernet_config__eth_config_tC"></span><span class="target" id="phy__tlk110_8h_1aea1f0db70014c57afead4cbd71583481"></span><em class="property">const</em> <a class="reference internal" href="esp_eth.html#_CPPv212eth_config_t" title="eth_config_t">eth_config_t</a> <code class="descclassname"></code><code class="descname">phy_tlk110_default_ethernet_config</code><a class="headerlink" href="esp_eth.html#_CPPv234phy_tlk110_default_ethernet_config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 PHY configuration. </p>
+<p>This configuration is not suitable for use as-is, it will need to be modified for your particular PHY hardware setup.</p>
+<p>Consult the Ethernet example to see how this is done. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv235phy_lan8720_default_ethernet_config">
+<span id="phy_lan8720_default_ethernet_config__eth_config_tC"></span><span class="target" id="phy__lan8720_8h_1a73ed917a8a174e247700427c4b18c946"></span><em class="property">const</em> <a class="reference internal" href="esp_eth.html#_CPPv212eth_config_t" title="eth_config_t">eth_config_t</a> <code class="descclassname"></code><code class="descname">phy_lan8720_default_ethernet_config</code><a class="headerlink" href="esp_eth.html#_CPPv235phy_lan8720_default_ethernet_config" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 PHY configuration. </p>
+<p>This configuration is not suitable for use as-is, it will need to be modified for your particular PHY hardware setup.</p>
+<p>Consult the Ethernet example to see how this is done. </p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-ethernet">
+<h2>API Reference - Ethernet<a class="headerlink" href="esp_eth.html#api-reference-ethernet" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="esp_eth.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/esp_eth.h">ethernet/include/esp_eth.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="esp_eth.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv212esp_eth_initP12eth_config_t">
+<span id="esp_eth_init__eth_config_tP"></span><span class="target" id="esp__eth_8h_1afeaa82e090808cdd7537cf18001f0624"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_init</code><span class="sig-paren">(</span><a class="reference internal" href="esp_eth.html#_CPPv212eth_config_t" title="eth_config_t">eth_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv212esp_eth_initP12eth_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Init ethernet mac. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>config can not be NULL,and phy chip must be suitable to phy init func.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK</li>
+<li>ESP_FAIL </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">config</span></code>: mac init data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221esp_eth_init_internalP12eth_config_t">
+<span id="esp_eth_init_internal__eth_config_tP"></span><span class="target" id="esp__eth_8h_1a233e8ffffae99fd73590031df35969fd"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_init_internal</code><span class="sig-paren">(</span><a class="reference internal" href="esp_eth.html#_CPPv212eth_config_t" title="eth_config_t">eth_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv221esp_eth_init_internalP12eth_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Init Ethernet mac driver only. </p>
+<p>For the most part, you need not call this function directly. It gets called from esp_eth_init().</p>
+<p>This function may be called, if you only need to initialize the Ethernet driver without having to use the network stack on top.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>config can not be NULL,and phy chip must be suitable to phy init func. </dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK</li>
+<li>ESP_FAIL </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">config</span></code>: mac init data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210esp_eth_txP7uint8_t8uint16_t">
+<span id="esp_eth_tx__uint8_tP.uint16_t"></span><span class="target" id="esp__eth_8h_1a94dc89b7f32597f4621d505e95981e77"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_tx</code><span class="sig-paren">(</span>uint8_t *<em>buf</em>, uint16_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv210esp_eth_txP7uint8_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send packet from tcp/ip to mac. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>buf can not be NULL,size must be less than 1580</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK</li>
+<li>ESP_FAIL </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">buf</span></code>: start address of packet data.</li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: size (byte) of packet data.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214esp_eth_enablev">
+<span id="esp_eth_enable__void"></span><span class="target" id="esp__eth_8h_1a66260a37755654626c166be481085d0c"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_enable</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv214esp_eth_enablev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable ethernet interface. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Shout be called after esp_eth_init</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK</li>
+<li>ESP_FAIL </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215esp_eth_disablev">
+<span id="esp_eth_disable__void"></span><span class="target" id="esp__eth_8h_1a58694188b1dc4c1e0707ceec4d87a092"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_disable</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv215esp_eth_disablev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable ethernet interface. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Shout be called after esp_eth_init</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK</li>
+<li>ESP_FAIL </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215esp_eth_get_macA6_7uint8_t">
+<span id="esp_eth_get_mac__uint8_tA"></span><span class="target" id="esp__eth_8h_1ad8535407846a3727133cea81a29e9d1c"></span>void <code class="descclassname"></code><code class="descname">esp_eth_get_mac</code><span class="sig-paren">(</span>uint8_t <em>mac</em>[6]<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv215esp_eth_get_macA6_7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get mac addr. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>mac addr must be a valid unicast address</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mac</span></code>: start address of mac address. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_eth_smi_write8uint32_t8uint16_t">
+<span id="esp_eth_smi_write__uint32_t.uint16_t"></span><span class="target" id="esp__eth_8h_1a018830b8cf62afc928af416a970d3fe5"></span>void <code class="descclassname"></code><code class="descname">esp_eth_smi_write</code><span class="sig-paren">(</span>uint32_t <em>reg_num</em>, uint16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv217esp_eth_smi_write8uint32_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read phy reg with smi interface. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>phy base addr must be right.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">reg_num</span></code>: phy reg num.</li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: value which write to phy reg. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_eth_smi_read8uint32_t">
+<span id="esp_eth_smi_read__uint32_t"></span><span class="target" id="esp__eth_8h_1a9e5f7b9d1018f6b0f681ad1118015e89"></span>uint16_t <code class="descclassname"></code><code class="descname">esp_eth_smi_read</code><span class="sig-paren">(</span>uint32_t <em>reg_num</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv216esp_eth_smi_read8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read phy reg with smi interface. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>phy base addr must be right.</dd>
+<dt><strong>Return</strong></dt>
+<dd>value what read from phy reg </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">reg_num</span></code>: phy reg num.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222esp_eth_smi_wait_value8uint32_t8uint16_t8uint16_ti">
+<span id="esp_eth_smi_wait_value__uint32_t.uint16_t.uint16_t.i"></span><span class="target" id="esp__eth_8h_1ae6dcd1285bbef145a44d7aa924b89c67"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_smi_wait_value</code><span class="sig-paren">(</span>uint32_t <em>reg_num</em>, uint16_t <em>value</em>, uint16_t <em>value_mask</em>, int <em>timeout_ms</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv222esp_eth_smi_wait_value8uint32_t8uint16_t8uint16_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Continuously read a PHY register over SMI interface, wait until the register has the desired value. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>PHY base address must be right.</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK if desired value matches, ESP_ERR_TIMEOUT if timed out. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">reg_num</span></code>: PHY register number </li>
+<li><code class="docutils literal"><span class="pre">value</span></code>: Value to wait for (masked with value_mask) </li>
+<li><code class="docutils literal"><span class="pre">value_mask</span></code>: Mask of bits to match in the register. </li>
+<li><code class="docutils literal"><span class="pre">timeout_ms</span></code>: Timeout to wait for this value (milliseconds). 0 means never timeout.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_eth_smi_wait_set8uint32_t8uint16_ti">
+<span id="esp_eth_smi_wait_set__uint32_t.uint16_t.i"></span><span class="target" id="esp__eth_8h_1ac804ef59147a893803bce266c09f0951"></span><em class="property">static</em> esp_err_t <code class="descclassname"></code><code class="descname">esp_eth_smi_wait_set</code><span class="sig-paren">(</span>uint32_t <em>reg_num</em>, uint16_t <em>value_mask</em>, int <em>timeout_ms</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv220esp_eth_smi_wait_set8uint32_t8uint16_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Continuously read a PHY register over SMI interface, wait until the register has all bits in a mask set. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>PHY base address must be right.</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK if desired value matches, ESP_ERR_TIMEOUT if timed out. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">reg_num</span></code>: PHY register number </li>
+<li><code class="docutils literal"><span class="pre">value_mask</span></code>: Value mask to wait for (all bits in this mask must be set) </li>
+<li><code class="docutils literal"><span class="pre">timeout_ms</span></code>: Timeout to wait for this value (milliseconds). 0 means never timeout.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_eth_free_rx_bufPv">
+<span id="esp_eth_free_rx_buf__voidP"></span><span class="target" id="esp__eth_8h_1aa61e296ef59839eeb42cb0069ac44852"></span>void <code class="descclassname"></code><code class="descname">esp_eth_free_rx_buf</code><span class="sig-paren">(</span>void *<em>buf</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv219esp_eth_free_rx_bufPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free emac rx buf. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>buf can not be null,and it is tcpip input buf.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">buf</span></code>: start address of recevie packet data. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="esp_eth.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv212eth_config_t">
+<span id="eth_config_t"></span><span class="target" id="structeth__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">eth_config_t</code><a class="headerlink" href="esp_eth.html#_CPPv212eth_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ethernet configuration </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t8phy_addrE">
+<span id="eth_config_t::phy_addr__eth_phy_base_t"></span><span class="target" id="structeth__config__t_1aeb3823790f8e0532c8571e064dcb0ada"></span><a class="reference internal" href="esp_eth.html#_CPPv214eth_phy_base_t" title="eth_phy_base_t">eth_phy_base_t</a> <code class="descname">phy_addr</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t8phy_addrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy base addr (0~31) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t8mac_modeE">
+<span id="eth_config_t::mac_mode__eth_mode_t"></span><span class="target" id="structeth__config__t_1a0eed876a8e2f2f7f7ebdbb577f9a3a43"></span><a class="reference internal" href="esp_eth.html#_CPPv210eth_mode_t" title="eth_mode_t">eth_mode_t</a> <code class="descname">mac_mode</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t8mac_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>mac mode only support RMII now </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t11tcpip_inputE">
+<span id="eth_config_t::tcpip_input__eth_tcpip_input_func"></span><span class="target" id="structeth__config__t_1aa05498819cb6f8dcc9b8634a605bc22b"></span><a class="reference internal" href="esp_eth.html#_CPPv220eth_tcpip_input_func" title="eth_tcpip_input_func">eth_tcpip_input_func</a> <code class="descname">tcpip_input</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t11tcpip_inputE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>tcpip input func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t8phy_initE">
+<span id="eth_config_t::phy_init__eth_phy_func"></span><span class="target" id="structeth__config__t_1a0fd97bb876d10e46c002afe919c96934"></span><a class="reference internal" href="esp_eth.html#_CPPv212eth_phy_func" title="eth_phy_func">eth_phy_func</a> <code class="descname">phy_init</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t8phy_initE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy init func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t14phy_check_linkE">
+<span id="eth_config_t::phy_check_link__eth_phy_check_link_func"></span><span class="target" id="structeth__config__t_1a198088e4690b08397e9aa7e963f90b15"></span><a class="reference internal" href="esp_eth.html#_CPPv223eth_phy_check_link_func" title="eth_phy_check_link_func">eth_phy_check_link_func</a> <code class="descname">phy_check_link</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t14phy_check_linkE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy check link func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t14phy_check_initE">
+<span id="eth_config_t::phy_check_init__eth_phy_check_init_func"></span><span class="target" id="structeth__config__t_1ace35ca7cfb52ff59ffd5db1e27f38ef1"></span><a class="reference internal" href="esp_eth.html#_CPPv223eth_phy_check_init_func" title="eth_phy_check_init_func">eth_phy_check_init_func</a> <code class="descname">phy_check_init</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t14phy_check_initE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy check init func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t18phy_get_speed_modeE">
+<span id="eth_config_t::phy_get_speed_mode__eth_phy_get_speed_mode_func"></span><span class="target" id="structeth__config__t_1adc0dc21e1ccfff413cc4c821b020ec92"></span><a class="reference internal" href="esp_eth.html#_CPPv227eth_phy_get_speed_mode_func" title="eth_phy_get_speed_mode_func">eth_phy_get_speed_mode_func</a> <code class="descname">phy_get_speed_mode</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t18phy_get_speed_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy check init func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t19phy_get_duplex_modeE">
+<span id="eth_config_t::phy_get_duplex_mode__eth_phy_get_duplex_mode_func"></span><span class="target" id="structeth__config__t_1a812fb40e3bf3b74118e40a07d235a6e7"></span><a class="reference internal" href="esp_eth.html#_CPPv228eth_phy_get_duplex_mode_func" title="eth_phy_get_duplex_mode_func">eth_phy_get_duplex_mode_func</a> <code class="descname">phy_get_duplex_mode</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t19phy_get_duplex_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>phy check init func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t11gpio_configE">
+<span id="eth_config_t::gpio_config__eth_gpio_config_func"></span><span class="target" id="structeth__config__t_1af85a2b3bcb0ca52622c09a9cfe3ad1ab"></span><a class="reference internal" href="esp_eth.html#_CPPv220eth_gpio_config_func" title="eth_gpio_config_func">eth_gpio_config_func</a> <code class="descname">gpio_config</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t11gpio_configE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>gpio config func </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t16flow_ctrl_enableE">
+<span id="eth_config_t::flow_ctrl_enable__b"></span><span class="target" id="structeth__config__t_1a5ae939c492b64769a0126e1f57236603"></span>bool <code class="descname">flow_ctrl_enable</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t16flow_ctrl_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>flag of flow ctrl enable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t28phy_get_partner_pause_enableE">
+<span id="eth_config_t::phy_get_partner_pause_enable__eth_phy_get_partner_pause_enable_func"></span><span class="target" id="structeth__config__t_1ab6ccc69a675b5cc9dac573de5f265e76"></span><a class="reference internal" href="esp_eth.html#_CPPv237eth_phy_get_partner_pause_enable_func" title="eth_phy_get_partner_pause_enable_func">eth_phy_get_partner_pause_enable_func</a> <code class="descname">phy_get_partner_pause_enable</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t28phy_get_partner_pause_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get partner pause enable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12eth_config_t16phy_power_enableE">
+<span id="eth_config_t::phy_power_enable__eth_phy_power_enable_func"></span><span class="target" id="structeth__config__t_1a8390fe2bd8e8d6764a1da5d621c7457b"></span><a class="reference internal" href="esp_eth.html#_CPPv225eth_phy_power_enable_func" title="eth_phy_power_enable_func">eth_phy_power_enable_func</a> <code class="descname">phy_power_enable</code><a class="headerlink" href="esp_eth.html#_CPPv2N12eth_config_t16phy_power_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>enable or disable phy power </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="esp_eth.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv223eth_phy_check_link_func">
+<span id="eth_phy_check_link_func"></span><span class="target" id="esp__eth_8h_1a7815ae562ea47a42a24382924dbd4566"></span><em class="property">typedef </em>bool (*<code class="descclassname"></code><code class="descname">eth_phy_check_link_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv223eth_phy_check_link_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv223eth_phy_check_init_func">
+<span id="eth_phy_check_init_func"></span><span class="target" id="esp__eth_8h_1aa0a292dc745f5aee34ca707d018977e8"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">eth_phy_check_init_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv223eth_phy_check_init_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv227eth_phy_get_speed_mode_func">
+<span id="eth_phy_get_speed_mode_func"></span><span class="target" id="esp__eth_8h_1a23c4a1b5ad20b37fe4273e2a1274dae0"></span><em class="property">typedef </em><a class="reference internal" href="esp_eth.html#_CPPv216eth_speed_mode_t" title="eth_speed_mode_t">eth_speed_mode_t</a> (*<code class="descclassname"></code><code class="descname">eth_phy_get_speed_mode_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv227eth_phy_get_speed_mode_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv228eth_phy_get_duplex_mode_func">
+<span id="eth_phy_get_duplex_mode_func"></span><span class="target" id="esp__eth_8h_1aae37a47fe9a23c9f1a5e29422d02c840"></span><em class="property">typedef </em><a class="reference internal" href="esp_eth.html#_CPPv217eth_duplex_mode_t" title="eth_duplex_mode_t">eth_duplex_mode_t</a> (*<code class="descclassname"></code><code class="descname">eth_phy_get_duplex_mode_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv228eth_phy_get_duplex_mode_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv212eth_phy_func">
+<span id="eth_phy_func"></span><span class="target" id="esp__eth_8h_1ad753f34e247ca18e6caf8f251baeabba"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">eth_phy_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv212eth_phy_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv220eth_tcpip_input_func">
+<span id="eth_tcpip_input_func"></span><span class="target" id="esp__eth_8h_1a08a138b9828771b8a2fb9361971c4d90"></span><em class="property">typedef </em>esp_err_t (*<code class="descclassname"></code><code class="descname">eth_tcpip_input_func</code>)<span class="sig-paren">(</span>void *buffer, uint16_t len, void *eb<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv220eth_tcpip_input_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv220eth_gpio_config_func">
+<span id="eth_gpio_config_func"></span><span class="target" id="esp__eth_8h_1a5176bdc08ea7579ff324d618700d580b"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">eth_gpio_config_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv220eth_gpio_config_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv237eth_phy_get_partner_pause_enable_func">
+<span id="eth_phy_get_partner_pause_enable_func"></span><span class="target" id="esp__eth_8h_1a388a581e1e0e35f4f6c0923003f1da70"></span><em class="property">typedef </em>bool (*<code class="descclassname"></code><code class="descname">eth_phy_get_partner_pause_enable_func</code>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv237eth_phy_get_partner_pause_enable_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv225eth_phy_power_enable_func">
+<span id="eth_phy_power_enable_func"></span><span class="target" id="esp__eth_8h_1ae49f5c92c8b678eefd1b65e5f5f6ff27"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">eth_phy_power_enable_func</code>)<span class="sig-paren">(</span>bool enable<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv225eth_phy_power_enable_func" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="esp_eth.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv210eth_mode_t">
+<span id="eth_mode_t"></span><span class="target" id="esp__eth_8h_1a5b9e3c9f333c9b4742f186047e08ff60"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">eth_mode_t</code><a class="headerlink" href="esp_eth.html#_CPPv210eth_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv213ETH_MODE_RMII">
+<span id="ETH_MODE_RMII"></span><span class="target" id="esp__eth_8h_1a5b9e3c9f333c9b4742f186047e08ff60a9409787812b64e5f9337ae47a1df8a4f"></span><code class="descname">ETH_MODE_RMII</code> = 0<a class="headerlink" href="esp_eth.html#_CPPv213ETH_MODE_RMII" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv212ETH_MODE_MII">
+<span id="ETH_MODE_MII"></span><span class="target" id="esp__eth_8h_1a5b9e3c9f333c9b4742f186047e08ff60a8b99b75209e9f1ebc335cce9e8cc3da1"></span><code class="descname">ETH_MODE_MII</code><a class="headerlink" href="esp_eth.html#_CPPv212ETH_MODE_MII" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv216eth_speed_mode_t">
+<span id="eth_speed_mode_t"></span><span class="target" id="esp__eth_8h_1a276e9434ce0e4a2e593b521198b39262"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">eth_speed_mode_t</code><a class="headerlink" href="esp_eth.html#_CPPv216eth_speed_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv218ETH_SPEED_MODE_10M">
+<span id="ETH_SPEED_MODE_10M"></span><span class="target" id="esp__eth_8h_1a276e9434ce0e4a2e593b521198b39262a98ef6d21990dc0c5365bc9e77579ba82"></span><code class="descname">ETH_SPEED_MODE_10M</code> = 0<a class="headerlink" href="esp_eth.html#_CPPv218ETH_SPEED_MODE_10M" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219ETH_SPEED_MODE_100M">
+<span id="ETH_SPEED_MODE_100M"></span><span class="target" id="esp__eth_8h_1a276e9434ce0e4a2e593b521198b39262a1a0bba54eaa489620083012e8b2211eb"></span><code class="descname">ETH_SPEED_MODE_100M</code><a class="headerlink" href="esp_eth.html#_CPPv219ETH_SPEED_MODE_100M" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217eth_duplex_mode_t">
+<span id="eth_duplex_mode_t"></span><span class="target" id="esp__eth_8h_1af4817c64b0c2286256cca66815843536"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">eth_duplex_mode_t</code><a class="headerlink" href="esp_eth.html#_CPPv217eth_duplex_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv219ETH_MODE_HALFDUPLEX">
+<span id="ETH_MODE_HALFDUPLEX"></span><span class="target" id="esp__eth_8h_1af4817c64b0c2286256cca66815843536ab57bf64b8a26f0a74691b93f5e13506d"></span><code class="descname">ETH_MODE_HALFDUPLEX</code> = 0<a class="headerlink" href="esp_eth.html#_CPPv219ETH_MODE_HALFDUPLEX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219ETH_MODE_FULLDUPLEX">
+<span id="ETH_MODE_FULLDUPLEX"></span><span class="target" id="esp__eth_8h_1af4817c64b0c2286256cca66815843536a01ce4d22899cc0551012e928b226f095"></span><code class="descname">ETH_MODE_FULLDUPLEX</code><a class="headerlink" href="esp_eth.html#_CPPv219ETH_MODE_FULLDUPLEX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv214eth_phy_base_t">
+<span id="eth_phy_base_t"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9ed"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">eth_phy_base_t</code><a class="headerlink" href="esp_eth.html#_CPPv214eth_phy_base_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv24PHY0">
+<span id="PHY0"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaa022a7cfb365fa415bc449c3af640fb6"></span><code class="descname">PHY0</code> = 0<a class="headerlink" href="esp_eth.html#_CPPv24PHY0" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY1">
+<span id="PHY1"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edae88b1e22ce66dd6010ae2a44b344cc96"></span><code class="descname">PHY1</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY1" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY2">
+<span id="PHY2"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda4e4249cc5e03689bd5f39ff4749e7871"></span><code class="descname">PHY2</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY3">
+<span id="PHY3"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaebcc0d005ef6bea4239e62e7df212c0c"></span><code class="descname">PHY3</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY3" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY4">
+<span id="PHY4"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edad3d0b58c8ad2e7aafc85d64baec7ad9f"></span><code class="descname">PHY4</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY4" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY5">
+<span id="PHY5"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaa20f3e6653265c83af03af8d606a1e8e"></span><code class="descname">PHY5</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY5" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY6">
+<span id="PHY6"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edab08aeb6ba822a78ab2e01f90a59d98bb"></span><code class="descname">PHY6</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY6" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY7">
+<span id="PHY7"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda7f409551818bd052f41f2f6aab2eb840"></span><code class="descname">PHY7</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY7" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY8">
+<span id="PHY8"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda2d46bb9a766b092dda68bd32144bf52e"></span><code class="descname">PHY8</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY8" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv24PHY9">
+<span id="PHY9"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda583e78a9bae657554c1750e2d50ec791"></span><code class="descname">PHY9</code><a class="headerlink" href="esp_eth.html#_CPPv24PHY9" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY10">
+<span id="PHY10"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda6964115c38762914b97cd38580c6afd8"></span><code class="descname">PHY10</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY10" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY11">
+<span id="PHY11"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda270e84c6cdade2a09bb6b86965c56874"></span><code class="descname">PHY11</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY11" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY12">
+<span id="PHY12"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaeada3f990a06d9b22f2ed852703c7045"></span><code class="descname">PHY12</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY12" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY13">
+<span id="PHY13"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edab6aeecbfd9068bd988e42ac6c60b032c"></span><code class="descname">PHY13</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY13" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY14">
+<span id="PHY14"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaa0e36adfba0af9048a77968a2f1f7c71"></span><code class="descname">PHY14</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY14" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY15">
+<span id="PHY15"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda2bbc39173810c7f606fdab21e1ac2086"></span><code class="descname">PHY15</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY15" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY16">
+<span id="PHY16"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edae5d3984312ac7df8d7daf65bf03bb543"></span><code class="descname">PHY16</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY16" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY17">
+<span id="PHY17"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaaf370aef5c99df66bc0025eea79b0046"></span><code class="descname">PHY17</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY17" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY18">
+<span id="PHY18"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda07787a128dd557a7041267067836ffcb"></span><code class="descname">PHY18</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY18" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY19">
+<span id="PHY19"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edae3458178a3a74cc303f61026f83f6b8a"></span><code class="descname">PHY19</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY19" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY20">
+<span id="PHY20"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda9c8171aba65186ead7ab180846c327c8"></span><code class="descname">PHY20</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY20" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY21">
+<span id="PHY21"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edade5024e42dae19cfd548151b84107961"></span><code class="descname">PHY21</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY21" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY22">
+<span id="PHY22"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda18e417c881149375c4e985a900b382e8"></span><code class="descname">PHY22</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY22" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY23">
+<span id="PHY23"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaed993cf9876ff73283e9a67b8743760b"></span><code class="descname">PHY23</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY23" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY24">
+<span id="PHY24"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda03e357acbc0a6caa4c62fe14a288a3a1"></span><code class="descname">PHY24</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY24" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY25">
+<span id="PHY25"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edaad10b8579e4cc821d660f09030de2773"></span><code class="descname">PHY25</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY25" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY26">
+<span id="PHY26"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda4889878a469fbcd7a3bd3c262deb09d7"></span><code class="descname">PHY26</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY26" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY27">
+<span id="PHY27"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda34acbc45b15c1c9134d7bf5cdd33c71d"></span><code class="descname">PHY27</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY27" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY28">
+<span id="PHY28"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9edafa553dd8fcd1be91ac43b565218761c9"></span><code class="descname">PHY28</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY28" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY29">
+<span id="PHY29"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda55656733f4f5f43e3ea17f27c12f05ee"></span><code class="descname">PHY29</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY29" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY30">
+<span id="PHY30"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda48778de3c71686c0ad5166e32e67022b"></span><code class="descname">PHY30</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY30" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv25PHY31">
+<span id="PHY31"></span><span class="target" id="esp__eth_8h_1a6839dd04aaeb12e14fcb954f21c2c9eda9cc1cf479b929e8c0fae596f755858d9"></span><code class="descname">PHY31</code><a class="headerlink" href="esp_eth.html#_CPPv25PHY31" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-phy-common">
+<h2>API Reference - PHY Common<a class="headerlink" href="esp_eth.html#api-reference-phy-common" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Header File<a class="headerlink" href="esp_eth.html#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy.h">ethernet/include/eth_phy/phy.h</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Functions<a class="headerlink" href="esp_eth.html#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv238phy_rmii_configure_data_interface_pinsv">
+<span id="phy_rmii_configure_data_interface_pins__void"></span><span class="target" id="phy_8h_1ad37227fb4328acd1a190bed3291aa465"></span>void <code class="descclassname"></code><code class="descname">phy_rmii_configure_data_interface_pins</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv238phy_rmii_configure_data_interface_pinsv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Common PHY-management functions.</p>
+<p>These are not enough to drive any particular Ethernet PHY, but they provide a common configuration structure and management functions. Configure fixed pins for RMII data interface.</p>
+<p>This configures GPIOs 0, 19, 22, 25, 26, 27 for use with RMII data interface. These pins cannot be changed, and must be wired to ethernet functions.</p>
+<p>This is not sufficient to fully configure the Ethernet PHY, MDIO configuration interface pins (such as SMI MDC, MDO, MDI) must also be configured correctly in the GPIO matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227phy_rmii_smi_configure_pins7uint8_t7uint8_t">
+<span id="phy_rmii_smi_configure_pins__uint8_t.uint8_t"></span><span class="target" id="phy_8h_1a89beca08f6f40d4f4172de171e4a66aa"></span>void <code class="descclassname"></code><code class="descname">phy_rmii_smi_configure_pins</code><span class="sig-paren">(</span>uint8_t <em>mdc_gpio</em>, uint8_t <em>mdio_gpio</em><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv227phy_rmii_smi_configure_pins7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure variable pins for SMI (MDIO) ethernet functions.</p>
+<p>Calling this function along with mii_configure_default_pins() will fully configure the GPIOs for the ethernet PHY. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224phy_mii_enable_flow_ctrlv">
+<span id="phy_mii_enable_flow_ctrl__void"></span><span class="target" id="phy_8h_1ac75a955a9adb8fc3a024a32546d8acc7"></span>void <code class="descclassname"></code><code class="descname">phy_mii_enable_flow_ctrl</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv224phy_mii_enable_flow_ctrlv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable flow control in standard PHY MII register. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225phy_mii_check_link_statusv">
+<span id="phy_mii_check_link_status__void"></span><span class="target" id="phy_8h_1a4adacbdfad5310a4380f98b116602914"></span>bool <code class="descclassname"></code><code class="descname">phy_mii_check_link_status</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv225phy_mii_check_link_statusv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv232phy_mii_get_partner_pause_enablev">
+<span id="phy_mii_get_partner_pause_enable__void"></span><span class="target" id="phy_8h_1a5ccdccbb9e6de8b662d134ecfaf0243f"></span>bool <code class="descclassname"></code><code class="descname">phy_mii_get_partner_pause_enable</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv232phy_mii_get_partner_pause_enablev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-phy-tlk110">
+<h2>API Reference - PHY TLK110<a class="headerlink" href="esp_eth.html#api-reference-phy-tlk110" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Header File<a class="headerlink" href="esp_eth.html#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy_tlk110.h">ethernet/include/eth_phy/phy_tlk110.h</a></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Functions<a class="headerlink" href="esp_eth.html#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv225phy_tlk110_dump_registersv">
+<span id="phy_tlk110_dump_registers"></span><span class="target" id="phy__tlk110_8h_1ab7300aa3f278e900f1cc26f49e408c2f"></span>void <code class="descclassname"></code><code class="descname">phy_tlk110_dump_registers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv225phy_tlk110_dump_registersv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Dump all TLK110 PHY SMI configuration registers. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>These registers are dumped at &#8216;debug&#8217; level, so output may not be visible depending on default log levels. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225phy_tlk110_check_phy_initv">
+<span id="phy_tlk110_check_phy_init__void"></span><span class="target" id="phy__tlk110_8h_1ab1ab0692b335cf9853168670f2123761"></span>void <code class="descclassname"></code><code class="descname">phy_tlk110_check_phy_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv225phy_tlk110_check_phy_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 phy_check_init function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225phy_tlk110_get_speed_modev">
+<span id="phy_tlk110_get_speed_mode__void"></span><span class="target" id="phy__tlk110_8h_1abad9ee3c655bb75a0c77109c4914beae"></span><a class="reference internal" href="esp_eth.html#_CPPv216eth_speed_mode_t" title="eth_speed_mode_t">eth_speed_mode_t</a> <code class="descclassname"></code><code class="descname">phy_tlk110_get_speed_mode</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv225phy_tlk110_get_speed_modev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 phy_get_speed_mode function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226phy_tlk110_get_duplex_modev">
+<span id="phy_tlk110_get_duplex_mode__void"></span><span class="target" id="phy__tlk110_8h_1ae7e21fac4bf1163dcfa03df5430790ee"></span><a class="reference internal" href="esp_eth.html#_CPPv217eth_duplex_mode_t" title="eth_duplex_mode_t">eth_duplex_mode_t</a> <code class="descclassname"></code><code class="descname">phy_tlk110_get_duplex_mode</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv226phy_tlk110_get_duplex_modev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 phy_get_duplex_mode function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223phy_tlk110_power_enableb">
+<span id="phy_tlk110_power_enable__b"></span><span class="target" id="phy__tlk110_8h_1a06a661e6f03d42c4df6719935de9d447"></span>void <code class="descclassname"></code><code class="descname">phy_tlk110_power_enable</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv223phy_tlk110_power_enableb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 phy_power_enable function. </p>
+<p>
+Consult the ethernet example to see how this is done. <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function may need to be replaced with a custom function if the PHY has a GPIO to enable power or start a clock.</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215phy_tlk110_initv">
+<span id="phy_tlk110_init__void"></span><span class="target" id="phy__tlk110_8h_1aa1637fea78d51c47e50f443e0b14b0cd"></span>void <code class="descclassname"></code><code class="descname">phy_tlk110_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv215phy_tlk110_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default TLK110 phy_init function. </p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="api-reference-phy-lan8720">
+<h2>API Reference - PHY LAN8720<a class="headerlink" href="esp_eth.html#api-reference-phy-lan8720" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>Header File<a class="headerlink" href="esp_eth.html#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/ethernet/include/eth_phy/phy_lan8720.h">ethernet/include/eth_phy/phy_lan8720.h</a></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>Functions<a class="headerlink" href="esp_eth.html#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv226phy_lan8720_dump_registersv">
+<span id="phy_lan8720_dump_registers"></span><span class="target" id="phy__lan8720_8h_1a7a983277adaff41f9da1728b4945b4fe"></span>void <code class="descclassname"></code><code class="descname">phy_lan8720_dump_registers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv226phy_lan8720_dump_registersv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Dump all LAN8720 PHY SMI configuration registers. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>These registers are dumped at &#8216;debug&#8217; level, so output may not be visible depending on default log levels. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226phy_lan8720_check_phy_initv">
+<span id="phy_lan8720_check_phy_init__void"></span><span class="target" id="phy__lan8720_8h_1a00212139f7561f2255081285c9970faa"></span>void <code class="descclassname"></code><code class="descname">phy_lan8720_check_phy_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv226phy_lan8720_check_phy_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 phy_check_init function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226phy_lan8720_get_speed_modev">
+<span id="phy_lan8720_get_speed_mode__void"></span><span class="target" id="phy__lan8720_8h_1a71277ba12220bc0ce541cd657c54dcb7"></span><a class="reference internal" href="esp_eth.html#_CPPv216eth_speed_mode_t" title="eth_speed_mode_t">eth_speed_mode_t</a> <code class="descclassname"></code><code class="descname">phy_lan8720_get_speed_mode</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv226phy_lan8720_get_speed_modev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 phy_get_speed_mode function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227phy_lan8720_get_duplex_modev">
+<span id="phy_lan8720_get_duplex_mode__void"></span><span class="target" id="phy__lan8720_8h_1aaf57e4b93272176dbe00c32b6108b593"></span><a class="reference internal" href="esp_eth.html#_CPPv217eth_duplex_mode_t" title="eth_duplex_mode_t">eth_duplex_mode_t</a> <code class="descclassname"></code><code class="descname">phy_lan8720_get_duplex_mode</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv227phy_lan8720_get_duplex_modev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 phy_get_duplex_mode function. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224phy_lan8720_power_enableb">
+<span id="phy_lan8720_power_enable__b"></span><span class="target" id="phy__lan8720_8h_1a6145d420dcfcc34d0f785eccfec5b205"></span>void <code class="descclassname"></code><code class="descname">phy_lan8720_power_enable</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv224phy_lan8720_power_enableb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 phy_power_enable function. </p>
+<p>
+Consult the ethernet example to see how this is done. <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function may need to be replaced with a custom function if the PHY has a GPIO to enable power or start a clock.</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216phy_lan8720_initv">
+<span id="phy_lan8720_init__void"></span><span class="target" id="phy__lan8720_8h_1a546d14d5fb6f52a0adcb1239ac54bc56"></span>void <code class="descclassname"></code><code class="descname">phy_lan8720_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_eth.html#_CPPv216phy_lan8720_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default LAN8720 phy_init function. </p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../peripherals/index.html" class="btn btn-neutral float-right" title="Peripherals API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Ethernet API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

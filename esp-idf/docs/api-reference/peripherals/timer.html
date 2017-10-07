@@ -1,0 +1,932 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TIMER &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Peripherals API" href="index.html"/>
+        <link rel="next" title="Touch Sensor" href="touch_pad.html"/>
+        <link rel="prev" title="SPI Slave driver" href="spi_slave.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc.html">ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO (including RTC low power I/O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">MCPWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../storage/sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sigmadelta.html">Sigma-delta Modulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="timer.html#">Timer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="timer.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="timer.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="timer.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="touch_pad.html">Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">UART</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Peripherals API</a> &raquo;</li>
+        
+      <li>TIMER</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/peripherals/timer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="timer">
+<h1>TIMER<a class="headerlink" href="timer.html#timer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="timer.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 chip contains two hardware timer groups, each containing two general-purpose hardware timers.</p>
+<p>They are all 64-bit generic timers based on 16-bit prescalers and 64-bit auto-reload-capable up/down counters.</p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="timer.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>64-bit hardware timer example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/timer_group">peripherals/timer_group</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="timer.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="timer.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/driver/include/driver/timer.h">driver/include/driver/timer.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="timer.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv223timer_get_counter_value13timer_group_t11timer_idx_tP8uint64_t">
+<span id="timer_get_counter_value__timer_group_t.timer_idx_t.uint64_tP"></span><span class="target" id="timer_8h_1a17639994075ce29c813c3948551d738c"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_get_counter_value</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, uint64_t *<em>timer_val</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv223timer_get_counter_value13timer_group_t11timer_idx_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read the counter value of hardware timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">timer_val</span></code>: Pointer to accept timer counter value.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226timer_get_counter_time_sec13timer_group_t11timer_idx_tPd">
+<span id="timer_get_counter_time_sec__timer_group_t.timer_idx_t.doubleP"></span><span class="target" id="timer_8h_1acd22334771eac28ae04c2cdbc24890de"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_get_counter_time_sec</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, double *<em>time</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv226timer_get_counter_time_sec13timer_group_t11timer_idx_tPd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read the counter value of hardware timer, in unit of a given scale. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">time</span></code>: Pointer, type of double*, to accept timer counter value, in seconds.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223timer_set_counter_value13timer_group_t11timer_idx_t8uint64_t">
+<span id="timer_set_counter_value__timer_group_t.timer_idx_t.uint64_t"></span><span class="target" id="timer_8h_1aae5747bf6074896f72ef87c0d77acdee"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_counter_value</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, uint64_t <em>load_val</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv223timer_set_counter_value13timer_group_t11timer_idx_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set counter value to hardware timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">load_val</span></code>: Counter value to write to the hardware timer.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211timer_start13timer_group_t11timer_idx_t">
+<span id="timer_start__timer_group_t.timer_idx_t"></span><span class="target" id="timer_8h_1a49c6d694d8f7ba13a584ac5217567ccb"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_start</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv211timer_start13timer_group_t11timer_idx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start the counter of hardware timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1]</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211timer_pause13timer_group_t11timer_idx_t">
+<span id="timer_pause__timer_group_t.timer_idx_t"></span><span class="target" id="timer_8h_1a9862cf904d5b2ef85003ab59deb70a3f"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_pause</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv211timer_pause13timer_group_t11timer_idx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pause the counter of hardware timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1]</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222timer_set_counter_mode13timer_group_t11timer_idx_t17timer_count_dir_t">
+<span id="timer_set_counter_mode__timer_group_t.timer_idx_t.timer_count_dir_t"></span><span class="target" id="timer_8h_1a3a64ee821808d92da43fd5f9aa0c2c8c"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_counter_mode</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, <a class="reference internal" href="timer.html#_CPPv217timer_count_dir_t" title="timer_count_dir_t">timer_count_dir_t</a> <em>counter_dir</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv222timer_set_counter_mode13timer_group_t11timer_idx_t17timer_count_dir_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set counting mode for hardware timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">counter_dir</span></code>: Counting direction of timer, count-up or count-down</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221timer_set_auto_reload13timer_group_t11timer_idx_t18timer_autoreload_t">
+<span id="timer_set_auto_reload__timer_group_t.timer_idx_t.timer_autoreload_t"></span><span class="target" id="timer_8h_1a9caa707e3765d3c537107f416dbd36e7"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_auto_reload</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, <a class="reference internal" href="timer.html#_CPPv218timer_autoreload_t" title="timer_autoreload_t">timer_autoreload_t</a> <em>reload</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv221timer_set_auto_reload13timer_group_t11timer_idx_t18timer_autoreload_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable or disable counter reload function when alarm event occurs. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">reload</span></code>: Counter reload mode.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217timer_set_divider13timer_group_t11timer_idx_t8uint16_t">
+<span id="timer_set_divider__timer_group_t.timer_idx_t.uint16_t"></span><span class="target" id="timer_8h_1a0807411e6647d1e7101f6ef9fcec6fe0"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_divider</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, uint16_t <em>divider</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv217timer_set_divider13timer_group_t11timer_idx_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set hardware timer source clock divider. Timer groups clock are divider from APB clock. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">divider</span></code>: Timer clock divider value.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221timer_set_alarm_value13timer_group_t11timer_idx_t8uint64_t">
+<span id="timer_set_alarm_value__timer_group_t.timer_idx_t.uint64_t"></span><span class="target" id="timer_8h_1a71ea81c0fea42426fa41801dfaf8a556"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_alarm_value</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, uint64_t <em>alarm_value</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv221timer_set_alarm_value13timer_group_t11timer_idx_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set timer alarm value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">alarm_value</span></code>: A 64-bit value to set the alarm value.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221timer_get_alarm_value13timer_group_t11timer_idx_tP8uint64_t">
+<span id="timer_get_alarm_value__timer_group_t.timer_idx_t.uint64_tP"></span><span class="target" id="timer_8h_1aa120811f51935a235dc4b4a2594c9f23"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_get_alarm_value</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, uint64_t *<em>alarm_value</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv221timer_get_alarm_value13timer_group_t11timer_idx_tP8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get timer alarm value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">alarm_value</span></code>: Pointer of A 64-bit value to accept the alarm value.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215timer_set_alarm13timer_group_t11timer_idx_t13timer_alarm_t">
+<span id="timer_set_alarm__timer_group_t.timer_idx_t.timer_alarm_t"></span><span class="target" id="timer_8h_1a808da81f9bd82392c7818e7c3bff365e"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_set_alarm</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, <a class="reference internal" href="timer.html#_CPPv213timer_alarm_t" title="timer_alarm_t">timer_alarm_t</a> <em>alarm_en</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv215timer_set_alarm13timer_group_t11timer_idx_t13timer_alarm_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get timer alarm value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">alarm_en</span></code>: To enable or disable timer alarm function.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218timer_isr_register13timer_group_t11timer_idx_tPFvPvEPviP18timer_isr_handle_t">
+<span class="target" id="timer_8h_1a73c02c4d92d6d3bc10284cc20b4f0dfd"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_isr_register</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, void (*<em>fn</em>)<span class="sig-paren">(</span>void *<span class="sig-paren">)</span>, void *<em>arg</em>, int <em>intr_alloc_flags</em>, <a class="reference internal" href="timer.html#_CPPv218timer_isr_handle_t" title="timer_isr_handle_t">timer_isr_handle_t</a> *<em>handle</em>, <span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv218timer_isr_register13timer_group_t11timer_idx_tPFvPvEPviP18timer_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>register Timer interrupt handler, the handler is an ISR. The handler will be attached to the same CPU core that this function is running on. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>In case the this is called with the INIRAM flag, code inside the handler function can only call functions in IRAM, so it cannot call other timer APIs. Use direct register access to access timers from inside the ISR in this case.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Function pointer error.</li>
+</ul>
+</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index of timer group </li>
+<li><code class="docutils literal"><span class="pre">fn</span></code>: Interrupt handler function. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">arg</span></code>: Parameter for handler function </li>
+<li><code class="docutils literal"><span class="pre">intr_alloc_flags</span></code>: Flags used to allocate the interrupt. One or multiple (ORred) ESP_INTR_FLAG_* values. See esp_intr_alloc.h for more info. </li>
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Pointer to return handle. If non-NULL, a handle for the interrupt will be returned here. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210timer_init13timer_group_t11timer_idx_tPK14timer_config_t">
+<span id="timer_init__timer_group_t.timer_idx_t.timer_config_tCP"></span><span class="target" id="timer_8h_1a895264604076543631b605de5fe54011"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_init</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, <em class="property">const</em> <a class="reference internal" href="timer.html#_CPPv214timer_config_t" title="timer_config_t">timer_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv210timer_init13timer_group_t11timer_idx_tPK14timer_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initializes and configure the timer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">config</span></code>: Pointer to timer initialization parameters.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216timer_get_config13timer_group_t11timer_idx_tP14timer_config_t">
+<span id="timer_get_config__timer_group_t.timer_idx_t.timer_config_tP"></span><span class="target" id="timer_8h_1a506a2ba5af3cdd04b65051b796221309"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_get_config</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em>, <a class="reference internal" href="timer.html#_CPPv214timer_config_t" title="timer_config_t">timer_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv216timer_get_config13timer_group_t11timer_idx_tP14timer_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get timer configure value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index, 0 for hw_timer[0] &amp; 1 for hw_timer[1] </li>
+<li><code class="docutils literal"><span class="pre">config</span></code>: Pointer of struct to accept timer parameters.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223timer_group_intr_enable13timer_group_t8uint32_t">
+<span id="timer_group_intr_enable__timer_group_t.uint32_t"></span><span class="target" id="timer_8h_1abe933efe08e76291c3217da12e891046"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_group_intr_enable</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, uint32_t <em>en_mask</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv223timer_group_intr_enable13timer_group_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable timer group interrupt, by enable mask. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">en_mask</span></code>: Timer interrupt enable mask. Use TIMG_T0_INT_ENA_M to enable t0 interrupt Use TIMG_T1_INT_ENA_M to enable t1 interrupt</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224timer_group_intr_disable13timer_group_t8uint32_t">
+<span id="timer_group_intr_disable__timer_group_t.uint32_t"></span><span class="target" id="timer_8h_1a864b9dec94573fc4d8f3b6f11bee3895"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_group_intr_disable</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, uint32_t <em>disable_mask</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv224timer_group_intr_disable13timer_group_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable timer group interrupt, by disable mask. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">disable_mask</span></code>: Timer interrupt disable mask. Use TIMG_T0_INT_ENA_M to disable t0 interrupt Use TIMG_T1_INT_ENA_M to disable t1 interrupt</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217timer_enable_intr13timer_group_t11timer_idx_t">
+<span id="timer_enable_intr__timer_group_t.timer_idx_t"></span><span class="target" id="timer_8h_1ac789af230c99df69103718a05fa14a9f"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_enable_intr</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv217timer_enable_intr13timer_group_t11timer_idx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable timer interrupt. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218timer_disable_intr13timer_group_t11timer_idx_t">
+<span id="timer_disable_intr__timer_group_t.timer_idx_t"></span><span class="target" id="timer_8h_1a2eca7ef66f0a794384f6558a726b9862"></span>esp_err_t <code class="descclassname"></code><code class="descname">timer_disable_intr</code><span class="sig-paren">(</span><a class="reference internal" href="timer.html#_CPPv213timer_group_t" title="timer_group_t">timer_group_t</a> <em>group_num</em>, <a class="reference internal" href="timer.html#_CPPv211timer_idx_t" title="timer_idx_t">timer_idx_t</a> <em>timer_num</em><span class="sig-paren">)</span><a class="headerlink" href="timer.html#_CPPv218timer_disable_intr13timer_group_t11timer_idx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable timer interrupt. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">group_num</span></code>: Timer group number, 0 for TIMERG0 or 1 for TIMERG1 </li>
+<li><code class="docutils literal"><span class="pre">timer_num</span></code>: Timer index.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="timer.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv214timer_config_t">
+<span id="timer_config_t"></span><span class="target" id="structtimer__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">timer_config_t</code><a class="headerlink" href="timer.html#_CPPv214timer_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>timer configure struct </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t8alarm_enE">
+<span id="timer_config_t::alarm_en__b"></span><span class="target" id="structtimer__config__t_1ab78ddcbf7f813afd851b338d54febc30"></span>bool <code class="descname">alarm_en</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t8alarm_enE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Timer alarm enable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t10counter_enE">
+<span id="timer_config_t::counter_en__b"></span><span class="target" id="structtimer__config__t_1ac12616431230e5e7d3d02ee25d43a07e"></span>bool <code class="descname">counter_en</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t10counter_enE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter enable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t9intr_typeE">
+<span id="timer_config_t::intr_type__timer_intr_mode_t"></span><span class="target" id="structtimer__config__t_1a8ddba0342692f0829da446a254eeb914"></span><a class="reference internal" href="timer.html#_CPPv217timer_intr_mode_t" title="timer_intr_mode_t">timer_intr_mode_t</a> <code class="descname">intr_type</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t9intr_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interrupt mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t11counter_dirE">
+<span id="timer_config_t::counter_dir__timer_count_dir_t"></span><span class="target" id="structtimer__config__t_1acdfefa9c224638620cc4393ff370a927"></span><a class="reference internal" href="timer.html#_CPPv217timer_count_dir_t" title="timer_count_dir_t">timer_count_dir_t</a> <code class="descname">counter_dir</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t11counter_dirE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter direction </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t11auto_reloadE">
+<span id="timer_config_t::auto_reload__b"></span><span class="target" id="structtimer__config__t_1aa1c5ae93b9682da9a0fd16f61243a663"></span>bool <code class="descname">auto_reload</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t11auto_reloadE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Timer auto-reload </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N14timer_config_t7dividerE">
+<span id="timer_config_t::divider__uint16_t"></span><span class="target" id="structtimer__config__t_1ad505dcb88029b32ff32eaf3402723696"></span>uint16_t <code class="descname">divider</code><a class="headerlink" href="timer.html#_CPPv2N14timer_config_t7dividerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Counter clock divider </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="timer.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.TIMER_BASE_CLK">
+<span class="target" id="timer_8h_1afd3d7ef0475a0247df1cb04a33078036"></span><code class="descname">TIMER_BASE_CLK</code><a class="headerlink" href="timer.html#c.TIMER_BASE_CLK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="timer.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv218timer_isr_handle_t">
+<span id="timer_isr_handle_t"></span><span class="target" id="timer_8h_1a1d6b76140d80f1b972aae3e3853c97b0"></span><em class="property">typedef </em><a class="reference internal" href="../system/intr_alloc.html#_CPPv213intr_handle_t" title="intr_handle_t">intr_handle_t</a> <code class="descclassname"></code><code class="descname">timer_isr_handle_t</code><a class="headerlink" href="timer.html#_CPPv218timer_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interrupt handle, used in order to free the isr after use. Aliases to an int handle for now. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="timer.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv213timer_group_t">
+<span id="timer_group_t"></span><span class="target" id="timer_8h_1af4c7aa31ba79627dfa942af378d2737f"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_group_t</code><a class="headerlink" href="timer.html#_CPPv213timer_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Selects a Timer-Group out of 2 available groups. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv213TIMER_GROUP_0">
+<span id="TIMER_GROUP_0"></span><span class="target" id="timer_8h_1af4c7aa31ba79627dfa942af378d2737fa805fb7dac41473913e40bab319b1b969"></span><code class="descname">TIMER_GROUP_0</code> = 0<a class="headerlink" href="timer.html#_CPPv213TIMER_GROUP_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hw timer group 0 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213TIMER_GROUP_1">
+<span id="TIMER_GROUP_1"></span><span class="target" id="timer_8h_1af4c7aa31ba79627dfa942af378d2737fa72c0fb040c4096f726d560cfd45550eb"></span><code class="descname">TIMER_GROUP_1</code> = 1<a class="headerlink" href="timer.html#_CPPv213TIMER_GROUP_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hw timer group 1 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TIMER_GROUP_MAX">
+<span id="TIMER_GROUP_MAX"></span><span class="target" id="timer_8h_1af4c7aa31ba79627dfa942af378d2737faaa0367b6298f1e2349b2c5abe47cc180"></span><code class="descname">TIMER_GROUP_MAX</code><a class="headerlink" href="timer.html#_CPPv215TIMER_GROUP_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv211timer_idx_t">
+<span id="timer_idx_t"></span><span class="target" id="timer_8h_1a3d030b1498848ae8c246287b22ac5610"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_idx_t</code><a class="headerlink" href="timer.html#_CPPv211timer_idx_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Select a hardware timer from timer groups. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv27TIMER_0">
+<span id="TIMER_0"></span><span class="target" id="timer_8h_1a3d030b1498848ae8c246287b22ac5610a1d3d9445cb6fc00112a01f7767149360"></span><code class="descname">TIMER_0</code> = 0<a class="headerlink" href="timer.html#_CPPv27TIMER_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Select timer0 of GROUPx </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv27TIMER_1">
+<span id="TIMER_1"></span><span class="target" id="timer_8h_1a3d030b1498848ae8c246287b22ac5610a0be6ca9f568d9237d83970c13199f4b5"></span><code class="descname">TIMER_1</code> = 1<a class="headerlink" href="timer.html#_CPPv27TIMER_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Select timer1 of GROUPx </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv29TIMER_MAX">
+<span id="TIMER_MAX"></span><span class="target" id="timer_8h_1a3d030b1498848ae8c246287b22ac5610a6cce90a129d5dbc47c22cae692874afb"></span><code class="descname">TIMER_MAX</code><a class="headerlink" href="timer.html#_CPPv29TIMER_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217timer_count_dir_t">
+<span id="timer_count_dir_t"></span><span class="target" id="timer_8h_1a8f627fe89afc3069bfea7c91d7a7e4a0"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_count_dir_t</code><a class="headerlink" href="timer.html#_CPPv217timer_count_dir_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Decides the direction of counter. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216TIMER_COUNT_DOWN">
+<span id="TIMER_COUNT_DOWN"></span><span class="target" id="timer_8h_1a8f627fe89afc3069bfea7c91d7a7e4a0ae33fbd644dbf42be3a4ff9ba50bb6368"></span><code class="descname">TIMER_COUNT_DOWN</code> = 0<a class="headerlink" href="timer.html#_CPPv216TIMER_COUNT_DOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Descending Count from cnt.high|cnt.low </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TIMER_COUNT_UP">
+<span id="TIMER_COUNT_UP"></span><span class="target" id="timer_8h_1a8f627fe89afc3069bfea7c91d7a7e4a0a9300fb13c7d6826f185b7c043003035f"></span><code class="descname">TIMER_COUNT_UP</code> = 1<a class="headerlink" href="timer.html#_CPPv214TIMER_COUNT_UP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Ascending Count from Zero </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TIMER_COUNT_MAX">
+<span id="TIMER_COUNT_MAX"></span><span class="target" id="timer_8h_1a8f627fe89afc3069bfea7c91d7a7e4a0a06003bbf1c3464424474b3265e7ff54a"></span><code class="descname">TIMER_COUNT_MAX</code><a class="headerlink" href="timer.html#_CPPv215TIMER_COUNT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv213timer_start_t">
+<span id="timer_start_t"></span><span class="target" id="timer_8h_1a2130c1a50446d5125bb4665ac8257b76"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_start_t</code><a class="headerlink" href="timer.html#_CPPv213timer_start_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Decides whether timer is on or paused. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv211TIMER_PAUSE">
+<span id="TIMER_PAUSE"></span><span class="target" id="timer_8h_1a2130c1a50446d5125bb4665ac8257b76a2fc9fdb3e346a94262fa0e143f8fcb79"></span><code class="descname">TIMER_PAUSE</code> = 0<a class="headerlink" href="timer.html#_CPPv211TIMER_PAUSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pause timer counter </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv211TIMER_START">
+<span id="TIMER_START"></span><span class="target" id="timer_8h_1a2130c1a50446d5125bb4665ac8257b76ab64e562a51298f4a9eabc1f74d263217"></span><code class="descname">TIMER_START</code> = 1<a class="headerlink" href="timer.html#_CPPv211TIMER_START" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start timer counter </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv213timer_alarm_t">
+<span id="timer_alarm_t"></span><span class="target" id="timer_8h_1a77ac4ee541c052220f2f330219986efc"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_alarm_t</code><a class="headerlink" href="timer.html#_CPPv213timer_alarm_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Decides whether to enable alarm mode. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv215TIMER_ALARM_DIS">
+<span id="TIMER_ALARM_DIS"></span><span class="target" id="timer_8h_1a77ac4ee541c052220f2f330219986efcadaf7b5635d3b7440379966fc46cea449"></span><code class="descname">TIMER_ALARM_DIS</code> = 0<a class="headerlink" href="timer.html#_CPPv215TIMER_ALARM_DIS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable timer alarm </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TIMER_ALARM_EN">
+<span id="TIMER_ALARM_EN"></span><span class="target" id="timer_8h_1a77ac4ee541c052220f2f330219986efcaba6124e2dfd69833d680e1dee8af2d8a"></span><code class="descname">TIMER_ALARM_EN</code> = 1<a class="headerlink" href="timer.html#_CPPv214TIMER_ALARM_EN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable timer alarm </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TIMER_ALARM_MAX">
+<span id="TIMER_ALARM_MAX"></span><span class="target" id="timer_8h_1a77ac4ee541c052220f2f330219986efca7bfcce9db4d8f6af356720d42e7dfece"></span><code class="descname">TIMER_ALARM_MAX</code><a class="headerlink" href="timer.html#_CPPv215TIMER_ALARM_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217timer_intr_mode_t">
+<span id="timer_intr_mode_t"></span><span class="target" id="timer_8h_1a093e19c66cdc46306fd433be1feb3fcb"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_intr_mode_t</code><a class="headerlink" href="timer.html#_CPPv217timer_intr_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Select interrupt type if running in alarm mode. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216TIMER_INTR_LEVEL">
+<span id="TIMER_INTR_LEVEL"></span><span class="target" id="timer_8h_1a093e19c66cdc46306fd433be1feb3fcba976729f02504ed3dfdcabcb587a22301"></span><code class="descname">TIMER_INTR_LEVEL</code> = 0<a class="headerlink" href="timer.html#_CPPv216TIMER_INTR_LEVEL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interrupt mode: level mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TIMER_INTR_MAX">
+<span id="TIMER_INTR_MAX"></span><span class="target" id="timer_8h_1a093e19c66cdc46306fd433be1feb3fcbaef46b0cae2036b59bab598d81019c42b"></span><code class="descname">TIMER_INTR_MAX</code><a class="headerlink" href="timer.html#_CPPv214TIMER_INTR_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv218timer_autoreload_t">
+<span id="timer_autoreload_t"></span><span class="target" id="timer_8h_1a9362323d30eacf0fd60c0b15ca9d1369"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">timer_autoreload_t</code><a class="headerlink" href="timer.html#_CPPv218timer_autoreload_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Select if Alarm needs to be loaded by software or automatically reload by hardware. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv220TIMER_AUTORELOAD_DIS">
+<span id="TIMER_AUTORELOAD_DIS"></span><span class="target" id="timer_8h_1a9362323d30eacf0fd60c0b15ca9d1369aa7656ad067434738870c0daa51198cd6"></span><code class="descname">TIMER_AUTORELOAD_DIS</code> = 0<a class="headerlink" href="timer.html#_CPPv220TIMER_AUTORELOAD_DIS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable auto-reload: hardware will not load counter value after an alarm event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219TIMER_AUTORELOAD_EN">
+<span id="TIMER_AUTORELOAD_EN"></span><span class="target" id="timer_8h_1a9362323d30eacf0fd60c0b15ca9d1369aa01383005cb47785100156222182b77f"></span><code class="descname">TIMER_AUTORELOAD_EN</code> = 1<a class="headerlink" href="timer.html#_CPPv219TIMER_AUTORELOAD_EN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable auto-reload: hardware will load counter value after an alarm event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220TIMER_AUTORELOAD_MAX">
+<span id="TIMER_AUTORELOAD_MAX"></span><span class="target" id="timer_8h_1a9362323d30eacf0fd60c0b15ca9d1369a4f065397d3bfe7269045b9e1497ccf4e"></span><code class="descname">TIMER_AUTORELOAD_MAX</code><a class="headerlink" href="timer.html#_CPPv220TIMER_AUTORELOAD_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="touch_pad.html" class="btn btn-neutral float-right" title="Touch Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="spi_slave.html" class="btn btn-neutral" title="SPI Slave driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

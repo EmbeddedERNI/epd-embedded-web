@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mDNS Service &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Protocols API" href="index.html"/>
+        <link rel="next" title="Storage API" href="../storage/index.html"/>
+        <link rel="prev" title="Protocols API" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Protocols</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="mdns.html#">mDNS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mdns.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdns.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdns.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Protocols API</a> &raquo;</li>
+        
+      <li>mDNS Service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/protocols/mdns.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mdns-service">
+<h1>mDNS Service<a class="headerlink" href="mdns.html#mdns-service" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="mdns.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>mDNS is a multicast UDP service that is used to provide local network service and host discovery.</p>
+<p>mDNS is installed by default on most operating systems or is available as separate package. On <code class="docutils literal"><span class="pre">Mac</span> <span class="pre">OS</span></code> it is installed by default and is called <code class="docutils literal"><span class="pre">Bonjour</span></code>. Apple releases an installer for <code class="docutils literal"><span class="pre">Windows</span></code> that can be found <a class="reference external" href="https://support.apple.com/downloads/bonjour%2520for%2520windows">on Apple&#8217;s support page</a>. On <code class="docutils literal"><span class="pre">Linux</span></code>, mDNS is provided by <a class="reference external" href="https://github.com/lathiat/avahi">avahi</a> and is usually installed by default.</p>
+<div class="section" id="mdns-properties">
+<h3>mDNS Properties<a class="headerlink" href="mdns.html#mdns-properties" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">hostname</span></code>: the hostname that the device will respond to. If not set, the <code class="docutils literal"><span class="pre">hostname</span></code> will be read from the interface. Example: <code class="docutils literal"><span class="pre">my-esp32</span></code> will resolve to <code class="docutils literal"><span class="pre">my-esp32.local</span></code></li>
+<li><code class="docutils literal"><span class="pre">default_instance</span></code>: friendly name for your device, like <code class="docutils literal"><span class="pre">Jhon's</span> <span class="pre">ESP32</span> <span class="pre">Thing</span></code>. If not set, <code class="docutils literal"><span class="pre">hostname</span></code> will be used.</li>
+</ul>
+</div></blockquote>
+<p>Example method to start mDNS for the STA interface and set <code class="docutils literal"><span class="pre">hostname</span></code> and <code class="docutils literal"><span class="pre">default_instance</span></code>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">mdns_server_t</span> <span class="o">*</span> <span class="n">mdns</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">start_mdns_service</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//initialize mDNS service on STA interface</span>
+    <span class="n">esp_err_t</span> <span class="n">err</span> <span class="o">=</span> <span class="n">mdns_init</span><span class="p">(</span><span class="n">TCPIP_ADAPTER_IF_STA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mdns</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;MDNS Init failed: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//set hostname</span>
+    <span class="n">mdns_set_hostname</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;my-esp32&quot;</span><span class="p">);</span>
+    <span class="c1">//set default instance</span>
+    <span class="n">mdns_set_instance</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;Jhon&#39;s ESP32 Thing&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mdns-services">
+<h3>mDNS Services<a class="headerlink" href="mdns.html#mdns-services" title="Permalink to this headline">¶</a></h3>
+<p>mDNS can advertise information about network services that your device offers. Each service is defined by a few properties.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">service</span></code>: (required) service type, prepended with underscore. Some common types can be found <a class="reference external" href="http://www.dns-sd.org/serviceTypes.html">here</a>.</li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: (required) protocol that the service runs on, prepended with underscore. Example: <code class="docutils literal"><span class="pre">_tcp</span></code> or <code class="docutils literal"><span class="pre">_udp</span></code></li>
+<li><code class="docutils literal"><span class="pre">port</span></code>: (required) network port that the service runs on</li>
+<li><code class="docutils literal"><span class="pre">instance</span></code>: friendly name for your service, like <code class="docutils literal"><span class="pre">Jhon's</span> <span class="pre">ESP32</span> <span class="pre">Web</span> <span class="pre">Server</span></code>. If not defined, <code class="docutils literal"><span class="pre">default_instance</span></code> will be used.</li>
+<li><code class="docutils literal"><span class="pre">txt</span></code>: <code class="docutils literal"><span class="pre">var=val</span></code> array of strings, used to define properties for your service</li>
+</ul>
+</div></blockquote>
+<p>Example method to add a few services and different properties:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">add_mdns_services</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//add our services</span>
+    <span class="n">mdns_service_add</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_http&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="n">mdns_service_add</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_arduino&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">,</span> <span class="mi">3232</span><span class="p">);</span>
+    <span class="n">mdns_service_add</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_myservice&quot;</span><span class="p">,</span> <span class="s">&quot;_udp&quot;</span><span class="p">,</span> <span class="mi">1234</span><span class="p">);</span>
+
+    <span class="c1">//NOTE: services must be added before their properties can be set</span>
+    <span class="c1">//use custom instance for the web server</span>
+    <span class="n">mdns_service_instance_set</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_http&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">,</span> <span class="s">&quot;Jhon&#39;s ESP32 Web Server&quot;</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">arduTxtData</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&quot;board=esp32&quot;</span><span class="p">,</span>
+            <span class="s">&quot;tcp_check=no&quot;</span><span class="p">,</span>
+            <span class="s">&quot;ssh_upload=no&quot;</span><span class="p">,</span>
+            <span class="s">&quot;auth_upload=no&quot;</span>
+    <span class="p">};</span>
+    <span class="c1">//set txt data for service (will free and replace current data)</span>
+    <span class="n">mdns_service_txt_set</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_arduino&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">arduTxtData</span><span class="p">);</span>
+
+    <span class="c1">//change service port</span>
+    <span class="n">mdns_service_port_set</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="s">&quot;_myservice&quot;</span><span class="p">,</span> <span class="s">&quot;_udp&quot;</span><span class="p">,</span> <span class="mi">4321</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mdns-query">
+<h3>mDNS Query<a class="headerlink" href="mdns.html#mdns-query" title="Permalink to this headline">¶</a></h3>
+<p>mDNS provides methods for browsing for services and resolving host&#8217;s IP/IPv6 addresses.</p>
+<p>Results are returned as a linked list of <code class="docutils literal"><span class="pre">mdns_result_t</span></code> objects. If the result is from host query, it will contain only <code class="docutils literal"><span class="pre">addr</span></code> and <code class="docutils literal"><span class="pre">addrv6</span></code> if found. Service queries will populate all fields in a result that were found.</p>
+<p>Example method to resolve host IPs:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">resolve_mdns_host</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">hostname</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;mDNS Host Lookup: %s.local</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">hostname</span><span class="p">);</span>
+    <span class="c1">//run search for 1000 ms</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mdns_query</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">//results were found</span>
+        <span class="k">const</span> <span class="n">mdns_result_t</span> <span class="o">*</span> <span class="n">results</span> <span class="o">=</span> <span class="n">mdns_result_get</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="c1">//itterate through all results</span>
+        <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//print result information</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  %u: IP:&quot;</span> <span class="n">IPSTR</span> <span class="s">&quot;, IPv6:&quot;</span> <span class="n">IPV6STR</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span>
+                <span class="n">IP2STR</span><span class="p">(</span><span class="o">&amp;</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">),</span> <span class="n">IPV62STR</span><span class="p">(</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">addrv6</span><span class="p">));</span>
+            <span class="c1">//load next result. Will be NULL if this was the last one</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//free the results from memory</span>
+        <span class="n">mdns_result_free</span><span class="p">(</span><span class="n">mdns</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//host was not found</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  Host Not Found</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example method to resolve local services:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">find_mdns_service</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">proto</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;mDNS Service Lookup: %s.%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">proto</span><span class="p">);</span>
+    <span class="c1">//run search for 1000 ms</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mdns_query</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">//results were found</span>
+        <span class="k">const</span> <span class="n">mdns_result_t</span> <span class="o">*</span> <span class="n">results</span> <span class="o">=</span> <span class="n">mdns_result_get</span><span class="p">(</span><span class="n">mdns</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="c1">//itterate through all results</span>
+        <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//print result information</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  %u: hostname:%s, instance:</span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s">, IP:&quot;</span> <span class="n">IPSTR</span> <span class="s">&quot;, IPv6:&quot;</span> <span class="n">IPV6STR</span> <span class="s">&quot;, port:%u, txt:%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">host</span><span class="p">)</span><span class="o">?</span><span class="n">results</span><span class="o">-&gt;</span><span class="nl">host</span><span class="p">:</span><span class="s">&quot;NULL&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">instance</span><span class="p">)</span><span class="o">?</span><span class="n">results</span><span class="o">-&gt;</span><span class="nl">instance</span><span class="p">:</span><span class="s">&quot;NULL&quot;</span><span class="p">,</span>
+                <span class="n">IP2STR</span><span class="p">(</span><span class="o">&amp;</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">addr</span><span class="p">),</span> <span class="n">IPV62STR</span><span class="p">(</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">addrv6</span><span class="p">),</span>
+                <span class="n">results</span><span class="o">-&gt;</span><span class="n">port</span><span class="p">,</span> <span class="p">(</span><span class="n">results</span><span class="o">-&gt;</span><span class="n">txt</span><span class="p">)</span><span class="o">?</span><span class="n">results</span><span class="o">-&gt;</span><span class="nl">txt</span><span class="p">:</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">);</span>
+            <span class="c1">//load next result. Will be NULL if this was the last one</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//free the results from memory</span>
+        <span class="n">mdns_result_free</span><span class="p">(</span><span class="n">mdns</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//service was not found</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;  Service Not Found</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of using the methods above:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_app_some_method</span><span class="p">(){</span>
+    <span class="c1">//search for esp32-mdns.local</span>
+    <span class="n">resolve_mdns_host</span><span class="p">(</span><span class="s">&quot;esp32-mdns&quot;</span><span class="p">);</span>
+
+    <span class="c1">//search for HTTP servers</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_http&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span>
+    <span class="c1">//or file servers</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_smb&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span> <span class="c1">//windows sharing</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_afpovertcp&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span> <span class="c1">//apple sharing</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_nfs&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span> <span class="c1">//NFS server</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_ftp&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span> <span class="c1">//FTP server</span>
+    <span class="c1">//or networked printer</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_printer&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span>
+    <span class="n">find_mdns_service</span><span class="p">(</span><span class="s">&quot;_ipp&quot;</span><span class="p">,</span> <span class="s">&quot;_tcp&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="mdns.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>mDNS server/scanner example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/protocols/mdns">protocols/mdns</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="mdns.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="mdns.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/mdns/include/mdns.h">mdns/include/mdns.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="mdns.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv29mdns_init18tcpip_adapter_if_tPP13mdns_server_t">
+<span id="mdns_init__tcpip_adapter_if_t.mdns_server_tPP"></span><span class="target" id="mdns_8h_1a6c2312be8824d473ddac4bd72ea663e1"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_init</code><span class="sig-paren">(</span>tcpip_adapter_if_t <em>tcpip_if</em>, <a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> **<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv29mdns_init18tcpip_adapter_if_tPP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize mDNS on given interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG when bad tcpip_if is given</li>
+<li>ESP_ERR_INVALID_STATE when the network returned error</li>
+<li>ESP_ERR_NO_MEM on memory error</li>
+<li>ESP_ERR_WIFI_NOT_INIT when WiFi is not initialized by eps_wifi_init </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">tcpip_if</span></code>: Interface that the server will listen on </li>
+<li><code class="docutils literal"><span class="pre">server</span></code>: Server pointer to populate on success</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv29mdns_freeP13mdns_server_t">
+<span id="mdns_free__mdns_server_tP"></span><span class="target" id="mdns_8h_1afb99b0268044af7b55ead3726c252343"></span>void <code class="descclassname"></code><code class="descname">mdns_free</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv29mdns_freeP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop and free mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server to free </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217mdns_set_hostnameP13mdns_server_tPKc">
+<span id="mdns_set_hostname__mdns_server_tP.cCP"></span><span class="target" id="mdns_8h_1ae0e69e45134b67502125099a09789c8c"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_set_hostname</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>hostname</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv217mdns_set_hostnameP13mdns_server_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the hostname for mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NO_MEM memory error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">hostname</span></code>: Hostname to set</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217mdns_set_instanceP13mdns_server_tPKc">
+<span id="mdns_set_instance__mdns_server_tP.cCP"></span><span class="target" id="mdns_8h_1af5f32c77d42c41e7e3edc1bbc30fc6f1"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_set_instance</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>instance</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv217mdns_set_instanceP13mdns_server_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the default instance name for mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NO_MEM memory error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">instance</span></code>: Instance name to set</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216mdns_service_addP13mdns_server_tPKcPKc8uint16_t">
+<span id="mdns_service_add__mdns_server_tP.cCP.cCP.uint16_t"></span><span class="target" id="mdns_8h_1a3d85acc2f7ba26ba12b3a47fe1a5835d"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_add</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em>, uint16_t <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv216mdns_service_addP13mdns_server_tPKcPKc8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add service to mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NO_MEM memory error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type (_http, _ftp, etc) </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol (_tcp, _udp) </li>
+<li><code class="docutils literal"><span class="pre">port</span></code>: service port</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219mdns_service_removeP13mdns_server_tPKcPKc">
+<span id="mdns_service_remove__mdns_server_tP.cCP.cCP"></span><span class="target" id="mdns_8h_1a13cd0367db72933c7b16e93b87c4638d"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_remove</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv219mdns_service_removeP13mdns_server_tPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove service from mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NOT_FOUND Service not found</li>
+<li>ESP_FAIL unknown error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type (_http, _ftp, etc) </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol (_tcp, _udp)</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225mdns_service_instance_setP13mdns_server_tPKcPKcPKc">
+<span id="mdns_service_instance_set__mdns_server_tP.cCP.cCP.cCP"></span><span class="target" id="mdns_8h_1a96e3ecfbc30a33c4d4edfa3a88b9bbbe"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_instance_set</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em>, <em class="property">const</em> char *<em>instance</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv225mdns_service_instance_setP13mdns_server_tPKcPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set instance name for service. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NOT_FOUND Service not found</li>
+<li>ESP_ERR_NO_MEM memory error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type (_http, _ftp, etc) </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol (_tcp, _udp) </li>
+<li><code class="docutils literal"><span class="pre">instance</span></code>: instance name to set</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220mdns_service_txt_setP13mdns_server_tPKcPKc7uint8_tPPKc">
+<span id="mdns_service_txt_set__mdns_server_tP.cCP.cCP.uint8_t.cCPP"></span><span class="target" id="mdns_8h_1abb2791886c279327668e18c73a064618"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_txt_set</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em>, uint8_t <em>num_items</em>, <em class="property">const</em> char **<em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv220mdns_service_txt_setP13mdns_server_tPKcPKc7uint8_tPPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set TXT data for service. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NOT_FOUND Service not found</li>
+<li>ESP_ERR_NO_MEM memory error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type (_http, _ftp, etc) </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol (_tcp, _udp) </li>
+<li><code class="docutils literal"><span class="pre">num_items</span></code>: number of items in TXT data </li>
+<li><code class="docutils literal"><span class="pre">txt</span></code>: string array of TXT data (eg. {&#8220;var=val&#8221;,&#8221;other=2&#8221;})</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221mdns_service_port_setP13mdns_server_tPKcPKc8uint16_t">
+<span id="mdns_service_port_set__mdns_server_tP.cCP.cCP.uint16_t"></span><span class="target" id="mdns_8h_1a4b90e053ea75b3a7ef6855440f89e0fb"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_port_set</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em>, uint16_t <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv221mdns_service_port_setP13mdns_server_tPKcPKc8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set service port. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error</li>
+<li>ESP_ERR_NOT_FOUND Service not found </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type (_http, _ftp, etc) </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol (_tcp, _udp) </li>
+<li><code class="docutils literal"><span class="pre">port</span></code>: service port</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223mdns_service_remove_allP13mdns_server_t">
+<span id="mdns_service_remove_all__mdns_server_tP"></span><span class="target" id="mdns_8h_1a5f0d3cd78160c075f0337aade358f0a6"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_service_remove_all</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv223mdns_service_remove_allP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove and free all services from mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210mdns_queryP13mdns_server_tPKcPKc8uint32_t">
+<span id="mdns_query__mdns_server_tP.cCP.cCP.uint32_t"></span><span class="target" id="mdns_8h_1a77b8c2e7d3eea0ac0e22cc5bc12f218f"></span>size_t <code class="descclassname"></code><code class="descname">mdns_query</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, <em class="property">const</em> char *<em>service</em>, <em class="property">const</em> char *<em>proto</em>, uint32_t <em>timeout</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv210mdns_queryP13mdns_server_tPKcPKc8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Query mDNS for host or service. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the number of results found </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">service</span></code>: service type or host name </li>
+<li><code class="docutils literal"><span class="pre">proto</span></code>: service protocol or NULL if searching for host </li>
+<li><code class="docutils literal"><span class="pre">timeout</span></code>: time to wait for answers. If 0, mdns_query_end MUST be called to end the search</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214mdns_query_endP13mdns_server_t">
+<span id="mdns_query_end__mdns_server_tP"></span><span class="target" id="mdns_8h_1ad26277fa3d02395405ca02ee3b0c750b"></span>size_t <code class="descclassname"></code><code class="descname">mdns_query_end</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv214mdns_query_endP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop mDNS Query started with timeout = 0. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the number of results found </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221mdns_result_get_countP13mdns_server_t">
+<span id="mdns_result_get_count__mdns_server_tP"></span><span class="target" id="mdns_8h_1af7ec3a07da2cb2ffa4ddd88f3bdd5ff7"></span>size_t <code class="descclassname"></code><code class="descname">mdns_result_get_count</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv221mdns_result_get_countP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get the number of results currently in memoty </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the number of results </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215mdns_result_getP13mdns_server_t6size_t">
+<span id="mdns_result_get__mdns_server_tP.s"></span><span class="target" id="mdns_8h_1aa4e43e4da172e884f06855c24f09f490"></span><em class="property">const</em> <a class="reference internal" href="mdns.html#_CPPv213mdns_result_t" title="mdns_result_t">mdns_result_t</a> *<code class="descclassname"></code><code class="descname">mdns_result_get</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em>, size_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv215mdns_result_getP13mdns_server_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get mDNS Search result with given index. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the result or NULL if error </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server </li>
+<li><code class="docutils literal"><span class="pre">num</span></code>: the index of the result</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216mdns_result_freeP13mdns_server_t">
+<span id="mdns_result_free__mdns_server_tP"></span><span class="target" id="mdns_8h_1a321d072ad46c8c34d87b1f3f8adf9a3e"></span>esp_err_t <code class="descclassname"></code><code class="descname">mdns_result_free</code><span class="sig-paren">(</span><a class="reference internal" href="mdns.html#_CPPv213mdns_server_t" title="mdns_server_t">mdns_server_t</a> *<em>server</em><span class="sig-paren">)</span><a class="headerlink" href="mdns.html#_CPPv216mdns_result_freeP13mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove and free all search results from mDNS server. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">server</span></code>: mDNS Server</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="mdns.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv213mdns_result_s">
+<span id="mdns_result_s"></span><span class="target" id="structmdns__result__s"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">mdns_result_s</code><a class="headerlink" href="mdns.html#_CPPv213mdns_result_s" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>mDNS query result structure </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s4hostE">
+<span id="mdns_result_s::host__cCP"></span><span class="target" id="structmdns__result__s_1adc6cbf36cb7bce93a1a0f6ba7be4a85a"></span><em class="property">const</em> char *<code class="descname">host</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s4hostE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>hostname </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s8instanceE">
+<span id="mdns_result_s::instance__cCP"></span><span class="target" id="structmdns__result__s_1a61471b767011f904f5e92cf61c34b2e9"></span><em class="property">const</em> char *<code class="descname">instance</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s8instanceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>instance </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s3txtE">
+<span id="mdns_result_s::txt__cCP"></span><span class="target" id="structmdns__result__s_1a7c4d9ef6b901d86afc4ae95ddb7e4a20"></span><em class="property">const</em> char *<code class="descname">txt</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s3txtE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>txt data </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s8priorityE">
+<span id="mdns_result_s::priority__uint16_t"></span><span class="target" id="structmdns__result__s_1a3de86ab5bb40fa89ca5af2d3efd18eb2"></span>uint16_t <code class="descname">priority</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s8priorityE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service priority </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s6weightE">
+<span id="mdns_result_s::weight__uint16_t"></span><span class="target" id="structmdns__result__s_1ae3d19bbb4a888d62d2e0df3d82211804"></span>uint16_t <code class="descname">weight</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s6weightE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service weight </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s4portE">
+<span id="mdns_result_s::port__uint16_t"></span><span class="target" id="structmdns__result__s_1a968bcd2e2ddec6c1ceba674dfa59e5bd"></span>uint16_t <code class="descname">port</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s4portE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>service port </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s4addrE">
+<span id="mdns_result_s::addr__ip4_addr"></span><span class="target" id="structmdns__result__s_1afed44e892bf76aa0cbf29c940555ce1d"></span><em class="property">struct</em> ip4_addr <code class="descname">addr</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s4addrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ip4 address </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s6addrv6E">
+<span id="mdns_result_s::addrv6__ip6_addr"></span><span class="target" id="structmdns__result__s_1afa5930fe940351a6ef99899190bbb24f"></span><em class="property">struct</em> ip6_addr <code class="descname">addrv6</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s6addrv6E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ip6 address </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13mdns_result_s4nextE">
+<span id="mdns_result_s::next__mdns_result_sCP"></span><span class="target" id="structmdns__result__s_1aa41ef2f0f595fee60675fc49e30adf21"></span><em class="property">const</em> <em class="property">struct</em> <a class="reference internal" href="mdns.html#_CPPv213mdns_result_s" title="mdns_result_s">mdns_result_s</a> *<code class="descname">next</code><a class="headerlink" href="mdns.html#_CPPv2N13mdns_result_s4nextE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>next result, or NULL for the last result in the list </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="mdns.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv213mdns_server_t">
+<span id="mdns_server_t"></span><span class="target" id="mdns_8h_1a8596fe700fd9660584311a44e4b04e38"></span><em class="property">typedef </em><em class="property">struct</em> mdns_server_s <code class="descclassname"></code><code class="descname">mdns_server_t</code><a class="headerlink" href="mdns.html#_CPPv213mdns_server_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv213mdns_result_t">
+<span id="mdns_result_t"></span><span class="target" id="mdns_8h_1aaf17d327afcd4e7d42f1379eb3563fa4"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="mdns.html#_CPPv213mdns_result_s" title="mdns_result_s">mdns_result_s</a> <code class="descclassname"></code><code class="descname">mdns_result_t</code><a class="headerlink" href="mdns.html#_CPPv213mdns_result_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>mDNS query result structure </p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../storage/index.html" class="btn btn-neutral float-right" title="Storage API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Protocols API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

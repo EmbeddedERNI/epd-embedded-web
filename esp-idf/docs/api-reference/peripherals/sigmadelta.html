@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sigma-delta Modulation &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Peripherals API" href="index.html"/>
+        <link rel="next" title="SPI Master driver" href="spi_master.html"/>
+        <link rel="prev" title="SDMMC Host Peripheral" href="../storage/sdmmc.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc.html">ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO (including RTC low power I/O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">MCPWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../storage/sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="sigmadelta.html#">Sigma-delta Modulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sigmadelta.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sigmadelta.html#functionality-overview">Functionality Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sigmadelta.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sigmadelta.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="touch_pad.html">Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">UART</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Peripherals API</a> &raquo;</li>
+        
+      <li>Sigma-delta Modulation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/peripherals/sigmadelta.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sigma-delta-modulation">
+<h1>Sigma-delta Modulation<a class="headerlink" href="sigmadelta.html#sigma-delta-modulation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="sigmadelta.html#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 has a second-order sigma-delta modulation module. This driver configures the channels of the sigma-delta module.</p>
+</div>
+<div class="section" id="functionality-overview">
+<h2>Functionality Overview<a class="headerlink" href="sigmadelta.html#functionality-overview" title="Permalink to this headline">¶</a></h2>
+<p>There are eight independent sigma-delta modulation channels identified with <a class="reference internal" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="sigmadelta_channel_t"><code class="xref cpp cpp-type docutils literal"><span class="pre">sigmadelta_channel_t</span></code></a>. Each channel is capable to output the binary, hardware generated signal with the sigma-delta modulation.</p>
+<p>Selected channel should be set up by providing configuration parameters in <a class="reference internal" href="sigmadelta.html#_CPPv219sigmadelta_config_t" title="sigmadelta_config_t"><code class="xref cpp cpp-type docutils literal"><span class="pre">sigmadelta_config_t</span></code></a> and then applying this configuration with <a class="reference internal" href="sigmadelta.html#_CPPv217sigmadelta_configPK19sigmadelta_config_t" title="sigmadelta_config"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_config()</span></code></a>.</p>
+<p>Another option is to call individual functions, that will configure all required parameters one by one:</p>
+<ul class="simple">
+<li><strong>Prescaler</strong> of the sigma-delta generator - <a class="reference internal" href="sigmadelta.html#_CPPv223sigmadelta_set_prescale20sigmadelta_channel_t7uint8_t" title="sigmadelta_set_prescale"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_set_prescale()</span></code></a></li>
+<li><strong>Duty</strong> of the output signal - <a class="reference internal" href="sigmadelta.html#_CPPv219sigmadelta_set_duty20sigmadelta_channel_t6int8_t" title="sigmadelta_set_duty"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_set_duty()</span></code></a></li>
+<li><strong>GPIO pin</strong> to output modulated signal - <a class="reference internal" href="sigmadelta.html#_CPPv218sigmadelta_set_pin20sigmadelta_channel_t10gpio_num_t" title="sigmadelta_set_pin"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_set_pin()</span></code></a></li>
+</ul>
+<p>The range of the &#8216;duty&#8217; input parameter of <a class="reference internal" href="sigmadelta.html#_CPPv219sigmadelta_set_duty20sigmadelta_channel_t6int8_t" title="sigmadelta_set_duty"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_set_duty()</span></code></a> is from -128 to 127 (eight bit signed integer). If zero value is set, then the output signal&#8217;s duty will be about 50%, see description of <a class="reference internal" href="sigmadelta.html#_CPPv219sigmadelta_set_duty20sigmadelta_channel_t6int8_t" title="sigmadelta_set_duty"><code class="xref cpp cpp-func docutils literal"><span class="pre">sigmadelta_set_duty()</span></code></a>.</p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="sigmadelta.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>Sigma-delta Modulation example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/sigmadelta">peripherals/sigmadelta</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="sigmadelta.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="sigmadelta.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/driver/include/driver/sigmadelta.h">driver/include/driver/sigmadelta.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="sigmadelta.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv217sigmadelta_configPK19sigmadelta_config_t">
+<span id="sigmadelta_config__sigmadelta_config_tCP"></span><span class="target" id="sigmadelta_8h_1a63bc3c5b5e74171edf87de91f24b2bd7"></span>esp_err_t <code class="descclassname"></code><code class="descname">sigmadelta_config</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="sigmadelta.html#_CPPv219sigmadelta_config_t" title="sigmadelta_config_t">sigmadelta_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="sigmadelta.html#_CPPv217sigmadelta_configPK19sigmadelta_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure Sigma-delta channel. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">config</span></code>: Pointer of Sigma-delta channel configuration struct</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219sigmadelta_set_duty20sigmadelta_channel_t6int8_t">
+<span id="sigmadelta_set_duty__sigmadelta_channel_t.int8_t"></span><span class="target" id="sigmadelta_8h_1aad52ebd7ed28bf4c2a3095036af68e27"></span>esp_err_t <code class="descclassname"></code><code class="descname">sigmadelta_set_duty</code><span class="sig-paren">(</span><a class="reference internal" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="sigmadelta_channel_t">sigmadelta_channel_t</a> <em>channel</em>, int8_t <em>duty</em><span class="sig-paren">)</span><a class="headerlink" href="sigmadelta.html#_CPPv219sigmadelta_set_duty20sigmadelta_channel_t6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set Sigma-delta channel duty. </p>
+<p>This function is used to set Sigma-delta channel duty, If you add a capacitor between the output pin and ground, the average output voltage will be Vdc = VDDIO / 256 * duty + VDDIO/2, where VDDIO is the power supply voltage.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">channel</span></code>: Sigma-delta channel number </li>
+<li><code class="docutils literal"><span class="pre">duty</span></code>: Sigma-delta duty of one channel, the value ranges from -128 to 127, recommended range is -90 ~ 90. The waveform is more like a random one in this range.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223sigmadelta_set_prescale20sigmadelta_channel_t7uint8_t">
+<span id="sigmadelta_set_prescale__sigmadelta_channel_t.uint8_t"></span><span class="target" id="sigmadelta_8h_1a2977b8ed8277c18d9f1f9bbad16ac5e1"></span>esp_err_t <code class="descclassname"></code><code class="descname">sigmadelta_set_prescale</code><span class="sig-paren">(</span><a class="reference internal" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="sigmadelta_channel_t">sigmadelta_channel_t</a> <em>channel</em>, uint8_t <em>prescale</em><span class="sig-paren">)</span><a class="headerlink" href="sigmadelta.html#_CPPv223sigmadelta_set_prescale20sigmadelta_channel_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set Sigma-delta channel&#8217;s clock pre-scale value. The source clock is APP_CLK, 80MHz. The clock frequency of the sigma-delta channel is APP_CLK / pre_scale. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">channel</span></code>: Sigma-delta channel number </li>
+<li><code class="docutils literal"><span class="pre">prescale</span></code>: The divider of source clock, ranges from 0 to 255</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218sigmadelta_set_pin20sigmadelta_channel_t10gpio_num_t">
+<span id="sigmadelta_set_pin__sigmadelta_channel_t.gpio_num_t"></span><span class="target" id="sigmadelta_8h_1a6f685ab603f5fe31b3bdb6128890ff83"></span>esp_err_t <code class="descclassname"></code><code class="descname">sigmadelta_set_pin</code><span class="sig-paren">(</span><a class="reference internal" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="sigmadelta_channel_t">sigmadelta_channel_t</a> <em>channel</em>, <a class="reference internal" href="gpio.html#_CPPv210gpio_num_t" title="gpio_num_t">gpio_num_t</a> <em>gpio_num</em><span class="sig-paren">)</span><a class="headerlink" href="sigmadelta.html#_CPPv218sigmadelta_set_pin20sigmadelta_channel_t10gpio_num_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set Sigma-delta signal output pin. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">channel</span></code>: Sigma-delta channel number </li>
+<li><code class="docutils literal"><span class="pre">gpio_num</span></code>: GPIO number of output pin.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="sigmadelta.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv219sigmadelta_config_t">
+<span id="sigmadelta_config_t"></span><span class="target" id="structsigmadelta__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">sigmadelta_config_t</code><a class="headerlink" href="sigmadelta.html#_CPPv219sigmadelta_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta configure struct. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N19sigmadelta_config_t7channelE">
+<span id="sigmadelta_config_t::channel__sigmadelta_channel_t"></span><span class="target" id="structsigmadelta__config__t_1a2648bd2351869181a9a2d31cdd97eb66"></span><a class="reference internal" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="sigmadelta_channel_t">sigmadelta_channel_t</a> <code class="descname">channel</code><a class="headerlink" href="sigmadelta.html#_CPPv2N19sigmadelta_config_t7channelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N19sigmadelta_config_t15sigmadelta_dutyE">
+<span id="sigmadelta_config_t::sigmadelta_duty__int8_t"></span><span class="target" id="structsigmadelta__config__t_1afd1e949e39fc175c099c67d0961b4c27"></span>int8_t <code class="descname">sigmadelta_duty</code><a class="headerlink" href="sigmadelta.html#_CPPv2N19sigmadelta_config_t15sigmadelta_dutyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta duty, duty ranges from -128 to 127. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N19sigmadelta_config_t19sigmadelta_prescaleE">
+<span id="sigmadelta_config_t::sigmadelta_prescale__uint8_t"></span><span class="target" id="structsigmadelta__config__t_1a4661ea00bd82fa366a0b315b7ca65f13"></span>uint8_t <code class="descname">sigmadelta_prescale</code><a class="headerlink" href="sigmadelta.html#_CPPv2N19sigmadelta_config_t19sigmadelta_prescaleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta prescale, prescale ranges from 0 to 255. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N19sigmadelta_config_t15sigmadelta_gpioE">
+<span id="sigmadelta_config_t::sigmadelta_gpio__uint8_t"></span><span class="target" id="structsigmadelta__config__t_1a2db78e84a774d2d4016d431b7c73da6f"></span>uint8_t <code class="descname">sigmadelta_gpio</code><a class="headerlink" href="sigmadelta.html#_CPPv2N19sigmadelta_config_t15sigmadelta_gpioE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta output io number, refer to gpio.h for more details. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="sigmadelta.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv220sigmadelta_channel_t">
+<span id="sigmadelta_channel_t"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fb"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">sigmadelta_channel_t</code><a class="headerlink" href="sigmadelta.html#_CPPv220sigmadelta_channel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel list. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_0">
+<span id="SIGMADELTA_CHANNEL_0"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba2fcbe59e9c3edaeba193d58d63a45564"></span><code class="descname">SIGMADELTA_CHANNEL_0</code> = 0<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 0 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_1">
+<span id="SIGMADELTA_CHANNEL_1"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba03028fce5fac565270f2d04f4cf170bf"></span><code class="descname">SIGMADELTA_CHANNEL_1</code> = 1<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 1 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_2">
+<span id="SIGMADELTA_CHANNEL_2"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba12b70e54e3eb863581cf4b6acdf1b2f5"></span><code class="descname">SIGMADELTA_CHANNEL_2</code> = 2<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 2 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_3">
+<span id="SIGMADELTA_CHANNEL_3"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba74e9022f13e51ec9786492192b62c4bc"></span><code class="descname">SIGMADELTA_CHANNEL_3</code> = 3<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 3 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_4">
+<span id="SIGMADELTA_CHANNEL_4"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba7bfdfaa1615ec0986ca132aeb9d021ba"></span><code class="descname">SIGMADELTA_CHANNEL_4</code> = 4<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 4 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_5">
+<span id="SIGMADELTA_CHANNEL_5"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fbad0139bd5799a49ed45e3627826a9ea1e"></span><code class="descname">SIGMADELTA_CHANNEL_5</code> = 5<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 5 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_6">
+<span id="SIGMADELTA_CHANNEL_6"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba69da76edc32a9239ad4d3d926e2f858c"></span><code class="descname">SIGMADELTA_CHANNEL_6</code> = 6<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 6 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220SIGMADELTA_CHANNEL_7">
+<span id="SIGMADELTA_CHANNEL_7"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba32d78d2deb7029cabc32c5ddcbe9d570"></span><code class="descname">SIGMADELTA_CHANNEL_7</code> = 7<a class="headerlink" href="sigmadelta.html#_CPPv220SIGMADELTA_CHANNEL_7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sigma-delta channel 7 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv222SIGMADELTA_CHANNEL_MAX">
+<span id="SIGMADELTA_CHANNEL_MAX"></span><span class="target" id="sigmadelta_8h_1af2bf494a6423aa4b4df1d0557e88a3fba7382dce019587455bee1b85f456f0c00"></span><code class="descname">SIGMADELTA_CHANNEL_MAX</code><a class="headerlink" href="sigmadelta.html#_CPPv222SIGMADELTA_CHANNEL_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spi_master.html" class="btn btn-neutral float-right" title="SPI Master driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../storage/sdmmc.html" class="btn btn-neutral" title="SDMMC Host Peripheral" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Debugger &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="JTAG Debugging" href="index.html"/>
+        <link rel="next" title="Debugging Examples" href="debugging-examples.html"/>
+        <link rel="prev" title="Configure Other JTAG Interface" href="configure-other-jtag.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../general-notes.html">General Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deep-sleep-stub.html">Deep Sleep Wake Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core_dump.html">ESP32 Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../security/flash-encryption.html">Flash Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../freertos-smp.html">FreeRTOS SMP Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hlinterrupts.html">High Level Interrupts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">JTAG Debugging</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#how-it-works">How it Works?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#selecting-jtag-adapter">Selecting JTAG Adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#setup-of-openocd">Setup of OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#configuring-esp32-target">Configuring ESP32 Target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#launching-debugger">Launching Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#debugging-examples">Debugging Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#building-openocd-from-sources">Building OpenOCD from Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#tips-and-quirks">Tips and Quirks</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#related-documents">Related Documents</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="using-debugger.html#">Using Debugger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="debugging-examples.html">Debugging Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tips-and-quirks.html">Tips and Quirks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app_trace.html">Application Level Tracing library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../security/secure-boot.html">Secure Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ulp.html">ULP Coprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-tests.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app_trace.html">Application Level Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../romconsole.html">ROM debug console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi.html">WiFi Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../external-ram.html">External SPI-connected RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Guides</a> &raquo;</li>
+        
+          <li><a href="index.html">JTAG Debugging</a> &raquo;</li>
+        
+      <li>Using Debugger</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-guides/jtag-debugging/using-debugger.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-debugger">
+<h1>Using Debugger<a class="headerlink" href="using-debugger.html#using-debugger" title="Permalink to this headline">¶</a></h1>
+<p>This section covers configuration and running debugger either from <a class="reference internal" href="using-debugger.html#jtag-debugging-using-debugger-eclipse"><span class="std std-ref">Eclipse</span></a>
+or <a class="reference internal" href="using-debugger.html#jtag-debugging-using-debugger-command-line"><span class="std std-ref">Command Line</span></a>. It is recommended to first check if debugger works from <a class="reference internal" href="using-debugger.html#jtag-debugging-using-debugger-command-line"><span class="std std-ref">Command Line</span></a> and then move to using Eclipse.</p>
+<div class="section" id="eclipse">
+<span id="jtag-debugging-using-debugger-eclipse"></span><h2>Eclipse<a class="headerlink" href="using-debugger.html#eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Debugging functionality is provided out of box in standard Eclipse installation. Another option is to use pluggins like &#8220;GDB Hardware Debugging&#8221; plugin. We have found this plugin quite convenient and decided to use throughout this guide.</p>
+<p>To begin with, install &#8220;GDB Hardware Debugging&#8221; plugin by opening Eclipse and going to <cite>Help</cite> &gt; <cite>Install</cite> New Software.</p>
+<p>Once installation is complete, configure debugging session following steps below. Please note that some of configuration parameters are generic and some are project specific. This will be shown below by configuring debugging for &#8220;blink&#8221; example project. If not done already, add this project to Eclipse workspace following guidance in section <a class="reference internal" href="../../get-started/eclipse-setup.html"><span class="doc">Build and Flash with Eclipse IDE</span></a>.  The source of <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/get-started/blink">get-started/blink</a> application is available  in <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples">examples</a> directory of ESP-IDF repository.</p>
+<ol class="arabic">
+<li><p class="first">In Eclipse go to <cite>Run</cite> &gt; <cite>Debug Configuration</cite>. A new window will open. In the window&#8217;s left pane double click &#8220;GDB Hardware Debugging&#8221; (or select &#8220;GDB Hardware Debugging&#8221; and press the &#8220;New&#8221; button) to create a new configuration.</p>
+</li>
+<li><p class="first">In a form that will show up on the right, enter the &#8220;Name:&#8221; of this configuration, e.g. &#8220;Blink checking&#8221;.</p>
+</li>
+<li><p class="first">On the &#8220;Main&#8221; tab below, under &#8220;Project:&#8221;, press &#8220;Browse&#8221; button and select the &#8220;blink&#8221; project.</p>
+</li>
+<li><p class="first">In next line &#8220;C/C++ Application:&#8221; press &#8220;Browse&#8221; button and select &#8220;blink.elf&#8221; file. If &#8220;blink.elf&#8221; is not there, then likely this project has not been build yet. See <a class="reference internal" href="../../get-started/eclipse-setup.html"><span class="doc">Build and Flash with Eclipse IDE</span></a> how to do it.</p>
+</li>
+<li><p class="first">Finally, under &#8220;Build (if required) before launching&#8221; click &#8220;Disable auto build&#8221;.</p>
+<p>A sample window with settings entered in points 1 - 5 is shown below.</p>
+<div class="align-center figure" id="id1">
+<img alt="Configuration of GDB Hardware Debugging - Main tab" src="../../_images/hw-debugging-main-tab.jpg" />
+<p class="caption"><span class="caption-text">Configuration of GDB Hardware Debugging - Main tab</span></p>
+</div>
+</li>
+<li><p class="first">Click &#8220;Debugger&#8221; tab. In field &#8220;GDB Command&#8221; enter <code class="docutils literal"><span class="pre">xtensa-esp32-elf-gdb</span></code> to invoke debugger.</p>
+</li>
+<li><p class="first">Change default configuration of &#8220;Remote host&#8221; by entering <code class="docutils literal"><span class="pre">3333</span></code> under the &#8220;Port number&#8221;.</p>
+<p>Configuration entered in points 6 and 7 is shown on the following picture.</p>
+<div class="align-center figure" id="id2">
+<img alt="Configuration of GDB Hardware Debugging - Debugger tab" src="../../_images/hw-debugging-debugger-tab.jpg" />
+<p class="caption"><span class="caption-text">Configuration of GDB Hardware Debugging - Debugger tab</span></p>
+</div>
+</li>
+<li><p class="first">The last tab to that requires changing of default configuration is &#8220;Startup&#8221;. Under &#8220;Initialization Commands&#8221; uncheck &#8220;Reset and Delay (seconds)&#8221; and &#8220;Halt&#8221;&#8221;. Then, in entry field below, type <code class="docutils literal"><span class="pre">mon</span> <span class="pre">reset</span> <span class="pre">halt</span></code> and <code class="docutils literal"><span class="pre">x</span> <span class="pre">$a1=0</span></code> (in two separate lines).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you want to update image in the flash automatically before starting new debug session add the following lines of commands at the beginning of &#8220;Initialization Commands&#8221; textbox:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span>mon reset halt
+mon program_esp32 ${workspace_loc:blink/build/blink.bin} 0x10000 verify
+</pre></div>
+</div>
+</div>
+<p>For description of <code class="docutils literal"><span class="pre">program_esp32</span></code> command see <a class="reference internal" href="index.html#jtag-upload-app-debug"><span class="std std-ref">Upload application for debugging</span></a>.</p>
+</li>
+<li><p class="first">Under &#8220;Load Image and Symbols&#8221; uncheck &#8220;Load image&#8221; option.</p>
+</li>
+<li><p class="first">Further down on the same tab, establish an initial breakpoint to halt CPUs after they are reset by debugger. The plugin will set this breakpoint at the beginning of the function entered under &#8220;Set break point at:&#8221;. Checkout this option and enter <code class="docutils literal"><span class="pre">app_main</span></code> in provided field.</p>
+</li>
+<li><p class="first">Checkout &#8220;Resume&#8221; option. This will make the program to resume after <code class="docutils literal"><span class="pre">mon</span> <span class="pre">reset</span> <span class="pre">halt</span></code> is invoked per point 8. The program will then stop at breakpoint inserted at <code class="docutils literal"><span class="pre">app_main</span></code>.</p>
+<p>Configuration described in points 8 - 11 is shown below.</p>
+<div class="align-center figure" id="id3">
+<img alt="Configuration of GDB Hardware Debugging - Startup tab" src="../../_images/hw-debugging-startup-tab.jpg" />
+<p class="caption"><span class="caption-text">Configuration of GDB Hardware Debugging - Startup tab</span></p>
+</div>
+<p>If the &#8220;Startup&#8221; sequence looks convoluted and respective &#8220;Initialization Commands&#8221; are not clear to you, check <a class="reference internal" href="tips-and-quirks.html#jtag-debugging-tip-debugger-startup-commands"><span class="std std-ref">What is the meaning of debugger&#8217;s startup commands?</span></a> for additional explanation.</p>
+</li>
+<li><p class="first">If you previously completed <a class="reference internal" href="index.html#jtag-debugging-configuring-esp32-target"><span class="std std-ref">Configuring ESP32 Target</span></a> steps described above, so the target is running and ready to talk to debugger, go right to debugging by pressing &#8220;Debug&#8221; button. Otherwise press &#8220;Apply&#8221; to save changes, go back to <a class="reference internal" href="index.html#jtag-debugging-configuring-esp32-target"><span class="std std-ref">Configuring ESP32 Target</span></a> and return here to start debugging.</p>
+</li>
+</ol>
+<p>Once all 1 - 12 configuration steps are satisfied, the new Eclipse perspective called &#8220;Debug&#8221; will open as shown on example picture below.</p>
+<div class="align-center figure" id="id4">
+<img alt="Debug Perspective in Eclipse" src="../../_images/debug-perspective.jpg" />
+<p class="caption"><span class="caption-text">Debug Perspective in Eclipse</span></p>
+</div>
+<p>If you are not quite sure how to use GDB, check <a class="reference internal" href="debugging-examples.html#jtag-debugging-examples-eclipse"><span class="std std-ref">Eclipse</span></a> example debugging session in section <a class="reference internal" href="index.html#jtag-debugging-examples"><span class="std std-ref">Debugging Examples</span></a>.</p>
+</div>
+<div class="section" id="command-line">
+<span id="jtag-debugging-using-debugger-command-line"></span><h2>Command Line<a class="headerlink" href="using-debugger.html#command-line" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>To be able start debugging session, the target should be up and running. If not done already, complete steps described under <a class="reference internal" href="index.html#jtag-debugging-configuring-esp32-target"><span class="std std-ref">Configuring ESP32 Target</span></a>.</li>
+</ol>
+<ol class="arabic" start="2">
+<li><p class="first">Open a new terminal session and go to directory that contains project for debugging, e.g.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/esp/blink
+</pre></div>
+</div>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><p class="first">When launching a debugger, you will need to provide couple of configuration parameters and commands. Instead of entering them one by one in command line, create a configuration file and name it <code class="docutils literal"><span class="pre">gdbinit</span></code>:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>target remote :3333
+mon reset halt
+thb app_main
+x $a1=0
+c
+</pre></div>
+</div>
+<p>Save this file in current directory.</p>
+<p>For more details what&#8217;s inside <code class="docutils literal"><span class="pre">gdbinit</span></code> file, see <a class="reference internal" href="tips-and-quirks.html#jtag-debugging-tip-debugger-startup-commands"><span class="std std-ref">What is the meaning of debugger&#8217;s startup commands?</span></a></p>
+</li>
+</ol>
+<ol class="arabic" start="4">
+<li><p class="first">Now you are ready to launch GDB. Type the following in terminal:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>xtensa-esp32-elf-gdb -x gdbinit build/blink.elf
+</pre></div>
+</div>
+</li>
+</ol>
+<ol class="arabic" start="5">
+<li><p class="first">If previous steps have been done correctly, you will see a similar log concluded with <code class="docutils literal"><span class="pre">(gdb)</span></code> prompt:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>user-name@computer-name:~/esp/blink$ xtensa-esp32-elf-gdb -x gdbinit build/blink.elf
+GNU gdb (crosstool-NG crosstool-ng-1.22.0-61-gab8375a) 7.10
+Copyright (C) 2015 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;
+and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;--host=x86_64-build_pc-linux-gnu --target=xtensa-esp32-elf&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+&lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from build/blink.elf...done.
+0x400d10d8 in esp_vApplicationIdleHook () at /home/user-name/esp/esp-idf/components/esp32/./freertos_hooks.c:52
+52          asm(&quot;waiti 0&quot;);
+JTAG tap: esp32.cpu0 tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+JTAG tap: esp32.slave tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+esp32: Debug controller was reset (pwrstat=0x5F, after clear 0x0F).
+esp32: Core was reset (pwrstat=0x5F, after clear 0x0F).
+Target halted. PRO_CPU: PC=0x5000004B (active)    APP_CPU: PC=0x00000000
+esp32: target state: halted
+esp32: Core was reset (pwrstat=0x1F, after clear 0x0F).
+Target halted. PRO_CPU: PC=0x40000400 (active)    APP_CPU: PC=0x40000400
+esp32: target state: halted
+Hardware assisted breakpoint 1 at 0x400db717: file /home/user-name/esp/blink/main/./blink.c, line 43.
+0x0:    0x00000000
+Target halted. PRO_CPU: PC=0x400DB717 (active)    APP_CPU: PC=0x400D10D8
+[New Thread 1073428656]
+[New Thread 1073413708]
+[New Thread 1073431316]
+[New Thread 1073410672]
+[New Thread 1073408876]
+[New Thread 1073432196]
+[New Thread 1073411552]
+[Switching to Thread 1073411996]
+
+Temporary breakpoint 1, app_main () at /home/user-name/esp/blink/main/./blink.c:43
+43      xTaskCreate(&amp;blink_task, &quot;blink_task&quot;, 512, NULL, 5, NULL);
+(gdb)
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Note the third line from bottom that shows debugger halting at breakpoint established in <code class="docutils literal"><span class="pre">gdbinit</span></code> file at function <code class="docutils literal"><span class="pre">app_main()</span></code>. Since the processor is halted, the LED should not be blinking. If this is what you see as well, you are ready to start debugging.</p>
+<p>If you are not quite sure how to use GDB, check <a class="reference internal" href="debugging-examples.html#jtag-debugging-examples-command-line"><span class="std std-ref">Command Line</span></a> example debugging session in section <a class="reference internal" href="index.html#jtag-debugging-examples"><span class="std std-ref">Debugging Examples</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging-examples.html" class="btn btn-neutral float-right" title="Debugging Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configure-other-jtag.html" class="btn btn-neutral" title="Configure Other JTAG Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

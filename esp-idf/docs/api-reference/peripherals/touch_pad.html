@@ -1,0 +1,1621 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Touch Sensor &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Peripherals API" href="index.html"/>
+        <link rel="next" title="UART" href="uart.html"/>
+        <link rel="prev" title="TIMER" href="timer.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc.html">ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO (including RTC low power I/O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">MCPWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../storage/sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sigmadelta.html">Sigma-delta Modulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="touch_pad.html#">Touch Sensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="touch_pad.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="touch_pad.html#functionality-overview">Functionality Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="touch_pad.html#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="touch_pad.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">UART</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Peripherals API</a> &raquo;</li>
+        
+      <li>Touch Sensor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/peripherals/touch_pad.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="touch-sensor">
+<h1>Touch Sensor<a class="headerlink" href="touch_pad.html#touch-sensor" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="touch_pad.html#introduction" title="Permalink to this headline">¶</a></h2>
+<p>A touch-sensor system is built on a substrate which carries electrodes and relevant connections under a protective flat surface. When a user touches the surface, the capacitance variation is triggered and a binary signal is generated to indicate whether the touch is valid.</p>
+<p>ESP32 can provide up to 10 capacitive touch pads / GPIOs. The sensing pads can be arranged in different combinations (e.g. matrix, slider), so that a larger area or more points can be detected. The touch pad sensing process is under the control of a hardware-implemented finite-state machine (FSM) which is initiated by software or a dedicated hardware timer.</p>
+<p>Design, operation and control registers of touch sensor are discussed in <a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf">ESP32 Technical Reference Manual</a> (PDF). Please refer to it for additional details how this subsystem works.</p>
+</div>
+<div class="section" id="functionality-overview">
+<h2>Functionality Overview<a class="headerlink" href="touch_pad.html#functionality-overview" title="Permalink to this headline">¶</a></h2>
+<p>Description of API is broken down into groups of functions to provide quick overview of features like:</p>
+<ul class="simple">
+<li>Initialization of touch pad driver</li>
+<li>Configuration of touch pad GPIO pins</li>
+<li>Taking measurements</li>
+<li>Adjusting parameters of measurements</li>
+<li>Filtering measurements</li>
+<li>Touch detection methods</li>
+<li>Setting up interrupts to report touch detection</li>
+<li>Waking up from sleep mode on interrupt</li>
+</ul>
+<p>For detailed description of particular function please go to section <a class="reference internal" href="touch_pad.html#touch-pad-api-reference"><span class="std std-ref">API Reference</span></a>. Practical implementation of this API is covered in section <a class="reference internal" href="touch_pad.html#touch-pad-api-examples"><span class="std std-ref">Application Examples</span></a>.</p>
+<div class="section" id="initialization">
+<h3>Initialization<a class="headerlink" href="touch_pad.html#initialization" title="Permalink to this headline">¶</a></h3>
+<p>Touch pad driver should be initialized before use by calling function <a class="reference internal" href="touch_pad.html#_CPPv214touch_pad_initv" title="touch_pad_init"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_init()</span></code></a>. This function sets several <code class="docutils literal"><span class="pre">.._DEFAULT</span></code> driver parameters listed in <a class="reference internal" href="touch_pad.html#touch-pad-api-reference"><span class="std std-ref">API Reference</span></a> under &#8220;Macros&#8221;. It also clears information what pads have been touched before (if any) and disables interrupts.</p>
+<p>If not required anymore, driver can be disabled by calling <a class="reference internal" href="touch_pad.html#_CPPv216touch_pad_deinitv" title="touch_pad_deinit"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_deinit()</span></code></a>.</p>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="touch_pad.html#configuration" title="Permalink to this headline">¶</a></h3>
+<p>Enabling of touch sensor functionality for particular GPIO is done with <a class="reference internal" href="touch_pad.html#_CPPv216touch_pad_config11touch_pad_t8uint16_t" title="touch_pad_config"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_config()</span></code></a>.</p>
+<p>The function <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_set_fsm_mode16touch_fsm_mode_t" title="touch_pad_set_fsm_mode"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_fsm_mode()</span></code></a> is used to select whether touch pad measurement (operated by FSM) is started automatically by hardware timer, or by software. If software mode is selected, then use <a class="reference internal" href="touch_pad.html#_CPPv218touch_pad_sw_startv" title="touch_pad_sw_start"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_sw_start()</span></code></a> to start of the FSM.</p>
+</div>
+<div class="section" id="touch-state-measurements">
+<h3>Touch State Measurements<a class="headerlink" href="touch_pad.html#touch-state-measurements" title="Permalink to this headline">¶</a></h3>
+<p>The following two functions come handy to read raw or filtered measurements from the sensor:</p>
+<ul class="simple">
+<li><a class="reference internal" href="touch_pad.html#_CPPv214touch_pad_read11touch_pad_tP8uint16_t" title="touch_pad_read"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_read()</span></code></a></li>
+<li><a class="reference internal" href="touch_pad.html#_CPPv223touch_pad_read_filtered11touch_pad_tP8uint16_t" title="touch_pad_read_filtered"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_read_filtered()</span></code></a></li>
+</ul>
+<p>They may be used to characterize particular touch pad design by checking the range of sensor readings when a pad is touched or released. This information can be then used to establish the touch threshold.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Start and configure filter before using <a class="reference internal" href="touch_pad.html#_CPPv223touch_pad_read_filtered11touch_pad_tP8uint16_t" title="touch_pad_read_filtered"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_read_filtered()</span></code></a> by calling specific filter functions described down below.</p>
+</div>
+<p>To see how to use both read functions check <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/touch_pad_read">peripherals/touch_pad_read</a> application example.</p>
+</div>
+<div class="section" id="optimization-of-measurements">
+<h3>Optimization of Measurements<a class="headerlink" href="touch_pad.html#optimization-of-measurements" title="Permalink to this headline">¶</a></h3>
+<p>Touch sensor has several configurable parameters to match characteristics of particular touch pad design. For instance, to sense smaller capacity changes, it is possible to narrow the reference voltage range within which the touch pads are charged / discharged. The high and low reference voltages are set using function <a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_set_voltage17touch_high_volt_t16touch_low_volt_t18touch_volt_atten_t" title="touch_pad_set_voltage"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_voltage()</span></code></a>. A positive side effect, besides ability to discern smaller capacity changes, will be reduction of power consumption for low power applications. A likely negative effect will be increase of measurement noise. If dynamic rage of obtained readings is still satisfactory, then further reduction of power consumption may be done by lowering the measurement time with <a class="reference internal" href="touch_pad.html#_CPPv223touch_pad_set_meas_time8uint16_t8uint16_t" title="touch_pad_set_meas_time"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_meas_time()</span></code></a>.</p>
+<p>The following summarizes available measurement parameters and corresponding &#8216;set&#8217; functions:</p>
+<ul>
+<li><p class="first">Touch pad charge / discharge parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>voltage range: <a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_set_voltage17touch_high_volt_t16touch_low_volt_t18touch_volt_atten_t" title="touch_pad_set_voltage"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_voltage()</span></code></a></li>
+<li>speed (slope): <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_set_cnt_mode11touch_pad_t17touch_cnt_slope_t15touch_tie_opt_t" title="touch_pad_set_cnt_mode"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_cnt_mode()</span></code></a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Measure time: <a class="reference internal" href="touch_pad.html#_CPPv223touch_pad_set_meas_time8uint16_t8uint16_t" title="touch_pad_set_meas_time"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_meas_time()</span></code></a></p>
+</li>
+</ul>
+<p>Relationship between voltage range (high / low reference voltages), speed (slope) and measure time is shown on figure below.</p>
+<div class="align-center figure" id="id3">
+<img alt="Touch Pad - relationship between measurement parameters" src="../../_images/touch_pad-measurement-parameters.jpg" />
+<p class="caption"><span class="caption-text">Touch Pad - relationship between measurement parameters</span></p>
+</div>
+<p>The last chart &#8220;Output&#8221; represents the touch sensor reading, i.e. the count of pulses collected within measure time.</p>
+<p>All functions are provided in pairs to &#8216;set&#8217; specific parameter and to &#8216;get&#8217; the current parameter&#8217;s value, e.g. <a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_set_voltage17touch_high_volt_t16touch_low_volt_t18touch_volt_atten_t" title="touch_pad_set_voltage"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_voltage()</span></code></a> and <a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_get_voltageP17touch_high_volt_tP16touch_low_volt_tP18touch_volt_atten_t" title="touch_pad_get_voltage"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_get_voltage()</span></code></a>.</p>
+</div>
+<div class="section" id="filtering-of-measurements">
+<span id="touch-pad-api-filtering-of-measurements"></span><h3>Filtering of Measurements<a class="headerlink" href="touch_pad.html#filtering-of-measurements" title="Permalink to this headline">¶</a></h3>
+<p>If measurements are noisy, you may filter them with provided API. The filter should be started before first use by calling <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_filter_start8uint32_t" title="touch_pad_filter_start"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_filter_start()</span></code></a>.</p>
+<p>The filter type is IIR (Infinite Impulse Response) and it has configurable period that can be set with function <a class="reference internal" href="touch_pad.html#_CPPv227touch_pad_set_filter_period8uint32_t" title="touch_pad_set_filter_period"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_filter_period()</span></code></a>.</p>
+<p>You can stop the filter with <a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_filter_stopv" title="touch_pad_filter_stop"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_filter_stop()</span></code></a>. If not required anymore, the filter may be deleted by invoking <a class="reference internal" href="touch_pad.html#_CPPv223touch_pad_filter_deletev" title="touch_pad_filter_delete"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_filter_delete()</span></code></a>.</p>
+</div>
+<div class="section" id="touch-detection">
+<h3>Touch Detection<a class="headerlink" href="touch_pad.html#touch-detection" title="Permalink to this headline">¶</a></h3>
+<p>Touch detection is implemented in ESP32&#8217;s hardware basing on user configured threshold and raw measurements executed by FSM. Use function <a class="reference internal" href="touch_pad.html#_CPPv220touch_pad_get_statusv" title="touch_pad_get_status"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_get_status()</span></code></a> to check what pads have been touched and <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_clear_statusv" title="touch_pad_clear_status"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_clear_status()</span></code></a> to clear the touch status information.</p>
+<p>Hardware touch detection may be also wired to interrupts and this is described in next section.</p>
+<p>If measurements are noisy and capacity changes small, then hardware touch detection may be not reliable. To resolve this issue, instead of using hardware detection / provided interrupts, implement measurement filtering and perform touch detection in your own application. See <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/touch_pad_interrupt">peripherals/touch_pad_interrupt</a> for sample implementation of both methods of touch detection.</p>
+</div>
+<div class="section" id="touch-triggered-interrupts">
+<h3>Touch Triggered Interrupts<a class="headerlink" href="touch_pad.html#touch-triggered-interrupts" title="Permalink to this headline">¶</a></h3>
+<p>Before enabling an interrupt on touch detection, user should establish touch detection threshold. Use functions described above to read and display sensor measurements when pad is touched and released. Apply a filter when measurements are noisy and relative changes are small. Depending on your application and environmental conditions, test the influence of temperature and power supply voltage changes on measured values.</p>
+<p>Once detection threshold is established, it may be set on initialization with <a class="reference internal" href="touch_pad.html#_CPPv216touch_pad_config11touch_pad_t8uint16_t" title="touch_pad_config"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_config()</span></code></a> or at the runtime with <a class="reference internal" href="touch_pad.html#_CPPv220touch_pad_set_thresh11touch_pad_t8uint16_t" title="touch_pad_set_thresh"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_thresh()</span></code></a>.</p>
+<p>In next step configure how interrupts are triggered. They may be triggered below or above threshold and this is set with function <a class="reference internal" href="touch_pad.html#_CPPv226touch_pad_set_trigger_mode20touch_trigger_mode_t" title="touch_pad_set_trigger_mode"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_trigger_mode()</span></code></a>.</p>
+<p>Finally configure and manage interrupt calls using the following functions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_isr_register14intr_handler_tPv" title="touch_pad_isr_register"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_isr_register()</span></code></a> / <a class="reference internal" href="touch_pad.html#_CPPv224touch_pad_isr_deregisterPFvPvEPv" title="touch_pad_isr_deregister"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_isr_deregister()</span></code></a></li>
+<li><a class="reference internal" href="touch_pad.html#_CPPv221touch_pad_intr_enablev" title="touch_pad_intr_enable"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_intr_enable()</span></code></a> / <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_intr_disablev" title="touch_pad_intr_disable"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_intr_disable()</span></code></a></li>
+</ul>
+<p>When interrupts are operational, you can obtain information what particular pad triggered interrupt by invoking <a class="reference internal" href="touch_pad.html#_CPPv220touch_pad_get_statusv" title="touch_pad_get_status"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_get_status()</span></code></a> and clear pad status with <a class="reference internal" href="touch_pad.html#_CPPv222touch_pad_clear_statusv" title="touch_pad_clear_status"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_clear_status()</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Interrupts on touch detection operate on raw / unfiltered measurements checked against user established threshold and are implemented in hardware. Enabling software filtering API (see <a class="reference internal" href="touch_pad.html#touch-pad-api-filtering-of-measurements"><span class="std std-ref">Filtering of Measurements</span></a>) does not affect this process.</p>
+</div>
+</div>
+<div class="section" id="wakeup-from-sleep-mode">
+<h3>Wakeup from Sleep Mode<a class="headerlink" href="touch_pad.html#wakeup-from-sleep-mode" title="Permalink to this headline">¶</a></h3>
+<p>If touch pad interrupts are used to wakeup the chip from a sleep mode, then user can select certain configuration of pads (SET1 or both SET1 and SET2), that should be touched to trigger the interrupt and cause subsequent wakeup. To do so, use function <a class="reference internal" href="touch_pad.html#_CPPv228touch_pad_set_trigger_source19touch_trigger_src_t" title="touch_pad_set_trigger_source"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_trigger_source()</span></code></a>.</p>
+<p>Configuration of required bit patterns of pads may be managed for each &#8216;SET&#8217; with:</p>
+<ul class="simple">
+<li><a class="reference internal" href="touch_pad.html#_CPPv224touch_pad_set_group_mask8uint16_t8uint16_t8uint16_t" title="touch_pad_set_group_mask"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_set_group_mask()</span></code></a> / <a class="reference internal" href="touch_pad.html#_CPPv224touch_pad_get_group_maskP8uint16_tP8uint16_tP8uint16_t" title="touch_pad_get_group_mask"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_get_group_mask()</span></code></a></li>
+<li><a class="reference internal" href="touch_pad.html#_CPPv226touch_pad_clear_group_mask8uint16_t8uint16_t8uint16_t" title="touch_pad_clear_group_mask"><code class="xref cpp cpp-func docutils literal"><span class="pre">touch_pad_clear_group_mask()</span></code></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="application-examples">
+<span id="touch-pad-api-examples"></span><h2>Application Examples<a class="headerlink" href="touch_pad.html#application-examples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Touch sensor read example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/touch_pad_read">peripherals/touch_pad_read</a>.</li>
+<li>Touch sensor interrupt example: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/touch_pad_interrupt">peripherals/touch_pad_interrupt</a>.</li>
+</ul>
+</div>
+<div class="section" id="api-reference">
+<span id="touch-pad-api-reference"></span><h2>API Reference<a class="headerlink" href="touch_pad.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="touch_pad.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/driver/include/driver/touch_pad.h">driver/include/driver/touch_pad.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="touch_pad.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv214touch_pad_initv">
+<span id="touch_pad_init"></span><span class="target" id="touch__pad_8h_1a233fb6e6bb2dddb27e23501b2a4df54a"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv214touch_pad_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize touch module. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Touch pad init error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216touch_pad_deinitv">
+<span id="touch_pad_deinit"></span><span class="target" id="touch__pad_8h_1aca087c6f9129219712554453987329f9"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_deinit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv216touch_pad_deinitv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Un-install touch pad driver. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Touch pad driver not initialized </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216touch_pad_config11touch_pad_t8uint16_t">
+<span id="touch_pad_config__touch_pad_t.uint16_t"></span><span class="target" id="touch__pad_8h_1a699afddd4ee8d9e14eaf83e3907f0518"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_config</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, uint16_t <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv216touch_pad_config11touch_pad_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure touch pad interrupt threshold. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG if argument wrong</li>
+<li>ESP_FAIL if touch pad not initialized </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">threshold</span></code>: interrupt threshold, </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214touch_pad_read11touch_pad_tP8uint16_t">
+<span id="touch_pad_read__touch_pad_t.uint16_tP"></span><span class="target" id="touch__pad_8h_1a657d41b76044c76c1df98c1de9510077"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_read</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, uint16_t *<em>touch_value</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv214touch_pad_read11touch_pad_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get touch sensor counter value. Each touch sensor has a counter to count the number of charge/discharge cycles. When the pad is not &#8216;touched&#8217;, we can get a number of the counter. When the pad is &#8216;touched&#8217;, the value in counter will get smaller because of the larger equivalent capacitance. User can use this function to determine the interrupt trigger threshold. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Touch pad error</li>
+<li>ESP_FAIL Touch pad not initialized </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">touch_value</span></code>: pointer to accept touch sensor value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223touch_pad_read_filtered11touch_pad_tP8uint16_t">
+<span id="touch_pad_read_filtered__touch_pad_t.uint16_tP"></span><span class="target" id="touch__pad_8h_1a9399bd9639dd89570ddae594b7de73d0"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_read_filtered</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, uint16_t *<em>touch_value</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv223touch_pad_read_filtered11touch_pad_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get filtered touch sensor counter value by IIR filter. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>touch_pad_filter_start has to be called before calling touch_pad_read_filtered. This function can be called from ISR</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG Touch pad error</li>
+<li>ESP_FAIL Touch pad not initialized </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">touch_value</span></code>: pointer to accept touch sensor value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230touch_pad_isr_handler_registerPFvPvEPviP13intr_handle_t">
+<span class="target" id="touch__pad_8h_1a06159a5fef2e2b86d3135b77de899e71"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_isr_handler_register</code><span class="sig-paren">(</span>void (*<em>fn</em>)<span class="sig-paren">(</span>void *<span class="sig-paren">)</span>, void *<em>arg</em>, int <em>unused</em>, <a class="reference internal" href="../system/intr_alloc.html#_CPPv213intr_handle_t" title="intr_handle_t">intr_handle_t</a> *<em>handle_unused</em>, <span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv230touch_pad_isr_handler_registerPFvPvEPviP13intr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register touch-pad ISR,. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Deprecated function, users should replace this with touch_pad_isr_register, because RTC modules share a same interrupt index. </dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success ;</li>
+<li>ESP_ERR_INVALID_ARG GPIO error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fn</span></code>: Pointer to ISR handler </li>
+<li><code class="docutils literal"><span class="pre">arg</span></code>: Parameter for ISR </li>
+<li><code class="docutils literal"><span class="pre">unused</span></code>: Reserved, not used </li>
+<li><code class="docutils literal"><span class="pre">handle_unused</span></code>: Reserved, not used </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_isr_register14intr_handler_tPv">
+<span id="touch_pad_isr_register__intr_handler_t.voidP"></span><span class="target" id="touch__pad_8h_1a40e52182416cdbc114ed393f5f74bbfa"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_isr_register</code><span class="sig-paren">(</span><a class="reference internal" href="../system/intr_alloc.html#_CPPv214intr_handler_t" title="intr_handler_t">intr_handler_t</a> <em>fn</em>, void *<em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_isr_register14intr_handler_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register touch-pad ISR. The handler will be attached to the same CPU core that this function is running on. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success ;</li>
+<li>ESP_ERR_INVALID_ARG GPIO error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fn</span></code>: Pointer to ISR handler </li>
+<li><code class="docutils literal"><span class="pre">arg</span></code>: Parameter for ISR </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224touch_pad_isr_deregisterPFvPvEPv">
+<span class="target" id="touch__pad_8h_1a15c1d7a2f117b7e2ff1321e7eca0faf3"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_isr_deregister</code><span class="sig-paren">(</span>void (*<em>fn</em>)<span class="sig-paren">(</span>void *<span class="sig-paren">)</span>, void *<em>arg</em>, <span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv224touch_pad_isr_deregisterPFvPvEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deregister the handler previously registered using touch_pad_isr_handler_register. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if a handler matching both fn and arg isn&#8217;t registered </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">fn</span></code>: handler function to call (as passed to touch_pad_isr_handler_register) </li>
+<li><code class="docutils literal"><span class="pre">arg</span></code>: argument of the handler (as passed to touch_pad_isr_handler_register) </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223touch_pad_set_meas_time8uint16_t8uint16_t">
+<span id="touch_pad_set_meas_time__uint16_t.uint16_t"></span><span class="target" id="touch__pad_8h_1a8b166cc9b199b5bf7e53e37f7b873509"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_meas_time</code><span class="sig-paren">(</span>uint16_t <em>sleep_cycle</em>, uint16_t <em>meas_cycle</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv223touch_pad_set_meas_time8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor measurement and sleep time. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">sleep_cycle</span></code>: The touch sensor will sleep after each measurement. sleep_cycle decide the interval between each measurement. t_sleep = sleep_cycle / (RTC_SLOW_CLK frequency). The approximate frequency value of RTC_SLOW_CLK can be obtained using rtc_clk_slow_freq_get_hz function. </li>
+<li><code class="docutils literal"><span class="pre">meas_cycle</span></code>: The duration of the touch sensor measurement. t_meas = meas_cycle / 8M, the maximum measure time is 0xffff / 8M = 8.19 ms </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223touch_pad_get_meas_timeP8uint16_tP8uint16_t">
+<span id="touch_pad_get_meas_time__uint16_tP.uint16_tP"></span><span class="target" id="touch__pad_8h_1a2b04aeab7dea68b6fbe67955e8f12a71"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_meas_time</code><span class="sig-paren">(</span>uint16_t *<em>sleep_cycle</em>, uint16_t *<em>meas_cycle</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv223touch_pad_get_meas_timeP8uint16_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor measurement and sleep time. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">sleep_cycle</span></code>: Pointer to accept sleep cycle number </li>
+<li><code class="docutils literal"><span class="pre">meas_cycle</span></code>: Pointer to accept measurement cycle count. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221touch_pad_set_voltage17touch_high_volt_t16touch_low_volt_t18touch_volt_atten_t">
+<span id="touch_pad_set_voltage__touch_high_volt_t.touch_low_volt_t.touch_volt_atten_t"></span><span class="target" id="touch__pad_8h_1a98011da820393cbafca7d130e185e602"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_voltage</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv217touch_high_volt_t" title="touch_high_volt_t">touch_high_volt_t</a> <em>refh</em>, <a class="reference internal" href="touch_pad.html#_CPPv216touch_low_volt_t" title="touch_low_volt_t">touch_low_volt_t</a> <em>refl</em>, <a class="reference internal" href="touch_pad.html#_CPPv218touch_volt_atten_t" title="touch_volt_atten_t">touch_volt_atten_t</a> <em>atten</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv221touch_pad_set_voltage17touch_high_volt_t16touch_low_volt_t18touch_volt_atten_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor reference voltage, if the voltage gap between high and low reference voltage get less, the charging and discharging time would be faster, accordingly, the counter value would be larger. In the case of detecting very slight change of capacitance, we can narrow down the gap so as to increase the sensitivity. On the other hand, narrow voltage gap would also introduce more noise, but we can use a software filter to pre-process the counter value. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">refh</span></code>: the value of DREFH </li>
+<li><code class="docutils literal"><span class="pre">refl</span></code>: the value of DREFL </li>
+<li><code class="docutils literal"><span class="pre">atten</span></code>: the attenuation on DREFH </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221touch_pad_get_voltageP17touch_high_volt_tP16touch_low_volt_tP18touch_volt_atten_t">
+<span id="touch_pad_get_voltage__touch_high_volt_tP.touch_low_volt_tP.touch_volt_atten_tP"></span><span class="target" id="touch__pad_8h_1a8f505a8bba09c94e021287e906330d54"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_voltage</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv217touch_high_volt_t" title="touch_high_volt_t">touch_high_volt_t</a> *<em>refh</em>, <a class="reference internal" href="touch_pad.html#_CPPv216touch_low_volt_t" title="touch_low_volt_t">touch_low_volt_t</a> *<em>refl</em>, <a class="reference internal" href="touch_pad.html#_CPPv218touch_volt_atten_t" title="touch_volt_atten_t">touch_volt_atten_t</a> *<em>atten</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv221touch_pad_get_voltageP17touch_high_volt_tP16touch_low_volt_tP18touch_volt_atten_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor reference voltage,. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">refh</span></code>: pointer to accept DREFH value </li>
+<li><code class="docutils literal"><span class="pre">refl</span></code>: pointer to accept DREFL value </li>
+<li><code class="docutils literal"><span class="pre">atten</span></code>: pointer to accept the attenuation on DREFH </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_set_cnt_mode11touch_pad_t17touch_cnt_slope_t15touch_tie_opt_t">
+<span id="touch_pad_set_cnt_mode__touch_pad_t.touch_cnt_slope_t.touch_tie_opt_t"></span><span class="target" id="touch__pad_8h_1a12585ca5ebd2a9d5dd10c1d88ea9da15"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_cnt_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, <a class="reference internal" href="touch_pad.html#_CPPv217touch_cnt_slope_t" title="touch_cnt_slope_t">touch_cnt_slope_t</a> <em>slope</em>, <a class="reference internal" href="touch_pad.html#_CPPv215touch_tie_opt_t" title="touch_tie_opt_t">touch_tie_opt_t</a> <em>opt</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_set_cnt_mode11touch_pad_t17touch_cnt_slope_t15touch_tie_opt_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor charge/discharge speed for each pad. If the slope is 0, the counter would always be zero. If the slope is 1, the charging and discharging would be slow, accordingly, the counter value would be small. If the slope is set 7, which is the maximum value, the charging and discharging would be fast, accordingly, the counter value would be larger. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">slope</span></code>: touch pad charge/discharge speed </li>
+<li><code class="docutils literal"><span class="pre">opt</span></code>: the initial voltage </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_get_cnt_mode11touch_pad_tP17touch_cnt_slope_tP15touch_tie_opt_t">
+<span id="touch_pad_get_cnt_mode__touch_pad_t.touch_cnt_slope_tP.touch_tie_opt_tP"></span><span class="target" id="touch__pad_8h_1a3a85bc0222aaea6c661a195f549b76eb"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_cnt_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, <a class="reference internal" href="touch_pad.html#_CPPv217touch_cnt_slope_t" title="touch_cnt_slope_t">touch_cnt_slope_t</a> *<em>slope</em>, <a class="reference internal" href="touch_pad.html#_CPPv215touch_tie_opt_t" title="touch_tie_opt_t">touch_tie_opt_t</a> *<em>opt</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_get_cnt_mode11touch_pad_tP17touch_cnt_slope_tP15touch_tie_opt_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor charge/discharge speed for each pad. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">slope</span></code>: pointer to accept touch pad charge/discharge slope </li>
+<li><code class="docutils literal"><span class="pre">opt</span></code>: pointer to accept the initial voltage </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217touch_pad_io_init11touch_pad_t">
+<span id="touch_pad_io_init__touch_pad_t"></span><span class="target" id="touch__pad_8h_1ab7b9c0052152e25f1e403e70f4a710f9"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_io_init</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv217touch_pad_io_init11touch_pad_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize touch pad GPIO. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_set_fsm_mode16touch_fsm_mode_t">
+<span id="touch_pad_set_fsm_mode__touch_fsm_mode_t"></span><span class="target" id="touch__pad_8h_1a8b86f18ada56a588a99011122e09f9bc"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_fsm_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv216touch_fsm_mode_t" title="touch_fsm_mode_t">touch_fsm_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_set_fsm_mode16touch_fsm_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor FSM mode, the test action can be triggered by the timer, as well as by the software. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: FSM mode </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_get_fsm_modeP16touch_fsm_mode_t">
+<span id="touch_pad_get_fsm_mode__touch_fsm_mode_tP"></span><span class="target" id="touch__pad_8h_1a35ff56bfcd3a17d45a7b991fb31ffceb"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_fsm_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv216touch_fsm_mode_t" title="touch_fsm_mode_t">touch_fsm_mode_t</a> *<em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_get_fsm_modeP16touch_fsm_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor FSM mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: pointer to accept FSM mode </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218touch_pad_sw_startv">
+<span id="touch_pad_sw_start"></span><span class="target" id="touch__pad_8h_1aa635aca284c2a9fcd2346b5e036086d5"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_sw_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv218touch_pad_sw_startv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Trigger a touch sensor measurement, only support in SW mode of FSM. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220touch_pad_set_thresh11touch_pad_t8uint16_t">
+<span id="touch_pad_set_thresh__touch_pad_t.uint16_t"></span><span class="target" id="touch__pad_8h_1ae9b8db086ad1a0df3267985716cb035d"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_thresh</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, uint16_t <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv220touch_pad_set_thresh11touch_pad_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor interrupt threshold. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">threshold</span></code>: threshold of touchpad count, refer to touch_pad_set_trigger_mode to see how to set trigger mode. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220touch_pad_get_thresh11touch_pad_tP8uint16_t">
+<span id="touch_pad_get_thresh__touch_pad_t.uint16_tP"></span><span class="target" id="touch__pad_8h_1aecd6ec2e248b1918cdf11b122513f5dd"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_thresh</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv211touch_pad_t" title="touch_pad_t">touch_pad_t</a> <em>touch_num</em>, uint16_t *<em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv220touch_pad_get_thresh11touch_pad_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor interrupt threshold. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">touch_num</span></code>: touch pad index </li>
+<li><code class="docutils literal"><span class="pre">threshold</span></code>: pointer to accept threshold </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226touch_pad_set_trigger_mode20touch_trigger_mode_t">
+<span id="touch_pad_set_trigger_mode__touch_trigger_mode_t"></span><span class="target" id="touch__pad_8h_1a107209526b7dd928f9fb01154d032c13"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_trigger_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv220touch_trigger_mode_t" title="touch_trigger_mode_t">touch_trigger_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv226touch_pad_set_trigger_mode20touch_trigger_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor interrupt trigger mode. Interrupt can be triggered either when counter result is less than threshold or when counter result is more than threshold. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: touch sensor interrupt trigger mode </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226touch_pad_get_trigger_modeP20touch_trigger_mode_t">
+<span id="touch_pad_get_trigger_mode__touch_trigger_mode_tP"></span><span class="target" id="touch__pad_8h_1a0f0c6a522127485fbf52f1fd15040425"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_trigger_mode</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv220touch_trigger_mode_t" title="touch_trigger_mode_t">touch_trigger_mode_t</a> *<em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv226touch_pad_get_trigger_modeP20touch_trigger_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor interrupt trigger mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: pointer to accept touch sensor interrupt trigger mode </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv228touch_pad_set_trigger_source19touch_trigger_src_t">
+<span id="touch_pad_set_trigger_source__touch_trigger_src_t"></span><span class="target" id="touch__pad_8h_1a989aa1f05914696abfaa7c9bfbd75f75"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_trigger_source</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv219touch_trigger_src_t" title="touch_trigger_src_t">touch_trigger_src_t</a> <em>src</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv228touch_pad_set_trigger_source19touch_trigger_src_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor interrupt trigger source. There are two sets of touch signals. Set1 and set2 can be mapped to several touch signals. Either set will be triggered if at least one of its touch signal is &#8216;touched&#8217;. The interrupt can be configured to be generated if set1 is triggered, or only if both sets are triggered. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src</span></code>: touch sensor interrupt trigger source </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv228touch_pad_get_trigger_sourceP19touch_trigger_src_t">
+<span id="touch_pad_get_trigger_source__touch_trigger_src_tP"></span><span class="target" id="touch__pad_8h_1a451735d26728d239f084e14482866944"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_trigger_source</code><span class="sig-paren">(</span><a class="reference internal" href="touch_pad.html#_CPPv219touch_trigger_src_t" title="touch_trigger_src_t">touch_trigger_src_t</a> *<em>src</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv228touch_pad_get_trigger_sourceP19touch_trigger_src_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor interrupt trigger source. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">src</span></code>: pointer to accept touch sensor interrupt trigger source </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224touch_pad_set_group_mask8uint16_t8uint16_t8uint16_t">
+<span id="touch_pad_set_group_mask__uint16_t.uint16_t.uint16_t"></span><span class="target" id="touch__pad_8h_1a90db55f7d120ef62fa5190262cd1ab6b"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_group_mask</code><span class="sig-paren">(</span>uint16_t <em>set1_mask</em>, uint16_t <em>set2_mask</em>, uint16_t <em>en_mask</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv224touch_pad_set_group_mask8uint16_t8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set touch sensor group mask. Touch pad module has two sets of signals, &#8216;Touched&#8217; signal is triggered only if at least one of touch pad in this group is &#8220;touched&#8221;. This function will set the register bits according to the given bitmask. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">set1_mask</span></code>: bitmask of touch sensor signal group1, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">set2_mask</span></code>: bitmask of touch sensor signal group2, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">en_mask</span></code>: bitmask of touch sensor work enable, it&#8217;s a 10-bit value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224touch_pad_get_group_maskP8uint16_tP8uint16_tP8uint16_t">
+<span id="touch_pad_get_group_mask__uint16_tP.uint16_tP.uint16_tP"></span><span class="target" id="touch__pad_8h_1aa9358e7fd0773ecb65bc095589e9ec30"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_group_mask</code><span class="sig-paren">(</span>uint16_t *<em>set1_mask</em>, uint16_t *<em>set2_mask</em>, uint16_t *<em>en_mask</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv224touch_pad_get_group_maskP8uint16_tP8uint16_tP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get touch sensor group mask. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">set1_mask</span></code>: pointer to accept bitmask of touch sensor signal group1, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">set2_mask</span></code>: pointer to accept bitmask of touch sensor signal group2, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">en_mask</span></code>: pointer to accept bitmask of touch sensor work enable, it&#8217;s a 10-bit value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226touch_pad_clear_group_mask8uint16_t8uint16_t8uint16_t">
+<span id="touch_pad_clear_group_mask__uint16_t.uint16_t.uint16_t"></span><span class="target" id="touch__pad_8h_1a774c7c070fb07ed19689923a5cf9be1b"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_clear_group_mask</code><span class="sig-paren">(</span>uint16_t <em>set1_mask</em>, uint16_t <em>set2_mask</em>, uint16_t <em>en_mask</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv226touch_pad_clear_group_mask8uint16_t8uint16_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear touch sensor group mask. Touch pad module has two sets of signals, Interrupt is triggered only if at least one of touch pad in this group is &#8220;touched&#8221;. This function will clear the register bits according to the given bitmask. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_ARG if argument is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">set1_mask</span></code>: bitmask touch sensor signal group1, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">set2_mask</span></code>: bitmask touch sensor signal group2, it&#8217;s a 10-bit value </li>
+<li><code class="docutils literal"><span class="pre">en_mask</span></code>: bitmask of touch sensor work enable, it&#8217;s a 10-bit value </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_clear_statusv">
+<span id="touch_pad_clear_status"></span><span class="target" id="touch__pad_8h_1a0750c1e62ae1ea34ded71baa4337f6e8"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_clear_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_clear_statusv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To clear the touch status register, usually use this function in touch ISR to clear status. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220touch_pad_get_statusv">
+<span id="touch_pad_get_status"></span><span class="target" id="touch__pad_8h_1a603d51494df1ec7fc7bd6bd96c5025b1"></span>uint32_t <code class="descclassname"></code><code class="descname">touch_pad_get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv220touch_pad_get_statusv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the touch sensor status, usually used in ISR to decide which pads are &#8216;touched&#8217;. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>touch status </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221touch_pad_intr_enablev">
+<span id="touch_pad_intr_enable"></span><span class="target" id="touch__pad_8h_1a94c15a754bb1ff9666e6741da3faed0d"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_intr_enable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv221touch_pad_intr_enablev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To enable touch pad interrupt. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_intr_disablev">
+<span id="touch_pad_intr_disable"></span><span class="target" id="touch__pad_8h_1aa81e281502cb65cca63d4f381f0673a4"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_intr_disable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_intr_disablev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To disable touch pad interrupt. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227touch_pad_set_filter_period8uint32_t">
+<span id="touch_pad_set_filter_period__uint32_t"></span><span class="target" id="touch__pad_8h_1a56c1b612da26e1ab115f2f37f120777a"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_set_filter_period</code><span class="sig-paren">(</span>uint32_t <em>new_period_ms</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv227touch_pad_set_filter_period8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set touch pad filter calibration period, in ms. Need to call touch_pad_filter_start before all touch filter APIs </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_STATE driver state error</li>
+<li>ESP_ERR_INVALID_ARG parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">new_period_ms</span></code>: filter period, in ms </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227touch_pad_get_filter_periodP8uint32_t">
+<span id="touch_pad_get_filter_period__uint32_tP"></span><span class="target" id="touch__pad_8h_1ae734223f35f82854351fd4db43029879"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_get_filter_period</code><span class="sig-paren">(</span>uint32_t *<em>p_period_ms</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv227touch_pad_get_filter_periodP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get touch pad filter calibration period, in ms Need to call touch_pad_filter_start before all touch filter APIs </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_STATE driver state error</li>
+<li>ESP_ERR_INVALID_ARG parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">p_period_ms</span></code>: pointer to accept period </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222touch_pad_filter_start8uint32_t">
+<span id="touch_pad_filter_start__uint32_t"></span><span class="target" id="touch__pad_8h_1a900ecfd9f9530dd30c15da19e09d9a88"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_filter_start</code><span class="sig-paren">(</span>uint32_t <em>filter_period_ms</em><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv222touch_pad_filter_start8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>start touch pad filter function This API will start a filter to process the noise in order to prevent false triggering when detecting slight change of capacitance. Need to call touch_pad_filter_start before all touch filter APIs </p>
+<p>If filter is not initialized, this API will initialize the filter with given period. If filter is already initialized, this API will update the filter period. <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This filter uses FreeRTOS timer, which is dispatched from a task with priority 1 by default on CPU 0. So if some application task with higher priority takes a lot of CPU0 time, then the quality of data obtained from this filter will be affected. You can adjust FreeRTOS timer task priority in menuconfig. </dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_ARG parameter error</li>
+<li>ESP_ERR_NO_MEM No memory for driver</li>
+<li>ESP_ERR_INVALID_STATE driver state error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">filter_period_ms</span></code>: filter calibration period, in ms </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221touch_pad_filter_stopv">
+<span id="touch_pad_filter_stop"></span><span class="target" id="touch__pad_8h_1ad854d0ef12192592f3b4d446eb6e5fda"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_filter_stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv221touch_pad_filter_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>stop touch pad filter function Need to call touch_pad_filter_start before all touch filter APIs </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_STATE driver state error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv223touch_pad_filter_deletev">
+<span id="touch_pad_filter_delete"></span><span class="target" id="touch__pad_8h_1a25da4380057b446df38904aa7719a7f8"></span>esp_err_t <code class="descclassname"></code><code class="descname">touch_pad_filter_delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="touch_pad.html#_CPPv223touch_pad_filter_deletev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>delete touch pad filter driver and release the memory Need to call touch_pad_filter_start before all touch filter APIs </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_ERR_INVALID_STATE driver state error </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="touch_pad.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.TOUCH_PAD_SLEEP_CYCLE_DEFAULT">
+<span class="target" id="touch__pad_8h_1a69f7d7dd09e6a110122069b65b84b0cd"></span><code class="descname">TOUCH_PAD_SLEEP_CYCLE_DEFAULT</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_SLEEP_CYCLE_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timer frequency is RTC_SLOW_CLK (can be 150k or 32k depending on the options), max value is 0xffff </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_MEASURE_CYCLE_DEFAULT">
+<span class="target" id="touch__pad_8h_1afa85017278384c0931228ebe37b79da7"></span><code class="descname">TOUCH_PAD_MEASURE_CYCLE_DEFAULT</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_MEASURE_CYCLE_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timer frequency is 8Mhz, the max value is 0xffff </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_FSM_MODE_DEFAULT">
+<span class="target" id="touch__pad_8h_1ab2ae203f52864d08d896104ab83d1a71"></span><code class="descname">TOUCH_FSM_MODE_DEFAULT</code><a class="headerlink" href="touch_pad.html#c.TOUCH_FSM_MODE_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The touch FSM my be started by the software or timer </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_TRIGGER_MODE_DEFAULT">
+<span class="target" id="touch__pad_8h_1afea97a47f1acbfa7ecd08746e78ff905"></span><code class="descname">TOUCH_TRIGGER_MODE_DEFAULT</code><a class="headerlink" href="touch_pad.html#c.TOUCH_TRIGGER_MODE_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interrupts can be triggered if sensor value gets below or above threshold </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_TRIGGER_SOURCE_DEFAULT">
+<span class="target" id="touch__pad_8h_1aeffcebf10eafd6a6841919c08a81561c"></span><code class="descname">TOUCH_TRIGGER_SOURCE_DEFAULT</code><a class="headerlink" href="touch_pad.html#c.TOUCH_TRIGGER_SOURCE_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The wakeup trigger source can be SET1 or both SET1 and SET2 </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_BIT_MASK_MAX">
+<span class="target" id="touch__pad_8h_1a43bf7f1d7eaa69b980186fb9f873606d"></span><code class="descname">TOUCH_PAD_BIT_MASK_MAX</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_BIT_MASK_MAX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="touch_pad.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv218touch_isr_handle_t">
+<span id="touch_isr_handle_t"></span><span class="target" id="touch__pad_8h_1a5b438dbe58bf94aba049bb59f3653126"></span><em class="property">typedef </em><a class="reference internal" href="../system/intr_alloc.html#_CPPv213intr_handle_t" title="intr_handle_t">intr_handle_t</a> <code class="descclassname"></code><code class="descname">touch_isr_handle_t</code><a class="headerlink" href="touch_pad.html#_CPPv218touch_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="touch_pad.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv211touch_pad_t">
+<span id="touch_pad_t"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceb"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_pad_t</code><a class="headerlink" href="touch_pad.html#_CPPv211touch_pad_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM0">
+<span id="TOUCH_PAD_NUM0"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba2be5bfdc5fa0daa33662739944705958"></span><code class="descname">TOUCH_PAD_NUM0</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 0 is GPIO4 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM1">
+<span id="TOUCH_PAD_NUM1"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73cebae04fac51b3b5d5836ed9bdec541f85b0"></span><code class="descname">TOUCH_PAD_NUM1</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 1 is GPIO0 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM2">
+<span id="TOUCH_PAD_NUM2"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73cebabbc76073102701b93feab1c7805e0b71"></span><code class="descname">TOUCH_PAD_NUM2</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 2 is GPIO2 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM3">
+<span id="TOUCH_PAD_NUM3"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73cebad17df691e183c7b5aa9654e467b9c479"></span><code class="descname">TOUCH_PAD_NUM3</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 3 is GPIO15 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM4">
+<span id="TOUCH_PAD_NUM4"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73cebaa80e4617c48ae2c32917d34026f745d8"></span><code class="descname">TOUCH_PAD_NUM4</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 4 is GPIO13 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM5">
+<span id="TOUCH_PAD_NUM5"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba073d6faf2ea192c346f2afc2841eca2c"></span><code class="descname">TOUCH_PAD_NUM5</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 5 is GPIO12 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM6">
+<span id="TOUCH_PAD_NUM6"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba6b89e291caf808835292a07288ced988"></span><code class="descname">TOUCH_PAD_NUM6</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 6 is GPIO14 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM7">
+<span id="TOUCH_PAD_NUM7"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba5215edc4a1a3a81ce59624bfefd27926"></span><code class="descname">TOUCH_PAD_NUM7</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 7 is GPIO27 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM8">
+<span id="TOUCH_PAD_NUM8"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba6d691cc64542fd58c1af1c7924d997f3"></span><code class="descname">TOUCH_PAD_NUM8</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM8" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 8 is GPIO32 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214TOUCH_PAD_NUM9">
+<span id="TOUCH_PAD_NUM9"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73ceba1e3357886c1b2ff4fc63c97441702048"></span><code class="descname">TOUCH_PAD_NUM9</code><a class="headerlink" href="touch_pad.html#_CPPv214TOUCH_PAD_NUM9" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad channel 9 is GPIO33 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213TOUCH_PAD_MAX">
+<span id="TOUCH_PAD_MAX"></span><span class="target" id="touch__pad_8h_1ad974977a657d2e2ae20be08678c73cebae6b6b7790a28b7a9e6afb052c0a1c652"></span><code class="descname">TOUCH_PAD_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv213TOUCH_PAD_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217touch_high_volt_t">
+<span id="touch_high_volt_t"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_high_volt_t</code><a class="headerlink" href="touch_pad.html#_CPPv217touch_high_volt_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216TOUCH_HVOLT_KEEP">
+<span id="TOUCH_HVOLT_KEEP"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659a674e4a6548663881857266370c4c91d9"></span><code class="descname">TOUCH_HVOLT_KEEP</code> = -1<a class="headerlink" href="touch_pad.html#_CPPv216TOUCH_HVOLT_KEEP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage, no change </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_HVOLT_2V4">
+<span id="TOUCH_HVOLT_2V4"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659a73bce9d1c810225b0ac35e567ca325ae"></span><code class="descname">TOUCH_HVOLT_2V4</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_HVOLT_2V4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage, 2.4V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_HVOLT_2V5">
+<span id="TOUCH_HVOLT_2V5"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659a82cf5ac0bd8ab739b24cf8436a2124cf"></span><code class="descname">TOUCH_HVOLT_2V5</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_HVOLT_2V5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage, 2.5V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_HVOLT_2V6">
+<span id="TOUCH_HVOLT_2V6"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659a52c27c5babfa99a0848c7cbdd7a0a87c"></span><code class="descname">TOUCH_HVOLT_2V6</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_HVOLT_2V6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage, 2.6V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_HVOLT_2V7">
+<span id="TOUCH_HVOLT_2V7"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659aadbdd4ae14a287709ef074efe666bec1"></span><code class="descname">TOUCH_HVOLT_2V7</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_HVOLT_2V7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage, 2.7V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_HVOLT_MAX">
+<span id="TOUCH_HVOLT_MAX"></span><span class="target" id="touch__pad_8h_1a41e37d349c5dd6544ab8f61ab6f97659a90f33c6fc6106ce16c2207825cef6f8e"></span><code class="descname">TOUCH_HVOLT_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_HVOLT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv216touch_low_volt_t">
+<span id="touch_low_volt_t"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_low_volt_t</code><a class="headerlink" href="touch_pad.html#_CPPv216touch_low_volt_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216TOUCH_LVOLT_KEEP">
+<span id="TOUCH_LVOLT_KEEP"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354a85317266cf1d5b73ff23eb12f9e0396f"></span><code class="descname">TOUCH_LVOLT_KEEP</code> = -1<a class="headerlink" href="touch_pad.html#_CPPv216TOUCH_LVOLT_KEEP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor low reference voltage, no change </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_LVOLT_0V5">
+<span id="TOUCH_LVOLT_0V5"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354a670b2c5722a4753369679e383bb42ec4"></span><code class="descname">TOUCH_LVOLT_0V5</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_LVOLT_0V5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor low reference voltage, 0.5V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_LVOLT_0V6">
+<span id="TOUCH_LVOLT_0V6"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354a6397ea21725544aafbf72d08316f81e5"></span><code class="descname">TOUCH_LVOLT_0V6</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_LVOLT_0V6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor low reference voltage, 0.6V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_LVOLT_0V7">
+<span id="TOUCH_LVOLT_0V7"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354afb226c89ab2e46585c36c6848caaf779"></span><code class="descname">TOUCH_LVOLT_0V7</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_LVOLT_0V7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor low reference voltage, 0.7V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_LVOLT_0V8">
+<span id="TOUCH_LVOLT_0V8"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354a43de84ebbbad1f7c7474e56de8942871"></span><code class="descname">TOUCH_LVOLT_0V8</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_LVOLT_0V8" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor low reference voltage, 0.8V </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215TOUCH_LVOLT_MAX">
+<span id="TOUCH_LVOLT_MAX"></span><span class="target" id="touch__pad_8h_1ac8a137d80cbb96f7513dc525ff324354a1b82a05f0c877e87a8f3618e83b07f70"></span><code class="descname">TOUCH_LVOLT_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv215TOUCH_LVOLT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv218touch_volt_atten_t">
+<span id="touch_volt_atten_t"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3f"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_volt_atten_t</code><a class="headerlink" href="touch_pad.html#_CPPv218touch_volt_atten_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv222TOUCH_HVOLT_ATTEN_KEEP">
+<span id="TOUCH_HVOLT_ATTEN_KEEP"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fa6401c41756f50c220f362a2dc26ec109"></span><code class="descname">TOUCH_HVOLT_ATTEN_KEEP</code> = -1<a class="headerlink" href="touch_pad.html#_CPPv222TOUCH_HVOLT_ATTEN_KEEP" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage attenuation, no change </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv221TOUCH_HVOLT_ATTEN_1V5">
+<span id="TOUCH_HVOLT_ATTEN_1V5"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fa21abac373b09fb828bd70686c2d498d2"></span><code class="descname">TOUCH_HVOLT_ATTEN_1V5</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv221TOUCH_HVOLT_ATTEN_1V5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage attenuation, 1.5V attenuation </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220TOUCH_HVOLT_ATTEN_1V">
+<span id="TOUCH_HVOLT_ATTEN_1V"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fa39e65a9a9d4911de03009d926709dc71"></span><code class="descname">TOUCH_HVOLT_ATTEN_1V</code><a class="headerlink" href="touch_pad.html#_CPPv220TOUCH_HVOLT_ATTEN_1V" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage attenuation, 1.0V attenuation </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv221TOUCH_HVOLT_ATTEN_0V5">
+<span id="TOUCH_HVOLT_ATTEN_0V5"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fa6144f9e5421f4765c50512bae475c508"></span><code class="descname">TOUCH_HVOLT_ATTEN_0V5</code><a class="headerlink" href="touch_pad.html#_CPPv221TOUCH_HVOLT_ATTEN_0V5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage attenuation, 0.5V attenuation </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220TOUCH_HVOLT_ATTEN_0V">
+<span id="TOUCH_HVOLT_ATTEN_0V"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fa67edfe99562bb0af13e0a2203752f7bd"></span><code class="descname">TOUCH_HVOLT_ATTEN_0V</code><a class="headerlink" href="touch_pad.html#_CPPv220TOUCH_HVOLT_ATTEN_0V" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor high reference voltage attenuation, 0V attenuation </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv221TOUCH_HVOLT_ATTEN_MAX">
+<span id="TOUCH_HVOLT_ATTEN_MAX"></span><span class="target" id="touch__pad_8h_1aa8d353990162d21c431fca8ffe561c3fae49e538f28950244f5a275990434a0fe"></span><code class="descname">TOUCH_HVOLT_ATTEN_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv221TOUCH_HVOLT_ATTEN_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217touch_cnt_slope_t">
+<span id="touch_cnt_slope_t"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_cnt_slope_t</code><a class="headerlink" href="touch_pad.html#_CPPv217touch_cnt_slope_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_0">
+<span id="TOUCH_PAD_SLOPE_0"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a75fae1325ea2b4997bfa9af8112a7de9"></span><code class="descname">TOUCH_PAD_SLOPE_0</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed, always zero </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_1">
+<span id="TOUCH_PAD_SLOPE_1"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a50d1c08086164da7e9c16fc7da07dc0b"></span><code class="descname">TOUCH_PAD_SLOPE_1</code> = 1<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed, slowest </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_2">
+<span id="TOUCH_PAD_SLOPE_2"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a2bb0e8b2d664486cf506c385613a8768"></span><code class="descname">TOUCH_PAD_SLOPE_2</code> = 2<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_3">
+<span id="TOUCH_PAD_SLOPE_3"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a2f1e0e4087911844ce31e260fad5a035"></span><code class="descname">TOUCH_PAD_SLOPE_3</code> = 3<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_3" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_4">
+<span id="TOUCH_PAD_SLOPE_4"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714abf9f19df2976f52248658615fc5a3037"></span><code class="descname">TOUCH_PAD_SLOPE_4</code> = 4<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_4" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_5">
+<span id="TOUCH_PAD_SLOPE_5"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a51e8cd8904897402cb28963c0df44ef3"></span><code class="descname">TOUCH_PAD_SLOPE_5</code> = 5<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_6">
+<span id="TOUCH_PAD_SLOPE_6"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714afd81426b6c5581226d2688dc200e2860"></span><code class="descname">TOUCH_PAD_SLOPE_6</code> = 6<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_6" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_PAD_SLOPE_7">
+<span id="TOUCH_PAD_SLOPE_7"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a1db932bc5844c5290ecc36786aca7ce8"></span><code class="descname">TOUCH_PAD_SLOPE_7</code> = 7<a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_PAD_SLOPE_7" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch sensor charge / discharge speed, fast </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219TOUCH_PAD_SLOPE_MAX">
+<span id="TOUCH_PAD_SLOPE_MAX"></span><span class="target" id="touch__pad_8h_1ab15e931ac8a5057a7b2251d19ca19714a772ac81276703fcd36214fe251bdb008"></span><code class="descname">TOUCH_PAD_SLOPE_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv219TOUCH_PAD_SLOPE_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv220touch_trigger_mode_t">
+<span id="touch_trigger_mode_t"></span><span class="target" id="touch__pad_8h_1a78ea24317bbcf69b489f55d8d492585f"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_trigger_mode_t</code><a class="headerlink" href="touch_pad.html#_CPPv220touch_trigger_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv219TOUCH_TRIGGER_BELOW">
+<span id="TOUCH_TRIGGER_BELOW"></span><span class="target" id="touch__pad_8h_1a78ea24317bbcf69b489f55d8d492585fa0db1953f578f9925d833c03b68895a7d"></span><code class="descname">TOUCH_TRIGGER_BELOW</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv219TOUCH_TRIGGER_BELOW" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch interrupt will happen if counter value is less than threshold. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv219TOUCH_TRIGGER_ABOVE">
+<span id="TOUCH_TRIGGER_ABOVE"></span><span class="target" id="touch__pad_8h_1a78ea24317bbcf69b489f55d8d492585fa7fc1446577db119a8d10e8f9a919ef43"></span><code class="descname">TOUCH_TRIGGER_ABOVE</code> = 1<a class="headerlink" href="touch_pad.html#_CPPv219TOUCH_TRIGGER_ABOVE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch interrupt will happen if counter value is larger than threshold. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_TRIGGER_MAX">
+<span id="TOUCH_TRIGGER_MAX"></span><span class="target" id="touch__pad_8h_1a78ea24317bbcf69b489f55d8d492585fa86d97481121a37e9c0a3a72eb8764a55"></span><code class="descname">TOUCH_TRIGGER_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_TRIGGER_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv219touch_trigger_src_t">
+<span id="touch_trigger_src_t"></span><span class="target" id="touch__pad_8h_1a702dd8a96a9db982ebb96956b3c582ac"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_trigger_src_t</code><a class="headerlink" href="touch_pad.html#_CPPv219touch_trigger_src_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv225TOUCH_TRIGGER_SOURCE_BOTH">
+<span id="TOUCH_TRIGGER_SOURCE_BOTH"></span><span class="target" id="touch__pad_8h_1a702dd8a96a9db982ebb96956b3c582acaf319ebc8929b025b531b574e9e2fa769"></span><code class="descname">TOUCH_TRIGGER_SOURCE_BOTH</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv225TOUCH_TRIGGER_SOURCE_BOTH" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>wakeup interrupt is generated if both SET1 and SET2 are &#8220;touched&#8221; </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv225TOUCH_TRIGGER_SOURCE_SET1">
+<span id="TOUCH_TRIGGER_SOURCE_SET1"></span><span class="target" id="touch__pad_8h_1a702dd8a96a9db982ebb96956b3c582aca8edcb8067aa4afed1cd88913cfb54208"></span><code class="descname">TOUCH_TRIGGER_SOURCE_SET1</code> = 1<a class="headerlink" href="touch_pad.html#_CPPv225TOUCH_TRIGGER_SOURCE_SET1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>wakeup interrupt is generated if SET1 is &#8220;touched&#8221; </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv224TOUCH_TRIGGER_SOURCE_MAX">
+<span id="TOUCH_TRIGGER_SOURCE_MAX"></span><span class="target" id="touch__pad_8h_1a702dd8a96a9db982ebb96956b3c582acab2b8fdfe0dbfb7cf5f2572f683fe31c5"></span><code class="descname">TOUCH_TRIGGER_SOURCE_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv224TOUCH_TRIGGER_SOURCE_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv215touch_tie_opt_t">
+<span id="touch_tie_opt_t"></span><span class="target" id="touch__pad_8h_1a6125148c8c665cc1dae6cc6fda4fd151"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_tie_opt_t</code><a class="headerlink" href="touch_pad.html#_CPPv215touch_tie_opt_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv221TOUCH_PAD_TIE_OPT_LOW">
+<span id="TOUCH_PAD_TIE_OPT_LOW"></span><span class="target" id="touch__pad_8h_1a6125148c8c665cc1dae6cc6fda4fd151a1f86ae10785480d708b3a5c7feec9a20"></span><code class="descname">TOUCH_PAD_TIE_OPT_LOW</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv221TOUCH_PAD_TIE_OPT_LOW" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initial level of charging voltage, low level </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv222TOUCH_PAD_TIE_OPT_HIGH">
+<span id="TOUCH_PAD_TIE_OPT_HIGH"></span><span class="target" id="touch__pad_8h_1a6125148c8c665cc1dae6cc6fda4fd151ad848817385a1036fde617231e3485c2e"></span><code class="descname">TOUCH_PAD_TIE_OPT_HIGH</code> = 1<a class="headerlink" href="touch_pad.html#_CPPv222TOUCH_PAD_TIE_OPT_HIGH" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initial level of charging voltage, high level </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv221TOUCH_PAD_TIE_OPT_MAX">
+<span id="TOUCH_PAD_TIE_OPT_MAX"></span><span class="target" id="touch__pad_8h_1a6125148c8c665cc1dae6cc6fda4fd151accc7bd4d0fa8c406321cbbdac9f78bf4"></span><code class="descname">TOUCH_PAD_TIE_OPT_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv221TOUCH_PAD_TIE_OPT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv216touch_fsm_mode_t">
+<span id="touch_fsm_mode_t"></span><span class="target" id="touch__pad_8h_1a52bb72160e439555b1b74c4577dd5f62"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">touch_fsm_mode_t</code><a class="headerlink" href="touch_pad.html#_CPPv216touch_fsm_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv220TOUCH_FSM_MODE_TIMER">
+<span id="TOUCH_FSM_MODE_TIMER"></span><span class="target" id="touch__pad_8h_1a52bb72160e439555b1b74c4577dd5f62af6beb8d26cd84fc522cbf0afed28b9e3"></span><code class="descname">TOUCH_FSM_MODE_TIMER</code> = 0<a class="headerlink" href="touch_pad.html#_CPPv220TOUCH_FSM_MODE_TIMER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To start touch FSM by timer </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv217TOUCH_FSM_MODE_SW">
+<span id="TOUCH_FSM_MODE_SW"></span><span class="target" id="touch__pad_8h_1a52bb72160e439555b1b74c4577dd5f62aecefec50090e792dfeac56b52bb330ef"></span><code class="descname">TOUCH_FSM_MODE_SW</code><a class="headerlink" href="touch_pad.html#_CPPv217TOUCH_FSM_MODE_SW" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>To start touch FSM by software trigger </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv218TOUCH_FSM_MODE_MAX">
+<span id="TOUCH_FSM_MODE_MAX"></span><span class="target" id="touch__pad_8h_1a52bb72160e439555b1b74c4577dd5f62a91955f0913e08f5fd7b54e23ad0dcd67"></span><code class="descname">TOUCH_FSM_MODE_MAX</code><a class="headerlink" href="touch_pad.html#_CPPv218TOUCH_FSM_MODE_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gpio-lookup-macros">
+<h3>GPIO Lookup Macros<a class="headerlink" href="touch_pad.html#gpio-lookup-macros" title="Permalink to this headline">¶</a></h3>
+<p>Some useful macros can be used to specified the GPIO number of a touchpad channel, or vice versa.
+e.g.</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">TOUCH_PAD_NUM5_GPIO_NUM</span></code> is the GPIO number of channel 5 (12);</li>
+<li><code class="docutils literal"><span class="pre">TOUCH_PAD_GPIO4_CHANNEL</span></code> is the channel number of GPIO 4 (channel 0).</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h3>Header File<a class="headerlink" href="touch_pad.html#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/soc/esp32/include/soc/touch_channel.h">soc/esp32/include/soc/touch_channel.h</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Macros<a class="headerlink" href="touch_pad.html#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO4_CHANNEL">
+<span class="target" id="touch__channel_8h_1ab28d16f44fcff3ba55e86b8035bd285a"></span><code class="descname">TOUCH_PAD_GPIO4_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO4_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM0_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1abdbb80bd439b51d0c92a9b6e3874a259"></span><code class="descname">TOUCH_PAD_NUM0_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM0_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO0_CHANNEL">
+<span class="target" id="touch__channel_8h_1a98e080dfb2dc20b3ea6312d163e5fce3"></span><code class="descname">TOUCH_PAD_GPIO0_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO0_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM1_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1ab2d29a98fa6e9f2e156d20cf7257fa2b"></span><code class="descname">TOUCH_PAD_NUM1_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM1_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO2_CHANNEL">
+<span class="target" id="touch__channel_8h_1a6d317d8cdf2202c219f39c1a38570629"></span><code class="descname">TOUCH_PAD_GPIO2_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO2_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM2_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1ad897e050621d9af31268c5f90726db04"></span><code class="descname">TOUCH_PAD_NUM2_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM2_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO15_CHANNEL">
+<span class="target" id="touch__channel_8h_1ab5fb54607904b0830d1639a78f4a0093"></span><code class="descname">TOUCH_PAD_GPIO15_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO15_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM3_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a71fddd6bb44ceeef53965be95188d548"></span><code class="descname">TOUCH_PAD_NUM3_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM3_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO13_CHANNEL">
+<span class="target" id="touch__channel_8h_1a098ce55d795178f67096efc170e06707"></span><code class="descname">TOUCH_PAD_GPIO13_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO13_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM4_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a43cb298f1b73029747b09c4313f407f1"></span><code class="descname">TOUCH_PAD_NUM4_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM4_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO12_CHANNEL">
+<span class="target" id="touch__channel_8h_1a64081ac9bc89fa95085337e86b6eb8f6"></span><code class="descname">TOUCH_PAD_GPIO12_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO12_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM5_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a2b74a328c0056cfd854d58aadd8176c4"></span><code class="descname">TOUCH_PAD_NUM5_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM5_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO14_CHANNEL">
+<span class="target" id="touch__channel_8h_1ae12d844f215cf17c38951651675af343"></span><code class="descname">TOUCH_PAD_GPIO14_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO14_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM6_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a76ff4ad9d72651c3991a3e314ef5fd24"></span><code class="descname">TOUCH_PAD_NUM6_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM6_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO27_CHANNEL">
+<span class="target" id="touch__channel_8h_1ab60edde6e381f9516fbdf4db6f53113d"></span><code class="descname">TOUCH_PAD_GPIO27_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO27_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM7_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a8b3f6a6183418ef6c45538ba2be2af7b"></span><code class="descname">TOUCH_PAD_NUM7_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM7_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO33_CHANNEL">
+<span class="target" id="touch__channel_8h_1a4212557a964244e260b2240142d7cd1b"></span><code class="descname">TOUCH_PAD_GPIO33_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO33_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM8_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1add0d56e011d2060b63ea18134b9f1ce2"></span><code class="descname">TOUCH_PAD_NUM8_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM8_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_GPIO32_CHANNEL">
+<span class="target" id="touch__channel_8h_1ae2a52d2db16ef2a6ffb744915a1ddf9a"></span><code class="descname">TOUCH_PAD_GPIO32_CHANNEL</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_GPIO32_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.TOUCH_PAD_NUM9_GPIO_NUM">
+<span class="target" id="touch__channel_8h_1a14b6b2816684ca92aee9386040b7eedf"></span><code class="descname">TOUCH_PAD_NUM9_GPIO_NUM</code><a class="headerlink" href="touch_pad.html#c.TOUCH_PAD_NUM9_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="uart.html" class="btn btn-neutral float-right" title="UART" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="timer.html" class="btn btn-neutral" title="TIMER" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

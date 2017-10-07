@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Get Started &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="next" title="ESP32-DevKitC Getting Started Guide" href="get-started-devkitc.html"/>
+        <link rel="prev" title="ESP-IDF Programming Guide" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="index.html#">Get Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-need">What You Need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#guides">Guides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="get-started-devkitc.html">ESP32 DevKitC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get-started-wrover-kit.html">ESP-WROVER-KIT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-toolchain">Setup Toolchain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="windows-setup.html">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-setup.html">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="macos-setup.html">MacOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-esp-idf">Get ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-path-to-esp-idf">Setup Path to ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#start-a-project">Start a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#connect">Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#build-and-flash">Build and Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#monitor">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-esp-idf">Updating ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#related-documents">Related Documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="add-idf_path-to-profile.html">Add IDF_PATH to User Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="establish-serial-connection.html">Establish Serial Connection with ESP32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="make-project.html">Build and Flash with Make</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eclipse-setup.html">Build and Flash with Eclipse IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idf-monitor.html">IDF Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchain-setup-scratch.html">Customized Setup of Toolchain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Get Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get-started/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="get-started">
+<h1>Get Started<a class="headerlink" href="index.html#get-started" title="Permalink to this headline">¶</a></h1>
+<p>This document is intended to help users set up the software environment for developement of applications using hardware based on the Espressif ESP32. Through a simple example we would like to illustrate how to use ESP-IDF (Espressif IoT Development Framework), including the menu based configuration, compiling the ESP-IDF and firmware download to ESP32 boards.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="index.html#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ESP32 integrates Wi-Fi (2.4 GHz band) and Bluetooth 4.2 solutions on a single chip, along with dual high performance cores, Ultra Low Power co-processor and several peripherals. Powered by 40 nm technology, ESP32 provides a robust, highly integrated platform to meet the continuous demands for efficient power usage, compact design, security, high performance, and reliability.</p>
+<p>Espressif provides the basic hardware and software resources that help application developers to build their ideas around the ESP32 series hardware. The software development framework by Espressif is intended for rapidly developing Internet-of-Things (IoT) applications, with Wi-Fi, Bluetooth, power management and several other system features.</p>
+</div>
+<div class="section" id="what-you-need">
+<h2>What You Need<a class="headerlink" href="index.html#what-you-need" title="Permalink to this headline">¶</a></h2>
+<p>To develop applications for ESP32 you need:</p>
+<ul class="simple">
+<li><strong>PC</strong> loaded with either Windows, Linux or Mac operating system</li>
+<li><strong>Toolchain</strong> to build the <strong>Application</strong> for ESP32</li>
+<li><strong>ESP-IDF</strong> that essentially contains API for ESP32 and scripts to operate the <strong>Toolchain</strong></li>
+<li>A text editor to write programs (<strong>Projects</strong>) in C, e.g. <a class="reference external" href="https://www.eclipse.org/">Eclipse</a></li>
+<li>The <strong>ESP32</strong> board itself and a <strong>USB cable</strong> to connect it to the <strong>PC</strong></li>
+</ul>
+<div class="align-center figure" id="id1">
+<img alt="Development of applications for ESP32" src="../_images/what-you-need.png" />
+<p class="caption"><span class="caption-text">Development of applications for ESP32</span></p>
+</div>
+<p>Preparation of development environment consists of three steps:</p>
+<ol class="arabic simple">
+<li>Setup of <strong>Toolchain</strong></li>
+<li>Getting of <strong>ESP-IDF</strong> from GitHub</li>
+<li>Installation and configuration of <strong>Eclipse</strong></li>
+</ol>
+<p>You may skip the last step, if you prefer to use different editor.</p>
+<p>Having environment set up, you are ready to start the most interesting part - the application development. This process may be summarized in four steps:</p>
+<ol class="arabic simple">
+<li>Configuration of a <strong>Project</strong> and writing the code</li>
+<li>Compilation of the <strong>Project</strong> and linking it to build an <strong>Application</strong></li>
+<li>Flashing (uploading) of the <strong>Application</strong> to <strong>ESP32</strong></li>
+<li>Monitoring / debugging of the <strong>Application</strong></li>
+</ol>
+<p>See instructions below that will walk you through these steps.</p>
+</div>
+<div class="section" id="guides">
+<h2>Guides<a class="headerlink" href="index.html#guides" title="Permalink to this headline">¶</a></h2>
+<p>If you have one of ESP32 development boards listed below, click on provided links to get you up and running.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="get-started-devkitc.html">ESP32 DevKitC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get-started-wrover-kit.html">ESP-WROVER-KIT</a></li>
+</ul>
+</div>
+<p>If you have different board, move to sections below.</p>
+</div>
+<div class="section" id="setup-toolchain">
+<span id="get-started-setup-toolchain"></span><h2>Setup Toolchain<a class="headerlink" href="index.html#setup-toolchain" title="Permalink to this headline">¶</a></h2>
+<p>The quickest way to start development with ESP32 is by installing a prebuilt toolchain. Pick up your OS below and follow provided instructions.</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="windows-setup.html"><img alt="windows-logo" src="../_images/windows-logo1.png" /></a></td>
+<td><a class="reference external" href="linux-setup.html"><img alt="linux-logo" src="../_images/linux-logo1.png" /></a></td>
+<td><a class="reference external" href="macos-setup.html"><img alt="macos-logo" src="../_images/macos-logo1.png" /></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="windows-setup.html">Windows</a></td>
+<td><a class="reference external" href="linux-setup.html">Linux</a></td>
+<td><a class="reference external" href="macos-setup.html">Mac OS</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are using <code class="docutils literal"><span class="pre">~/esp</span></code> directory to install the prebuilt toolchain, ESP-IDF and sample applications. You can use different directory, but need to adjust respective commands.</p>
+</div>
+<p>Depending on your experience and preferences, instead of using a prebuilt toolchain, you may want to customize your environment. To set up the system your own way go to section <a class="reference internal" href="toolchain-setup-scratch.html#get-started-customized-setup"><span class="std std-ref">Customized Setup of Toolchain</span></a>.</p>
+<p>Once you are done with setting up the toolchain then go to section <a class="reference internal" href="index.html#get-started-get-esp-idf"><span class="std std-ref">Get ESP-IDF</span></a>.</p>
+</div>
+<div class="section" id="get-esp-idf">
+<span id="get-started-get-esp-idf"></span><h2>Get ESP-IDF<a class="headerlink" href="index.html#get-esp-idf" title="Permalink to this headline">¶</a></h2>
+<p>Besides the toolchain (that contains programs to compile and build the application), you also need ESP32 specific API / libraries. They are provided by Espressif in <a class="reference external" href="https://github.com/espressif/esp-idf">ESP-IDF repository</a>. To get it, open terminal, navigate to the directory you want to put ESP-IDF, and clone it using <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></code> command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/esp
+git clone --recursive https://github.com/espressif/esp-idf.git
+</pre></div>
+</div>
+<p>ESP-IDF will be downloaded into <code class="docutils literal"><span class="pre">~/esp/esp-idf</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Do not miss the <code class="docutils literal"><span class="pre">--recursive</span></code> option. If you have already cloned ESP-IDF without this option, run another command to get all the submodules:</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/esp/esp-idf
+git submodule update --init
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While cloning submodules on <strong>Windows</strong> platform, the <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></code> command may print some output starting <code class="docutils literal"><span class="pre">':</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">valid</span> <span class="pre">identifier...</span></code>. This is a <a class="reference external" href="https://github.com/espressif/esp-idf/issues/11">known issue</a> but the git clone still succeeds without any problems.</p>
+</div>
+</div>
+<div class="section" id="setup-path-to-esp-idf">
+<span id="get-started-setup-path"></span><h2>Setup Path to ESP-IDF<a class="headerlink" href="index.html#setup-path-to-esp-idf" title="Permalink to this headline">¶</a></h2>
+<p>The toolchain programs access ESP-IDF using <code class="docutils literal"><span class="pre">IDF_PATH</span></code> environment variable. This variable should be set up on your PC, otherwise projects will not build. Setting may be done manually, each time PC is restarted. Another option is to set up it permanently by defining <code class="docutils literal"><span class="pre">IDF_PATH</span></code> in user profile. To do so, follow instructions specific to <a class="reference internal" href="add-idf_path-to-profile.html#add-idf-path-to-profile-windows"><span class="std std-ref">Windows</span></a> , <a class="reference internal" href="add-idf_path-to-profile.html#add-idf-path-to-profile-linux-macos"><span class="std std-ref">Linux and MacOS</span></a> in section <a class="reference internal" href="add-idf_path-to-profile.html"><span class="doc">Add IDF_PATH to User Profile</span></a>.</p>
+</div>
+<div class="section" id="start-a-project">
+<span id="get-started-start-project"></span><h2>Start a Project<a class="headerlink" href="index.html#start-a-project" title="Permalink to this headline">¶</a></h2>
+<p>Now you are ready to prepare your application for ESP32. To start off quickly, we will use <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/get-started/hello_world">get-started/hello_world</a> project from <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples">examples</a> directory in IDF.</p>
+<p>Copy <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/get-started/hello_world">get-started/hello_world</a> to <code class="docutils literal"><span class="pre">~/esp</span></code> directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/esp
+cp -r <span class="nv">$IDF_PATH</span>/examples/get-started/hello_world .
+</pre></div>
+</div>
+<p>You can also find a range of example projects under the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples">examples</a> directory in ESP-IDF. These example project directories can be copied in the same way as presented above, to begin your own projects.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">The esp-idf build system does not support spaces in paths to esp-idf or to projects.</p>
+</div>
+</div>
+<div class="section" id="connect">
+<span id="get-started-connect"></span><h2>Connect<a class="headerlink" href="index.html#connect" title="Permalink to this headline">¶</a></h2>
+<p>You are almost there. To be able to proceed further, connect ESP32 board to PC, check under what serial port the board is visible and verify if serial communication works. If you are not sure how to do it, check instructions in section <a class="reference internal" href="establish-serial-connection.html"><span class="doc">Establish Serial Connection with ESP32</span></a>. Note the port number, as it will be required in the next step.</p>
+</div>
+<div class="section" id="configure">
+<span id="get-started-configure"></span><h2>Configure<a class="headerlink" href="index.html#configure" title="Permalink to this headline">¶</a></h2>
+<p>Being in terminal window, go to directory of <code class="docutils literal"><span class="pre">hello_world</span></code> application by typing <code class="docutils literal"><span class="pre">cd</span> <span class="pre">~/esp/hello_world</span></code>. Then start project configuration utility <code class="docutils literal"><span class="pre">menuconfig</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/esp/hello_world
+make menuconfig
+</pre></div>
+</div>
+<p>If previous steps have been done correctly, the following menu will be displayed:</p>
+<div class="align-center figure" id="id2">
+<img alt="Project configuration - Home window" src="../_images/project-configuration.png" />
+<p class="caption"><span class="caption-text">Project configuration - Home window</span></p>
+</div>
+<p>In the menu, navigate to <code class="docutils literal"><span class="pre">Serial</span> <span class="pre">flasher</span> <span class="pre">config</span></code> &gt; <code class="docutils literal"><span class="pre">Default</span> <span class="pre">serial</span> <span class="pre">port</span></code> to configure the serial port, where project will be loaded to. Confirm selection by pressing enter, save configuration by selecting <code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">Save</span> <span class="pre">&gt;</span></code> and then exit application by selecting <code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">Exit</span> <span class="pre">&gt;</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On Windows, serial ports have names like COM1. On MacOS, they start with <code class="docutils literal"><span class="pre">/dev/cu.</span></code>. On Linux, they start with <code class="docutils literal"><span class="pre">/dev/tty</span></code>.
+(See <a class="reference internal" href="establish-serial-connection.html"><span class="doc">Establish Serial Connection with ESP32</span></a> for full details.)</p>
+</div>
+<p>Here are couple of tips on navigation and use of <code class="docutils literal"><span class="pre">menuconfig</span></code>:</p>
+<ul class="simple">
+<li>Use up &amp; down arrow keys to navigate the menu.</li>
+<li>Use Enter key to go into a submenu, Escape key to go out or to exit.</li>
+<li>Type <code class="docutils literal"><span class="pre">?</span></code> to see a help screen. Enter key exits the help screen.</li>
+<li>Use Space key, or <code class="docutils literal"><span class="pre">Y</span></code> and <code class="docutils literal"><span class="pre">N</span></code> keys to enable (Yes) and disable (No) configuration items with checkboxes &#8220;<code class="docutils literal"><span class="pre">[*]</span></code>&#8220;</li>
+<li>Pressing <code class="docutils literal"><span class="pre">?</span></code> while highlighting a configuration item displays help about that item.</li>
+<li>Type <code class="docutils literal"><span class="pre">/</span></code> to search the configuration items.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are <strong>Arch Linux</strong> user, navigate to <code class="docutils literal"><span class="pre">SDK</span> <span class="pre">tool</span> <span class="pre">configuration</span></code> and change the name of <code class="docutils literal"><span class="pre">Python</span> <span class="pre">2</span> <span class="pre">interpreter</span></code> from <code class="docutils literal"><span class="pre">python</span></code> to <code class="docutils literal"><span class="pre">python2</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most ESP32 development boards have a 40MHz crystal installed. However, some boards use a 26MHz crystal. If your board uses a 26MHz crystal, or you get garbage output from serial port after code upload, adjust the <a class="reference internal" href="../api-reference/kconfig.html#config-esp32-xtal-freq-sel"><span class="std std-ref">ESP32_XTAL_FREQ_SEL</span></a> option in menuconfig.</p>
+</div>
+</div>
+<div class="section" id="build-and-flash">
+<span id="get-started-build-flash"></span><h2>Build and Flash<a class="headerlink" href="index.html#build-and-flash" title="Permalink to this headline">¶</a></h2>
+<p>Now you can build and flash the application. Run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>make flash
+</pre></div>
+</div>
+<p>This will compile the application and all the ESP-IDF components, generate bootloader, partition table, and application binaries, and flash these binaries to your ESP32 board.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>esptool.py v2.0-beta2
+Flashing binaries to serial port /dev/ttyUSB0 (app at offset 0x10000)...
+esptool.py v2.0-beta2
+Connecting........___
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 921600
+Changed.
+Attaching SPI flash...
+Configuring flash size...
+Auto-detected Flash size: 4MB
+Flash params set to 0x0220
+Compressed 11616 bytes to 6695...
+Wrote 11616 bytes (6695 compressed) at 0x00001000 in 0.1 seconds (effective 920.5 kbit/s)...
+Hash of data verified.
+Compressed 408096 bytes to 171625...
+Wrote 408096 bytes (171625 compressed) at 0x00010000 in 3.9 seconds (effective 847.3 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 82...
+Wrote 3072 bytes (82 compressed) at 0x00008000 in 0.0 seconds (effective 8297.4 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting...
+</pre></div>
+</div>
+<p>If there are no issues, at the end of build process, you should see messages describing progress of loading process. Finally, the end module will be reset and &#8220;hello_world&#8221; application will start.</p>
+<p>If you&#8217;d like to use the Eclipse IDE instead of running <code class="docutils literal"><span class="pre">make</span></code>, check out the <a class="reference internal" href="eclipse-setup.html"><span class="doc">Eclipse guide</span></a>.</p>
+</div>
+<div class="section" id="monitor">
+<span id="get-started-build-monitor"></span><h2>Monitor<a class="headerlink" href="index.html#monitor" title="Permalink to this headline">¶</a></h2>
+<p>To see if &#8220;hello_world&#8221; application is indeed running, type <code class="docutils literal"><span class="pre">make</span> <span class="pre">monitor</span></code>. This command is launching <a class="reference internal" href="idf-monitor.html"><span class="doc">IDF Monitor</span></a> application:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>$ make monitor
+MONITOR
+--- idf_monitor on /dev/ttyUSB0 115200 ---
+--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+ets Jun  8 2016 00:22:57
+...
+</pre></div>
+</div>
+<p>Several lines below, after start up and diagnostic log, you should see &#8220;Hello world!&#8221; printed out by the application.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>...
+Hello world!
+Restarting in 10 seconds...
+I (211) cpu_start: Starting scheduler on APP CPU.
+Restarting in 9 seconds...
+Restarting in 8 seconds...
+Restarting in 7 seconds...
+</pre></div>
+</div>
+<p>To exit monitor use shortcut <code class="docutils literal"><span class="pre">Ctrl+]</span></code>. To execute <code class="docutils literal"><span class="pre">make</span> <span class="pre">flash</span></code> and <code class="docutils literal"><span class="pre">make</span> <span class="pre">monitor</span></code> in one shoot type <code class="docutils literal"><span class="pre">make</span> <span class="pre">flash</span> <span class="pre">monitor</span></code>. Check section <a class="reference internal" href="idf-monitor.html"><span class="doc">IDF Monitor</span></a> for handy shortcuts and more details on using this application.</p>
+<p>That&#8217;s all what you need to get started with ESP32!</p>
+<p>Now you are ready to try some other <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples">examples</a>, or go right to developing your own applications.</p>
+</div>
+<div class="section" id="updating-esp-idf">
+<h2>Updating ESP-IDF<a class="headerlink" href="index.html#updating-esp-idf" title="Permalink to this headline">¶</a></h2>
+<p>After some time of using ESP-IDF, you may want to update it to take advantage of new features or bug fixes. The simplest way to do so is by deleting existing <code class="docutils literal"><span class="pre">esp-idf</span></code> folder and cloning it again, exactly as when doing initial installation described in sections <a class="reference internal" href="index.html#get-started-get-esp-idf"><span class="std std-ref">Get ESP-IDF</span></a>.</p>
+<p>Another solution is to update only what has changed. This method is useful if you have slow connection to the GiHub. To do the update run the following commands:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>cd ~/esp/esp-idf
+git pull
+git submodule update --init --recursive
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></code> command is fetching and merging changes from ESP-IDF repository on GitHub. Then <code class="docutils literal"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--init</span> <span class="pre">--recursive</span></code> is updating existing submodules or getting a fresh copy of new ones. On GitHub the submodules are represented as links to other repositories and require this additional command to get them onto your PC.</p>
+<p>If you would like to use specific release of ESP-IDF, e.g. <cite>v2.1</cite>, run:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>cd ~/esp
+git clone https://github.com/espressif/esp-idf.git esp-idf-v2.1
+cd esp-idf-v2.1/
+git checkout v2.1
+git submodule update --init --recursive
+</pre></div>
+</div>
+<p>After that remember to <a class="reference internal" href="add-idf_path-to-profile.html"><span class="doc">Add IDF_PATH to User Profile</span></a>, so the toolchain scripts know where to find the ESP-IDF in it&#8217;s release specific location.</p>
+</div>
+<div class="section" id="related-documents">
+<h2>Related Documents<a class="headerlink" href="index.html#related-documents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="add-idf_path-to-profile.html">Add IDF_PATH to User Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="establish-serial-connection.html">Establish Serial Connection with ESP32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="make-project.html">Build and Flash with Make</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eclipse-setup.html">Build and Flash with Eclipse IDE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="idf-monitor.html">IDF Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="toolchain-setup-scratch.html">Customized Setup of Toolchain</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="get-started-devkitc.html" class="btn btn-neutral float-right" title="ESP32-DevKitC Getting Started Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="ESP-IDF Programming Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Over The Air Updates (OTA) &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="System API" href="index.html"/>
+        <link rel="next" title="Sleep Modes" href="sleep_modes.html"/>
+        <link rel="prev" title="Watchdogs" href="wdts.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mem_alloc.html">Heap Memory Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_debug.html">Heap Memory Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr_alloc.html">Interrupt Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wdts.html">Watchdogs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="ota.html#">Over The Air Updates (OTA)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ota.html#ota-process-overview">OTA Process Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ota.html#ota-data-partition">OTA Data Partition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ota.html#see-also">See also</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ota.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ota.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sleep_modes.html">Sleep Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base_mac_address.html">Base MAC address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">System API</a> &raquo;</li>
+        
+      <li>Over The Air Updates (OTA)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/system/ota.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="over-the-air-updates-ota">
+<h1>Over The Air Updates (OTA)<a class="headerlink" href="ota.html#over-the-air-updates-ota" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ota-process-overview">
+<h2>OTA Process Overview<a class="headerlink" href="ota.html#ota-process-overview" title="Permalink to this headline">¶</a></h2>
+<p>The OTA update mechanism allows a device to update itself based on data received while the normal firmware is running
+(for example, over WiFi or Bluetooth.)</p>
+<p>OTA requires configuring the <a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">Partition Table</span></a> of the device with at least two &#8220;OTA app slot&#8221;
+partitions (ie <cite>ota_0</cite> and <cite>ota_1</cite>) and an &#8220;OTA Data Partition&#8221;.</p>
+<p>The OTA operation functions write a new app firmware image to whichever OTA app slot is not currently being used for
+booting. Once the image is verified, the OTA Data partition is updated to specify that this image should be used for the
+next boot.</p>
+</div>
+<div class="section" id="ota-data-partition">
+<span id="id1"></span><h2>OTA Data Partition<a class="headerlink" href="ota.html#ota-data-partition" title="Permalink to this headline">¶</a></h2>
+<p>An OTA data partition (type <code class="docutils literal"><span class="pre">data</span></code>, subtype <code class="docutils literal"><span class="pre">ota</span></code>) must be included in the <a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">Partition Table</span></a>
+of any project which uses the OTA functions.</p>
+<p>For factory boot settings, the OTA data partition should contain no data (all bytes erased to 0xFF). In this case the
+esp-idf software bootloader will boot the factory app if it is present in the the partition table. If no factory app is
+included in the partition table, the first available OTA slot (usually <code class="docutils literal"><span class="pre">ota_0</span></code>) is booted.</p>
+<p>After the first OTA update, the OTA data partition is updated to specify which OTA app slot partition should be booted next.</p>
+<p>The OTA data partition is two flash sectors (0x2000 bytes) in size, to prevent problems if there is a power failure
+while it is being written. Sectors are independently erased and written with matching data, and if they disagree a
+counter field is used to determine which sector was written more recently.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="ota.html#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">Partition Table documentation</span></a></li>
+<li><a class="reference internal" href="../storage/spi_flash.html"><span class="doc">Lower-Level SPI Flash/Partition API</span></a></li>
+</ul>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="ota.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>End-to-end example of OTA firmware update workflow: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/system/ota">system/ota</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="ota.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="ota.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/app_update/include/esp_ota_ops.h">app_update/include/esp_ota_ops.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="ota.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv213esp_ota_beginPK15esp_partition_t6size_tP16esp_ota_handle_t">
+<span id="esp_ota_begin__esp_partition_tCP.s.esp_ota_handle_tP"></span><span class="target" id="esp__ota__ops_8h_1a9bc45e766f0a06a9aea5c3554451fbfd"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_ota_begin</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, size_t <em>image_size</em>, <a class="reference internal" href="ota.html#_CPPv216esp_ota_handle_t" title="esp_ota_handle_t">esp_ota_handle_t</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv213esp_ota_beginPK15esp_partition_t6size_tP16esp_ota_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Commence an OTA update writing to the specified partition. </p>
+<p>The specified partition is erased to the specified image size.</p>
+<p>If image size is not yet known, pass OTA_SIZE_UNKNOWN which will cause the entire partition to be erased.</p>
+<p>On success, this function allocates memory that remains in use until esp_ota_end() is called with the returned handle.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: OTA operation commenced successfully.</li>
+<li>ESP_ERR_INVALID_ARG: partition or out_handle arguments were NULL, or partition doesn&#8217;t point to an OTA app partition.</li>
+<li>ESP_ERR_NO_MEM: Cannot allocate memory for OTA operation.</li>
+<li>ESP_ERR_OTA_PARTITION_CONFLICT: Partition holds the currently running firmware, cannot update in place.</li>
+<li>ESP_ERR_NOT_FOUND: Partition argument not found in partition table.</li>
+<li>ESP_ERR_OTA_SELECT_INFO_INVALID: The OTA data partition contains invalid data.</li>
+<li>ESP_ERR_INVALID_SIZE: Partition doesn&#8217;t fit in configured flash size.</li>
+<li>ESP_ERR_FLASH_OP_TIMEOUT or ESP_ERR_FLASH_OP_FAIL: Flash write failed. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to info for partition which will receive the OTA update. Required. </li>
+<li><code class="docutils literal"><span class="pre">image_size</span></code>: Size of new OTA app image. Partition will be erased in order to receive this size of image. If 0 or OTA_SIZE_UNKNOWN, the entire partition is erased. </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: On success, returns a handle which should be used for subsequent esp_ota_write() and esp_ota_end() calls.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213esp_ota_write16esp_ota_handle_tPKv6size_t">
+<span id="esp_ota_write__esp_ota_handle_t.voidCP.s"></span><span class="target" id="esp__ota__ops_8h_1ad0c82589787238cceee85d384ff94963"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_ota_write</code><span class="sig-paren">(</span><a class="reference internal" href="ota.html#_CPPv216esp_ota_handle_t" title="esp_ota_handle_t">esp_ota_handle_t</a> <em>handle</em>, <em class="property">const</em> void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv213esp_ota_write16esp_ota_handle_tPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write OTA update data to partition. </p>
+<p>This function can be called multiple times as data is received during the OTA operation. Data is written sequentially to the partition.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: Data was written to flash successfully.</li>
+<li>ESP_ERR_INVALID_ARG: handle is invalid.</li>
+<li>ESP_ERR_OTA_VALIDATE_FAILED: First byte of image contains invalid app image magic byte.</li>
+<li>ESP_ERR_FLASH_OP_TIMEOUT or ESP_ERR_FLASH_OP_FAIL: Flash write failed.</li>
+<li>ESP_ERR_OTA_SELECT_INFO_INVALID: OTA data partition has invalid contents </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from esp_ota_begin </li>
+<li><code class="docutils literal"><span class="pre">data</span></code>: Data buffer to write </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of data buffer in bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv211esp_ota_end16esp_ota_handle_t">
+<span id="esp_ota_end__esp_ota_handle_t"></span><span class="target" id="esp__ota__ops_8h_1a5431fefb9be82295bdf5f10cb94bd3ec"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_ota_end</code><span class="sig-paren">(</span><a class="reference internal" href="ota.html#_CPPv216esp_ota_handle_t" title="esp_ota_handle_t">esp_ota_handle_t</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv211esp_ota_end16esp_ota_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Finish OTA update and validate newly written app image. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>After calling esp_ota_end(), the handle is no longer valid and any memory associated with it is freed (regardless of result).</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: Newly written OTA app image is valid.</li>
+<li>ESP_ERR_NOT_FOUND: OTA handle was not found.</li>
+<li>ESP_ERR_INVALID_ARG: Handle was never written to.</li>
+<li>ESP_ERR_OTA_VALIDATE_FAILED: OTA image is invalid (either not a valid app image, or - if secure boot is enabled - signature failed to verify.)</li>
+<li>ESP_ERR_INVALID_STATE: If flash encryption is enabled, this result indicates an internal error writing the final encrypted bytes to flash. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Handle obtained from esp_ota_begin().</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226esp_ota_set_boot_partitionPK15esp_partition_t">
+<span id="esp_ota_set_boot_partition__esp_partition_tCP"></span><span class="target" id="esp__ota__ops_8h_1ae3f26950d63f174fa47bbf885c189973"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_ota_set_boot_partition</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em><span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv226esp_ota_set_boot_partitionPK15esp_partition_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure OTA data for a new boot partition. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>If this function returns ESP_OK, calling esp_restart() will boot the newly configured app partition.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: OTA data updated, next reboot will use specified partition.</li>
+<li>ESP_ERR_INVALID_ARG: partition argument was NULL or didn&#8217;t point to a valid OTA partition of type &#8220;app&#8221;.</li>
+<li>ESP_ERR_OTA_VALIDATE_FAILED: Partition contained invalid app image. Also returned if secure boot is enabled and signature validation failed.</li>
+<li>ESP_ERR_NOT_FOUND: OTA data partition not found.</li>
+<li>ESP_ERR_FLASH_OP_TIMEOUT or ESP_ERR_FLASH_OP_FAIL: Flash erase or write failed. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: Pointer to info for partition containing app image to boot.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226esp_ota_get_boot_partitionv">
+<span id="esp_ota_get_boot_partition__void"></span><span class="target" id="esp__ota__ops_8h_1a3e57c41765c566b104695782c39b123c"></span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_ota_get_boot_partition</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv226esp_ota_get_boot_partitionv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get partition info of currently configured boot app. </p>
+<p>If esp_ota_set_boot_partition() has been called, the partition which was set by that function will be returned.</p>
+<p>If esp_ota_set_boot_partition() has not been called, the result is usually the same as esp_ota_get_running_partition(). The two results are not equal if the configured boot partition does not contain a valid app (meaning that the running partition will be an app that the bootloader chose via fallback).</p>
+<p>If the OTA data partition is not present or not valid then the result is the first app partition found in the partition table. In priority order, this means: the factory app, the first OTA app slot, or the test app partition.</p>
+<p>Note that there is no guarantee the returned partition is a valid app. Use esp_image_load(ESP_IMAGE_VERIFY, ...) to verify if the returned partition contains a bootable image.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to info for partition structure, or NULL if partition table is invalid or a flash read operation failed. Any returned pointer is valid for the lifetime of the application. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv229esp_ota_get_running_partitionv">
+<span id="esp_ota_get_running_partition__void"></span><span class="target" id="esp__ota__ops_8h_1a6c7acddf42c3ae03cf51f79d74145318"></span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_ota_get_running_partition</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv229esp_ota_get_running_partitionv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get partition info of currently running app. </p>
+<p>This function is different to esp_ota_get_boot_partition() in that it ignores any change of selected boot partition caused by esp_ota_set_boot_partition(). Only the app whose code is currently running will have its partition information returned.</p>
+<p>The partition returned by this function may also differ from esp_ota_get_boot_partition() if the configured boot partition is somehow invalid, and the bootloader fell back to a different app partition at boot.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to info for partition structure, or NULL if no partition is found or flash read operation failed. Returned pointer is valid for the lifetime of the application. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv233esp_ota_get_next_update_partitionPK15esp_partition_t">
+<span id="esp_ota_get_next_update_partition__esp_partition_tCP"></span><span class="target" id="esp__ota__ops_8h_1a4a618c8388b2a5b47f0998533f8fd493"></span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<code class="descclassname"></code><code class="descname">esp_ota_get_next_update_partition</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="../storage/spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>start_from</em><span class="sig-paren">)</span><a class="headerlink" href="ota.html#_CPPv233esp_ota_get_next_update_partitionPK15esp_partition_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the next OTA app partition which should be written with a new firmware. </p>
+<p>Call this function to find an OTA app partition which can be passed to esp_ota_begin().</p>
+<p>Finds next partition round-robin, starting from the current running partition.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Pointer to info for partition which should be updated next. NULL result indicates invalid OTA data partition, or that no eligible OTA app slot partition was found. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">start_from</span></code>: If set, treat this partition info as describing the current running partition. Can be NULL, in which case esp_ota_get_running_partition() is used to find the currently running partition. The result of this function is never the same as this argument.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="ota.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.OTA_SIZE_UNKNOWN">
+<span class="target" id="esp__ota__ops_8h_1a2b59e5257a669f4d42123b914659b13c"></span><code class="descname">OTA_SIZE_UNKNOWN</code><a class="headerlink" href="ota.html#c.OTA_SIZE_UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used for esp_ota_begin() if new image size is unknown </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_OTA_BASE">
+<span class="target" id="esp__ota__ops_8h_1a82107daeadfd3ec3f89b81a1c05adb3d"></span><code class="descname">ESP_ERR_OTA_BASE</code><a class="headerlink" href="ota.html#c.ESP_ERR_OTA_BASE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base error code for ota_ops api </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_OTA_PARTITION_CONFLICT">
+<span class="target" id="esp__ota__ops_8h_1a41f0ac37858fcd77ce7d016c0d21dba0"></span><code class="descname">ESP_ERR_OTA_PARTITION_CONFLICT</code><a class="headerlink" href="ota.html#c.ESP_ERR_OTA_PARTITION_CONFLICT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error if request was to write or erase the current running partition </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_OTA_SELECT_INFO_INVALID">
+<span class="target" id="esp__ota__ops_8h_1ade03c22c871db65a35ea0cb9b12d4bb2"></span><code class="descname">ESP_ERR_OTA_SELECT_INFO_INVALID</code><a class="headerlink" href="ota.html#c.ESP_ERR_OTA_SELECT_INFO_INVALID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error if OTA data partition contains invalid content </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_OTA_VALIDATE_FAILED">
+<span class="target" id="esp__ota__ops_8h_1ab1216d6e362b43c5aa6e8a801d4f267a"></span><code class="descname">ESP_ERR_OTA_VALIDATE_FAILED</code><a class="headerlink" href="ota.html#c.ESP_ERR_OTA_VALIDATE_FAILED" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error if OTA app image is invalid </p>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="ota.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv216esp_ota_handle_t">
+<span id="esp_ota_handle_t"></span><span class="target" id="esp__ota__ops_8h_1ab59b49499007fc1d23ff9da4e311f63f"></span><em class="property">typedef </em>uint32_t <code class="descclassname"></code><code class="descname">esp_ota_handle_t</code><a class="headerlink" href="ota.html#_CPPv216esp_ota_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opaque handle for an application OTA update. </p>
+<p>esp_ota_begin() returns a handle which is then used for subsequent calls to esp_ota_write() and esp_ota_end(). </p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sleep_modes.html" class="btn btn-neutral float-right" title="Sleep Modes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wdts.html" class="btn btn-neutral" title="Watchdogs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

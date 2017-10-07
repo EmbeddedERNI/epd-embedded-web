@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Watchdogs &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="System API" href="index.html"/>
+        <link rel="next" title="Over The Air Updates (OTA)" href="ota.html"/>
+        <link rel="prev" title="Interrupt allocation" href="intr_alloc.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mem_alloc.html">Heap Memory Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_debug.html">Heap Memory Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr_alloc.html">Interrupt Allocation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="wdts.html#">Watchdogs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="wdts.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wdts.html#api-reference">API Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wdts.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ota.html">Over The Air Updates (OTA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep_modes.html">Sleep Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base_mac_address.html">Base MAC address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">System API</a> &raquo;</li>
+        
+      <li>Watchdogs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/system/wdts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="watchdogs">
+<h1>Watchdogs<a class="headerlink" href="wdts.html#watchdogs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="wdts.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>Esp-idf has support for two types of watchdogs: a task watchdog as well as an interrupt watchdog. Both can be
+enabled using <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code> and selecting the appropriate options.</p>
+<div class="section" id="interrupt-watchdog">
+<h3>Interrupt watchdog<a class="headerlink" href="wdts.html#interrupt-watchdog" title="Permalink to this headline">¶</a></h3>
+<p>The interrupt watchdog makes sure the FreeRTOS task switching interrupt isn&#8217;t blocked for a long time. This
+is bad because no other tasks, including potentially important ones like the WiFi task and the idle task,
+can&#8217;t get any CPU runtime. A blocked task switching interrupt can happen because a program runs into an
+infinite loop with interrupts disabled or hangs in an interrupt.</p>
+<p>The default action of the interrupt watchdog is to invoke the panic handler. causing a register dump and an opportunity
+for the programmer to find out, using either OpenOCD or gdbstub, what bit of code is stuck with interrupts
+disabled. Depending on the configuration of the panic handler, it can also blindly reset the CPU, which may be
+preferred in a production environment.</p>
+<p>The interrupt watchdog is built around the hardware watchdog in timer group 1. If this watchdog for some reason
+cannot execute the NMI handler that invokes the panic handler (e.g. because IRAM is overwritten by garbage),
+it will hard-reset the SOC.</p>
+</div>
+<div class="section" id="task-watchdog">
+<h3>Task watchdog<a class="headerlink" href="wdts.html#task-watchdog" title="Permalink to this headline">¶</a></h3>
+<p>Any tasks can elect to be watched by the task watchdog. If such a task does not feed the watchdog within the time
+specified by the task watchdog timeout (which is configurable using <code class="docutils literal"><span class="pre">make</span> <span class="pre">menuconfig</span></code>), the watchdog will
+print out a warning with information about which processes are running on the ESP32 CPUs and which processes
+failed to feed the watchdog.</p>
+<p>By default, the task watchdog watches the idle tasks. The usual cause of idle tasks not feeding the watchdog
+is a higher-priority process looping without yielding to the lower-priority processes, and can be an indicator
+of badly-written code that spinloops on a peripheral or a task that is stuck in an infinite loop.</p>
+<p>Other task can elect to be watched by the task watchdog by calling <code class="docutils literal"><span class="pre">esp_task_wdt_feed()</span></code>. Calling this routine
+for the first time will register the task to the task watchdog; calling it subsequent times will feed
+the watchdog. If a task does not want to be watched anymore (e.g. because it is finished and will call
+<code class="docutils literal"><span class="pre">vTaskDelete()</span></code> on itself), it needs to call <code class="docutils literal"><span class="pre">esp_task_wdt_delete()</span></code>.</p>
+<p>The task watchdog is built around the hardware watchdog in timer group 0. If this watchdog for some reason
+cannot execute the interrupt handler that prints the task data (e.g. because IRAM is overwritten by garbage
+or interrupts are disabled entirely) it will hard-reset the SOC.</p>
+</div>
+<div class="section" id="jtag-and-watchdogs">
+<h3>JTAG and watchdogs<a class="headerlink" href="wdts.html#jtag-and-watchdogs" title="Permalink to this headline">¶</a></h3>
+<p>While debugging using OpenOCD, if the CPUs are halted the watchdogs will keep running, eventually resetting the
+CPU. This makes it very hard to debug code; that is why the OpenOCD config will disable both watchdogs on startup.
+This does mean that you will not get any warnings or panics from either the task or interrupt watchdog when the ESP32
+is connected to OpenOCD via JTAG.</p>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="wdts.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-files">
+<h3>Header Files<a class="headerlink" href="wdts.html#header-files" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/esp32/include/esp_int_wdt.h">esp32/include/esp_int_wdt.h</a></li>
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/esp32/include/esp_task_wdt.h">esp32/include/esp_task_wdt.h</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="wdts.html#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv216esp_int_wdt_initv">
+<span id="esp_int_wdt_init"></span><span class="target" id="group__Watchdog__APIs_1gaf5fe2c16eb06755802da89ae46dd21b6"></span>void <code class="descclassname"></code><code class="descname">esp_int_wdt_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="wdts.html#_CPPv216esp_int_wdt_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the interrupt watchdog. This is called in the init code if the interrupt watchdog is enabled in menuconfig. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_task_wdt_initv">
+<span id="esp_task_wdt_init"></span><span class="target" id="group__Watchdog__APIs_1gacb95ceb7c0da95f28445ad19f13c2833"></span>void <code class="descclassname"></code><code class="descname">esp_task_wdt_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="wdts.html#_CPPv217esp_task_wdt_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the task watchdog. This is called in the init code, if the task watchdog is enabled in menuconfig. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_task_wdt_feedv">
+<span id="esp_task_wdt_feed"></span><span class="target" id="group__Watchdog__APIs_1ga9f749c8e01fc934f276d2516f4dfb900"></span>void <code class="descclassname"></code><code class="descname">esp_task_wdt_feed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="wdts.html#_CPPv217esp_task_wdt_feedv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Feed the watchdog. After the first feeding session, the watchdog will expect the calling task to keep feeding the watchdog until task_wdt_delete() is called. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_task_wdt_deletev">
+<span id="esp_task_wdt_delete"></span><span class="target" id="group__Watchdog__APIs_1ga52a7c194f9d5eb9c592c82f574ce125b"></span>void <code class="descclassname"></code><code class="descname">esp_task_wdt_delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="wdts.html#_CPPv219esp_task_wdt_deletev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete the watchdog for the current task. </p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ota.html" class="btn btn-neutral float-right" title="Over The Air Updates (OTA)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intr_alloc.html" class="btn btn-neutral" title="Interrupt allocation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

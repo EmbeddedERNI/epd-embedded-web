@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ESP32 Modules and Boards &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="ESP32 Hardware Reference" href="index.html"/>
+        <link rel="next" title="API Guides" href="../api-guides/index.html"/>
+        <link rel="prev" title="ESP32 Hardware Reference" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">H/W Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf">Technical Reference Manual (PDF)</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf">Datasheet (PDF)</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf">Hardware Design Guidelines (PDF)</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://espressif.com/sites/default/files/documentation/eco_and_workarounds_for_bugs_in_esp32_en.pdf">Silicon Errata (PDF)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="modules-and-boards.html#">Modules and Boards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules-and-boards.html#esp-wroom-32">ESP-WROOM-32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules-and-boards.html#esp32-wrover">ESP32-WROVER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules-and-boards.html#esp32-core-board-v2-esp32-devkitc">ESP32 Core Board V2 / ESP32 DevKitC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules-and-boards.html#esp32-demo-board-v2">ESP32 Demo Board V2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules-and-boards.html#esp-wrover-kit">ESP-WROVER-KIT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modules-and-boards.html#esp-wrover-kit-v1-esp32-devkitj-v1">ESP-WROVER-KIT V1 / ESP32 DevKitJ V1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules-and-boards.html#esp-wrover-kit-v2">ESP-WROVER-KIT V2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules-and-boards.html#esp-wrover-kit-v3">ESP-WROVER-KIT V3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">ESP32 Hardware Reference</a> &raquo;</li>
+        
+      <li>ESP32 Modules and Boards</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/hw-reference/modules-and-boards.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="esp32-modules-and-boards">
+<span id="esp-modules-and-boards"></span><h1>ESP32 Modules and Boards<a class="headerlink" href="modules-and-boards.html#esp32-modules-and-boards" title="Permalink to this headline">¶</a></h1>
+<p>Espressif designed and manufactured several development modules and boards to help users evaluate functionality of ESP32 chip. Development boards, depending on intended functionality, have exposed GPIO pins headers, provide USB programming interface, JTAG interface as well as peripherals like touch pads, LCD screen, SD card slot, camera module header, etc.</p>
+<p>For details please refer to documentation below, provided together with description of particular boards.</p>
+<div class="section" id="esp-wroom-32">
+<span id="esp-modules-and-boards-esp-wroom-32"></span><h2>ESP-WROOM-32<a class="headerlink" href="modules-and-boards.html#esp-wroom-32" title="Permalink to this headline">¶</a></h2>
+<p>The smallest module intended for installation in final products. Can be also used for evaluation after adding extra components like programming interface, boot strapping resistors and break out headers.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp-wroom-32.jpg"><img alt="ESP-WROOM-32 module (front and back)" src="../../../../dl/schematics/pictures/esp-wroom-32.jpg" style="width: 40%;" /></a>
+<p class="caption"><span class="caption-text">ESP-WROOM-32 module (front and back)</span></p>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP-WROOM-32-v3.2_sch.pdf">Schematic</a> (PDF)</li>
+<li><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp-wroom-32_datasheet_en.pdf">Datasheet</a> (PDF)</li>
+<li><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_module_reference_design.zip">ESP32 Module Reference Design</a> (ZIP) containing OrCAD schematic, PCB layout, gerbers and BOM</li>
+</ul>
+</div>
+<div class="section" id="esp32-wrover">
+<span id="esp-modules-and-boards-esp32-wrover"></span><h2>ESP32-WROVER<a class="headerlink" href="modules-and-boards.html#esp32-wrover" title="Permalink to this headline">¶</a></h2>
+<p>A step upgrade of ESP-WROOM-32 described above with an additional 4 MB SPI PSRAM (Pseudo static RAM). Module is provided in two versions: &#8216;ESP32-WROVER&#8217; with PCB antenna (shown below) and &#8216;ESP32-WROVER-I&#8217; with an IPEX antenna.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp32-wrover.jpg"><img alt="ESP32-WROVER module (front and back)" src="../../../../dl/schematics/pictures/esp32-wrover.jpg" style="width: 40%;" /></a>
+<p class="caption"><span class="caption-text">ESP32-WROVER module (front and back)</span></p>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32-wrover_datasheet_en.pdf">Datasheet</a> (PDF)</li>
+<li><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp-psram32_datasheet_en.pdf">ESP-PSRAM32 Datasheet</a> (PDF)</li>
+</ul>
+</div>
+<div class="section" id="esp32-core-board-v2-esp32-devkitc">
+<span id="esp-modules-and-boards-esp32-devkitc"></span><h2>ESP32 Core Board V2 / ESP32 DevKitC<a class="headerlink" href="modules-and-boards.html#esp32-core-board-v2-esp32-devkitc" title="Permalink to this headline">¶</a></h2>
+<p>Small and convenient development board with ESP-WROOM-32 module installed, break out pin headers and minimum additional components. Includes USB to serial programming interface, that also provides power supply for the board. Has press buttons to reset the board and put it in upload mode.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp32-core-board-v2.jpg"><img alt="ESP32 Core Board V2 / ESP32 DevKitC board" src="../../../../dl/schematics/pictures/esp32-core-board-v2.jpg" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-text">ESP32 Core Board V2 / ESP32 DevKitC board</span></p>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP32-Core-Board-V2_sch.pdf">Schematic</a> (PDF)</li>
+<li><a class="reference external" href="https://espressif.com/sites/default/files/documentation/esp32_development_board_reference_design.zip">ESP32 Development Board Reference Design</a> (ZIP) containing OrCAD schematic, PCB layout, gerbers and BOM</li>
+<li><a class="reference internal" href="../get-started/get-started-devkitc.html"><span class="doc">ESP32-DevKitC Getting Started Guide</span></a></li>
+<li><a class="reference external" href="https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers">CP210x USB to UART Bridge VCP Drivers</a></li>
+</ul>
+</div>
+<div class="section" id="esp32-demo-board-v2">
+<span id="esp-modules-and-boards-esp32-demo-board-v2"></span><h2>ESP32 Demo Board V2<a class="headerlink" href="modules-and-boards.html#esp32-demo-board-v2" title="Permalink to this headline">¶</a></h2>
+<p>One of first feature rich evaluation boards that contains several pin headers, dip switches, USB to serial programming interface, reset and boot mode press buttons, power switch, 10 touch pads and separate header to connect LCD screen.</p>
+<div class="figure align-center" id="id4">
+<img alt="ESP32 Demo Board V2" src="../../../../dl/schematics/pictures/esp32-demo-board-v2.jpg" />
+<p class="caption"><span class="caption-text">ESP32 Demo Board V2</span></p>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP32-Demo-Board-V2_sch.pdf">Schematic</a> (PDF)</li>
+<li><a class="reference external" href="http://www.ftdichip.com/Drivers/D2XX.htm">FTDI Virtual COM Port Drivers</a></li>
+</ul>
+</div>
+<div class="section" id="esp-wrover-kit">
+<span id="esp-modules-and-boards-esp-wrover-kit"></span><h2>ESP-WROVER-KIT<a class="headerlink" href="modules-and-boards.html#esp-wrover-kit" title="Permalink to this headline">¶</a></h2>
+<p>This section describes several revisions of ESP-WROVER-KIT development board.</p>
+<p>All versions of ESP-WROVER-KIT are ready to accommodate an <a class="reference internal" href="modules-and-boards.html#esp-modules-and-boards-esp-wroom-32"><span class="std std-ref">ESP-WROOM-32</span></a> or <a class="reference internal" href="modules-and-boards.html#esp-modules-and-boards-esp32-wrover"><span class="std std-ref">ESP32-WROVER</span></a> module.</p>
+<p>ESP-WROVER-KIT has dual port USB to serial converter for programming and JTAG interface for debugging. Power supply is provided by USB interface or from standard 5 mm power supply jack. Power supply selection is done with a jumper and may be put on/off with a separate switch. The board has MicroSD card slot, 3.2” SPI LCD screen and dedicated header to connect a camera. It provides RGB diode for diagnostics. Includes 32.768 kHz XTAL for internal RTC to operate it in low power modes.</p>
+<div class="section" id="esp-wrover-kit-v1-esp32-devkitj-v1">
+<span id="esp-modules-and-boards-esp-wrover-kit-v1"></span><h3>ESP-WROVER-KIT V1 / ESP32 DevKitJ V1<a class="headerlink" href="modules-and-boards.html#esp-wrover-kit-v1-esp32-devkitj-v1" title="Permalink to this headline">¶</a></h3>
+<p>First version of ESP-WROVER-KIT. Shipped with ESP-WROOM-32 on board.</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp32-devkitj-v1.jpg"><img alt="ESP-WROVER-KIT V1 / ESP32 DevKitJ V1 board" src="../../../../dl/schematics/pictures/esp32-devkitj-v1.jpg" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-text">ESP-WROVER-KIT V1 / ESP32 DevKitJ V1 board</span></p>
+</div>
+<p>The board has red soldermask.</p>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP32-DevKitJ-v1_sch.pdf">Schematic</a> (PDF)</li>
+<li><a class="reference internal" href="../api-guides/jtag-debugging/index.html"><span class="doc">JTAG Debugging</span></a></li>
+<li><a class="reference external" href="http://www.ftdichip.com/Drivers/D2XX.htm">FTDI Virtual COM Port Drivers</a></li>
+</ul>
+</div>
+<div class="section" id="esp-wrover-kit-v2">
+<span id="esp-modules-and-boards-esp-wrover-kit-v2"></span><h3>ESP-WROVER-KIT V2<a class="headerlink" href="modules-and-boards.html#esp-wrover-kit-v2" title="Permalink to this headline">¶</a></h3>
+<p>This is updated version of ESP32 DevKitJ V1 described above with design improvements identified when DevKitJ was in use, e.g. improved support for SD card. By default board has ESP-WROOM-32 module installed.</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp-wrover-kit-v2.jpg"><img alt="ESP-WROVER-KIT V2 board" src="../../../../dl/schematics/pictures/esp-wrover-kit-v2.jpg" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-text">ESP-WROVER-KIT V2 board</span></p>
+</div>
+<p>Comparing to previous version, this board has a shiny black finish and a male camera header.</p>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP-WROVER-KIT_SCH-2.pdf">Schematic V2</a> (PDF)</li>
+<li><a class="reference internal" href="../get-started/get-started-wrover-kit-v2.html"><span class="doc">ESP-WROVER-KIT V2 Getting Started Guide</span></a></li>
+<li><a class="reference internal" href="../api-guides/jtag-debugging/index.html"><span class="doc">JTAG Debugging</span></a></li>
+<li><a class="reference external" href="http://www.ftdichip.com/Drivers/D2XX.htm">FTDI Virtual COM Port Drivers</a></li>
+</ul>
+</div>
+<div class="section" id="esp-wrover-kit-v3">
+<span id="esp-modules-and-boards-esp-wrover-kit-v3"></span><h3>ESP-WROVER-KIT V3<a class="headerlink" href="modules-and-boards.html#esp-wrover-kit-v3" title="Permalink to this headline">¶</a></h3>
+<p>The first release of ESP-WROVER-KIT shipped with ESP32-WROVER module installed by default. This release also introduced several design changes to conditioning and interlocking of signals to the bootstrapping pins. Also, a zero Ohm resistor (R166) has been added between WROVER/WROOM module and VDD33 net, which can be desoldered, or replaced with a shunt resistor, for current measurement. This is intended to facilitate power consumption analysis in various operation modes of ESP32. Refer to schematic - the changes are enclosed in green border.</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="../../../../dl/schematics/pictures/esp-wrover-kit-v3.jpg"><img alt="ESP-WROVER-KIT V3 board" src="../../../../dl/schematics/pictures/esp-wrover-kit-v3.jpg" style="width: 90%;" /></a>
+<p class="caption"><span class="caption-text">ESP-WROVER-KIT V3 board</span></p>
+</div>
+<p>The camera header has been changed from male back to female. The board soldermask is matte black. The board on picture above has ESP32-WROVER is installed.</p>
+<ul class="simple">
+<li><a class="reference external" href="../../../../dl/schematics/ESP-WROVER-KIT_SCH-3.pdf">Schematic V3</a> (PDF)</li>
+<li><a class="reference internal" href="../get-started/get-started-wrover-kit.html"><span class="doc">ESP-WROVER-KIT V3 Getting Started Guide</span></a></li>
+<li><a class="reference internal" href="../api-guides/jtag-debugging/index.html"><span class="doc">JTAG Debugging</span></a></li>
+<li><a class="reference external" href="http://www.ftdichip.com/Drivers/D2XX.htm">FTDI Virtual COM Port Drivers</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api-guides/index.html" class="btn btn-neutral float-right" title="API Guides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="ESP32 Hardware Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

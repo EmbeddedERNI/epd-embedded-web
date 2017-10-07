@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setup Toolchain for Mac OS from Scratch &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../index.html"/>
+        <link rel="up" title="Standard Setup of Toolchain for Mac OS" href="macos-setup.html"/>
+        <link rel="next" title="Add IDF_PATH to User Profile" href="add-idf_path-to-profile.html"/>
+        <link rel="prev" title="Standard Setup of Toolchain for Mac OS" href="macos-setup.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-need">What You Need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#guides">Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#setup-toolchain">Setup Toolchain</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="windows-setup.html">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-setup.html">Linux</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="macos-setup.html">MacOS</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#install-prerequisites">Install Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#toolchain-setup">Toolchain Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#next-steps">Next Steps</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="macos-setup.html#related-documents">Related Documents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#get-esp-idf">Get ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#setup-path-to-esp-idf">Setup Path to ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#start-a-project">Start a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#connect">Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#configure">Configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#build-and-flash">Build and Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#monitor">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#updating-esp-idf">Updating ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#related-documents">Related Documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Get Started</a> &raquo;</li>
+        
+          <li><a href="macos-setup.html">Standard Setup of Toolchain for Mac OS</a> &raquo;</li>
+        
+      <li>Setup Toolchain for Mac OS from Scratch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get-started/macos-setup-scratch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setup-toolchain-for-mac-os-from-scratch">
+<h1>Setup Toolchain for Mac OS from Scratch<a class="headerlink" href="macos-setup-scratch.html#setup-toolchain-for-mac-os-from-scratch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-prerequisites">
+<h2>Install Prerequisites<a class="headerlink" href="macos-setup-scratch.html#install-prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">install pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">easy_install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">install pyserial:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pyserial</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="compile-the-toolchain-from-source">
+<h2>Compile the Toolchain from Source<a class="headerlink" href="macos-setup-scratch.html#compile-the-toolchain-from-source" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Install dependencies:</p>
+<ul>
+<li><p class="first">Install either <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a> or <a class="reference external" href="https://brew.sh/">homebrew</a> package manager. MacPorts needs a full XCode installation, while homebrew only needs XCode command line tools.</p>
+</li>
+<li><p class="first">with MacPorts:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">gsed</span> <span class="n">gawk</span> <span class="n">binutils</span> <span class="n">gperf</span> <span class="n">grep</span> <span class="n">gettext</span> <span class="n">wget</span> <span class="n">libtool</span> <span class="n">autoconf</span> <span class="n">automake</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">with homebrew:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">gnu</span><span class="o">-</span><span class="n">sed</span> <span class="n">gawk</span> <span class="n">binutils</span> <span class="n">gperftools</span> <span class="n">gettext</span> <span class="n">wget</span> <span class="n">help2man</span> <span class="n">libtool</span> <span class="n">autoconf</span> <span class="n">automake</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<p>Create a case-sensitive filesystem image:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">hdiutil</span> <span class="n">create</span> <span class="o">~/</span><span class="n">esp</span><span class="o">/</span><span class="n">crosstool</span><span class="o">.</span><span class="n">dmg</span> <span class="o">-</span><span class="n">volname</span> <span class="s2">&quot;ctng&quot;</span> <span class="o">-</span><span class="n">size</span> <span class="mi">10</span><span class="n">g</span> <span class="o">-</span><span class="n">fs</span> <span class="s2">&quot;Case-sensitive HFS+&quot;</span>
+</pre></div>
+</div>
+<p>Mount it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">hdiutil</span> <span class="n">mount</span> <span class="o">~/</span><span class="n">esp</span><span class="o">/</span><span class="n">crosstool</span><span class="o">.</span><span class="n">dmg</span>
+</pre></div>
+</div>
+<p>Create a symlink to your work directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">esp</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">Volumes</span><span class="o">/</span><span class="n">ctng</span> <span class="n">crosstool</span><span class="o">-</span><span class="n">NG</span>
+</pre></div>
+</div>
+<p>Download <code class="docutils literal"><span class="pre">crosstool-NG</span></code> and build it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">esp</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">b</span> <span class="n">xtensa</span><span class="o">-</span><span class="mf">1.22</span><span class="o">.</span><span class="n">x</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">espressif</span><span class="o">/</span><span class="n">crosstool</span><span class="o">-</span><span class="n">NG</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">crosstool</span><span class="o">-</span><span class="n">NG</span>
+<span class="o">./</span><span class="n">bootstrap</span> <span class="o">&amp;&amp;</span> <span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">local</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Build the toolchain:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">ct</span><span class="o">-</span><span class="n">ng</span> <span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span>
+<span class="o">./</span><span class="n">ct</span><span class="o">-</span><span class="n">ng</span> <span class="n">build</span>
+<span class="n">chmod</span> <span class="o">-</span><span class="n">R</span> <span class="n">u</span><span class="o">+</span><span class="n">w</span> <span class="n">builds</span><span class="o">/</span><span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span>
+</pre></div>
+</div>
+<p>Toolchain will be built in <code class="docutils literal"><span class="pre">~/esp/crosstool-NG/builds/xtensa-esp32-elf</span></code>. Follow <a class="reference internal" href="macos-setup.html#setup-macos-toolchain-add-it-to-path"><span class="std std-ref">instructions for standard setup</span></a> to add the toolchain to your <code class="docutils literal"><span class="pre">PATH</span></code>.</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="macos-setup-scratch.html#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>To carry on with development environment setup, proceed to section <a class="reference internal" href="index.html#get-started-get-esp-idf"><span class="std std-ref">Get ESP-IDF</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="add-idf_path-to-profile.html" class="btn btn-neutral float-right" title="Add IDF_PATH to User Profile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="macos-setup.html" class="btn btn-neutral" title="Standard Setup of Toolchain for Mac OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

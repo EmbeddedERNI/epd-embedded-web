@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Wear Levelling APIs &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Storage API" href="index.html"/>
+        <link rel="next" title="SPIFFS Filesystem" href="spiffs.html"/>
+        <link rel="prev" title="FAT Filesystem Support" href="fatfs.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spi_flash.html">SPI Flash and Partition APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatfs.html">FAT Filesystem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="wear-levelling.html#">Wear Levelling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#wear-levelling-access-apis">Wear Levelling access APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#memory-size">Memory Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#see-also">See also</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#high-level-api-reference">High level API Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wear-levelling.html#mid-level-api-reference">Mid level API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Storage API</a> &raquo;</li>
+        
+      <li>Wear Levelling APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/storage/wear-levelling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="wear-levelling-apis">
+<h1>Wear Levelling APIs<a class="headerlink" href="wear-levelling.html#wear-levelling-apis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="wear-levelling.html#overview" title="Permalink to this headline">¶</a></h2>
+<p>Most of the flash devices and specially SPI flash devices that are used in ESP32
+have sector based organization and have limited amount of erase/modification cycles
+per memory sector. To avoid situation when one sector reach the limit of erases when
+other sectors was used not often, we have made a component that avoid this situation.
+The wear levelling component share the amount of erases between all sectors in the
+memory without user interaction.
+The wear_levelling component contains APIs related to reading, writing, erasing,
+memory mapping data in the external SPI flash through the partition component. It
+also has higher-level APIs which work with FAT filesystem defined in
+the <a class="reference internal" href="fatfs.html"><span class="doc">FAT filesystem</span></a>.</p>
+<p>The wear levelling component, together with FAT FS component, works with FAT FS sector size 4096
+bytes which is standard size of the flash devices. In this mode the component has best performance,
+but needs additional memoty in the RAM. To save internal memory the component has two additional modes
+to work with sector size 512 bytes: Performance and Safety modes. In Performance mode by erase sector
+operation data will be stored to the RAM, sector will be erased and then data will be stored
+back to the flash. If by this operation power off situation will occur, the complete 4096 bytes
+will be lost. To prevent this the Safety mode was implemented. In safety mode the data will be first
+stored to the flash and after sector will be erased, will be stored back. If power off situation will
+occur, after power on, the data will be recovered.
+By default defined the sector size 512 bytes and Performance mode. To change these values please use
+the configuration menu.</p>
+<p>The wear levelling component does not cache data in RAM. Write and erase functions
+modify flash directly, and flash contents is consistent when the function returns.</p>
+</div>
+<div class="section" id="wear-levelling-access-apis">
+<h2>Wear Levelling access APIs<a class="headerlink" href="wear-levelling.html#wear-levelling-access-apis" title="Permalink to this headline">¶</a></h2>
+<p>This is the set of APIs for working with data in flash:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">wl_mount</span></code> mount wear levelling module for defined partition</li>
+<li><code class="docutils literal"><span class="pre">wl_unmount</span></code> used to unmount levelling module</li>
+<li><code class="docutils literal"><span class="pre">wl_erase_range</span></code> used to erase range of addresses in flash</li>
+<li><code class="docutils literal"><span class="pre">wl_write</span></code> used to write data to the partition</li>
+<li><code class="docutils literal"><span class="pre">wl_read</span></code> used to read data from the partition</li>
+<li><code class="docutils literal"><span class="pre">wl_size</span></code> return size of avalible memory in bytes</li>
+<li><code class="docutils literal"><span class="pre">wl_sector_size</span></code> returns size of one sector</li>
+</ul>
+<p>Generally, try to avoid using the raw wear levelling functions in favor of
+filesystem-specific functions.</p>
+</div>
+<div class="section" id="memory-size">
+<h2>Memory Size<a class="headerlink" href="wear-levelling.html#memory-size" title="Permalink to this headline">¶</a></h2>
+<p>The memory size calculated in the wear Levelling module based on parameters of
+partition. The module use few sectors of flash for internal data.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="wear-levelling.html#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">FAT Filesystem</span></a></li>
+<li><a class="reference internal" href="../../api-guides/partition-tables.html"><span class="doc">Partition Table documentation</span></a></li>
+</ul>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="wear-levelling.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>An example which combines wear levelling driver with FATFS library is provided in <code class="docutils literal"><span class="pre">examples/storage/wear_levelling</span></code> directory. This example initializes the wear levelling driver, mounts FATFS partition, and writes and reads data from it using POSIX and C library APIs. See README.md file in the example directory for more information.</p>
+</div>
+<div class="section" id="high-level-api-reference">
+<h2>High level API Reference<a class="headerlink" href="wear-levelling.html#high-level-api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-files">
+<h3>Header Files<a class="headerlink" href="wear-levelling.html#header-files" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/fatfs/src/esp_vfs_fat.h">fatfs/src/esp_vfs_fat.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="wear-levelling.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv226esp_vfs_fat_spiflash_mountPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t">
+<span id="esp_vfs_fat_spiflash_mount__cCP.cCP.esp_vfs_fat_mount_config_tCP.wl_handle_tP"></span><span class="target" id="esp__vfs__fat_8h_1a6c7fe0ea633b5b10df5fcadb2ccea5d7"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_spiflash_mount</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em>, <em class="property">const</em> char *<em>partition_label</em>, <em class="property">const</em> <a class="reference internal" href="fatfs.html#_CPPv226esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t">esp_vfs_fat_mount_config_t</a> *<em>mount_config</em>, <a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> *<em>wl_handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv226esp_vfs_fat_spiflash_mountPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Convenience function to initialize FAT filesystem in SPI flash and register it in VFS. </p>
+<p>This is an all-in-one function which does the following:</p>
+<p><ul class="simple">
+<li>finds the partition with defined partition_label. Partition label should be configured in the partition table.</li>
+<li>initializes flash wear levelling library on top of the given partition</li>
+<li>mounts FAT partition using FATFS library on top of flash wear levelling library</li>
+<li>registers FATFS library with VFS, with prefix given by base_prefix variable</li>
+</ul>
+</p>
+<p>This function is intended to make example code more compact.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_NOT_FOUND if the partition table does not contain FATFS partition with given label</li>
+<li>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount was already called</li>
+<li>ESP_ERR_NO_MEM if memory can not be allocated</li>
+<li>ESP_FAIL if partition can not be mounted</li>
+<li>other error codes from wear levelling library, SPI flash driver, or FATFS drivers </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: path where FATFS partition should be mounted (e.g. &#8220;/spiflash&#8221;) </li>
+<li><code class="docutils literal"><span class="pre">partition_label</span></code>: label of the partition which should be used </li>
+<li><code class="docutils literal"><span class="pre">mount_config</span></code>: pointer to structure with extra parameters for mounting FATFS </li>
+<li><code class="docutils literal"><span class="pre">wl_handle</span></code>: wear levelling driver handle </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv226esp_vfs_fat_mount_config_t">
+<span id="esp_vfs_fat_mount_config_t"></span><span class="target" id="structesp__vfs__fat__mount__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">esp_vfs_fat_mount_config_t</code><a class="headerlink" href="wear-levelling.html#_CPPv226esp_vfs_fat_mount_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configuration arguments for esp_vfs_fat_sdmmc_mount and esp_vfs_fat_spiflash_mount functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N26esp_vfs_fat_mount_config_t22format_if_mount_failedE">
+<span id="esp_vfs_fat_mount_config_t::format_if_mount_failed__b"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a00a3a5b150759860512e9d44c89232ac"></span>bool <code class="descname">format_if_mount_failed</code><a class="headerlink" href="wear-levelling.html#_CPPv2N26esp_vfs_fat_mount_config_t22format_if_mount_failedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>If FAT partition can not be mounted, and this parameter is true, create partition table and format the filesystem. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N26esp_vfs_fat_mount_config_t9max_filesE">
+<span id="esp_vfs_fat_mount_config_t::max_files__i"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a2eec236e215f9fc7cd94fb340e32f301"></span>int <code class="descname">max_files</code><a class="headerlink" href="wear-levelling.html#_CPPv2N26esp_vfs_fat_mount_config_t9max_filesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Max number of open files. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv228esp_vfs_fat_spiflash_unmountPKc11wl_handle_t">
+<span id="esp_vfs_fat_spiflash_unmount__cCP.wl_handle_t"></span><span class="target" id="esp__vfs__fat_8h_1af9afd8899f6007b26a3dbc47f9fd7484"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_vfs_fat_spiflash_unmount</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>base_path</em>, <a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>wl_handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv228esp_vfs_fat_spiflash_unmountPKc11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unmount FAT filesystem and release resources acquired using esp_vfs_fat_spiflash_mount. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK on success</li>
+<li>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount hasn&#8217;t been called </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">base_path</span></code>: path where partition should be registered (e.g. &#8220;/spiflash&#8221;) </li>
+<li><code class="docutils literal"><span class="pre">wl_handle</span></code>: wear levelling driver handle returned by esp_vfs_fat_spiflash_mount</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="mid-level-api-reference">
+<h2>Mid level API Reference<a class="headerlink" href="wear-levelling.html#mid-level-api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="wear-levelling.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/wear_levelling/include/wear_levelling.h">wear_levelling/include/wear_levelling.h</a></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Functions<a class="headerlink" href="wear-levelling.html#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv28wl_mountPK15esp_partition_tP11wl_handle_t">
+<span id="wl_mount__esp_partition_tCP.wl_handle_tP"></span><span class="target" id="wear__levelling_8h_1a21f9c061e5569ff17b4e266d94b40ba1"></span>esp_err_t <code class="descclassname"></code><code class="descname">wl_mount</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="spi_flash.html#_CPPv215esp_partition_t" title="esp_partition_t">esp_partition_t</a> *<em>partition</em>, <a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> *<em>out_handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv28wl_mountPK15esp_partition_tP11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Mount WL for defined partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK, if the allocation was successfully;</li>
+<li>ESP_ERR_INVALID_ARG, if WL allocation was unsuccessful;</li>
+<li>ESP_ERR_NO_MEM, if there was no memory to allocate WL components; </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">partition</span></code>: that will be used for access </li>
+<li><code class="docutils literal"><span class="pre">out_handle</span></code>: handle of the WL instance</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210wl_unmount11wl_handle_t">
+<span id="wl_unmount__wl_handle_t"></span><span class="target" id="wear__levelling_8h_1af016f2c0a912cca2bd540a527c38ed87"></span>esp_err_t <code class="descclassname"></code><code class="descname">wl_unmount</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv210wl_unmount11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unmount WL for defined partition. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK, if the operation completed successfully;</li>
+<li>or one of error codes from lower-level flash driver. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL partition handle</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214wl_erase_range11wl_handle_t6size_t6size_t">
+<span id="wl_erase_range__wl_handle_t.s.s"></span><span class="target" id="wear__levelling_8h_1a26539c4a332a0d499dc58e56c4b1a957"></span>esp_err_t <code class="descclassname"></code><code class="descname">wl_erase_range</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em>, size_t <em>start_addr</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv214wl_erase_range11wl_handle_t6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Erase part of the WL storage. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK, if the range was erased successfully;</li>
+<li>ESP_ERR_INVALID_ARG, if iterator or dst are NULL;</li>
+<li>ESP_ERR_INVALID_SIZE, if erase would go out of bounds of the partition;</li>
+<li>or one of error codes from lower-level flash driver. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL handle that are related to the partition </li>
+<li><code class="docutils literal"><span class="pre">start_addr</span></code>: Address where erase operation should start. Must be aligned to the result of function wl_sector_size(...). </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of the range which should be erased, in bytes. Must be divisible by result of function wl_sector_size(...)..</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv28wl_write11wl_handle_t6size_tPKv6size_t">
+<span id="wl_write__wl_handle_t.s.voidCP.s"></span><span class="target" id="wear__levelling_8h_1afdc2bc2749599219984dbf2e13305295"></span>esp_err_t <code class="descclassname"></code><code class="descname">wl_write</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em>, size_t <em>dest_addr</em>, <em class="property">const</em> void *<em>src</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv28wl_write11wl_handle_t6size_tPKv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Write data to the WL storage. </p>
+<p>Before writing data to flash, corresponding region of flash needs to be erased. This can be done using wl_erase_range function.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Prior to writing to WL storage, make sure it has been erased with wl_erase_range call.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK, if data was written successfully;</li>
+<li>ESP_ERR_INVALID_ARG, if dst_offset exceeds partition size;</li>
+<li>ESP_ERR_INVALID_SIZE, if write would go out of bounds of the partition;</li>
+<li>or one of error codes from lower-level flash driver. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL handle that are related to the partition </li>
+<li><code class="docutils literal"><span class="pre">dest_addr</span></code>: Address where the data should be written, relative to the beginning of the partition. </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: Pointer to the source buffer. Pointer must be non-NULL and buffer must be at least &#8216;size&#8217; bytes long. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of data to be written, in bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27wl_read11wl_handle_t6size_tPv6size_t">
+<span id="wl_read__wl_handle_t.s.voidP.s"></span><span class="target" id="wear__levelling_8h_1a51650ed4ca644af624c97d608b213a60"></span>esp_err_t <code class="descclassname"></code><code class="descname">wl_read</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em>, size_t <em>src_addr</em>, void *<em>dest</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv27wl_read11wl_handle_t6size_tPv6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data from the WL storage. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK, if data was read successfully;</li>
+<li>ESP_ERR_INVALID_ARG, if src_offset exceeds partition size;</li>
+<li>ESP_ERR_INVALID_SIZE, if read would go out of bounds of the partition;</li>
+<li>or one of error codes from lower-level flash driver. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL module instance that was initialized before </li>
+<li><code class="docutils literal"><span class="pre">dest</span></code>: Pointer to the buffer where data should be stored. Pointer must be non-NULL and buffer must be at least &#8216;size&#8217; bytes long. </li>
+<li><code class="docutils literal"><span class="pre">src_addr</span></code>: Address of the data to be read, relative to the beginning of the partition. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Size of data to be read, in bytes.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv27wl_size11wl_handle_t">
+<span id="wl_size__wl_handle_t"></span><span class="target" id="wear__levelling_8h_1a0e5f4e2e4b3876619c807feee77021c0"></span>size_t <code class="descclassname"></code><code class="descname">wl_size</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv27wl_size11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get size of the WL storage. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>usable size, in bytes </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL module handle that was initialized before </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214wl_sector_size11wl_handle_t">
+<span id="wl_sector_size__wl_handle_t"></span><span class="target" id="wear__levelling_8h_1a012f51bd69a648f33aaa3d5aface5d7e"></span>size_t <code class="descclassname"></code><code class="descname">wl_sector_size</code><span class="sig-paren">(</span><a class="reference internal" href="wear-levelling.html#_CPPv211wl_handle_t" title="wl_handle_t">wl_handle_t</a> <em>handle</em><span class="sig-paren">)</span><a class="headerlink" href="wear-levelling.html#_CPPv214wl_sector_size11wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get sector size of the WL instance. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>sector size, in bytes </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">handle</span></code>: WL module handle that was initialized before </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="wear-levelling.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.WL_INVALID_HANDLE">
+<span class="target" id="wear__levelling_8h_1ac28b30ea532b3c51e5558243e13b29e9"></span><code class="descname">WL_INVALID_HANDLE</code><a class="headerlink" href="wear-levelling.html#c.WL_INVALID_HANDLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="wear-levelling.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv211wl_handle_t">
+<span id="wl_handle_t"></span><span class="target" id="wear__levelling_8h_1a61ae21458fdcc36e4311891e40fa509c"></span><em class="property">typedef </em>int32_t <code class="descclassname"></code><code class="descname">wl_handle_t</code><a class="headerlink" href="wear-levelling.html#_CPPv211wl_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>wear levelling handle </p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spiffs.html" class="btn btn-neutral float-right" title="SPIFFS Filesystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fatfs.html" class="btn btn-neutral" title="FAT Filesystem Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1572 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Wi-Fi &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Wi-Fi API" href="index.html"/>
+        <link rel="next" title="Smart Config" href="esp_smartconfig.html"/>
+        <link rel="prev" title="Wi-Fi API" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Wi-Fi</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="esp_wifi.html#">Wi-Fi</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="esp_wifi.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_wifi.html#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="esp_wifi.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="esp_smartconfig.html">Smart Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_now.html">ESPNOW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Wi-Fi API</a> &raquo;</li>
+        
+      <li>Wi-Fi</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/wifi/esp_wifi.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="wi-fi">
+<h1>Wi-Fi<a class="headerlink" href="esp_wifi.html#wi-fi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="esp_wifi.html#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="application-examples">
+<h2>Application Examples<a class="headerlink" href="esp_wifi.html#application-examples" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/wifi">wifi</a> directory of ESP-IDF examples that contains the following applications:</p>
+<ul class="simple">
+<li>Simple application showing how to connect ESP32 module to an Access Point - <a class="reference external" href="https://github.com/espressif/esp-idf-template">esp-idf-template</a>.</li>
+<li>Using power save mode of Wi-Fi - <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/wifi/power_save">wifi/power_save</a>.</li>
+</ul>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="esp_wifi.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="esp_wifi.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/esp32/include/esp_wifi.h">esp32/include/esp_wifi.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="esp_wifi.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv213esp_wifi_initP18wifi_init_config_t">
+<span id="esp_wifi_init__wifi_init_config_tP"></span><span class="target" id="esp__wifi_8h_1a52879bca7be58fe28ff6703a0e773445"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_init</code><span class="sig-paren">(</span><a class="reference internal" href="esp_wifi.html#_CPPv218wifi_init_config_t" title="wifi_init_config_t">wifi_init_config_t</a> *<em>config</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv213esp_wifi_initP18wifi_init_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Init WiFi Alloc resource for WiFi driver, such as WiFi control structure, RX/TX buffer, WiFi NVS structure etc, this WiFi also start WiFi task. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API must be called before all other WiFi API can be called </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. Always use WIFI_INIT_CONFIG_DEFAULT macro to init the config to default values, this can guarantee all the fields got correct value when more fields are added into <a class="reference internal" href="esp_wifi.html#structwifi__init__config__t"><span class="std std-ref">wifi_init_config_t</span></a> in future release. If you want to set your owner initial values, overwrite the default values which are set by WIFI_INIT_CONFIG_DEFAULT, please be notified that the field &#8216;magic&#8217; of <a class="reference internal" href="esp_wifi.html#structwifi__init__config__t"><span class="std std-ref">wifi_init_config_t</span></a> should always be WIFI_INIT_CONFIG_MAGIC!</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NO_MEM: out of memory</li>
+<li>others: refer to error code esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">config</span></code>: provide WiFi init configuration</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215esp_wifi_deinitv">
+<span id="esp_wifi_deinit__void"></span><span class="target" id="esp__wifi_8h_1a60882c01bdf7a17e57fd329f3eda7f45"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_deinit</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv215esp_wifi_deinitv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deinit WiFi Free all resource allocated in esp_wifi_init and stop WiFi task. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API should be called if you want to remove WiFi driver from the system</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_OK: succeed </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_wifi_set_mode11wifi_mode_t">
+<span id="esp_wifi_set_mode__wifi_mode_t"></span><span class="target" id="esp__wifi_8h_1af0b828976a972b93e66b3b10f9cf25ca"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_mode</code><span class="sig-paren">(</span>wifi_mode_t <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv217esp_wifi_set_mode11wifi_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the WiFi operating mode. </p>
+<p>Set the WiFi operating mode as station, soft-AP or station+soft-AP, The default mode is soft-AP mode.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>others: refer to error code in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: WiFi operating mode</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217esp_wifi_get_modeP11wifi_mode_t">
+<span id="esp_wifi_get_mode__wifi_mode_tP"></span><span class="target" id="esp__wifi_8h_1ad33b1bc142774f59d71bba946c695ab6"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_mode</code><span class="sig-paren">(</span>wifi_mode_t *<em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv217esp_wifi_get_modeP11wifi_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get current operating mode of WiFi. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">mode</span></code>: store current WiFi mode</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv214esp_wifi_startv">
+<span id="esp_wifi_start__void"></span><span class="target" id="esp__wifi_8h_1a904c3480d34571f490b707d9c07e8e7d"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_start</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv214esp_wifi_startv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Start WiFi according to current configuration If mode is WIFI_MODE_STA, it create station control block and start station If mode is WIFI_MODE_AP, it create soft-AP control block and start soft-AP If mode is WIFI_MODE_APSTA, it create soft-AP and station control block and start soft-AP and station. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_NO_MEM: out of memory</li>
+<li>ESP_ERR_WIFI_CONN: WiFi internal error, station or soft-AP control block wrong</li>
+<li>ESP_ERR_WIFI_FAIL: other WiFi internal errors </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213esp_wifi_stopv">
+<span id="esp_wifi_stop__void"></span><span class="target" id="esp__wifi_8h_1a114b747fa26b7c919b56a41610c5c3fe"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv213esp_wifi_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop WiFi If mode is WIFI_MODE_STA, it stop station and free station control block If mode is WIFI_MODE_AP, it stop soft-AP and free soft-AP control block If mode is WIFI_MODE_APSTA, it stop station/soft-AP and free station/soft-AP control block. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_wifi_restorev">
+<span id="esp_wifi_restore__void"></span><span class="target" id="esp__wifi_8h_1a7b4be34f4a60d8b80d524a63de686992"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_restore</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv216esp_wifi_restorev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Restore WiFi stack persistent settings to default values. </p>
+<p>This function will reset settings made using the following APIs:<ul class="simple">
+<li>esp_wifi_get_auto_connect,</li>
+<li>esp_wifi_set_protocol,</li>
+<li>esp_wifi_set_config related</li>
+<li>esp_wifi_set_mode</li>
+</ul>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_wifi_connectv">
+<span id="esp_wifi_connect__void"></span><span class="target" id="esp__wifi_8h_1a293461c436ae0e057a8131426888caaa"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_connect</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv216esp_wifi_connectv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Connect the ESP32 WiFi station to the AP. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API only impact WIFI_MODE_STA or WIFI_MODE_APSTA mode </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. If the ESP32 is connected to an AP, call esp_wifi_disconnect to disconnect.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_START: WiFi is not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_CONN: WiFi internal error, station or soft-AP control block wrong</li>
+<li>ESP_ERR_WIFI_SSID: SSID of AP which station connects is invalid </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_wifi_disconnectv">
+<span id="esp_wifi_disconnect__void"></span><span class="target" id="esp__wifi_8h_1ac3d7b24b73b04893a38381b9996e4ec4"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_disconnect</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv219esp_wifi_disconnectv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disconnect the ESP32 WiFi station from the AP. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi was not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi was not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_FAIL: other WiFi internal errors </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227esp_wifi_clear_fast_connectv">
+<span id="esp_wifi_clear_fast_connect__void"></span><span class="target" id="esp__wifi_8h_1afac7eede18a111e55eae9e2c6efdeb8e"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_clear_fast_connect</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv227esp_wifi_clear_fast_connectv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Currently this API is just an stub API. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_wifi_deauth_sta8uint16_t">
+<span id="esp_wifi_deauth_sta__uint16_t"></span><span class="target" id="esp__wifi_8h_1a730fe41750dbb20d38a5c81a4180dd89"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_deauth_sta</code><span class="sig-paren">(</span>uint16_t <em>aid</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv219esp_wifi_deauth_sta8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>deauthenticate all stations or associated id equals to aid </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi was not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_MODE: WiFi mode is wrong </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">aid</span></code>: when aid is 0, deauthenticate all stations, otherwise deauthenticate station whose associated id is aid</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_wifi_scan_startP18wifi_scan_config_tb">
+<span id="esp_wifi_scan_start__wifi_scan_config_tP.b"></span><span class="target" id="esp__wifi_8h_1a36c0d9f8280c5c8ed0925e3eac44de0a"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_scan_start</code><span class="sig-paren">(</span>wifi_scan_config_t *<em>config</em>, bool <em>block</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv219esp_wifi_scan_startP18wifi_scan_config_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Scan all available APs. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>If this API is called, the found APs are stored in WiFi driver dynamic allocated memory and the will be freed in esp_wifi_scan_get_ap_records, so generally, call esp_wifi_scan_get_ap_records to cause the memory to be freed once the scan is done </dd>
+<dt><strong>Attention</strong></dt>
+<dd>The values of maximum active scan time and passive scan time per channel are limited to 1500 milliseconds. Values above 1500ms may cause station to disconnect from AP and are not recommended.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi was not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_TIMEOUT: blocking scan is timeout</li>
+<li>others: refer to error code in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">config</span></code>: configuration of scanning </li>
+<li><code class="docutils literal"><span class="pre">block</span></code>: if block is true, this API will block the caller until the scan is done, otherwise it will return immediately</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218esp_wifi_scan_stopv">
+<span id="esp_wifi_scan_stop__void"></span><span class="target" id="esp__wifi_8h_1a686e608576aa4a35edcbe60d2f9f9004"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_scan_stop</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv218esp_wifi_scan_stopv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Stop the scan in process. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi is not started by esp_wifi_start </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_wifi_scan_get_ap_numP8uint16_t">
+<span id="esp_wifi_scan_get_ap_num__uint16_tP"></span><span class="target" id="esp__wifi_8h_1a74490e9826b333d8a36d7855e0efe01e"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_scan_get_ap_num</code><span class="sig-paren">(</span>uint16_t *<em>number</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv224esp_wifi_scan_get_ap_numP8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get number of APs found in last scan. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>This API can only be called when the scan is completed, otherwise it may get wrong value.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi is not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">number</span></code>: store number of APIs found in last scan</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv228esp_wifi_scan_get_ap_recordsP8uint16_tP16wifi_ap_record_t">
+<span id="esp_wifi_scan_get_ap_records__uint16_tP.wifi_ap_record_tP"></span><span class="target" id="esp__wifi_8h_1a8aa2f7b0b8567fb04470515070b59cef"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_scan_get_ap_records</code><span class="sig-paren">(</span>uint16_t *<em>number</em>, wifi_ap_record_t *<em>ap_records</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv228esp_wifi_scan_get_ap_recordsP8uint16_tP16wifi_ap_record_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get AP list found in last scan. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_STARTED: WiFi is not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_NO_MEM: out of memory </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">number</span></code>: As input param, it stores max AP number ap_records can hold. As output param, it receives the actual AP number this API returns. </li>
+<li><code class="docutils literal"><span class="pre">ap_records</span></code>: wifi_ap_record_t array to hold the found APs</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_wifi_sta_get_ap_infoP16wifi_ap_record_t">
+<span id="esp_wifi_sta_get_ap_info__wifi_ap_record_tP"></span><span class="target" id="esp__wifi_8h_1a44ddac1ad317b705e5bd95066ecd7532"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_sta_get_ap_info</code><span class="sig-paren">(</span>wifi_ap_record_t *<em>ap_info</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv224esp_wifi_sta_get_ap_infoP16wifi_ap_record_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get information of AP which the ESP32 station is associated with. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>others: fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ap_info</span></code>: the wifi_ap_record_t to hold AP information</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215esp_wifi_set_ps14wifi_ps_type_t">
+<span id="esp_wifi_set_ps__wifi_ps_type_t"></span><span class="target" id="esp__wifi_8h_1a3f40206a4c47c23f2a23fb2ce7da3ea6"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_ps</code><span class="sig-paren">(</span>wifi_ps_type_t <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv215esp_wifi_set_ps14wifi_ps_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set current power save type. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>Default power save type is WIFI_PS_NONE.</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_ERR_WIFI_NOT_SUPPORT: not supported yet </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">type</span></code>: power save type</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215esp_wifi_get_psP14wifi_ps_type_t">
+<span id="esp_wifi_get_ps__wifi_ps_type_tP"></span><span class="target" id="esp__wifi_8h_1aa0ec15576152c9144e28d2b639fa3258"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_ps</code><span class="sig-paren">(</span>wifi_ps_type_t *<em>type</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv215esp_wifi_get_psP14wifi_ps_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get current power save type. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>Default power save type is WIFI_PS_NONE.</dd>
+<dt><strong>Return</strong></dt>
+<dd>ESP_ERR_WIFI_NOT_SUPPORT: not supported yet </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">type</span></code>: store current power save type</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221esp_wifi_set_protocol16wifi_interface_t7uint8_t">
+<span id="esp_wifi_set_protocol__wifi_interface_t.uint8_t"></span><span class="target" id="esp__wifi_8h_1a0cb472b49728cd8508f391e136274e33"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_protocol</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, uint8_t <em>protocol_bitmap</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv221esp_wifi_set_protocol16wifi_interface_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set protocol type of specified interface The default protocol is (WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N) </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>Currently we only support 802.11b or 802.11bg or 802.11bgn mode</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>others: refer to error codes in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interfaces </li>
+<li><code class="docutils literal"><span class="pre">protocol_bitmap</span></code>: WiFi protocol bitmap</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221esp_wifi_get_protocol16wifi_interface_tP7uint8_t">
+<span id="esp_wifi_get_protocol__wifi_interface_t.uint8_tP"></span><span class="target" id="esp__wifi_8h_1a72ac6e600d90715128ba9079c07e2e12"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_protocol</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, uint8_t *<em>protocol_bitmap</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv221esp_wifi_get_protocol16wifi_interface_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current protocol bitmap of the specified interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>others: refer to error codes in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface </li>
+<li><code class="docutils literal"><span class="pre">protocol_bitmap</span></code>: store current WiFi protocol bitmap of interface ifx</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t">
+<span id="esp_wifi_set_bandwidth__wifi_interface_t.wifi_bandwidth_t"></span><span class="target" id="esp__wifi_8h_1a19e03c1dfb531c88d34b8240c8b78896"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_bandwidth</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, wifi_bandwidth_t <em>bw</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv222esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the bandwidth of ESP32 specified interface. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. API return false if try to configure an interface that is not enabled </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. WIFI_BW_HT40 is supported only when the interface support 11N</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>others: refer to error codes in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface to be configured </li>
+<li><code class="docutils literal"><span class="pre">bw</span></code>: bandwidth</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222esp_wifi_get_bandwidth16wifi_interface_tP16wifi_bandwidth_t">
+<span id="esp_wifi_get_bandwidth__wifi_interface_t.wifi_bandwidth_tP"></span><span class="target" id="esp__wifi_8h_1ae3eae6458cddc2df8ebba9e2578a1753"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_bandwidth</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, wifi_bandwidth_t *<em>bw</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv222esp_wifi_get_bandwidth16wifi_interface_tP16wifi_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the bandwidth of ESP32 specified interface. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. API return false if try to get a interface that is not enable</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface to be configured </li>
+<li><code class="docutils literal"><span class="pre">bw</span></code>: store bandwidth of interface ifx</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_wifi_set_channel7uint8_t18wifi_second_chan_t">
+<span id="esp_wifi_set_channel__uint8_t.wifi_second_chan_t"></span><span class="target" id="esp__wifi_8h_1a8ca5ce9af573c4fd959b2066cce9fcd5"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_channel</code><span class="sig-paren">(</span>uint8_t <em>primary</em>, wifi_second_chan_t <em>second</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv220esp_wifi_set_channel7uint8_t18wifi_second_chan_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set primary/secondary channel of ESP32. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This is a special API for sniffer </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. This API should be called after esp_wifi_start() or esp_wifi_set_promiscuous()</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">primary</span></code>: for HT20, primary is the channel number, for HT40, primary is the primary channel </li>
+<li><code class="docutils literal"><span class="pre">second</span></code>: for HT20, second is ignored, for HT40, second is the second channel</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_wifi_get_channelP7uint8_tP18wifi_second_chan_t">
+<span id="esp_wifi_get_channel__uint8_tP.wifi_second_chan_tP"></span><span class="target" id="esp__wifi_8h_1a5fc428d45a26c656301d390b37730f4a"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_channel</code><span class="sig-paren">(</span>uint8_t *<em>primary</em>, wifi_second_chan_t *<em>second</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv220esp_wifi_get_channelP7uint8_tP18wifi_second_chan_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the primary/secondary channel of ESP32. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. API return false if try to get a interface that is not enable</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">primary</span></code>: store current primary channel </li>
+<li><code class="docutils literal"><span class="pre">second</span></code>: store current second channel</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_wifi_set_countryP14wifi_country_t">
+<span id="esp_wifi_set_country__wifi_country_tP"></span><span class="target" id="esp__wifi_8h_1a29d2b9fd1fb94649dcfc8c7f18739dc8"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_country</code><span class="sig-paren">(</span>wifi_country_t *<em>country</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv220esp_wifi_set_countryP14wifi_country_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>configure country info </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. The default country is {.cc=&#8221;CN&#8221;, .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO} </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. When the country policy is WIFI_COUNTRY_POLICY_AUTO, use the country info of AP to which the station is connected. E.g. if the configured country info is {.cc=&#8221;USA&#8221;, .schan=1, .nchan=11}, the country info of the AP to which the station is connected is {.cc=&#8221;JP&#8221;, .schan=1, .nchan=14}, then our country info is {.cc=&#8221;JP&#8221;, .schan=1, .nchan=14}. If the station disconnected from the AP, the country info back to {.cc=&#8221;USA&#8221;, .schan=1, .nchan=11} again. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>3. When the country policy is WIFI_COUNTRY_POLICY_MANUAL, always use the configured country info. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>4. When the country info is changed because of configuration or because the station connects to a different external AP, the country IE in probe response/beacon of the soft-AP is changed also. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>5. The country configuration is not stored into flash </dd>
+<dt><strong>Attention</strong></dt>
+<dd>6. This API doesn&#8217;t validate the per-country rules, it&#8217;s up to the user to fill in all fields according to local regulations.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">country</span></code>: the configured country info</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_wifi_get_countryP14wifi_country_t">
+<span id="esp_wifi_get_country__wifi_country_tP"></span><span class="target" id="esp__wifi_8h_1a2f3a8fe849995ba74dd52968e69a71e7"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_country</code><span class="sig-paren">(</span>wifi_country_t *<em>country</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv220esp_wifi_get_countryP14wifi_country_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get the current country info </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">country</span></code>: country info</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_wifi_set_mac16wifi_interface_tA6_7uint8_t">
+<span id="esp_wifi_set_mac__wifi_interface_t.uint8_tA"></span><span class="target" id="esp__wifi_8h_1aad53b735e1681cf912ce3ea930df7570"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_mac</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, uint8_t <em>mac</em>[6]<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv216esp_wifi_set_mac16wifi_interface_tA6_7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set MAC address of the ESP32 WiFi station or the soft-AP interface. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API can only be called when the interface is disabled </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. ESP32 soft-AP and station have different MAC addresses, do not set them to be the same. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>3. The bit 0 of the first byte of ESP32 MAC address can not be 1. For example, the MAC address can set to be &#8220;1a:XX:XX:XX:XX:XX&#8221;, but can not be &#8220;15:XX:XX:XX:XX:XX&#8221;.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_MAC: invalid mac address</li>
+<li>ESP_ERR_WIFI_MODE: WiFi mode is wrong</li>
+<li>others: refer to error codes in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface </li>
+<li><code class="docutils literal"><span class="pre">mac</span></code>: the MAC address</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216esp_wifi_get_mac16wifi_interface_tA6_7uint8_t">
+<span id="esp_wifi_get_mac__wifi_interface_t.uint8_tA"></span><span class="target" id="esp__wifi_8h_1a424aede226e6ea52e420fa2de33f5747"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_mac</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, uint8_t <em>mac</em>[6]<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv216esp_wifi_get_mac16wifi_interface_tA6_7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get mac of specified interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_IF: invalid interface </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface </li>
+<li><code class="docutils literal"><span class="pre">mac</span></code>: store mac of the interface ifx</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv230esp_wifi_set_promiscuous_rx_cb21wifi_promiscuous_cb_t">
+<span id="esp_wifi_set_promiscuous_rx_cb__wifi_promiscuous_cb_t"></span><span class="target" id="esp__wifi_8h_1a3b9a2026bd4e5ca98733fe8dc0154a13"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_promiscuous_rx_cb</code><span class="sig-paren">(</span><a class="reference internal" href="esp_wifi.html#_CPPv221wifi_promiscuous_cb_t" title="wifi_promiscuous_cb_t">wifi_promiscuous_cb_t</a> <em>cb</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv230esp_wifi_set_promiscuous_rx_cb21wifi_promiscuous_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register the RX callback function in the promiscuous mode. </p>
+<p>Each time a packet is received, the registered callback function will be called.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">cb</span></code>: callback</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_wifi_set_promiscuousb">
+<span id="esp_wifi_set_promiscuous__b"></span><span class="target" id="esp__wifi_8h_1a904d764d5771899c392f953d9badb620"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_promiscuous</code><span class="sig-paren">(</span>bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv224esp_wifi_set_promiscuousb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the promiscuous mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">en</span></code>: false - disable, true - enable</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_wifi_get_promiscuousPb">
+<span id="esp_wifi_get_promiscuous__bP"></span><span class="target" id="esp__wifi_8h_1ae001e5a84484cc5ca4967275acc59193"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_promiscuous</code><span class="sig-paren">(</span>bool *<em>en</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv224esp_wifi_get_promiscuousPb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the promiscuous mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">en</span></code>: store the current status of promiscuous mode</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv231esp_wifi_set_promiscuous_filterPK25wifi_promiscuous_filter_t">
+<span id="esp_wifi_set_promiscuous_filter__wifi_promiscuous_filter_tCP"></span><span class="target" id="esp__wifi_8h_1a4eb525d224710ef1c48ac1ff440eb481"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_promiscuous_filter</code><span class="sig-paren">(</span><em class="property">const</em> wifi_promiscuous_filter_t *<em>filter</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv231esp_wifi_set_promiscuous_filterPK25wifi_promiscuous_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the promiscuous filter. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. The default filter is to filter all packets except WIFI_PKT_MISC</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">filter</span></code>: the packet type filtered by promisucous</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv231esp_wifi_get_promiscuous_filterP25wifi_promiscuous_filter_t">
+<span id="esp_wifi_get_promiscuous_filter__wifi_promiscuous_filter_tP"></span><span class="target" id="esp__wifi_8h_1a3c722528c5c1a109cc6cdcb582cb40df"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_promiscuous_filter</code><span class="sig-paren">(</span>wifi_promiscuous_filter_t *<em>filter</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv231esp_wifi_get_promiscuous_filterP25wifi_promiscuous_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the promiscuous filter. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">filter</span></code>: store the current status of promiscuous filter</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_wifi_set_config16wifi_interface_tP13wifi_config_t">
+<span id="esp_wifi_set_config__wifi_interface_t.wifi_config_tP"></span><span class="target" id="esp__wifi_8h_1a4fcc5854b788e0bce35efe1f3493a804"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_config</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, wifi_config_t *<em>conf</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv219esp_wifi_set_config16wifi_interface_tP13wifi_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the configuration of the ESP32 STA or AP. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. This API can be called only when specified interface is enabled, otherwise, API fail </dd>
+<dt><strong>Attention</strong></dt>
+<dd>2. For station configuration, bssid_set needs to be 0; and it needs to be 1 only when users need to check the MAC address of the AP. </dd>
+<dt><strong>Attention</strong></dt>
+<dd>3. ESP32 is limited to only one channel, so when in the soft-AP+station mode, the soft-AP will adjust its channel automatically to be the same as the channel of the ESP32 station.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_IF: invalid interface</li>
+<li>ESP_ERR_WIFI_MODE: invalid mode</li>
+<li>ESP_ERR_WIFI_PASSWORD: invalid password</li>
+<li>ESP_ERR_WIFI_NVS: WiFi internal NVS error</li>
+<li>others: refer to the erro code in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface </li>
+<li><code class="docutils literal"><span class="pre">conf</span></code>: station or soft-AP configuration</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219esp_wifi_get_config16wifi_interface_tP13wifi_config_t">
+<span id="esp_wifi_get_config__wifi_interface_t.wifi_config_tP"></span><span class="target" id="esp__wifi_8h_1ab82a8df3779b96f0ad8b1fb511722cd3"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_config</code><span class="sig-paren">(</span>wifi_interface_t <em>ifx</em>, wifi_config_t *<em>conf</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv219esp_wifi_get_config16wifi_interface_tP13wifi_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get configuration of specified interface. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_IF: invalid interface </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ifx</span></code>: interface </li>
+<li><code class="docutils literal"><span class="pre">conf</span></code>: station or soft-AP configuration</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv224esp_wifi_ap_get_sta_listP15wifi_sta_list_t">
+<span id="esp_wifi_ap_get_sta_list__wifi_sta_list_tP"></span><span class="target" id="esp__wifi_8h_1a86d8a211cc7883380341683c7b35da20"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_ap_get_sta_list</code><span class="sig-paren">(</span>wifi_sta_list_t *<em>sta</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv224esp_wifi_ap_get_sta_listP15wifi_sta_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get STAs associated with soft-AP. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>SSC only API</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument</li>
+<li>ESP_ERR_WIFI_MODE: WiFi mode is wrong</li>
+<li>ESP_ERR_WIFI_CONN: WiFi internal error, the station/soft-AP control block is invalid </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">sta</span></code>: station list</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220esp_wifi_set_storage14wifi_storage_t">
+<span id="esp_wifi_set_storage__wifi_storage_t"></span><span class="target" id="esp__wifi_8h_1a23b10556e149c670d09de277b97f4947"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_storage</code><span class="sig-paren">(</span>wifi_storage_t <em>storage</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv220esp_wifi_set_storage14wifi_storage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the WiFi API configuration storage type. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>1. The default value is WIFI_STORAGE_FLASH</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">storage</span></code>: : storage type</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_wifi_set_auto_connectb">
+<span id="esp_wifi_set_auto_connect__b"></span><span class="target" id="esp__wifi_8h_1a8aabfb2eeae74e8929f9bb616e58f97c"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_auto_connect</code><span class="sig-paren">(</span>bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv225esp_wifi_set_auto_connectb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set auto connect The default value is true. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_MODE: WiFi internal error, the station/soft-AP control block is invalid</li>
+<li>others: refer to error code in esp_err.h </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">en</span></code>: : true - enable auto connect / false - disable auto connect</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_wifi_get_auto_connectPb">
+<span id="esp_wifi_get_auto_connect__bP"></span><span class="target" id="esp__wifi_8h_1a3e6d57f189d256897624edce85a601ba"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_auto_connect</code><span class="sig-paren">(</span>bool *<em>en</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv225esp_wifi_get_auto_connectPb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the auto connect flag. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">en</span></code>: store current auto connect configuration</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222esp_wifi_set_vendor_ieb21wifi_vendor_ie_type_t19wifi_vendor_ie_id_tPKv">
+<span id="esp_wifi_set_vendor_ie__b.wifi_vendor_ie_type_t.wifi_vendor_ie_id_t.voidCP"></span><span class="target" id="esp__wifi_8h_1a6c10a76c82b69e714ab1009d9a04338d"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_vendor_ie</code><span class="sig-paren">(</span>bool <em>enable</em>, wifi_vendor_ie_type_t <em>type</em>, wifi_vendor_ie_id_t <em>idx</em>, <em class="property">const</em> void *<em>vnd_ie</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv222esp_wifi_set_vendor_ieb21wifi_vendor_ie_type_t19wifi_vendor_ie_id_tPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set 802.11 Vendor-Specific Information Element. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init()</li>
+<li>ESP_ERR_WIFI_ARG: Invalid argument, including if first byte of vnd_ie is not WIFI_VENDOR_IE_ELEMENT_ID (0xDD) or second byte is an invalid length.</li>
+<li>ESP_ERR_WIFI_NO_MEM: Out of memory </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">enable</span></code>: If true, specified IE is enabled. If false, specified IE is removed. </li>
+<li><code class="docutils literal"><span class="pre">type</span></code>: Information Element type. Determines the frame type to associate with the IE. </li>
+<li><code class="docutils literal"><span class="pre">idx</span></code>: Index to set or clear. Each IE type can be associated with up to two elements (indices 0 &amp; 1). </li>
+<li><code class="docutils literal"><span class="pre">vnd_ie</span></code>: Pointer to vendor specific element data. First 6 bytes should be a header with fields matching vendor_ie_data_t. If enable is false, this argument is ignored and can be NULL. Data does not need to remain valid after the function returns.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_wifi_set_vendor_ie_cb18esp_vendor_ie_cb_tPv">
+<span id="esp_wifi_set_vendor_ie_cb__esp_vendor_ie_cb_t.voidP"></span><span class="target" id="esp__wifi_8h_1a33f6c96d44f740928a38ef267b75e7b9"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_vendor_ie_cb</code><span class="sig-paren">(</span><a class="reference internal" href="esp_wifi.html#_CPPv218esp_vendor_ie_cb_t" title="esp_vendor_ie_cb_t">esp_vendor_ie_cb_t</a> <em>cb</em>, void *<em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv225esp_wifi_set_vendor_ie_cb18esp_vendor_ie_cb_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register Vendor-Specific Information Element monitoring callback. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">cb</span></code>: Callback function </li>
+<li><code class="docutils literal"><span class="pre">ctx</span></code>: Context argument, passed to callback function.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_wifi_set_max_tx_power6int8_t">
+<span id="esp_wifi_set_max_tx_power__int8_t"></span><span class="target" id="esp__wifi_8h_1abea7f6556e77e460341e8af7089250c1"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_set_max_tx_power</code><span class="sig-paren">(</span>int8_t <em>power</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv225esp_wifi_set_max_tx_power6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set maximum WiFi transmiting power. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>WiFi transmiting power is divided to six levels in phy init data. Level0 represents highest transmiting power and level5 represents lowest transmiting power. Packets of different rates are transmitted in different powers according to the configuration in phy init data. This API only sets maximum WiFi transmiting power. If this API is called, the transmiting power of every packet will be less than or equal to the value set by this API. If this API is not called, the value of maximum transmitting power set in phy_init_data.bin or menuconfig (depend on whether to use phy init data in partition or not) will be used. Default value is level0. Values passed in power are mapped to transmit power levels as follows:<ul class="simple">
+<li>[78, 127]: level0</li>
+<li>[76, 77]: level1</li>
+<li>[74, 75]: level2</li>
+<li>[68, 73]: level3</li>
+<li>[60, 67]: level4</li>
+<li>[52, 59]: level5</li>
+<li>[44, 51]: level5 - 2dBm</li>
+<li>[34, 43]: level5 - 4.5dBm</li>
+<li>[28, 33]: level5 - 6dBm</li>
+<li>[20, 27]: level5 - 8dBm</li>
+<li>[8, 19]: level5 - 11dBm</li>
+<li>[-128, 7]: level5 - 14dBm</li>
+</ul>
+</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_START: WiFi is not started by esp_wifi_start </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">power</span></code>: Maximum WiFi transmiting power.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv225esp_wifi_get_max_tx_powerP6int8_t">
+<span id="esp_wifi_get_max_tx_power__int8_tP"></span><span class="target" id="esp__wifi_8h_1aa33072f0063b6e0e4aab2ed5051f60e2"></span>esp_err_t <code class="descclassname"></code><code class="descname">esp_wifi_get_max_tx_power</code><span class="sig-paren">(</span>int8_t *<em>power</em><span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv225esp_wifi_get_max_tx_powerP6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get maximum WiFi transmiting power. </p>
+<p><dl class="docutils">
+<dt><strong>Attention</strong></dt>
+<dd>This API gets maximum WiFi transmiting power. Values got from power are mapped to transmit power levels as follows:<ul class="simple">
+<li>78: 19.5dBm</li>
+<li>76: 19dBm</li>
+<li>74: 18.5dBm</li>
+<li>68: 17dBm</li>
+<li>60: 15dBm</li>
+<li>52: 13dBm</li>
+<li>44: 11dBm</li>
+<li>34: 8.5dBm</li>
+<li>28: 7dBm</li>
+<li>20: 5dBm</li>
+<li>8: 2dBm</li>
+<li>-4: -1dBm</li>
+</ul>
+</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK: succeed</li>
+<li>ESP_ERR_WIFI_NOT_INIT: WiFi is not initialized by esp_wifi_init</li>
+<li>ESP_ERR_WIFI_NOT_START: WiFi is not started by esp_wifi_start</li>
+<li>ESP_ERR_WIFI_ARG: invalid argument </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">power</span></code>: Maximum WiFi transmiting power.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="esp_wifi.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv218wifi_init_config_t">
+<span id="wifi_init_config_t"></span><span class="target" id="structwifi__init__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">wifi_init_config_t</code><a class="headerlink" href="esp_wifi.html#_CPPv218wifi_init_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi stack configuration parameters passed to esp_wifi_init call. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t13event_handlerE">
+<span id="wifi_init_config_t::event_handler__system_event_handler_t"></span><span class="target" id="structwifi__init__config__t_1a02260655c174f1127aaf0766196f8950"></span>system_event_handler_t <code class="descname">event_handler</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t13event_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi event handler </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t16wpa_crypto_funcsE">
+<span id="wifi_init_config_t::wpa_crypto_funcs__wpa_crypto_funcs_t"></span><span class="target" id="structwifi__init__config__t_1a2ff19845832be39255d46fc67556578e"></span>wpa_crypto_funcs_t <code class="descname">wpa_crypto_funcs</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t16wpa_crypto_funcsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi station crypto functions when connect </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t17static_rx_buf_numE">
+<span id="wifi_init_config_t::static_rx_buf_num__i"></span><span class="target" id="structwifi__init__config__t_1a8a67593945f7180847efa4014924d24b"></span>int <code class="descname">static_rx_buf_num</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t17static_rx_buf_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi static RX buffer number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t18dynamic_rx_buf_numE">
+<span id="wifi_init_config_t::dynamic_rx_buf_num__i"></span><span class="target" id="structwifi__init__config__t_1ab956a40112ef73313422683e01cf522f"></span>int <code class="descname">dynamic_rx_buf_num</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t18dynamic_rx_buf_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi dynamic RX buffer number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t11tx_buf_typeE">
+<span id="wifi_init_config_t::tx_buf_type__i"></span><span class="target" id="structwifi__init__config__t_1ac4a0ebf7fa4d9e182857b0ef35f5713e"></span>int <code class="descname">tx_buf_type</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t11tx_buf_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi TX buffer type </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t17static_tx_buf_numE">
+<span id="wifi_init_config_t::static_tx_buf_num__i"></span><span class="target" id="structwifi__init__config__t_1adf33b565854c9816b273e0a480396fad"></span>int <code class="descname">static_tx_buf_num</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t17static_tx_buf_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi static TX buffer number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t18dynamic_tx_buf_numE">
+<span id="wifi_init_config_t::dynamic_tx_buf_num__i"></span><span class="target" id="structwifi__init__config__t_1a7e363077f061021f3900775a20896d30"></span>int <code class="descname">dynamic_tx_buf_num</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t18dynamic_tx_buf_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi dynamic TX buffer number </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t12ampdu_enableE">
+<span id="wifi_init_config_t::ampdu_enable__i"></span><span class="target" id="structwifi__init__config__t_1a6101e76a6c64a2d7f13c5a5db1bbd86f"></span>int <code class="descname">ampdu_enable</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t12ampdu_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi AMPDU feature enable flag </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t10nvs_enableE">
+<span id="wifi_init_config_t::nvs_enable__i"></span><span class="target" id="structwifi__init__config__t_1ae4173d3cb8f5bab5fc7459600fc93f39"></span>int <code class="descname">nvs_enable</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t10nvs_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi NVS flash enable flag </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t11nano_enableE">
+<span id="wifi_init_config_t::nano_enable__i"></span><span class="target" id="structwifi__init__config__t_1af39cbb3f0725f731e2cbc07c1b31762f"></span>int <code class="descname">nano_enable</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t11nano_enableE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Nano option for printf/scan family enable flag </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t9tx_ba_winE">
+<span id="wifi_init_config_t::tx_ba_win__i"></span><span class="target" id="structwifi__init__config__t_1ae0b456b457e9c6df26110dd9473a5831"></span>int <code class="descname">tx_ba_win</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t9tx_ba_winE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi Block Ack TX window size </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t9rx_ba_winE">
+<span id="wifi_init_config_t::rx_ba_win__i"></span><span class="target" id="structwifi__init__config__t_1a515731f395f782014c8c6e6dcef66069"></span>int <code class="descname">rx_ba_win</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t9rx_ba_winE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi Block Ack RX window size </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18wifi_init_config_t5magicE">
+<span id="wifi_init_config_t::magic__i"></span><span class="target" id="structwifi__init__config__t_1aa486cbfeed09206d86829006ffe0e1da"></span>int <code class="descname">magic</code><a class="headerlink" href="esp_wifi.html#_CPPv2N18wifi_init_config_t5magicE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>WiFi init magic number, it should be the last field </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="esp_wifi.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_OK">
+<span class="target" id="esp__wifi_8h_1a06a526a58db4661808a9bb7deb026c21"></span><code class="descname">ESP_ERR_WIFI_OK</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_OK" title="Permalink to this definition">¶</a></dt>
+<dd><p>No error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_FAIL">
+<span class="target" id="esp__wifi_8h_1acdf2fdbd38e813b3abb9e5c3130cf60f"></span><code class="descname">ESP_ERR_WIFI_FAIL</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd><p>General fail code </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NO_MEM">
+<span class="target" id="esp__wifi_8h_1a7870d698b6fec98f77df0f547ac21731"></span><code class="descname">ESP_ERR_WIFI_NO_MEM</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NO_MEM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Out of memory </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_ARG">
+<span class="target" id="esp__wifi_8h_1a3df9b11554624608ba195264f7ef9a37"></span><code class="descname">ESP_ERR_WIFI_ARG</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_ARG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invalid argument </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NOT_SUPPORT">
+<span class="target" id="esp__wifi_8h_1a99e6a88bab0c7a7ef90ec50bf9afdd27"></span><code class="descname">ESP_ERR_WIFI_NOT_SUPPORT</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NOT_SUPPORT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that API is not supported yet </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NOT_INIT">
+<span class="target" id="esp__wifi_8h_1ae0a9bb725bcf66c4e6d88ba6a9c3dff3"></span><code class="descname">ESP_ERR_WIFI_NOT_INIT</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NOT_INIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi driver was not installed by esp_wifi_init </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NOT_STARTED">
+<span class="target" id="esp__wifi_8h_1abd5f7a3ff712e5c4b60a9b491c48007b"></span><code class="descname">ESP_ERR_WIFI_NOT_STARTED</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NOT_STARTED" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi driver was not started by esp_wifi_start </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NOT_STOPPED">
+<span class="target" id="esp__wifi_8h_1a40ac62a3a31da110eeb2a89903bb059a"></span><code class="descname">ESP_ERR_WIFI_NOT_STOPPED</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NOT_STOPPED" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi driver was not stopped by esp_wifi_stop </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_IF">
+<span class="target" id="esp__wifi_8h_1a1aa1a0c044b683db8d6ed36b9790307d"></span><code class="descname">ESP_ERR_WIFI_IF</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_IF" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi interface error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_MODE">
+<span class="target" id="esp__wifi_8h_1a62e020545d33418343f0cbb549fc58a2"></span><code class="descname">ESP_ERR_WIFI_MODE</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_MODE" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi mode error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_STATE">
+<span class="target" id="esp__wifi_8h_1a5bb6d6f6d4902b5336562ec0a796e3a9"></span><code class="descname">ESP_ERR_WIFI_STATE</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_STATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi internal state error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_CONN">
+<span class="target" id="esp__wifi_8h_1a67c87be665574d62049678298415a75d"></span><code class="descname">ESP_ERR_WIFI_CONN</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_CONN" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi internal control block of station or soft-AP error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_NVS">
+<span class="target" id="esp__wifi_8h_1a672c676cf3e7d894bf92e5da100ec7c3"></span><code class="descname">ESP_ERR_WIFI_NVS</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_NVS" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi internal NVS module error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_MAC">
+<span class="target" id="esp__wifi_8h_1a4c906e6fc6d68fbf465312323e50d300"></span><code class="descname">ESP_ERR_WIFI_MAC</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_MAC" title="Permalink to this definition">¶</a></dt>
+<dd><p>MAC address is invalid </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_SSID">
+<span class="target" id="esp__wifi_8h_1abdd4a5ba257a8887132f401117a79ee1"></span><code class="descname">ESP_ERR_WIFI_SSID</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_SSID" title="Permalink to this definition">¶</a></dt>
+<dd><p>SSID is invalid </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_PASSWORD">
+<span class="target" id="esp__wifi_8h_1ab9e6400871a19946c21e6754f63406ba"></span><code class="descname">ESP_ERR_WIFI_PASSWORD</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Password is invalid </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_TIMEOUT">
+<span class="target" id="esp__wifi_8h_1acf38f7709b9b359a611f20f6c0351e7e"></span><code class="descname">ESP_ERR_WIFI_TIMEOUT</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timeout error </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.ESP_ERR_WIFI_WAKE_FAIL">
+<span class="target" id="esp__wifi_8h_1aeddffb28d8e5713df7067368f2d198bb"></span><code class="descname">ESP_ERR_WIFI_WAKE_FAIL</code><a class="headerlink" href="esp_wifi.html#c.ESP_ERR_WIFI_WAKE_FAIL" title="Permalink to this definition">¶</a></dt>
+<dd><p>WiFi is in sleep state(RF closed) and wakeup fail </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_STATIC_TX_BUFFER_NUM">
+<span class="target" id="esp__wifi_8h_1a622c1fd4775a5a6fa061cfbc118e994e"></span><code class="descname">WIFI_STATIC_TX_BUFFER_NUM</code><a class="headerlink" href="esp_wifi.html#c.WIFI_STATIC_TX_BUFFER_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_DYNAMIC_TX_BUFFER_NUM">
+<span class="target" id="esp__wifi_8h_1a3e74539000b5cbcbf0841e01f8482456"></span><code class="descname">WIFI_DYNAMIC_TX_BUFFER_NUM</code><a class="headerlink" href="esp_wifi.html#c.WIFI_DYNAMIC_TX_BUFFER_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_AMPDU_ENABLED">
+<span class="target" id="esp__wifi_8h_1a8aded32bbe7bf4d701cf42d58841e233"></span><code class="descname">WIFI_AMPDU_ENABLED</code><a class="headerlink" href="esp_wifi.html#c.WIFI_AMPDU_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_NVS_ENABLED">
+<span class="target" id="esp__wifi_8h_1ab0116987b8ce17535f1d374b267b6f8c"></span><code class="descname">WIFI_NVS_ENABLED</code><a class="headerlink" href="esp_wifi.html#c.WIFI_NVS_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_NANO_FORMAT_ENABLED">
+<span class="target" id="esp__wifi_8h_1a347fbb1b51e46938fe50e7051fdd789c"></span><code class="descname">WIFI_NANO_FORMAT_ENABLED</code><a class="headerlink" href="esp_wifi.html#c.WIFI_NANO_FORMAT_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_INIT_CONFIG_MAGIC">
+<span class="target" id="esp__wifi_8h_1a062d0fc26adbbf3371b50f1ffaa61d71"></span><code class="descname">WIFI_INIT_CONFIG_MAGIC</code><a class="headerlink" href="esp_wifi.html#c.WIFI_INIT_CONFIG_MAGIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_DEFAULT_TX_BA_WIN">
+<span class="target" id="esp__wifi_8h_1adc0dc1a56b700957e16972ff92669d8f"></span><code class="descname">WIFI_DEFAULT_TX_BA_WIN</code><a class="headerlink" href="esp_wifi.html#c.WIFI_DEFAULT_TX_BA_WIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_DEFAULT_RX_BA_WIN">
+<span class="target" id="esp__wifi_8h_1a6d4adfe8ba5cdb7b01ae650936e6a8ca"></span><code class="descname">WIFI_DEFAULT_RX_BA_WIN</code><a class="headerlink" href="esp_wifi.html#c.WIFI_DEFAULT_RX_BA_WIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.WIFI_INIT_CONFIG_DEFAULT">
+<span class="target" id="esp__wifi_8h_1a2953649971b51ffd11bece62cd0c9dbe"></span><code class="descname">WIFI_INIT_CONFIG_DEFAULT</code><a class="headerlink" href="esp_wifi.html#c.WIFI_INIT_CONFIG_DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="esp_wifi.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv221wifi_promiscuous_cb_t">
+<span id="wifi_promiscuous_cb_t"></span><span class="target" id="esp__wifi_8h_1a936eb43c3d85b6b6d4bdb37270e55de7"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">wifi_promiscuous_cb_t</code>)<span class="sig-paren">(</span>void *buf, wifi_promiscuous_pkt_type_t type<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv221wifi_promiscuous_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The RX callback function in the promiscuous mode. Each time a packet is received, the callback function will be called. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">buf</span></code>: Data received. Type of data in buffer (wifi_promiscuous_pkt_t or wifi_pkt_rx_ctrl_t) indicated by &#8216;type&#8217; parameter. </li>
+<li><code class="docutils literal"><span class="pre">type</span></code>: promiscuous packet type. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv218esp_vendor_ie_cb_t">
+<span id="esp_vendor_ie_cb_t"></span><span class="target" id="esp__wifi_8h_1a4b0426fdc372e5aa1e7f993cde7910ab"></span><em class="property">typedef </em>void (*<code class="descclassname"></code><code class="descname">esp_vendor_ie_cb_t</code>)<span class="sig-paren">(</span>void *ctx, wifi_vendor_ie_type_t type, <em class="property">const</em> uint8_t sa[6], <em class="property">const</em> vendor_ie_data_t *vnd_ie, int rssi<span class="sig-paren">)</span><a class="headerlink" href="esp_wifi.html#_CPPv218esp_vendor_ie_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Function signature for received Vendor-Specific Information Element callback. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">ctx</span></code>: Context argument, as passed to esp_wifi_set_vendor_ie_cb() when registering callback. </li>
+<li><code class="docutils literal"><span class="pre">type</span></code>: Information element type, based on frame type received. </li>
+<li><code class="docutils literal"><span class="pre">sa</span></code>: Source 802.11 address. </li>
+<li><code class="docutils literal"><span class="pre">vnd_ie</span></code>: Pointer to the vendor specific element data received. </li>
+<li><code class="docutils literal"><span class="pre">rssi</span></code>: Received signal strength indication. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="esp_smartconfig.html" class="btn btn-neutral float-right" title="Smart Config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Wi-Fi API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

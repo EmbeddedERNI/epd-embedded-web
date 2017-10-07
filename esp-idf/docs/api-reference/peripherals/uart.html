@@ -1,0 +1,1707 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UART &mdash; ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="ESP-IDF Programming Guide v3.0-dev-806-gde750e9 documentation" href="../../index.html"/>
+        <link rel="up" title="Peripherals API" href="index.html"/>
+        <link rel="next" title="Protocols API" href="../protocols/index.html"/>
+        <link rel="prev" title="Touch Sensor" href="touch_pad.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ESP-IDF Programming Guide
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v3.0-dev-806-gde750e9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wifi/index.html">Wi-Fi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ethernet/index.html">Ethernet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc.html">ADC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dac.html">DAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO (including RTC low power I/O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">I2C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">I2S</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">MCPWM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../storage/sdmmc.html">SD/MMC Card Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sigmadelta.html">Sigma-delta Modulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="touch_pad.html">Touch Sensor</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="uart.html#">UART</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig.html">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">H/W Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="index.html">Peripherals API</a> &raquo;</li>
+        
+      <li>UART</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api-reference/peripherals/uart.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uart">
+<h1>UART<a class="headerlink" href="uart.html#uart" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="uart.html#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../template.html">Instructions</a></p>
+</div>
+<div class="section" id="application-example">
+<h2>Application Example<a class="headerlink" href="uart.html#application-example" title="Permalink to this headline">¶</a></h2>
+<p>Configure uart settings and install uart driver to read/write using UART0 and UART1 interfaces: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/de750e9/examples/peripherals/uart">peripherals/uart</a>.</p>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="uart.html#api-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="header-file">
+<h3>Header File<a class="headerlink" href="uart.html#header-file" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/driver/include/driver/uart.h">driver/include/driver/uart.h</a></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="uart.html#functions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="_CPPv220uart_set_word_length11uart_port_t18uart_word_length_t">
+<span id="uart_set_word_length__uart_port_t.uart_word_length_t"></span><span class="target" id="uart_8h_1a808676f2b0888e32d32845867dee2696"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_word_length</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv218uart_word_length_t" title="uart_word_length_t">uart_word_length_t</a> <em>data_bit</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv220uart_set_word_length11uart_port_t18uart_word_length_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART data bits. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">data_bit</span></code>: UART data bits</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220uart_get_word_length11uart_port_tP18uart_word_length_t">
+<span id="uart_get_word_length__uart_port_t.uart_word_length_tP"></span><span class="target" id="uart_8h_1a23e265fcff2bccfb9767317acebffb5f"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_word_length</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv218uart_word_length_t" title="uart_word_length_t">uart_word_length_t</a> *<em>data_bit</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv220uart_get_word_length11uart_port_tP18uart_word_length_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get UART data bits. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success, result will be put in (*data_bit) </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">data_bit</span></code>: Pointer to accept value of UART data bits.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218uart_set_stop_bits11uart_port_t16uart_stop_bits_t">
+<span id="uart_set_stop_bits__uart_port_t.uart_stop_bits_t"></span><span class="target" id="uart_8h_1a557ff2a2cd3d3d83acc072df8af9e4bf"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_stop_bits</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv216uart_stop_bits_t" title="uart_stop_bits_t">uart_stop_bits_t</a> <em>stop_bits</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv218uart_set_stop_bits11uart_port_t16uart_stop_bits_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART stop bits. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Fail </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">stop_bits</span></code>: UART stop bits</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218uart_get_stop_bits11uart_port_tP16uart_stop_bits_t">
+<span id="uart_get_stop_bits__uart_port_t.uart_stop_bits_tP"></span><span class="target" id="uart_8h_1abdc7f04203ccda3e93a3c0f77dbcfd09"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_stop_bits</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv216uart_stop_bits_t" title="uart_stop_bits_t">uart_stop_bits_t</a> *<em>stop_bits</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv218uart_get_stop_bits11uart_port_tP16uart_stop_bits_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART stop bits. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success, result will be put in (*stop_bit) </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">stop_bits</span></code>: Pointer to accept value of UART stop bits.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215uart_set_parity11uart_port_t13uart_parity_t">
+<span id="uart_set_parity__uart_port_t.uart_parity_t"></span><span class="target" id="uart_8h_1a8b637bcc5b144866907fe2af67047b3b"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_parity</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv213uart_parity_t" title="uart_parity_t">uart_parity_t</a> <em>parity_mode</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv215uart_set_parity11uart_port_t13uart_parity_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART parity. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">parity_mode</span></code>: the enum of uart parity configuration</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215uart_get_parity11uart_port_tP13uart_parity_t">
+<span id="uart_get_parity__uart_port_t.uart_parity_tP"></span><span class="target" id="uart_8h_1abcbfeedc6a77806fd0ba3fa7534ee073"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_parity</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv213uart_parity_t" title="uart_parity_t">uart_parity_t</a> *<em>parity_mode</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv215uart_get_parity11uart_port_tP13uart_parity_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get UART parity mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success, result will be put in (*parity_mode) </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">parity_mode</span></code>: Pointer to accept value of UART parity mode.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217uart_set_baudrate11uart_port_t8uint32_t">
+<span id="uart_set_baudrate__uart_port_t.uint32_t"></span><span class="target" id="uart_8h_1a77efdf5168e7269213a98298dacb5d58"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_baudrate</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t <em>baudrate</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv217uart_set_baudrate11uart_port_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART baud rate. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">baudrate</span></code>: UART baud rate.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217uart_get_baudrate11uart_port_tP8uint32_t">
+<span id="uart_get_baudrate__uart_port_t.uint32_tP"></span><span class="target" id="uart_8h_1a409b45d7f0e70b3ef495538faeab11d2"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_baudrate</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t *<em>baudrate</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv217uart_get_baudrate11uart_port_tP8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get UART bit-rate. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success, result will be put in (*baudrate) </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">baudrate</span></code>: Pointer to accept value of UART baud rate</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221uart_set_line_inverse11uart_port_t8uint32_t">
+<span id="uart_set_line_inverse__uart_port_t.uint32_t"></span><span class="target" id="uart_8h_1adeaf7062ad7d6763f4713c67f7685151"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_line_inverse</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t <em>inverse_mask</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv221uart_set_line_inverse11uart_port_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART line inverse mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">inverse_mask</span></code>: Choose the wires that need to be inverted. Inverse_mask should be chosen from UART_INVERSE_RXD/UART_INVERSE_TXD/UART_INVERSE_RTS/UART_INVERSE_CTS, combine with OR operation.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221uart_set_hw_flow_ctrl11uart_port_t21uart_hw_flowcontrol_t7uint8_t">
+<span id="uart_set_hw_flow_ctrl__uart_port_t.uart_hw_flowcontrol_t.uint8_t"></span><span class="target" id="uart_8h_1a3d4457ec08abdc9dbae7a5f4f1031002"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_hw_flow_ctrl</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv221uart_hw_flowcontrol_t" title="uart_hw_flowcontrol_t">uart_hw_flowcontrol_t</a> <em>flow_ctrl</em>, uint8_t <em>rx_thresh</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv221uart_set_hw_flow_ctrl11uart_port_t21uart_hw_flowcontrol_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set hardware flow control. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">flow_ctrl</span></code>: Hardware flow control mode </li>
+<li><code class="docutils literal"><span class="pre">rx_thresh</span></code>: Threshold of Hardware RX flow control(0 ~ UART_FIFO_LEN). Only when UART_HW_FLOWCTRL_RTS is set, will the rx_thresh value be set.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221uart_set_sw_flow_ctrl11uart_port_tb7uint8_t7uint8_t">
+<span id="uart_set_sw_flow_ctrl__uart_port_t.b.uint8_t.uint8_t"></span><span class="target" id="uart_8h_1aa3473b99b93b1671bc38c17e09ed72f3"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_sw_flow_ctrl</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, bool <em>enable</em>, uint8_t <em>rx_thresh_xon</em>, uint8_t <em>rx_thresh_xoff</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv221uart_set_sw_flow_ctrl11uart_port_tb7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set software flow control. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">enable</span></code>: switch on or off </li>
+<li><code class="docutils literal"><span class="pre">rx_thresh_xon</span></code>: low water mark </li>
+<li><code class="docutils literal"><span class="pre">rx_thresh_xoff</span></code>: high water mark</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221uart_get_hw_flow_ctrl11uart_port_tP21uart_hw_flowcontrol_t">
+<span id="uart_get_hw_flow_ctrl__uart_port_t.uart_hw_flowcontrol_tP"></span><span class="target" id="uart_8h_1abb10d50ebdb733917ba941226fb52164"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_hw_flow_ctrl</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <a class="reference internal" href="uart.html#_CPPv221uart_hw_flowcontrol_t" title="uart_hw_flowcontrol_t">uart_hw_flowcontrol_t</a> *<em>flow_ctrl</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv221uart_get_hw_flow_ctrl11uart_port_tP21uart_hw_flowcontrol_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get hardware flow control mode. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_OK Success, result will be put in (*flow_ctrl) </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">flow_ctrl</span></code>: Option for different flow control mode.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222uart_clear_intr_status11uart_port_t8uint32_t">
+<span id="uart_clear_intr_status__uart_port_t.uint32_t"></span><span class="target" id="uart_8h_1afc1fb2f0c77a5711af1dad15013285ee"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_clear_intr_status</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t <em>clr_mask</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv222uart_clear_intr_status11uart_port_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear UART interrupt status. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">clr_mask</span></code>: Bit mask of the status that to be cleared. enable_mask should be chosen from the fields of register UART_INT_CLR_REG.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv221uart_enable_intr_mask11uart_port_t8uint32_t">
+<span id="uart_enable_intr_mask__uart_port_t.uint32_t"></span><span class="target" id="uart_8h_1ac1e5f3bf85282611dfdf91fbcf9ab5b0"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_enable_intr_mask</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t <em>enable_mask</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv221uart_enable_intr_mask11uart_port_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART interrupt enable. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">enable_mask</span></code>: Bit mask of the enable bits. enable_mask should be chosen from the fields of register UART_INT_ENA_REG.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv222uart_disable_intr_mask11uart_port_t8uint32_t">
+<span id="uart_disable_intr_mask__uart_port_t.uint32_t"></span><span class="target" id="uart_8h_1a2529c04af335aa09b089cd092f9496a1"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_disable_intr_mask</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint32_t <em>disable_mask</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv222uart_disable_intr_mask11uart_port_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear UART interrupt enable bits. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">disable_mask</span></code>: Bit mask of the disable bits. disable_mask should be chosen from the fields of register UART_INT_ENA_REG.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219uart_enable_rx_intr11uart_port_t">
+<span id="uart_enable_rx_intr__uart_port_t"></span><span class="target" id="uart_8h_1aeaf76305bb1e7ec4ffd1c71799bb2e24"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_enable_rx_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv219uart_enable_rx_intr11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable UART RX interrupt(RX_FULL &amp; RX_TIMEOUT INTERRUPT) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220uart_disable_rx_intr11uart_port_t">
+<span id="uart_disable_rx_intr__uart_port_t"></span><span class="target" id="uart_8h_1adff6c82a2fe5d3bd46a30f48972f282c"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_disable_rx_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv220uart_disable_rx_intr11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable UART RX interrupt(RX_FULL &amp; RX_TIMEOUT INTERRUPT) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv220uart_disable_tx_intr11uart_port_t">
+<span id="uart_disable_tx_intr__uart_port_t"></span><span class="target" id="uart_8h_1a17d5cc483b5b24d89b2610e04640dd00"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_disable_tx_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv220uart_disable_tx_intr11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable UART TX interrupt(RX_FULL &amp; RX_TIMEOUT INTERRUPT) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219uart_enable_tx_intr11uart_port_tii">
+<span id="uart_enable_tx_intr__uart_port_t.i.i"></span><span class="target" id="uart_8h_1afdb256b93e7c57731a7745f08fdf07f8"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_enable_tx_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, int <em>enable</em>, int <em>thresh</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv219uart_enable_tx_intr11uart_port_tii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable UART TX interrupt(RX_FULL &amp; RX_TIMEOUT INTERRUPT) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">enable</span></code>: 1: enable; 0: disable </li>
+<li><code class="docutils literal"><span class="pre">thresh</span></code>: Threshold of TX interrupt, 0 ~ UART_FIFO_LEN</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217uart_isr_register11uart_port_tPFvPvEPviP17uart_isr_handle_t">
+<span class="target" id="uart_8h_1a2413646de281325acb5b771e48150f69"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_isr_register</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, void (*<em>fn</em>)<span class="sig-paren">(</span>void *<span class="sig-paren">)</span>, void *<em>arg</em>, int <em>intr_alloc_flags</em>, <a class="reference internal" href="uart.html#_CPPv217uart_isr_handle_t" title="uart_isr_handle_t">uart_isr_handle_t</a> *<em>handle</em>, <span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv217uart_isr_register11uart_port_tPFvPvEPviP17uart_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>register UART interrupt handler(ISR). </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>UART ISR handler will be attached to the same CPU core that this function is running on.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">fn</span></code>: Interrupt handler function. </li>
+<li><code class="docutils literal"><span class="pre">arg</span></code>: parameter for handler function </li>
+<li><code class="docutils literal"><span class="pre">intr_alloc_flags</span></code>: Flags used to allocate the interrupt. One or multiple (ORred) ESP_INTR_FLAG_* values. See esp_intr_alloc.h for more info. </li>
+<li><code class="docutils literal"><span class="pre">handle</span></code>: Pointer to return handle. If non-NULL, a handle for the interrupt will be returned here.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213uart_isr_free11uart_port_t">
+<span id="uart_isr_free__uart_port_t"></span><span class="target" id="uart_8h_1a6394bf24366f7d850034e3949ee57b32"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_isr_free</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv213uart_isr_free11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free UART interrupt handler registered by uart_isr_register. Must be called on the same core as uart_isr_register was called. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212uart_set_pin11uart_port_tiiii">
+<span id="uart_set_pin__uart_port_t.i.i.i.i"></span><span class="target" id="uart_8h_1a9fae9b92aa2400b4098500fad67bf130"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_pin</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, int <em>tx_io_num</em>, int <em>rx_io_num</em>, int <em>rts_io_num</em>, int <em>cts_io_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv212uart_set_pin11uart_port_tiiii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set UART pin number. </p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>Internal signal can be output to multiple GPIO pads. Only one GPIO pad can connect with input signal.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">tx_io_num</span></code>: UART TX pin GPIO number, if set to UART_PIN_NO_CHANGE, use the current pin. </li>
+<li><code class="docutils literal"><span class="pre">rx_io_num</span></code>: UART RX pin GPIO number, if set to UART_PIN_NO_CHANGE, use the current pin. </li>
+<li><code class="docutils literal"><span class="pre">rts_io_num</span></code>: UART RTS pin GPIO number, if set to UART_PIN_NO_CHANGE, use the current pin. </li>
+<li><code class="docutils literal"><span class="pre">cts_io_num</span></code>: UART CTS pin GPIO number, if set to UART_PIN_NO_CHANGE, use the current pin.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212uart_set_rts11uart_port_ti">
+<span id="uart_set_rts__uart_port_t.i"></span><span class="target" id="uart_8h_1a6005ed5198bccb515f3a45332651fe3f"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_rts</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, int <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv212uart_set_rts11uart_port_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART set RTS level (before inverse) UART rx hardware flow control should not be set. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">level</span></code>: 1: RTS output low(active); 0: RTS output high(block)</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv212uart_set_dtr11uart_port_ti">
+<span id="uart_set_dtr__uart_port_t.i"></span><span class="target" id="uart_8h_1af03a824b0b24952fc20c26ec0927dc40"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_set_dtr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, int <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv212uart_set_dtr11uart_port_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART set DTR level (before inverse) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">level</span></code>: 1: DTR output low; 0: DTR output high</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217uart_param_config11uart_port_tPK13uart_config_t">
+<span id="uart_param_config__uart_port_t.uart_config_tCP"></span><span class="target" id="uart_8h_1a26909ef7d30875c035d74febd31fc444"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_param_config</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <em class="property">const</em> <a class="reference internal" href="uart.html#_CPPv213uart_config_t" title="uart_config_t">uart_config_t</a> *<em>uart_config</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv217uart_param_config11uart_port_tPK13uart_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART parameter configure. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">uart_config</span></code>: UART parameter settings</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216uart_intr_config11uart_port_tPK18uart_intr_config_t">
+<span id="uart_intr_config__uart_port_t.uart_intr_config_tCP"></span><span class="target" id="uart_8h_1a2a4c7d4dc9d293e98505a903e99c200f"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_intr_config</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <em class="property">const</em> <a class="reference internal" href="uart.html#_CPPv218uart_intr_config_t" title="uart_intr_config_t">uart_intr_config_t</a> *<em>intr_conf</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv216uart_intr_config11uart_port_tPK18uart_intr_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART interrupt configure. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">intr_conf</span></code>: UART interrupt settings</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv219uart_driver_install11uart_port_tiiiP13QueueHandle_ti">
+<span id="uart_driver_install__uart_port_t.i.i.i.QueueHandle_tP.i"></span><span class="target" id="uart_8h_1af668e653f7b0af9dbf55cdb5be839ec9"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_driver_install</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, int <em>rx_buffer_size</em>, int <em>tx_buffer_size</em>, int <em>queue_size</em>, QueueHandle_t *<em>uart_queue</em>, int <em>intr_alloc_flags</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv219uart_driver_install11uart_port_tiiiP13QueueHandle_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Install UART driver. </p>
+<p>UART ISR handler will be attached to the same CPU core that this function is running on.</p>
+<p><dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>tx_buffer_size should be greater than UART_FIFO_LEN.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">rx_buffer_size</span></code>: UART RX ring buffer size, rx_buffer_size should be greater than UART_FIFO_LEN. </li>
+<li><code class="docutils literal"><span class="pre">tx_buffer_size</span></code>: UART TX ring buffer size. If set to zero, driver will not use TX buffer, TX function will block task until all data have been sent out.. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">queue_size</span></code>: UART event queue size/depth. </li>
+<li><code class="docutils literal"><span class="pre">uart_queue</span></code>: UART event queue handle (out param). On success, a new queue handle is written here to provide access to UART events. If set to NULL, driver will not use an event queue. </li>
+<li><code class="docutils literal"><span class="pre">intr_alloc_flags</span></code>: Flags used to allocate the interrupt. One or multiple (ORred) ESP_INTR_FLAG_* values. See esp_intr_alloc.h for more info. Do not set ESP_INTR_FLAG_IRAM here (the driver&#8217;s ISR handler is not located in IRAM)</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv218uart_driver_delete11uart_port_t">
+<span id="uart_driver_delete__uart_port_t"></span><span class="target" id="uart_8h_1af14d79ece50100374ef756b6eb4675d5"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_driver_delete</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv218uart_driver_delete11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Uninstall UART driver. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv217uart_wait_tx_done11uart_port_t10TickType_t">
+<span id="uart_wait_tx_done__uart_port_t.TickType_t"></span><span class="target" id="uart_8h_1adee69c880882e652759d03f2614d95af"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_wait_tx_done</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, TickType_t <em>ticks_to_wait</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv217uart_wait_tx_done11uart_port_t10TickType_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Wait UART TX FIFO empty. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error</li>
+<li>ESP_ERR_TIMEOUT Timeout </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">ticks_to_wait</span></code>: Timeout, count in RTOS ticks</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv213uart_tx_chars11uart_port_tPKc8uint32_t">
+<span id="uart_tx_chars__uart_port_t.cCP.uint32_t"></span><span class="target" id="uart_8h_1aca552dc1f99b6ed8d74b81d835344eba"></span>int <code class="descclassname"></code><code class="descname">uart_tx_chars</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <em class="property">const</em> char *<em>buffer</em>, uint32_t <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv213uart_tx_chars11uart_port_tPKc8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send data to the UART port from a given buffer and length. </p>
+<p>This function will not wait for the space in TX FIFO, just fill the TX FIFO and return when the FIFO is full. <dl class="docutils">
+<dt><strong>Note</strong></dt>
+<dd>This function should only be used when UART TX buffer is not enabled.</dd>
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>(-1) Parameter error</li>
+<li>OTHERS(&gt;=0) The number of data that pushed to the TX FIFO </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">buffer</span></code>: data buffer address </li>
+<li><code class="docutils literal"><span class="pre">len</span></code>: data length to send</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv216uart_write_bytes11uart_port_tPKc6size_t">
+<span id="uart_write_bytes__uart_port_t.cCP.s"></span><span class="target" id="uart_8h_1a4c2411719e618a486919676f592559e8"></span>int <code class="descclassname"></code><code class="descname">uart_write_bytes</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <em class="property">const</em> char *<em>src</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv216uart_write_bytes11uart_port_tPKc6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send data to the UART port from a given buffer and length,. </p>
+<p>If parameter tx_buffer_size is set to zero: This function will not return until all the data have been sent out, or at least pushed into TX FIFO.</p>
+<p>Otherwise, if tx_buffer_size &gt; 0, this function will return after copying all the data to tx ringbuffer, then, UART ISR will move data from ring buffer to TX FIFO gradually.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>(-1) Parameter error</li>
+<li>OTHERS(&gt;=0) The number of data that pushed to the TX FIFO </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: data buffer address </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: data length to send</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv227uart_write_bytes_with_break11uart_port_tPKc6size_ti">
+<span id="uart_write_bytes_with_break__uart_port_t.cCP.s.i"></span><span class="target" id="uart_8h_1a77b44b6ad999b97a2e6b23e3a981c874"></span>int <code class="descclassname"></code><code class="descname">uart_write_bytes_with_break</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, <em class="property">const</em> char *<em>src</em>, size_t <em>size</em>, int <em>brk_len</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv227uart_write_bytes_with_break11uart_port_tPKc6size_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Send data to the UART port from a given buffer and length,. </p>
+<p>If parameter tx_buffer_size is set to zero: This function will not return until all the data and the break signal have been sent out. After all data send out, send a break signal.</p>
+<p>Otherwise, if tx_buffer_size &gt; 0, this function will return after copying all the data to tx ringbuffer, then, UART ISR will move data from ring buffer to TX FIFO gradually. After all data send out, send a break signal.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>(-1) Parameter error</li>
+<li>OTHERS(&gt;=0) The number of data that pushed to the TX FIFO </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">src</span></code>: data buffer address </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: data length to send </li>
+<li><code class="docutils literal"><span class="pre">brk_len</span></code>: break signal length (unit: time of one data bit at current_baudrate)</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215uart_read_bytes11uart_port_tP7uint8_t8uint32_t10TickType_t">
+<span id="uart_read_bytes__uart_port_t.uint8_tP.uint32_t.TickType_t"></span><span class="target" id="uart_8h_1ada873c6deef1c1b23f76b3bc6e886339"></span>int <code class="descclassname"></code><code class="descname">uart_read_bytes</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, uint8_t *<em>buf</em>, uint32_t <em>length</em>, TickType_t <em>ticks_to_wait</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv215uart_read_bytes11uart_port_tP7uint8_t8uint32_t10TickType_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART read bytes from UART buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>(-1) Error</li>
+<li>Others return a char data from uart fifo. </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2 </li>
+<li><code class="docutils literal"><span class="pre">buf</span></code>: pointer to the buffer. </li>
+<li><code class="docutils literal"><span class="pre">length</span></code>: data length </li>
+<li><code class="docutils literal"><span class="pre">ticks_to_wait</span></code>: sTimeout, count in RTOS ticks</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv210uart_flush11uart_port_t">
+<span id="uart_flush__uart_port_t"></span><span class="target" id="uart_8h_1a1d6df979239b59c1d04ec3ef3db99127"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_flush</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv210uart_flush11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART ring buffer flush. This will discard all data in the UART RX buffer. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART_NUM_0, UART_NUM_1 or UART_NUM_2</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv226uart_get_buffered_data_len11uart_port_tP6size_t">
+<span id="uart_get_buffered_data_len__uart_port_t.sP"></span><span class="target" id="uart_8h_1a40f71f946b85f3029c6b21cb0ee320f9"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_get_buffered_data_len</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, size_t *<em>size</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv226uart_get_buffered_data_len11uart_port_tP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART get RX ring buffer cached data length. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART port number. </li>
+<li><code class="docutils literal"><span class="pre">size</span></code>: Pointer of size_t to accept cached data length</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv229uart_disable_pattern_det_intr11uart_port_t">
+<span id="uart_disable_pattern_det_intr__uart_port_t"></span><span class="target" id="uart_8h_1a8e37088bdce71c0137e52fd8b6786130"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_disable_pattern_det_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv229uart_disable_pattern_det_intr11uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART disable pattern detect function. Designed for applications like &#8216;AT commands&#8217;. When the hardware detect a series of one same character, the interrupt will be triggered. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART port number.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv228uart_enable_pattern_det_intr11uart_port_tc7uint8_tiii">
+<span id="uart_enable_pattern_det_intr__uart_port_t.c.uint8_t.i.i.i"></span><span class="target" id="uart_8h_1a7fcb877367ecf9b17e8f8380e7ded826"></span>esp_err_t <code class="descclassname"></code><code class="descname">uart_enable_pattern_det_intr</code><span class="sig-paren">(</span><a class="reference internal" href="uart.html#_CPPv211uart_port_t" title="uart_port_t">uart_port_t</a> <em>uart_num</em>, char <em>pattern_chr</em>, uint8_t <em>chr_num</em>, int <em>chr_tout</em>, int <em>post_idle</em>, int <em>pre_idle</em><span class="sig-paren">)</span><a class="headerlink" href="uart.html#_CPPv228uart_enable_pattern_det_intr11uart_port_tc7uint8_tiii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART enable pattern detect function. Designed for applications like &#8216;AT commands&#8217;. When the hardware detect a series of one same character, the interrupt will be triggered. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><ul class="simple">
+<li>ESP_OK Success</li>
+<li>ESP_FAIL Parameter error </li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal"><span class="pre">uart_num</span></code>: UART port number. </li>
+<li><code class="docutils literal"><span class="pre">pattern_chr</span></code>: character of the pattern </li>
+<li><code class="docutils literal"><span class="pre">chr_num</span></code>: number of the character, 8bit value. </li>
+<li><code class="docutils literal"><span class="pre">chr_tout</span></code>: timeout of the interval between each pattern characters, 24bit value, unit is APB(80Mhz) clock cycle. </li>
+<li><code class="docutils literal"><span class="pre">post_idle</span></code>: idle time after the last pattern character, 24bit value, unit is APB(80Mhz) clock cycle. </li>
+<li><code class="docutils literal"><span class="pre">pre_idle</span></code>: idle time before the first pattern character, 24bit value, unit is APB(80Mhz) clock cycle.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="section" id="structures">
+<h3>Structures<a class="headerlink" href="uart.html#structures" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="_CPPv213uart_config_t">
+<span id="uart_config_t"></span><span class="target" id="structuart__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">uart_config_t</code><a class="headerlink" href="uart.html#_CPPv213uart_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART configuration parameters for uart_param_config function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t9baud_rateE">
+<span id="uart_config_t::baud_rate__i"></span><span class="target" id="structuart__config__t_1a768e00e6a3db1d58765d8bf4b34e80d1"></span>int <code class="descname">baud_rate</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t9baud_rateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART baudrate </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t9data_bitsE">
+<span id="uart_config_t::data_bits__uart_word_length_t"></span><span class="target" id="structuart__config__t_1a2d2b5ed0166f0f857fd237a07514c9de"></span><a class="reference internal" href="uart.html#_CPPv218uart_word_length_t" title="uart_word_length_t">uart_word_length_t</a> <code class="descname">data_bits</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t9data_bitsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART byte size </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t6parityE">
+<span id="uart_config_t::parity__uart_parity_t"></span><span class="target" id="structuart__config__t_1a157fe675a803f44325017b6b32a20824"></span><a class="reference internal" href="uart.html#_CPPv213uart_parity_t" title="uart_parity_t">uart_parity_t</a> <code class="descname">parity</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t6parityE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART parity mode </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t9stop_bitsE">
+<span id="uart_config_t::stop_bits__uart_stop_bits_t"></span><span class="target" id="structuart__config__t_1ac90c1cc43e3e84befa5f6e98d63bb2d8"></span><a class="reference internal" href="uart.html#_CPPv216uart_stop_bits_t" title="uart_stop_bits_t">uart_stop_bits_t</a> <code class="descname">stop_bits</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t9stop_bitsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART stop bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t9flow_ctrlE">
+<span id="uart_config_t::flow_ctrl__uart_hw_flowcontrol_t"></span><span class="target" id="structuart__config__t_1a8ae1deadf2a552166b99d9ec9e829a21"></span><a class="reference internal" href="uart.html#_CPPv221uart_hw_flowcontrol_t" title="uart_hw_flowcontrol_t">uart_hw_flowcontrol_t</a> <code class="descname">flow_ctrl</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t9flow_ctrlE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART HW flow control mode(cts/rts) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N13uart_config_t19rx_flow_ctrl_threshE">
+<span id="uart_config_t::rx_flow_ctrl_thresh__uint8_t"></span><span class="target" id="structuart__config__t_1a00ec151e26838db6bd7fb92c5a76395c"></span>uint8_t <code class="descname">rx_flow_ctrl_thresh</code><a class="headerlink" href="uart.html#_CPPv2N13uart_config_t19rx_flow_ctrl_threshE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART HW RTS threshold </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv218uart_intr_config_t">
+<span id="uart_intr_config_t"></span><span class="target" id="structuart__intr__config__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">uart_intr_config_t</code><a class="headerlink" href="uart.html#_CPPv218uart_intr_config_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART interrupt configuration parameters for uart_intr_config function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N18uart_intr_config_t16intr_enable_maskE">
+<span id="uart_intr_config_t::intr_enable_mask__uint32_t"></span><span class="target" id="structuart__intr__config__t_1ad3c56b1600d50d45a51dd2744d0d53c9"></span>uint32_t <code class="descname">intr_enable_mask</code><a class="headerlink" href="uart.html#_CPPv2N18uart_intr_config_t16intr_enable_maskE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART interrupt enable mask, choose from UART_XXXX_INT_ENA_M under UART_INT_ENA_REG(i), connect with bit-or operator </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18uart_intr_config_t17rx_timeout_threshE">
+<span id="uart_intr_config_t::rx_timeout_thresh__uint8_t"></span><span class="target" id="structuart__intr__config__t_1a861a3257789ed271105b5ba2c9d99b5f"></span>uint8_t <code class="descname">rx_timeout_thresh</code><a class="headerlink" href="uart.html#_CPPv2N18uart_intr_config_t17rx_timeout_threshE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART timeout interrupt threshold(unit: time of sending one byte) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18uart_intr_config_t24txfifo_empty_intr_threshE">
+<span id="uart_intr_config_t::txfifo_empty_intr_thresh__uint8_t"></span><span class="target" id="structuart__intr__config__t_1a3f3f3b2b515287fcc7daab310e3a98bb"></span>uint8_t <code class="descname">txfifo_empty_intr_thresh</code><a class="headerlink" href="uart.html#_CPPv2N18uart_intr_config_t24txfifo_empty_intr_threshE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART TX empty interrupt threshold. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N18uart_intr_config_t18rxfifo_full_threshE">
+<span id="uart_intr_config_t::rxfifo_full_thresh__uint8_t"></span><span class="target" id="structuart__intr__config__t_1a40aa067bfc76dba1abd37d48651b9345"></span>uint8_t <code class="descname">rxfifo_full_thresh</code><a class="headerlink" href="uart.html#_CPPv2N18uart_intr_config_t18rxfifo_full_threshE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART RX full interrupt threshold. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv212uart_event_t">
+<span id="uart_event_t"></span><span class="target" id="structuart__event__t"></span><em class="property">struct </em><code class="descclassname"></code><code class="descname">uart_event_t</code><a class="headerlink" href="uart.html#_CPPv212uart_event_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Event structure used in UART event queue. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N12uart_event_t4typeE">
+<span id="uart_event_t::type__uart_event_type_t"></span><span class="target" id="structuart__event__t_1a35e079bbfb879b8fd1bfc281653ffea4"></span><a class="reference internal" href="uart.html#_CPPv217uart_event_type_t" title="uart_event_type_t">uart_event_type_t</a> <code class="descname">type</code><a class="headerlink" href="uart.html#_CPPv2N12uart_event_t4typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART event type </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N12uart_event_t4sizeE">
+<span id="uart_event_t::size__s"></span><span class="target" id="structuart__event__t_1aaa4b10a03d29e3ff21214d39a0c6e6df"></span>size_t <code class="descname">size</code><a class="headerlink" href="uart.html#_CPPv2N12uart_event_t4sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART data size for UART_DATA event </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="uart.html#macros" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.UART_FIFO_LEN">
+<span class="target" id="uart_8h_1a653fc44b41db6efb3884c15ce8d6c30e"></span><code class="descname">UART_FIFO_LEN</code><a class="headerlink" href="uart.html#c.UART_FIFO_LEN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the hardware FIFO buffers </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INTR_MASK">
+<span class="target" id="uart_8h_1a236e4265357229fa5f9b586cc744866d"></span><code class="descname">UART_INTR_MASK</code><a class="headerlink" href="uart.html#c.UART_INTR_MASK" title="Permalink to this definition">¶</a></dt>
+<dd><p>mask of all UART interrupts </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_LINE_INV_MASK">
+<span class="target" id="uart_8h_1a7652c930ed7eb1841c38419905e5eafd"></span><code class="descname">UART_LINE_INV_MASK</code><a class="headerlink" href="uart.html#c.UART_LINE_INV_MASK" title="Permalink to this definition">¶</a></dt>
+<dd><p>TBD </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_BITRATE_MAX">
+<span class="target" id="uart_8h_1ab5636b7aad11849ee4c6f7c481dc07f6"></span><code class="descname">UART_BITRATE_MAX</code><a class="headerlink" href="uart.html#c.UART_BITRATE_MAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max bit rate supported by UART </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_PIN_NO_CHANGE">
+<span class="target" id="uart_8h_1ab33b16f9bc23412d5d31f76d134a36db"></span><code class="descname">UART_PIN_NO_CHANGE</code><a class="headerlink" href="uart.html#c.UART_PIN_NO_CHANGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant for uart_set_pin function which indicates that UART pin should not be changed </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INVERSE_DISABLE">
+<span class="target" id="uart_8h_1a683885aa03c7b605604d897e27cb5355"></span><code class="descname">UART_INVERSE_DISABLE</code><a class="headerlink" href="uart.html#c.UART_INVERSE_DISABLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable UART signal inverse </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INVERSE_RXD">
+<span class="target" id="uart_8h_1a12becc6acce13974ed835c4e67bbfa6e"></span><code class="descname">UART_INVERSE_RXD</code><a class="headerlink" href="uart.html#c.UART_INVERSE_RXD" title="Permalink to this definition">¶</a></dt>
+<dd><p>UART RXD input inverse </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INVERSE_CTS">
+<span class="target" id="uart_8h_1a890cb40955ca53d14b6d92fca06ae9c4"></span><code class="descname">UART_INVERSE_CTS</code><a class="headerlink" href="uart.html#c.UART_INVERSE_CTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>UART CTS input inverse </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INVERSE_TXD">
+<span class="target" id="uart_8h_1acda3c509c62bcca3bf7aae18218fb524"></span><code class="descname">UART_INVERSE_TXD</code><a class="headerlink" href="uart.html#c.UART_INVERSE_TXD" title="Permalink to this definition">¶</a></dt>
+<dd><p>UART TXD output inverse </p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_INVERSE_RTS">
+<span class="target" id="uart_8h_1a930be76712b1217fba81c9cd541d532a"></span><code class="descname">UART_INVERSE_RTS</code><a class="headerlink" href="uart.html#c.UART_INVERSE_RTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>UART RTS output inverse </p>
+</dd></dl>
+
+</div>
+<div class="section" id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="uart.html#type-definitions" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv217uart_isr_handle_t">
+<span id="uart_isr_handle_t"></span><span class="target" id="uart_8h_1a3f041e20057aa29e3733adba8e84b484"></span><em class="property">typedef </em><a class="reference internal" href="../system/intr_alloc.html#_CPPv213intr_handle_t" title="intr_handle_t">intr_handle_t</a> <code class="descclassname"></code><code class="descname">uart_isr_handle_t</code><a class="headerlink" href="uart.html#_CPPv217uart_isr_handle_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="enumerations">
+<h3>Enumerations<a class="headerlink" href="uart.html#enumerations" title="Permalink to this headline">¶</a></h3>
+<dl class="type">
+<dt id="_CPPv218uart_word_length_t">
+<span id="uart_word_length_t"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_word_length_t</code><a class="headerlink" href="uart.html#_CPPv218uart_word_length_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART word length constants. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216UART_DATA_5_BITS">
+<span id="UART_DATA_5_BITS"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044a45437f3ff3941ae72e531dfb755456f4"></span><code class="descname">UART_DATA_5_BITS</code> = 0x0<a class="headerlink" href="uart.html#_CPPv216UART_DATA_5_BITS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>word length: 5bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_DATA_6_BITS">
+<span id="UART_DATA_6_BITS"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044a2f062e3e06c3560077fe86fef6b8d9cb"></span><code class="descname">UART_DATA_6_BITS</code> = 0x1<a class="headerlink" href="uart.html#_CPPv216UART_DATA_6_BITS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>word length: 6bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_DATA_7_BITS">
+<span id="UART_DATA_7_BITS"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044aa5bd9a1dad740644b4c60fe0a8f9addd"></span><code class="descname">UART_DATA_7_BITS</code> = 0x2<a class="headerlink" href="uart.html#_CPPv216UART_DATA_7_BITS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>word length: 7bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_DATA_8_BITS">
+<span id="UART_DATA_8_BITS"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044a92b996b63bd23267f72518c51a79936e"></span><code class="descname">UART_DATA_8_BITS</code> = 0x3<a class="headerlink" href="uart.html#_CPPv216UART_DATA_8_BITS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>word length: 8bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv218UART_DATA_BITS_MAX">
+<span id="UART_DATA_BITS_MAX"></span><span class="target" id="uart_8h_1aab50969c4f0a2257304e7e88016b0044a92fecdfea5b36efedd93902b073443a2"></span><code class="descname">UART_DATA_BITS_MAX</code> = 0X4<a class="headerlink" href="uart.html#_CPPv218UART_DATA_BITS_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv216uart_stop_bits_t">
+<span id="uart_stop_bits_t"></span><span class="target" id="uart_8h_1a6da57a73bbdbf830b845d4116f8341d7"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_stop_bits_t</code><a class="headerlink" href="uart.html#_CPPv216uart_stop_bits_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART stop bits number. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv216UART_STOP_BITS_1">
+<span id="UART_STOP_BITS_1"></span><span class="target" id="uart_8h_1a6da57a73bbdbf830b845d4116f8341d7a44b3bfbe90aebe2b23227f5c011f41cc"></span><code class="descname">UART_STOP_BITS_1</code> = 0x1<a class="headerlink" href="uart.html#_CPPv216UART_STOP_BITS_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>stop bit: 1bit </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv218UART_STOP_BITS_1_5">
+<span id="UART_STOP_BITS_1_5"></span><span class="target" id="uart_8h_1a6da57a73bbdbf830b845d4116f8341d7a5e3880b6868c824f0a76663f8ee5270f"></span><code class="descname">UART_STOP_BITS_1_5</code> = 0x2<a class="headerlink" href="uart.html#_CPPv218UART_STOP_BITS_1_5" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>stop bit: 1.5bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_STOP_BITS_2">
+<span id="UART_STOP_BITS_2"></span><span class="target" id="uart_8h_1a6da57a73bbdbf830b845d4116f8341d7a00c73c92b3d624bc86cfa63636dd99b3"></span><code class="descname">UART_STOP_BITS_2</code> = 0x3<a class="headerlink" href="uart.html#_CPPv216UART_STOP_BITS_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>stop bit: 2bits </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv218UART_STOP_BITS_MAX">
+<span id="UART_STOP_BITS_MAX"></span><span class="target" id="uart_8h_1a6da57a73bbdbf830b845d4116f8341d7a56d0ec5d576907cf54437274285ee693"></span><code class="descname">UART_STOP_BITS_MAX</code> = 0x4<a class="headerlink" href="uart.html#_CPPv218UART_STOP_BITS_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv211uart_port_t">
+<span id="uart_port_t"></span><span class="target" id="uart_8h_1a7f28644638bd57536eb5260695e83de9"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_port_t</code><a class="headerlink" href="uart.html#_CPPv211uart_port_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART peripheral number. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv210UART_NUM_0">
+<span id="UART_NUM_0"></span><span class="target" id="uart_8h_1a7f28644638bd57536eb5260695e83de9a58fd32e284dbcb8b75d4d7b73760827f"></span><code class="descname">UART_NUM_0</code> = 0x0<a class="headerlink" href="uart.html#_CPPv210UART_NUM_0" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART base address 0x3ff40000 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv210UART_NUM_1">
+<span id="UART_NUM_1"></span><span class="target" id="uart_8h_1a7f28644638bd57536eb5260695e83de9a7bbf3455b5ac5115b6609c6296188f0f"></span><code class="descname">UART_NUM_1</code> = 0x1<a class="headerlink" href="uart.html#_CPPv210UART_NUM_1" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART base address 0x3ff50000 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv210UART_NUM_2">
+<span id="UART_NUM_2"></span><span class="target" id="uart_8h_1a7f28644638bd57536eb5260695e83de9a9e71fb57730174c2e2a55e728029ded2"></span><code class="descname">UART_NUM_2</code> = 0x2<a class="headerlink" href="uart.html#_CPPv210UART_NUM_2" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART base address 0x3ff6E000 </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv212UART_NUM_MAX">
+<span id="UART_NUM_MAX"></span><span class="target" id="uart_8h_1a7f28644638bd57536eb5260695e83de9a3bab1b6ad421ddc84572296520aae034"></span><code class="descname">UART_NUM_MAX</code><a class="headerlink" href="uart.html#_CPPv212UART_NUM_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv213uart_parity_t">
+<span id="uart_parity_t"></span><span class="target" id="uart_8h_1a6bcc37e31dd40c204b4ac6f6189e8878"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_parity_t</code><a class="headerlink" href="uart.html#_CPPv213uart_parity_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART parity constants. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv219UART_PARITY_DISABLE">
+<span id="UART_PARITY_DISABLE"></span><span class="target" id="uart_8h_1a6bcc37e31dd40c204b4ac6f6189e8878aaacbb6cf4a984331ce0784edb10e1d65"></span><code class="descname">UART_PARITY_DISABLE</code> = 0x0<a class="headerlink" href="uart.html#_CPPv219UART_PARITY_DISABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Disable UART parity </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_PARITY_EVEN">
+<span id="UART_PARITY_EVEN"></span><span class="target" id="uart_8h_1a6bcc37e31dd40c204b4ac6f6189e8878ad908a637b1dd23f93b149dd2d8bdfdb8"></span><code class="descname">UART_PARITY_EVEN</code> = 0x2<a class="headerlink" href="uart.html#_CPPv216UART_PARITY_EVEN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable UART even parity </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215UART_PARITY_ODD">
+<span id="UART_PARITY_ODD"></span><span class="target" id="uart_8h_1a6bcc37e31dd40c204b4ac6f6189e8878ad90cc425f5ba447773a44a75be6593e2"></span><code class="descname">UART_PARITY_ODD</code> = 0x3<a class="headerlink" href="uart.html#_CPPv215UART_PARITY_ODD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable UART odd parity </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv221uart_hw_flowcontrol_t">
+<span id="uart_hw_flowcontrol_t"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9e"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_hw_flowcontrol_t</code><a class="headerlink" href="uart.html#_CPPv221uart_hw_flowcontrol_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART hardware flow control modes. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv224UART_HW_FLOWCTRL_DISABLE">
+<span id="UART_HW_FLOWCTRL_DISABLE"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9eaf5fbb68dace1cef615b349cbceeb5334"></span><code class="descname">UART_HW_FLOWCTRL_DISABLE</code> = 0x0<a class="headerlink" href="uart.html#_CPPv224UART_HW_FLOWCTRL_DISABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>disable hardware flow control </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220UART_HW_FLOWCTRL_RTS">
+<span id="UART_HW_FLOWCTRL_RTS"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9ea5a3d78eb8ac164374c8f108e570cb664"></span><code class="descname">UART_HW_FLOWCTRL_RTS</code> = 0x1<a class="headerlink" href="uart.html#_CPPv220UART_HW_FLOWCTRL_RTS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>enable RX hardware flow control (rts) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220UART_HW_FLOWCTRL_CTS">
+<span id="UART_HW_FLOWCTRL_CTS"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9eaa13ec62ff02b7471017864a39cf52460"></span><code class="descname">UART_HW_FLOWCTRL_CTS</code> = 0x2<a class="headerlink" href="uart.html#_CPPv220UART_HW_FLOWCTRL_CTS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>enable TX hardware flow control (cts) </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv224UART_HW_FLOWCTRL_CTS_RTS">
+<span id="UART_HW_FLOWCTRL_CTS_RTS"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9ea25f457d713ea53655fa394e335f15e62"></span><code class="descname">UART_HW_FLOWCTRL_CTS_RTS</code> = 0x3<a class="headerlink" href="uart.html#_CPPv224UART_HW_FLOWCTRL_CTS_RTS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>enable hardware flow control </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv220UART_HW_FLOWCTRL_MAX">
+<span id="UART_HW_FLOWCTRL_MAX"></span><span class="target" id="uart_8h_1a4866947d21bd2902ba97ff2273028c9ea135b405084a593465b84f19a6104ab28"></span><code class="descname">UART_HW_FLOWCTRL_MAX</code> = 0x4<a class="headerlink" href="uart.html#_CPPv220UART_HW_FLOWCTRL_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv217uart_event_type_t">
+<span id="uart_event_type_t"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94caf"></span><em class="property">enum </em><code class="descclassname"></code><code class="descname">uart_event_type_t</code><a class="headerlink" href="uart.html#_CPPv217uart_event_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART event types used in the ringbuffer. </p>
+<p><em>Values:</em></p>
+<dl class="member">
+<dt id="_CPPv29UART_DATA">
+<span id="UART_DATA"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafab8cffca7dac643fb53ca35bd20214882"></span><code class="descname">UART_DATA</code><a class="headerlink" href="uart.html#_CPPv29UART_DATA" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART data event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv210UART_BREAK">
+<span id="UART_BREAK"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa4986147e23cc46ab8c2aa7e151d09571"></span><code class="descname">UART_BREAK</code><a class="headerlink" href="uart.html#_CPPv210UART_BREAK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART break event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_BUFFER_FULL">
+<span id="UART_BUFFER_FULL"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa12578023d68c7c43e33bac855ad394fd"></span><code class="descname">UART_BUFFER_FULL</code><a class="headerlink" href="uart.html#_CPPv216UART_BUFFER_FULL" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART RX buffer full event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv213UART_FIFO_OVF">
+<span id="UART_FIFO_OVF"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafad4404c87268f285a8b5551efc4fa121e"></span><code class="descname">UART_FIFO_OVF</code><a class="headerlink" href="uart.html#_CPPv213UART_FIFO_OVF" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART FIFO overflow event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214UART_FRAME_ERR">
+<span id="UART_FRAME_ERR"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa32a1926931bdd145a394fccbd75ec4f0"></span><code class="descname">UART_FRAME_ERR</code><a class="headerlink" href="uart.html#_CPPv214UART_FRAME_ERR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART RX frame error event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215UART_PARITY_ERR">
+<span id="UART_PARITY_ERR"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa93e1a6617858153f2c39c1ec54cbfade"></span><code class="descname">UART_PARITY_ERR</code><a class="headerlink" href="uart.html#_CPPv215UART_PARITY_ERR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART RX parity event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv215UART_DATA_BREAK">
+<span id="UART_DATA_BREAK"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa1c2eb56d729c73b734c7997d4ca5aabe"></span><code class="descname">UART_DATA_BREAK</code><a class="headerlink" href="uart.html#_CPPv215UART_DATA_BREAK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART TX data and break event </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv216UART_PATTERN_DET">
+<span id="UART_PATTERN_DET"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa8d13ac936522dd215489629e89c07b1e"></span><code class="descname">UART_PATTERN_DET</code><a class="headerlink" href="uart.html#_CPPv216UART_PATTERN_DET" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART pattern detected </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv214UART_EVENT_MAX">
+<span id="UART_EVENT_MAX"></span><span class="target" id="uart_8h_1aa33921674d20cc4e8c996134afc94cafa4aebcf28effb5c6f8a42abf2f957025b"></span><code class="descname">UART_EVENT_MAX</code><a class="headerlink" href="uart.html#_CPPv214UART_EVENT_MAX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>UART event max index </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gpio-lookup-macros">
+<h3>GPIO Lookup Macros<a class="headerlink" href="uart.html#gpio-lookup-macros" title="Permalink to this headline">¶</a></h3>
+<p>Some useful macros can be used to specified the <strong>direct</strong> GPIO (UART module connected to pads through direct IO mux without the GPIO mux) number of a UART channel, or vice versa.
+The pin name can be omitted if specify the channel of a GPIO num.
+e.g.</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">UART_NUM_2_TXD_DIRECT_GPIO_NUM</span></code> is the GPIO number of UART channel 2 TXD pin (17);</li>
+<li><code class="docutils literal"><span class="pre">UART_GPIO19_DIRECT_CHANNEL</span></code> is the UART channel number of GPIO 19 (channel 0);</li>
+<li><code class="docutils literal"><span class="pre">UART_CTS_GPIO19_DIRECT_CHANNEL</span></code> is the UART channel number of GPIO 19, and GPIO 19 must be a CTS pin (channel 0).</li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h3>Header File<a class="headerlink" href="uart.html#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/espressif/esp-idf/blob/de750e9/components/soc/esp32/include/soc/uart_channel.h">soc/esp32/include/soc/uart_channel.h</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Macros<a class="headerlink" href="uart.html#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="macro">
+<dt id="c.UART_GPIO1_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a6fb19dd35e19a437dec6ca20be29c404"></span><code class="descname">UART_GPIO1_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO1_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_0_TXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a4ab5e5c94a9556ead2793f5a68af3afd"></span><code class="descname">UART_NUM_0_TXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_0_TXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO3_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a23ff6432cc0d68a25e9b27b5dc28dbdf"></span><code class="descname">UART_GPIO3_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO3_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_0_RXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1aca381368a6e05cff9200b77dd4dc2bf4"></span><code class="descname">UART_NUM_0_RXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_0_RXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO19_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1abca2bd587531baf1631bd8a477f0ad4a"></span><code class="descname">UART_GPIO19_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO19_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_0_CTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1ad7940688e6ec4496ed17a81d6d354a97"></span><code class="descname">UART_NUM_0_CTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_0_CTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO22_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a6fb3a840724b1c5d7ba47021e5c7e311"></span><code class="descname">UART_GPIO22_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO22_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_0_RTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1af457a79776f98060888f6f0a9a27b79e"></span><code class="descname">UART_NUM_0_RTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_0_RTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_TXD_GPIO1_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a2f8568148849fb4d2fa0aba17cd917d5"></span><code class="descname">UART_TXD_GPIO1_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_TXD_GPIO1_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RXD_GPIO3_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a29d5b99a331678c1167226d2460fb0c0"></span><code class="descname">UART_RXD_GPIO3_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RXD_GPIO3_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_CTS_GPIO19_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1ad2172581e12249dcdb163d712ef76385"></span><code class="descname">UART_CTS_GPIO19_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_CTS_GPIO19_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RTS_GPIO22_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1ac3dace4019793969c2430b7e359da903"></span><code class="descname">UART_RTS_GPIO22_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RTS_GPIO22_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO10_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a70486c8fc843401aff662a37fcbfcae7"></span><code class="descname">UART_GPIO10_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO10_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_1_TXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a5fb6488f5a99387c238badc165118fd4"></span><code class="descname">UART_NUM_1_TXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_1_TXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO9_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a4e44f1ede468c53a5fc2edef860f4c22"></span><code class="descname">UART_GPIO9_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO9_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_1_RXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1ac8e7a0dd4765f17cf9d63d58b6b0392c"></span><code class="descname">UART_NUM_1_RXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_1_RXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO6_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a5fa7550534fc91100759cc78eac358e5"></span><code class="descname">UART_GPIO6_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO6_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_1_CTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a421e448ceee48e3474ade6fc6c622865"></span><code class="descname">UART_NUM_1_CTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_1_CTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO11_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a71755294f25bd925e5a96fc67c5c3283"></span><code class="descname">UART_GPIO11_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO11_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_1_RTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a99b0fe2db1a3b890a6b55fee80ba384d"></span><code class="descname">UART_NUM_1_RTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_1_RTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_TXD_GPIO10_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a9087a36aa316960c9fa5a5e90776e45f"></span><code class="descname">UART_TXD_GPIO10_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_TXD_GPIO10_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RXD_GPIO9_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1ae847cfb380d6a58bd3fc7cffce2f8f2c"></span><code class="descname">UART_RXD_GPIO9_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RXD_GPIO9_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_CTS_GPIO6_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a6ba8a20cf6e43120616d7309bd7de87d"></span><code class="descname">UART_CTS_GPIO6_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_CTS_GPIO6_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RTS_GPIO11_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a58afc23f574af5c052678011213dc0e6"></span><code class="descname">UART_RTS_GPIO11_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RTS_GPIO11_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO17_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a45d5b0d2c783a45588bec65c8c770725"></span><code class="descname">UART_GPIO17_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO17_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_2_TXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a7e18107d9b36c11fba3e647996cf332c"></span><code class="descname">UART_NUM_2_TXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_2_TXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO16_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a83580b4739a47a86dc5f825042796f7d"></span><code class="descname">UART_GPIO16_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO16_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_2_RXD_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a402b85523b39359b02ef726d5446cfb4"></span><code class="descname">UART_NUM_2_RXD_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_2_RXD_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO8_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a6d7318c574156c7b4eb43c9482a85035"></span><code class="descname">UART_GPIO8_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO8_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_2_CTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1a53aa8254a8d434e09b0d0e9be6cde2c0"></span><code class="descname">UART_NUM_2_CTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_2_CTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_GPIO7_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a42d5b419247fc2a113df36bf230c8eba"></span><code class="descname">UART_GPIO7_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_GPIO7_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_NUM_2_RTS_DIRECT_GPIO_NUM">
+<span class="target" id="uart__channel_8h_1acaba9047762ae543076d07dd2d649f8f"></span><code class="descname">UART_NUM_2_RTS_DIRECT_GPIO_NUM</code><a class="headerlink" href="uart.html#c.UART_NUM_2_RTS_DIRECT_GPIO_NUM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_TXD_GPIO17_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a38c430f9ffcd6bf1b44608798079e339"></span><code class="descname">UART_TXD_GPIO17_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_TXD_GPIO17_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RXD_GPIO16_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a2ed6f576dea8a88cb8103afc0b5d07a7"></span><code class="descname">UART_RXD_GPIO16_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RXD_GPIO16_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_CTS_GPIO8_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1a505eb5143c533d3f274977a368377a38"></span><code class="descname">UART_CTS_GPIO8_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_CTS_GPIO8_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="macro">
+<dt id="c.UART_RTS_GPIO7_DIRECT_CHANNEL">
+<span class="target" id="uart__channel_8h_1aee8248c2a5c3a23baaad3bd2396a3bb0"></span><code class="descname">UART_RTS_GPIO7_DIRECT_CHANNEL</code><a class="headerlink" href="uart.html#c.UART_RTS_GPIO7_DIRECT_CHANNEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../protocols/index.html" class="btn btn-neutral float-right" title="Protocols API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="touch_pad.html" class="btn btn-neutral" title="Touch Sensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016 - 2017, Espressif.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v3.0-dev-806-gde750e9',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
