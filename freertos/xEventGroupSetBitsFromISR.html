@@ -12,17 +12,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -117,7 +117,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -197,7 +197,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -206,7 +206,7 @@
                     </table>
 
                     <h1>xEventGroupSetBitsFromISR()<br/>
-                      <small>[<a class="el" href="/event-groups-API.html">Event Group API</a>]</small></h1>
+                      <small>[<a class="el" href="event-groups-API.html">Event Group API</a>]</small></h1>
 
                     <p><br/>
                     </p>
@@ -221,8 +221,8 @@
                           BaseType_t *pxHigherPriorityTaskWoken );
 </font></pre>
 
-                    <p>Set bits (flags) within an RTOS <a href="/FreeRTOS-Event-Groups.html">event
-                      group</a>. A version of <a href="/xEventGroupSetBits.html">xEventGroupSetBits()</a> that can be called
+                    <p>Set bits (flags) within an RTOS <a href="FreeRTOS-Event-Groups.html">event
+                      group</a>. A version of <a href="xEventGroupSetBits.html">xEventGroupSetBits()</a> that can be called
                       from an interrupt service routine (ISR).</p>
 
                     <p>Setting bits in an event group will
@@ -252,7 +252,7 @@
                       executes) then the priority of the RTOS daemon
                       task must be higher than the priority of any
                       application task that uses the event group. The
-                      priority of the RTOS daemon task is set by the <a href="/Configuring-a-real-time-RTOS-application-to-use-software-timers.html"> configTIMER_TASK_PRIORITY</a> definition in
+                      priority of the RTOS daemon task is set by the <a href="Configuring-a-real-time-RTOS-application-to-use-software-timers.html"> configTIMER_TASK_PRIORITY</a> definition in
                       FreeRTOSConfig.h.</p>
 
                     <p>INCLUDE_xEventGroupSetBitFromISR,
@@ -279,7 +279,7 @@
                               <td><font face="arial">The event group
                                 in which the bits are to be set. The
                                 event group must have previously been
-                                created using a call to <a href="/xEventGroupCreate.html">xEventGroupCreate()</a>.</font></td>
+                                created using a call to <a href="xEventGroupCreate.html">xEventGroupCreate()</a>.</font></td>
                             </tr>
 
                             <tr>
@@ -322,7 +322,7 @@
 
                       <dd>If the message was sent to the RTOS daemon
                         task then pdPASS is returned, otherwise pdFAIL
-                        is returned. pdFAIL will be returned if the <a href="/RTOS-software-timer-service-daemon-task.html">timer service queue</a> was full.</dd>
+                        is returned. pdFAIL will be returned if the <a href="RTOS-software-timer-service-daemon-task.html">timer service queue</a> was full.</dd>
                     </dl>
                     <b>Example usage:</b>
                     <pre><font face="courier">
@@ -367,8 +367,8 @@ BaseType_t xHigherPriorityTaskWoken, xResult;
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -396,7 +396,7 @@ BaseType_t xHigherPriorityTaskWoken, xResult;
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

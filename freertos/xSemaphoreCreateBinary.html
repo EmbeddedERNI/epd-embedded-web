@@ -11,17 +11,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -116,7 +116,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -196,7 +196,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -211,7 +211,7 @@
                       <table bgcolor="#B6CFFE" cellpadding="3" cellspacing="0">
                         <tbody>
                           <tr>
-                            <td align="center" style="border:solid 1px white; background-color:#7095d3;"><a href="/RTOS_Task_Notification_As_Binary_Semaphore.html" style="color:white;"><b>&nbsp;TIP: In
+                            <td align="center" style="border:solid 1px white; background-color:#7095d3;"><a href="RTOS_Task_Notification_As_Binary_Semaphore.html" style="color:white;"><b>&nbsp;TIP: In
                               many usage scenarios it is faster and
                               more memory efficient to use a direct to
                               task notification instead of a binary
@@ -227,8 +227,8 @@
 SemaphoreHandle_t xSemaphoreCreateBinary( void );
         </font></pre>
 
-                    <p>Creates a <a href="/Embedded-RTOS-Binary-Semaphores.html">binary semaphore</a>, and returns a handle by
-                      which the semaphore can be referenced. <a href="/a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a> must be
+                    <p>Creates a <a href="Embedded-RTOS-Binary-Semaphores.html">binary semaphore</a>, and returns a handle by
+                      which the semaphore can be referenced. <a href="a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a> must be
                       set to 1 in FreeRTOSConfig.h, or left undefined
                       (in which case it will default to 1), for this
                       RTOS API function to be available.</p>
@@ -237,19 +237,19 @@ SemaphoreHandle_t xSemaphoreCreateBinary( void );
                       RAM that is used to hold the semaphore's state.
                       If a binary semaphore is created using
                       xSemaphoreCreateBinary() then the required RAM is
-                      automatically allocated from the <a href="/a00111.html">FreeRTOS heap</a>. If a
-                      binary semaphore is created using <a href="/xSemaphoreCreateBinaryStatic.html">xSemaphoreCreateBinaryStatic()</a> then the RAM
+                      automatically allocated from the <a href="a00111.html">FreeRTOS heap</a>. If a
+                      binary semaphore is created using <a href="xSemaphoreCreateBinaryStatic.html">xSemaphoreCreateBinaryStatic()</a> then the RAM
                       is provided by the application writer, which
                       requires an additional parameter, but allows the
                       RAM to be statically allocated at compile time.
-                      See the <a href="/Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
+                      See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
                       information.</p>
 
                     <p>The semaphore is created in the 'empty' state,
                       meaning the semaphore must first be given using
-                      the <a href="/a00123.html">xSemaphoreGive()</a>
+                      the <a href="a00123.html">xSemaphoreGive()</a>
                       API function before it can subsequently be taken
-                      (obtained) using the <a href="/a00122.html">xSemaphoreTake</a>() function.</p>
+                      (obtained) using the <a href="a00122.html">xSemaphoreTake</a>() function.</p>
 
                     <p>Binary semaphores and <a href="CreateMutex.html">mutexes</a> are very
                       similar but have some subtle differences: Mutexes
@@ -267,7 +267,7 @@ SemaphoreHandle_t xSemaphoreCreateBinary( void );
                       'takes' the semaphore. This is demonstrated by
                       the sample code on the <a href="a00124.html">xSemaphoreGiveFromISR()</a> documentation page.
                       Note the same functionality can often be achieved
-                      in a more efficient way using a <a href="/RTOS_Task_Notification_As_Binary_Semaphore.html">direct to task notification</a>.</p>
+                      in a more efficient way using a <a href="RTOS_Task_Notification_As_Binary_Semaphore.html">direct to task notification</a>.</p>
 
                     <p>The priority of a task that 'takes' a mutex can
                       potentially be raised if another task of higher
@@ -300,7 +300,7 @@ SemaphoreHandle_t xSemaphoreCreateBinary( void );
 
                               <td><font face="arial">The semaphore
                                 could not be created because there was
-                                insufficient <a href="/a00111.html">FreeRTOS heap</a> available.</font></td>
+                                insufficient <a href="a00111.html">FreeRTOS heap</a> available.</font></td>
                             </tr>
 
                             <tr>
@@ -348,8 +348,8 @@ void vATask( void * pvParameters )
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -377,7 +377,7 @@ void vATask( void * pvParameters )
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

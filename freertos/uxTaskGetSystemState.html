@@ -11,17 +11,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -116,7 +116,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -196,7 +196,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -205,7 +205,7 @@
                     </table>
 
                     <h1>uxTaskGetSystemState()<br/>
-                      <small>[<a class="el" href="/a00021.html">Task
+                      <small>[<a class="el" href="a00021.html">Task
                       Utilities</a>]</small></h1>
                     task.h
                     <pre><font face="courier">
@@ -226,7 +226,7 @@ UBaseType_t uxTaskGetSystemState(
                       task state, and total amount of run time consumed
                       by the task.</p>
 
-                    <p>See <a href="/vTaskGetInfo.html">vTaskGetInfo()</a> for a version that populates
+                    <p>See <a href="vTaskGetInfo.html">vTaskGetInfo()</a> for a version that populates
                       a TaskStatus_t structure for a single task,
                       instead of every task.</p>
 
@@ -250,7 +250,7 @@ UBaseType_t uxTaskGetSystemState(
                                 that is under the control of the RTOS.
                                 The number of tasks under the control
                                 of the RTOS can be determined using the
-                                <a href="/a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTasks()</a> API
+                                <a href="a00021.html#usTaskGetNumberOfTasks">uxTaskGetNumberOfTasks()</a> API
                                 function.</font></td>
                             </tr>
 
@@ -275,7 +275,7 @@ UBaseType_t uxTaskGetSystemState(
                                 1 in FreeRTOSConfig.h then
                                 *pulTotalRunTime is set by
                                 uxTaskGetSystemState() to the total run
-                                time (as defined by the <a href="/rtos-run-time-stats.html">run
+                                time (as defined by the <a href="rtos-run-time-stats.html">run
                                 time stats clock</a>) since the target
                                 booted. pulTotalRunTime can be set to
                                 NULL to omit the total run time
@@ -389,7 +389,7 @@ typedef struct xTASK_STATUS
    UBaseType_t xTaskNumber;
 
    <font color="green">/* The state in which the task existed when the structure was populated. */</font>
-   <a href="/a00021.html#eTaskGetState">eTaskState</a> eCurrentState;
+   <a href="a00021.html#eTaskGetState">eTaskState</a> eCurrentState;
 
    <font color="green">/* The priority at which the task was running (may be inherited) when the
    structure was populated. */</font>
@@ -401,7 +401,7 @@ typedef struct xTASK_STATUS
    FreeRTOSConfig.h. */</font>
    UBaseType_t uxBasePriority;
 
-   <font color="green">/* The total run time allocated to the task so far, as defined by the <a href="/rtos-run-time-stats.html">run
+   <font color="green">/* The total run time allocated to the task so far, as defined by the <a href="rtos-run-time-stats.html">run
    time stats clock</a>.  Only valid when configGENERATE_RUN_TIME_STATS is
    defined as 1 in FreeRTOSConfig.h. */</font>
    unsigned long ulRunTimeCounter;
@@ -425,8 +425,8 @@ typedef struct xTASK_STATUS
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -454,7 +454,7 @@ typedef struct xTASK_STATUS
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

@@ -12,17 +12,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -117,7 +117,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -197,7 +197,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -213,30 +213,30 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(
                             StaticSemaphore_t *pxMutexBuffer );
 </pre>
 
-                    <p>Creates a <a href="/Real-time-embedded-RTOS-mutexes.html">mutex</a>, and returns a handle by which the
+                    <p>Creates a <a href="Real-time-embedded-RTOS-mutexes.html">mutex</a>, and returns a handle by which the
                       created mutex can be referenced. Mutexes cannot
                       be used in interrupt service routines.</p>
 
-                    <p><a href="/a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must be set
+                    <p><a href="a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must be set
                       to 1 in FreeRTOSConfig.h for this RTOS API
                       function to be available.</p>
 
                     <p>Each mutex require a small amount of RAM that
                       is used to hold the mutex's state. If a mutex is
-                      created using <a href="/CreateMutex.html">xSemaphoreCreateMutex</a>() then the required
-                      RAM is automatically allocated from the <a href="/a00111.html">FreeRTOS heap</a>. If a
+                      created using <a href="CreateMutex.html">xSemaphoreCreateMutex</a>() then the required
+                      RAM is automatically allocated from the <a href="a00111.html">FreeRTOS heap</a>. If a
                       mutex is created using
                       xSemaphoreCreateMutexStatic() then the RAM is
                       provided by the application writer, which
                       requires an additional parameter, but allows the
                       RAM to be statically allocated at compile time.
-                      See the <a href="/Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
+                      See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
                       information.</p>
 
-                    <p>Mutexes are taken using <a href="/a00122.html">xSemaphoreTake</a>(), and given using <a href="/a00123.html">xSemaphoreGive()</a>.
+                    <p>Mutexes are taken using <a href="a00122.html">xSemaphoreTake</a>(), and given using <a href="a00123.html">xSemaphoreGive()</a>.
                       xSemaphoreTakeRecursive() and
                       xSemaphoreGiveRecursive() can only be used on
-                      mutexes created using <a href="/xSemaphoreCreateRecursiveMutex.html">xSemaphoreCreateResursiveMutex</a>().</p>
+                      mutexes created using <a href="xSemaphoreCreateRecursiveMutex.html">xSemaphoreCreateResursiveMutex</a>().</p>
 
                     <p>Mutexes and <a href="a00121.html">binary
                       semaphores</a> are very similar but have some
@@ -332,7 +332,7 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(
 
     <font color="green">/* The pxMutexBuffer was not NULL, so it is expected that the
     handle will not be NULL. */</font>
-    <a href="/a00110.html#configASSERT">configASSERT</a>( xSemaphore );
+    <a href="a00110.html#configASSERT">configASSERT</a>( xSemaphore );
 
     <font color="green">/* Rest of the task code goes here. */</font>
  }
@@ -347,8 +347,8 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -376,7 +376,7 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

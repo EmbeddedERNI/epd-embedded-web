@@ -13,17 +13,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -118,7 +118,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -198,7 +198,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -220,25 +220,25 @@ task. h
                                  StackType_t * const puxStackBuffer,
                                  StaticTask_t * const pxTaskBuffer );</pre>
 
-                    <p>Create a new <a href="/a00015.html">task</a>
+                    <p>Create a new <a href="a00015.html">task</a>
                       and add it to the list of tasks that are ready to
-                      run. <a href="/a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must be set
+                      run. <a href="a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must be set
                       to 1 in FreeRTOSConfig.h for this RTOS API
                       function to be available.</p>
 
                     <p>Each task requires RAM that is used to hold the
                       task state, and used by the task as its stack. If
-                      a task is created using <a href="/a00125.html">xTaskCreate()</a> then the required RAM is
-                      automatically allocated from the <a href="/a00111.html">FreeRTOS heap</a>. If a
+                      a task is created using <a href="a00125.html">xTaskCreate()</a> then the required RAM is
+                      automatically allocated from the <a href="a00111.html">FreeRTOS heap</a>. If a
                       task is created using xTaskCreateStatic() then
                       the RAM is provided by the application writer,
                       which results in a greater number of parameters,
                       but allows the RAM to be statically allocated at
-                      compile time. See the <a href="/Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
+                      compile time. See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
                       information.</p>
 
-                    <p>If you are using <a href="/FreeRTOS-MPU-memory-protection-unit.html">FreeRTOS-MPU</a> then it is recommended to use
-                      <a href="/xTaskCreateRestricted.html">xTaskCreateRestricted()</a> in place of
+                    <p>If you are using <a href="FreeRTOS-MPU-memory-protection-unit.html">FreeRTOS-MPU</a> then it is recommended to use
+                      <a href="xTaskCreateRestricted.html">xTaskCreateRestricted()</a> in place of
                       xTaskCreateStatic().</p>
 
                     <dl compact="compact">
@@ -255,9 +255,9 @@ task. h
                                 (just the name of the function that
                                 implements the task, see the example
                                 below).
-                                <p>Tasks are normally <a href="/implementing-a-FreeRTOS-task.html">implemented as an infinite loop</a>, and must never attempt to return
+                                <p>Tasks are normally <a href="implementing-a-FreeRTOS-task.html">implemented as an infinite loop</a>, and must never attempt to return
                                   or exit from their implementing
-                                  function. Tasks can however <a href="/a00126.html">delete
+                                  function. Tasks can however <a href="a00126.html">delete
                                   themselves</a>.</p>
                               </td>
                             </tr>
@@ -268,11 +268,11 @@ task. h
 
                               <td>A descriptive name for the task.
                                 This is mainly used to facilitate
-                                debugging, but can also be used to <a href="/a00021.html#xTaskGetHandle">obtain a task handle</a>.
+                                debugging, but can also be used to <a href="a00021.html#xTaskGetHandle">obtain a task handle</a>.
                                 <p>The maximum length of a task's name
                                   is set using the
                                   configMAX_TASK_NAME_LEN parameter in
-                                  <a href="/a00110.html">FreeRTOSConfig.h</a>.</p>
+                                  <a href="a00110.html">FreeRTOSConfig.h</a>.</p>
                               </td>
                             </tr>
 
@@ -285,7 +285,7 @@ task. h
                                 variables into xTaskCreateStatic().
                                 ulStackDepth must be set to the number
                                 of indexes in the array.
-                                <p>See the FAQ <a href="/FAQMem.html#StackSize">How
+                                <p>See the FAQ <a href="FAQMem.html#StackSize">How
                                   big should the stack be?</a></p>
                               </td>
                             </tr>
@@ -309,7 +309,7 @@ task. h
                               <td valign="top"><em>uxPriority</em>
                                 &nbsp;</td>
 
-                              <td>The <a href="/RTOS-task-priority.html">priority</a> at which the created
+                              <td>The <a href="RTOS-task-priority.html">priority</a> at which the created
                                 task will execute.
                                 <p>Systems that include MPU support
                                   can optionally create a task in a
@@ -404,7 +404,7 @@ task. h
         <font color="green">/* puxStackBuffer and pxTaskBuffer were not NULL, so the task will have
         been created, and xHandle will be the task's handle.  Use the handle
         to suspend the task. */</font>
-        <a href="/a00130.html">vTaskSuspend</a>( xHandle );
+        <a href="a00130.html">vTaskSuspend</a>( xHandle );
     }
 </pre>
                     <br/>
@@ -417,8 +417,8 @@ task. h
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -446,7 +446,7 @@ task. h
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

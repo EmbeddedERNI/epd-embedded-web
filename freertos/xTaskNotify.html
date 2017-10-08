@@ -11,17 +11,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -116,7 +116,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -196,7 +196,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -205,7 +205,7 @@
                     </table>
 
                     <h1>xTaskNotify()<br/>
-                      <small>[<a class="el" href="/RTOS-task-notification-API.html">RTOS
+                      <small>[<a class="el" href="RTOS-task-notification-API.html">RTOS
                       Task Notification API</a>]</small></h1>
 
                     <p><br/>
@@ -219,10 +219,10 @@
 
                     <p><small>[If you are using RTOS task
                       notifications to implement binary or counting
-                      semaphore type behaviour then use the simpler <a href="/xTaskNotifyGive.html">xTaskNotifyGive()</a> API function instead of
+                      semaphore type behaviour then use the simpler <a href="xTaskNotifyGive.html">xTaskNotifyGive()</a> API function instead of
                       xTaskNotify()]</small></p>
 
-                    <p>Each RTOS task has a 32-bit <a href="/RTOS-task-notifications.html">notification value</a> which is initialised to
+                    <p>Each RTOS task has a 32-bit <a href="RTOS-task-notifications.html">notification value</a> which is initialised to
                       zero when the RTOS task is created. xTaskNotify()
                       is used to send an event directly to and
                       potentially unblock an RTOS task, and optionally
@@ -258,15 +258,15 @@
                                 the <i>subject</i> task.</font>
                                 <p><font face="arial">To obtain a
                                   task's handle create the task using
-                                  <a href="/a00125.html">xTaskCreate()</a> and make use of
+                                  <a href="a00125.html">xTaskCreate()</a> and make use of
                                   the pxCreatedTask parameter, or
-                                  create the task using <a href="/xTaskCreateStatic.html">xTaskCreateStatic()</a> and store
+                                  create the task using <a href="xTaskCreateStatic.html">xTaskCreateStatic()</a> and store
                                   the returned value, or use the task's
-                                  name in a call to <a href="/a00021.html#xTaskGetHandle">xTaskGetHandle()</a>.</font></p>
+                                  name in a call to <a href="a00021.html#xTaskGetHandle">xTaskGetHandle()</a>.</font></p>
 
                                 <p><font face="arial">The handle of
                                   the currently executing RTOS task is
-                                  returned by the <a href="/a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentTaskHandle()</a> API
+                                  returned by the <a href="a00021.html#xTaskGetCurrentTaskHandle">xTaskGetCurrentTaskHandle()</a> API
                                   function.</font></p>
                               </td>
                             </tr>
@@ -323,7 +323,7 @@
                             the subject task's notification value. In
                             this way the RTOS task notification
                             mechanism can be used as a light weight
-                            alternative to an <a href="/FreeRTOS-Event-Groups.html">event
+                            alternative to an <a href="FreeRTOS-Event-Groups.html">event
                             group</a>.</td>
                         </tr>
 
@@ -344,7 +344,7 @@
                             task is unconditionally set to ulValue. In
                             this way the RTOS task notification
                             mechanism is being used as a light weight
-                            alternative to <a href="/xQueueOverwrite.html">xQueueOverwrite()</a>.</td>
+                            alternative to <a href="xQueueOverwrite.html">xQueueOverwrite()</a>.</td>
                         </tr>
 
                         <tr>
@@ -363,7 +363,7 @@
 
                             <p>In this way the RTOS task notification
                               mechanism is being used as a light weight
-                              alternative to <a href="/a00117.html">xQueueSend()</a> on a queue of length
+                              alternative to <a href="a00117.html">xQueueSend()</a> on a queue of length
                               1.</p>
                           </td>
                         </tr>
@@ -385,7 +385,7 @@
                       <b>Example usage:</b></p>
 
                     <p><small>[More examples are referenced from the
-                      main <a href="/RTOS-task-notifications.html">RTOS task notifications page</a>]</small></p>
+                      main <a href="RTOS-task-notifications.html">RTOS task notifications page</a>]</small></p>
 
                     <pre><font face="courier">
 
@@ -403,7 +403,7 @@
 
     <font color="green">/* Set the notification value of the task referenced by xTask4Handle to 0xfff,
     but only if to do so would not overwrite the task's existing notification
-    value before the task had obtained it (by a call to <a href="/xTaskNotifyWait.html">xTaskNotifyWait()</a>
+    value before the task had obtained it (by a call to <a href="xTaskNotifyWait.html">xTaskNotifyWait()</a>
     or <a href="ulTaskNotifyTake.html">ulTaskNotifyTake()</a>). */</font>
     if( xTaskNotify( xTask4Handle, 0xfff, eSetValueWithoutOverwrite ) == pdPASS )
     {
@@ -425,8 +425,8 @@
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -454,7 +454,7 @@
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

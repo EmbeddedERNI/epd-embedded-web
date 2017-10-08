@@ -12,17 +12,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -117,7 +117,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -197,7 +197,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -211,10 +211,10 @@
                     <pre>
 SemaphoreHandle_t xSemaphoreCreateRecursiveMutex( void )
 </pre>
-                    Creates a <a href="/RTOS-Recursive-Mutexes.html">recursive mutex</a>, and returns a handle by
+                    Creates a <a href="RTOS-Recursive-Mutexes.html">recursive mutex</a>, and returns a handle by
                     which the mutex can be referenced. Recursive
                     mutexes cannot be used in interrupt service
-                    routines. <a href="/a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a> and
+                    routines. <a href="a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a> and
                     configUSE_RECURSIVE_MUTEXES must both be set to 1
                     in FreeRTOSConfig.h for
                     xSemaphoreCreateRecursiveMutex() to be available
@@ -222,20 +222,20 @@ SemaphoreHandle_t xSemaphoreCreateRecursiveMutex( void )
                     undefined, in which case it will defailt to 1).
                     <p>Each recursive mutex require a small amount of
                       RAM that is used to hold the recursive mutex's
-                      state. If a mutex is created using <a href="/xSemaphoreCreateRecursiveMutex.html">xSemaphoreCreateRecursiveMutex()</a> then the
+                      state. If a mutex is created using <a href="xSemaphoreCreateRecursiveMutex.html">xSemaphoreCreateRecursiveMutex()</a> then the
                       required RAM is automatically allocated from the
-                      <a href="/a00111.html">FreeRTOS heap</a>. If a
+                      <a href="a00111.html">FreeRTOS heap</a>. If a
                       recursive mutex is created using
                       xSemaphoreCreateRecursiveMutexStatic() then the
                       RAM is provided by the application writer, which
                       requires an additional parameter, but allows the
                       RAM to be statically allocated at compile time.
-                      See the <a href="/Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
+                      See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
                       information.</p>
 
                     <p>Recursive mutexes are 'taken' (obtained) using
-                      the <a href="/xSemaphoreTakeRecursive.html">xSemaphoreTakeRecursive()</a> and given
-                      (released) using the <a href="/xSemaphoreGiveRecursive.html">xSemaphoreGiveRecursive()</a> API functions
+                      the <a href="xSemaphoreTakeRecursive.html">xSemaphoreTakeRecursive()</a> and given
+                      (released) using the <a href="xSemaphoreGiveRecursive.html">xSemaphoreGiveRecursive()</a> API functions
                       respectively. xSemaphoreTake() and
                       xSemaphoreGive() must not be used.</p>
 
@@ -274,7 +274,7 @@ SemaphoreHandle_t xSemaphoreCreateRecursiveMutex( void )
                         successfully then a handle to the created mutex
                         is returned. If the recursive mutex was not
                         created because the memory required to hold the
-                        mutex <a href="/a00111.html">could not be
+                        mutex <a href="a00111.html">could not be
                         allocated</a> then NULL is returned.</dd>
                     </dl>
 
@@ -304,8 +304,8 @@ SemaphoreHandle_t xSemaphoreCreateRecursiveMutex( void )
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -333,7 +333,7 @@ SemaphoreHandle_t xSemaphoreCreateRecursiveMutex( void )
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

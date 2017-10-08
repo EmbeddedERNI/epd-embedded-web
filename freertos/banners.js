@@ -38,60 +38,60 @@ var img_height	= 65;
 
 // banner list syntax: banners[x] = new banner(website_name, website_url, website_image_url, show_until_date);  DATE FORMAT: dd/mm/yyyy
 //banners[0] = new banner( 'Emcore Magazine', 'http://www.emcore-magazine.com/', '/banner-images/emcore-magazine-banner-1.png', "0");
-//blurbs[0] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+//blurbs[0] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[0] = new banner( 'FreeRTOS documentation', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book.png', "0");
-blurbs[0] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[0] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 
 banners[1] = new banner( 'FreeRTOS documentation', 'http://www.highintegritysystems.com/safertos', '/banner-images/safertosbanner.gif', "1");
-blurbs[1] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[1] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 //banners[2] = new banner( 'FreeRTOS training', '/training/RTOS-tutorial-and-training.html', '/banner-images/freertos-training-top-banner.png', "0");
-//blurbs[2] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+//blurbs[2] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[2] = new banner( 'FreeRTOS+ Ecosystem Showcase', 'http://www.highintegritysystems.com/middleware', '/banner-images/connectbanner.gif', "1");
-blurbs[2] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[2] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 
 banners[3] = new banner( 'FreeRTOS+ Ecosystem Showcase', 'http://www.highintegritysystems.com/middleware', '/banner-images/connectbanner.gif', "1");
-blurbs[3] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[3] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[4] = new banner( 'FreeRTOS paperbacks', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book-title-large.png', "0");
-blurbs[4] = new banner_blurb( '<br><small>5 book editions are available, <a href="/Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
+blurbs[4] = new banner_blurb( '<br><small>5 book editions are available, <a href="Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
 
 banners[5] = new banner( 'Connect', 'http://www.highintegritysystems.com/openrtos', '/banner-images/openrtosbanner.gif', "1");
-blurbs[5] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[5] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 //banners[6] = new banner( 'FreeRTOS training', '/training/RTOS-tutorial-and-training.html', '/banner-images/freertos-training-top-banner.png', "0");
-//blurbs[6] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+//blurbs[6] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[6] = new banner( 'FreeRTOS paperbacks', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book-title-large.png', "0");
-blurbs[6] = new banner_blurb( '<br><small>5 book editions are available, <a href="/Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
+blurbs[6] = new banner_blurb( '<br><small>5 book editions are available, <a href="Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
 
 banners[6] = new banner( 'FreeRTOS documentation', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book.png', "0");
-blurbs[6] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[6] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[7] = new banner( 'FreeRTOS documentation', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book.png', "0");
-blurbs[7] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[7] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 //banners[6] = new banner( 'SafeRTOS in ROM', 'http://www.highintegritysystems.com/index.php?option=com_content&view=article&id=93&Itemid=97', '/banner-images/SafeRTOS_in_ROM_banner.jpg', "0");
-//blurbs[6] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+//blurbs[6] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[8] = new banner( 'Connect Demo', 'http://www.highintegritysystems.com/safertos', '/banner-images/safertosbanner.gif', "1");
-blurbs[8] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[8] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[9] = new banner( 'FreeRTOS paperbacks', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book-title-large.png', "0");
-blurbs[9] = new banner_blurb( '<br><small>5 book editions are available, <a href="/Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
+blurbs[9] = new banner_blurb( '<br><small>5 book editions are available, <a href="Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
 
 banners[10] = new banner( 'FreeRTOS+ Ecosystem Showcase', 'http://www.highintegritysystems.com/middleware', '/banner-images/connectbanner.gif', "1");
-blurbs[10] = new banner_blurb( '<br><a href="/RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
+blurbs[10] = new banner_blurb( '<br><a href="RTOS-contact-and-support.html#advertising" target="basefrm"><small>Advertise here?</small></a>' );
 
 banners[11] = new banner( 'FreeRTOS paperbacks', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book-title-large.png', "0");
-blurbs[11] = new banner_blurb( '<br><small>5 book editions are available, <a href="/Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
+blurbs[11] = new banner_blurb( '<br><small>5 book editions are available, <a href="Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
 
 banners[12] = new banner( 'FreeRTOS paperbacks', '/Documentation/RTOS_book.html', '/banner-images/FreeRTOS-book-title-large.png', "0");
-blurbs[12] = new banner_blurb( '<br><small>5 book editions are available, <a href="/Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
+blurbs[12] = new banner_blurb( '<br><small>5 book editions are available, <a href="Documentation/RTOS_book.html" target="_blank"><b>eBook</b></a> &amp; <a href="http://bit.ly/duJ9R0" target="_blank"><b>paperback</b></a> - includes 16 <b>simple</b> examples' );
 
 ///////////////////////////////////////////////////////////////////////////////////
 //

@@ -12,17 +12,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -117,7 +117,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -197,7 +197,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -218,14 +218,14 @@
                    StaticTimer_t *pxTimerBuffer );
 </font></pre>
 
-                    <p>Creates a new <a href="/RTOS-software-timer.html">software
+                    <p>Creates a new <a href="RTOS-software-timer.html">software
                       timer</a> instance and returns a handle by which
                       the timer can be referenced.</p>
 
                     <p>For this RTOS API function to be available:</p>
 
                     <ol>
-                      <li>configUSE_TIMERS and <a href="/a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must both
+                      <li>configUSE_TIMERS and <a href="a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a> must both
                         be set to 1 in FreeRTOSConfig.h.</li>
 
                       <li>The FreeRTOS/Source/timer.c C source file
@@ -234,16 +234,16 @@
 
                     <p>Each software timer requires a small amount of
                       RAM that is used to hold the timer's state. If a
-                      timer is created using <a href="/FreeRTOS-timers-xTimerCreate.html">xTimerCreate()</a> then the required RAM is
-                      automatically allocated from the <a href="/a00111.html">FreeRTOS heap</a>. If a
+                      timer is created using <a href="FreeRTOS-timers-xTimerCreate.html">xTimerCreate()</a> then the required RAM is
+                      automatically allocated from the <a href="a00111.html">FreeRTOS heap</a>. If a
                       software timer is created using
                       xTimerCreateStatic() then the RAM is provided by
                       the application writer, which requires an
                       additional parameter, but allows the RAM to be
-                      statically allocated at compile time. See the <a href="/Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
+                      statically allocated at compile time. See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic allocation</a> page for more
                       information.</p>
 
-                    <p>Timers are created in the dormant state. The <a href="/FreeRTOS-timers-xTimerStart.html">xTimerStart()</a>, <a href="/FreeRTOS-timers-xTimerReset.html">xTimerReset()</a>, <a href="/FreeRTOS-timers-xTimerStartFromISR.html">xTimerStartFromISR()</a>, <a href="/FreeRTOS-timers-xTimerResetFromISR.html">xTimerResetFromISR()</a>, <a href="/FreeRTOS-timers-xTimerChangePeriod.html">xTimerChangePeriod()</a> and <a href="/FreeRTOS-timers-xTimerChangePeriodFromISR.html">xTimerChangePeriodFromISR()</a> API functions
+                    <p>Timers are created in the dormant state. The <a href="FreeRTOS-timers-xTimerStart.html">xTimerStart()</a>, <a href="FreeRTOS-timers-xTimerReset.html">xTimerReset()</a>, <a href="FreeRTOS-timers-xTimerStartFromISR.html">xTimerStartFromISR()</a>, <a href="FreeRTOS-timers-xTimerResetFromISR.html">xTimerResetFromISR()</a>, <a href="FreeRTOS-timers-xTimerChangePeriod.html">xTimerChangePeriod()</a> and <a href="FreeRTOS-timers-xTimerChangePeriodFromISR.html">xTimerChangePeriodFromISR()</a> API functions
                       can all be used to transition a timer into the
                       active state.</p>
 
@@ -278,7 +278,7 @@
                                 the timer must expire after 500ms, then
                                 set xTimerPeriod to pdMS_TO_TICKS( 500
                                 ). pdMS_TO_TICKS() can only be used if
-                                <a href="/a00110.html#configTICK_RATE_HZ">configTICK_RATE_HZ</a> is less than
+                                <a href="a00110.html#configTICK_RATE_HZ">configTICK_RATE_HZ</a> is less than
                                 or equal to 1000.</font></td>
                             </tr>
 
@@ -305,7 +305,7 @@
                                 identify which timer expired when the
                                 same callback function is assigned to
                                 more than one timer, or together with
-                                the <a href="/FreeRTOS-timers-vTimerSetTimerID.html">vTimerSetTimerID()</a> and <a href="/FreeRTOS-timers-pvTimerGetTimerID.html">pvTimerGetTimerID()</a> API functions
+                                the <a href="FreeRTOS-timers-vTimerSetTimerID.html">vTimerSetTimerID()</a> and <a href="FreeRTOS-timers-pvTimerGetTimerID.html">pvTimerGetTimerID()</a> API functions
                                 to save a value between calls to the
                                 timer's callback function.</font></td>
                             </tr>
@@ -372,7 +372,7 @@
 
     <font color="green">/* The number of times this timer has expired is saved as the
     timer's ID.  Obtain the count. */</font>
-    ulCount = ( uint32_t ) <a href="/FreeRTOS-timers-pvTimerGetTimerID.html">pvTimerGetTimerID</a>( xTimer );
+    ulCount = ( uint32_t ) <a href="FreeRTOS-timers-pvTimerGetTimerID.html">pvTimerGetTimerID</a>( xTimer );
 
     <font color="green">/* Increment the count, then test to see if the timer has expired
     ulMaxExpiryCountBeforeStopping yet. */</font>
@@ -384,14 +384,14 @@
         <font color="green">/* Do not use a block time if calling a timer API function
         from a timer callback function, as doing so could cause a
         deadlock! */</font>
-        <a href="/FreeRTOS-timers-xTimerStop.html">xTimerStop</a>( pxTimer, 0 );
+        <a href="FreeRTOS-timers-xTimerStop.html">xTimerStop</a>( pxTimer, 0 );
     }
     else
     {
        <font color="green">/* Store the incremented count back into the timer's ID field
        so it can be read back again the next time this software timer
        expires. */</font>
-       <a href="/FreeRTOS-timers-vTimerSetTimerID.html">vTimerSetTimerID</a>( xTimer, ( void * ) ulCount );
+       <a href="FreeRTOS-timers-vTimerSetTimerID.html">vTimerSetTimerID</a>( xTimer, ( void * ) ulCount );
     }
  }
 
@@ -436,7 +436,7 @@
             <font color="green">/* Start the timer.  No block time is specified, and
             even if one was it would be ignored because the RTOS
             scheduler has not yet been started. */</font>
-            if( <a href="/FreeRTOS-timers-xTimerStart.html">xTimerStart</a>( xTimers[ x ], 0 ) != pdPASS )
+            if( <a href="FreeRTOS-timers-xTimerStart.html">xTimerStart</a>( xTimers[ x ], 0 ) != pdPASS )
             {
                 <font color="green">/* The timer could not be set into the Active
                 state. */</font>
@@ -466,8 +466,8 @@
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -495,7 +495,7 @@
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

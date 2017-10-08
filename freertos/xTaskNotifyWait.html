@@ -11,17 +11,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -116,7 +116,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -196,7 +196,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -205,7 +205,7 @@
                     </table>
 
                     <h1>xTaskNotifyWait()<br/>
-                      <small>[<a class="el" href="/RTOS-task-notification-API.html">RTOS
+                      <small>[<a class="el" href="RTOS-task-notification-API.html">RTOS
                       Task Notification API</a>]</small></h1>
 
                     <p><br/>
@@ -220,12 +220,12 @@
 
                     <p><small>[If you are using RTOS task
                       notifications to implement binary or counting
-                      semaphore type behaviour then use the simpler <a href="/ulTaskNotifyTake.html">ulTaskNotifyTake()</a> API function instead of
+                      semaphore type behaviour then use the simpler <a href="ulTaskNotifyTake.html">ulTaskNotifyTake()</a> API function instead of
                       xTaskNotifyWait()]</small></p>
 
                     <p>Each RTOS task has a 32-bit notification value
                       which is initialised to zero when the RTOS task
-                      is created. An <a href="/RTOS-task-notifications.html">RTOS task
+                      is created. An <a href="RTOS-task-notifications.html">RTOS task
                       notification</a> is an event sent directly to a
                       task that can unblock the receiving task, and
                       optionally update the receiving task's
@@ -233,7 +233,7 @@
                       For example, a notification may overwrite the
                       receiving task's notification value, or just set
                       one or more bits in the receiving task's
-                      notification value. See the <a href="/RTOS-task-notifications.html#uses">RTOS
+                      notification value. See the <a href="RTOS-task-notifications.html#uses">RTOS
                       task notifications use case documentation</a>
                       for examples.</p>
 
@@ -369,11 +369,11 @@
                       <b>Example usage:</b></p>
 
                     <p><small>[More examples are referenced from the
-                      main <a href="/RTOS-task-notifications.html">RTOS task notifications page</a>]</small></p>
+                      main <a href="RTOS-task-notifications.html">RTOS task notifications page</a>]</small></p>
 
                     <pre><font face="courier">
 <font color="green">/* This task shows bits within the RTOS task notification value being used to pass
-different events to the task in the same way that flags in an <a href="/FreeRTOS-Event-Groups.html">event group</a> might
+different events to the task in the same way that flags in an <a href="FreeRTOS-Event-Groups.html">event group</a> might
 be used for the same purpose. */</font>
 void vAnEventProcessingTask( void *pvParameters )
 {
@@ -426,8 +426,8 @@ uint32_t ulNotifiedValue;
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -455,7 +455,7 @@ uint32_t ulNotifiedValue;
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>

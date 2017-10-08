@@ -12,17 +12,17 @@
     <style type="text/css"><![CDATA[
 ]]></style>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <script src="/banners.js" type="text/javascript"><![CDATA[
+    <script src="banners.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/stlib.js" type="text/javascript"><![CDATA[
+    <script src="stlib.js" type="text/javascript"><![CDATA[
 ]]></script>
-    <script src="/left_menu.js" type="text/javascript"><![CDATA[
+    <script src="left_menu.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"><![CDATA[
 ]]></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"><![CDATA[
 ]]></script>
-    <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    <link href="code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
     <script type="text/javascript"><![CDATA[
         window.onload = function()
         {
@@ -117,7 +117,7 @@
                               <tbody>
                                 <tr>
                                   <td id="logo_column" style="line-height:normal;" valign="middle" width="174px">
-                                    <div style="float:left;"><a href="/index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
+                                    <div style="float:left;"><a href="index.html"><img alt="Free RTOS logo" border="0" src="logo.jpg" style="padding: 0 0 0 5px;" width="164px"/></a></div>
                                   </td>
 
                                   <td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;"> &nbsp;</td>
@@ -197,7 +197,7 @@
                         <tr valign="middle">
                           <td width="5px"/>
 
-                          <td width="30px"><img border="0" height="25px" src="/menu_hint_arrow.png" style="padding:0;"/></td>
+                          <td width="30px"><img border="0" height="25px" src="menu_hint_arrow.png" style="padding:0;"/></td>
 
                           <td valign="middle">Hint: Use the tree menu
                             to navigate groups of related pages &nbsp;</td>
@@ -206,7 +206,7 @@
                     </table>
 
                     <h1>xQueueCreateSet()<br/>
-                      <small>[<a class="el" href="/RTOS-queue-sets.html">Queue Set API</a>]</small></h1>
+                      <small>[<a class="el" href="RTOS-queue-sets.html">Queue Set API</a>]</small></h1>
                     queue.h
                     <pre><font face="courier">
  QueueSetHandle_t xQueueCreateSet
@@ -223,14 +223,14 @@
                       task to block (pend) on a read operation from
                       multiple RTOS queues or semaphores
                       simultaneously. Note that there are simpler
-                      alternatives to using queue sets. See the <a href="/Pend-on-multiple-rtos-objects.html">Blocking on Multiple Objects</a> page for more
+                      alternatives to using queue sets. See the <a href="Pend-on-multiple-rtos-objects.html">Blocking on Multiple Objects</a> page for more
                       information.</p>
 
                     <p>A queue set must be explicitly created using a
                       call to xQueueCreateSet() before it can be used.
                       Once created, standard FreeRTOS queues and
                       semaphores can be added to the set using calls to
-                      <a href="/xQueueAddToSet.html">xQueueAddToSet()</a>. <a href="/xQueueSelectFromSet.html">xQueueSelectFromSet()</a> is then used to
+                      <a href="xQueueAddToSet.html">xQueueAddToSet()</a>. <a href="xQueueSelectFromSet.html">xQueueSelectFromSet()</a> is then used to
                       determine which, if any, of the queues or
                       semaphores contained in the set is in a state
                       where a queue read or semaphore take operation
@@ -426,8 +426,8 @@ something_else_t xReceivedFromQueue2;
                     </p>
 
                     <div align="center"><a href="#page_top"><small>[
-                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="/RTOS.html"><small>[ About FreeRTOS
-                      ]</small></a> &nbsp;&nbsp; <a href="/static_menu.html"><small>[ Sitemap
+                      Back to the top ]</small></a> &nbsp;&nbsp; <a href="RTOS.html"><small>[ About FreeRTOS
+                      ]</small></a> &nbsp;&nbsp; <a href="static_menu.html"><small>[ Sitemap
                       ]</small></a> &nbsp;&nbsp; <small>[
                       <script type="text/javascript"><![CDATA[
 <!--
@@ -455,7 +455,7 @@ something_else_t xReceivedFromQueue2;
                       distribution or available on this site are the
                       exclusive property of Real Time Engineers Ltd..
                       See the files license.txt (included in the
-                      distribution) and this <a href="/copyright.html">copyright notice</a> for more information.
+                      distribution) and this <a href="copyright.html">copyright notice</a> for more information.
                       FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers
                       Ltd.</font></div>
                   </td>
