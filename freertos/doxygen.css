@@ -166,7 +166,7 @@ td.light_blue_table_cell
 	color:#1a3065;
 	text-align:center;
 	font-weight:bold;
-	background: #ffffff url(http://www.freertos.org/FreeRTOS-Plus/light_blue_table_background.gif) left repeat-x;
+	background: #ffffff url(/FreeRTOS-Plus/light_blue_table_background.gif) left repeat-x;
 }
 
 BODY {
