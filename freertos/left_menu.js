@@ -14,7 +14,7 @@ stIT("p2i2",["A Better Type of Open Source","/open-source-software.html",,,,,,,,
 stIT("p2i3",["Features Overview","/FreeRTOS_Features.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p0i1");
 stIT("p2i4",["Coding Standard & Style","/FreeRTOS-Coding-Standard-and-Style-Guide.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p0i1");
 stIT("p2i5",["Licensing","/a00114.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p0i1");
-stIT("p2i6",["Site Map","/static_menu.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p0i1");
+stIT("p2i6",["Site Map","/index.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p0i1");
 stES();
 stIT("p1i1",["Features / Getting Started...","/FreeRTOS-quick-start-guide.html",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],"p1i0");
 stBS("p3",[,,,,,,,,],"p0");
