@@ -1,0 +1,1017 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+	<META name="description" content="Tutorial on small embedded systems design using FreeRTOS">
+	<META name="keywords" content="FreeRTOS tutorial, Design patterns, 8051, 8052, Free RTOS, royalty free, RTOS, free, RTOS free, open source, real time, embedded, FreeRTOS, source code, AVR, GNU, PIC, PIC18, development tools">
+	<title>FreeRTOS design tutorial</title><link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+
+
+<body>
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="http://www.freertos.org/index.html">
+															<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="http://www.freertos.org/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="http://www.freertos.org/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+<font face="arial">
+
+
+
+<h1>Solution #1<br><small>
+Why Use an RTOS Kernel?</small></h1>
+
+
+<br>
+
+<b><a href="index.html" title="Previous"><<<</a> | <a href="solution2.html" title="Next">>>></a></b>
+<p>
+See also the FAQ item "<a href="http://www.freertos.org/FAQWhat.html#WhyUseRTOS">Why use an RTOS?</a>".
+<p>
+<h2>Synopsis</h2>
+
+Many applications can be produced without the use of an RTOS kernel and this page describes an approach that might be taken.
+<p>
+Even though the application in this case is probably too complex for such an approach the page is included to both highlight the 
+potential problems and provide a contrast to the following RTOS based software designs.
+
+<p>
+<h2>Implementation</h2>
+This solution uses a traditional infinite loop approach, whereby each component of the application is represented by a function that
+executes to completion.   
+<p>
+Ideally a hardware timer would be used to schedule the time critical plant control function.  However, having to wait for the arrival of data and
+the complex calculation performed make the control function unsuitable for execution within an interrupt service routine.
+
+<p><br>
+<h3>Concept of Operation</h3>
+The frequency and order in which the components are called within the infinite loop can be modified to introduce some
+prioritisation.  A couple of such sequencing alternatives are provided in the example below.
+
+<p><br>
+<h3>Scheduler Configuration</h3>
+
+The RTOS scheduler is not used.
+
+<p>
+<br>
+<h3>Evaluation</h3>
+
+<table border="0" summary="">
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/good.gif"></font></td>
+		<td><font face="arial">Small code size.</font></td>
+	</tr>
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/good.gif"></font></td>
+		<td><font face="arial">No reliance on third party source code.</font></td>
+	</tr>
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/good.gif"></font></td>
+		<td><font face="arial">No RTOS RAM, ROM or processing overhead.</font></td>
+	</tr>
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/bad.gif"></font></td>
+		<td><font face="arial">Difficult to cater for complex timing requirements.</font></td>
+	</tr>
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/bad.gif"></font></td>
+		<td><font face="arial">Does not scale well without a large increase in complexity.</font></td>
+	</tr>
+	<tr>
+		<td><font face="arial"><img src="http://www.freertos.org/tutorial/bad.gif"></font></td>
+		<td><font face="arial">Timing hard to evaluate or maintain due to the interdependencies between the different functions.</font></td>
+	</tr>
+
+
+</table>
+
+<p>
+<br>
+<h3>Conclusion</h3>
+
+The simple loop approach is very good for small applications and applications with flexible timing requirements - but
+can become complex, difficult to analyse and difficult to maintain if scaled to larger systems.
+
+
+<p>
+<p>
+<hr>
+
+<h2>Example</h2>
+
+This example is a partial implementation of the hypothetical application introduced previously.
+
+<p>
+<br>
+<h3>The Plant Control Function</h3>
+
+The control function can be represented by the following pseudo code:
+
+<font face="courier"><pre>
+void PlantControlCycle( void )
+{
+    TransmitRequest();
+    WaitForFirstSensorResponse();
+
+    if( Got data from first sensor )
+    { 
+        WaitForSecondSensorResponse();
+        
+        if( Got data from second sensor )
+        {
+            PerformControlAlgorithm();
+            TransmitResults();
+        }
+    }
+}
+</pre></font>
+
+<p>
+<br>
+<h3>The Human Interface Functions</h3>
+
+This includes the keypad, LCD, RS232 communications and embedded web server.<p>
+The following pseudo code represents a simple infinite loop structure for controlling these interfaces.  
+
+<font face="courier"><pre>
+int main( void )
+{
+    Initialise();
+    
+    for( ;; )
+    {
+        ScanKeypad();
+        UpdateLCD();
+        ProcessRS232Characters();
+        ProcessHTTPRequests();   
+    }
+
+    <font color="green">// Should never get here.</font>
+    return 0;
+}
+</pre></font>
+
+		This assumes
+		two things:  First, The communications IO is buffered by interrupt service routines so peripherals do not require
+		polling.  Second, the individual
+		function calls within the loop execute quickly enough for all the maximum timing requirements to be met.
+		<p>
+
+
+<hr>
+<h2>Scheduling the Plant Control Function</h2>
+
+The length of the control function means it cannot simply be called from a 10ms timer interrupt.
+<p>
+Adding it to the infinite loop would require the introduction of some temporal control.  For example ... :
+<font face="courier"><pre>
+<font color="green">// Flag used to mark the time at which a
+// control cycle should start (mutual exclusion
+// issues being ignored for this example).</font>
+int TimerExpired;
+
+<font color="green">// Service routine for a timer interrupt.  This
+// is configured to execute every 10ms.</font>
+void TimerInterrupt( void )
+{    
+    TimerExpired = true;
+}
+
+
+<font color="green">// Main() still contains the infinite loop - 
+// within which a call to the plant control
+// function has been added.</font>
+int main( void )
+{
+    Initialise();
+    
+    for( ;; )
+    {
+        <font color="green">// Spin until it is time for the next
+        // cycle.</font>
+        if( TimerExpired )
+        {
+            PlantControlCycle();
+            TimerExpired = false;
+
+            ScanKeypad();
+            UpdateLCD();
+
+            <font color="green">// The LEDs could use a count of
+            // the number of interrupts, or a
+            // different timer.</font>
+            ProcessLEDs();
+
+            <font color="green">// Comms buffers must be large
+            // enough to hold 10ms worth of
+            // data.</font>
+            ProcessRS232Characters();
+            ProcessHTTPRequests();   
+        }
+
+        <font color="green">// The processor can be put to sleep
+        // here provided it is woken by any
+        // interrupt.</font>
+    }
+
+    <font color="green">// Should never get here.</font>
+    return 0;
+}
+</pre></font>
+
+... but this is not an acceptable solution:
+
+<ul>
+	<li>A delay or fault on the
+	field bus results in an increased execution time of the plant control function. The timing requirements 
+	of the interface functions would most likely be breached.<p></li>
+	<li>Executing all the functions each cycle could also result in a breach of the control cycle timing.<p></li>
+	<li>Jitter in the execution time may cause cycles to be missed.  For example the execution time of
+	    <tt>ProcessHTTPRequests()</tt> could be negligible when no HTTP requests have been received, but quite lengthy
+		when a page was being served.<p></li>
+	<li>It is not very maintainable - it relies on every function being executed within the maximum time.<p></li>
+	<li>The communication buffers are only serviced once per cycle necessitating their length to be larger than
+	would otherwise be necessary.<p></li>
+</ul>
+<p>
+<br>
+<hr>
+<h2>Alternative Structures</h2>
+
+Two factors can be identified that limit the suitability of the simple loop structure described so far.
+
+
+<ol>
+	<li>The length of each function call<p>
+
+	Allowing each function to execute in its entirety takes too long.  This can be prevented by splitting each
+	function into a number of states.  Only one state is executed each call.  Using the control function as an example:
+
+<font face="courier"><pre>
+<font color="green">// Define the states for the control cycle function.</font>
+typdef enum eCONTROL_STATES
+{
+    eStart, <font color="green">// Start new cycle.</font>
+    eWait1, <font color="green">// Wait for the first sensor response.</font>
+    eWait2  <font color="green">// Wait for the second sensor response.</font>
+} eControlStates;
+
+void PlantControlCycle( void )
+{
+static eControlState eState = eStart;
+
+    switch( eState )
+    {
+        case eStart :
+            TransmitRequest();
+            eState = eWait1;
+            break;
+            
+        case eWait1;
+            if( Got data from first sensor )
+            {
+                eState = eWait2;
+            }
+            <font color="green">// How are time outs to be handled?</font>
+            break;
+            
+        case eWait2;
+            if( Got data from first sensor )
+            {
+                PerformControlAlgorithm();
+                TransmitResults();
+                
+                eState = eStart;
+            }
+            <font color="green">// How are time outs to be handled?</font>
+            break;           
+    }
+}
+</pre></font>
+	
+	This function is now structurally more complex, and introduces further scheduling problems.  The code itself will become 
+	harder to understand as extra states are added - for example to	handle timeout and error conditions.
+
+	<p></li>
+
+	<li>The granularity of the timer<p>
+
+	A shorter timer interval will give more flexibility.  
+	<p>
+	Implementing the control function
+	as a state machine (an in so doing making each call shorter) may allow it to be called from a timer interrupt.  The 
+	timer interval will have to be short enough to ensure the function gets called at a frequency that meets its
+	timing requirements.  This option is fraught with timing and maintenance problems.
+	<p>
+	Alternatively the infinite loop solution could be modified to call different functions on each loop - with the high
+	priority control function called more frequently:
+<font face="courier"><pre>
+int main( void )
+{
+int Counter = -1;
+
+    Initialise();
+    
+    <font color="green">// Each function is implemented as a state 
+    // machine so is guaranteed to execute 
+    // quickly - but must be called often.
+    
+    // Note the timer frequency has been raised.</font>
+    
+    for( ;; )
+    {
+        if( TimerExpired )
+        {
+            Counter++;
+            
+            switch( Counter )
+            {
+                case 0  : ControlCycle();
+                          ScanKeypad();
+                          break;
+                          
+                case 1  : UpdateLCD();
+                          break;
+
+                case 2  : ControlCycle();
+                          ProcessRS232Characters();
+                          break;
+
+                case 3  : ProcessHTTPRequests();
+                          
+                          <font color="green">// Go back to start</font>
+                          Counter = -1;                          
+                          break;
+                          
+            }
+            
+            TimerExpired = false;
+        }
+    }
+
+    <font color="green">// Should never get here.</font>
+    return 0;
+}
+</pre></font>
+	
+	More intelligence can be introduced by means of event counters, whereby the lower priority functionality is only called if an
+	event has occurred that requires servicing:
+	
+<font face="courier"><pre>
+    for( ;; )
+    {
+        if( TimerExpired )
+        {
+            Counter++;
+            
+            <font color="green">// Process the control cycle every other loop.</font>
+            switch( Counter )
+            {
+                case 0  : ControlCycle();
+                          break;
+                          
+                case 1  : Counter = -1;
+                          break;
+            }
+
+            <font color="green">// Process just one of the other functions.  Only process
+            // a function if there is something to do.  EventStatus()
+            // checks for events since the last iteration.</font>
+            switch( EventStatus() )
+            {
+                case EVENT_KEY  :   ScanKeypad();
+                                    UpdateLCD();
+                                    break;
+                           
+                case EVENT_232  :   ProcessRS232Characters();
+                                    break;
+                            
+                case EVENT_TCP  :   ProcessHTTPRequests();
+                                    break;
+            }
+            
+            TimerExpired = false;
+        }
+    }
+</pre></font>		
+	
+	Processing events in this manner will reduce wasted CPU cycles but the design will still exhibit jitter in the frequency at which
+	the control cycle executes.
+
+
+	
+	<p></li>
+</ol>
+
+
+<p>
+NEXT >>> <a href="solution2.html">Solution #2:  A fully preemptive system</a>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</font>
+						<p>
+						<br>
+						<div align="center">
+							<a href="solution1.html#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="http://www.freertos.org/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+</body>
+</html>

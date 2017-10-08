@@ -1,0 +1,550 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+		<META name="description" content="FreeRTOS+TCP - building and running the free TCP/IP example projects">
+		<META name="keywords" content="TCP/IP, RTOS, examples, free, FreeRTOS, free TCP/IP stack">
+		<title>FreeRTOS+TCP Example Projects</title>
+		<link rel="stylesheet" href="doxygen.css" type="text/css">
+		<link rel="stylesheet" href="http://www.freertos.org/FreeRTOS-Labs/FreeRTOSLabs.css" type="text/css">
+		<style type="text/css"></style>
+		<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+	<body>
+		<a name="page_top"></a>
+<table style="height:100%; width:100%; background:white; border-right:solid 1px #e6e6e6; border-left:solid 1px #e6e6e6;" cellpadding="5" cellspacing="0" align="center">
+	<tr valign="top">
+		<td colspan="2" style="width:100%; height:130px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+			<font face="Arial, Helvetica">
+				<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+					<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+						<td>
+							<table width="100%" cellpadding="0" cellspacing="5px">
+								<tr>
+									<td style="line-height:normal;" valign="middle" width="174px">
+										<div style="float:left;">
+											<a href="http://www.freertos.org/index.html">
+												<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+											</a>
+										</div>
+									</td>
+									<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+										&nbsp;
+									</td>
+									<td valign="middle" style="line-height:normal;" class="header_links">
+										<h3>
+											FreeRTOS Labs . . .
+											<br>
+											<small>
+												Check Back Regularly To See What's New
+											</small>
+										</h3>
+									</td>
+									<td valign="top" align="right">
+										<font size="1">[
+										<script type='text/javascript'><!--
+										var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+										//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+										]</font>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+						<td>
+						</td>
+					</tr>
+					<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+						<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+							<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+								&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+							</div>
+							<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+								<!-- Twitter -->
+								<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+							</div>
+							<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+								<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+							</div>
+							<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+								<tr>
+									<td width="4px">
+										<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+									</td>
+									<td style="border-right:solid 2px white; border-left:solid 2px white; width:120px; line-height:normal;" align="center">
+										<a href="http://www.freertos.org/index.html" class="blue_menu">
+											Homepage
+										</a>
+									</td>
+									<td style="border-right:solid 2px white; width:120px; line-height:normal;" align="center">
+										<a href="index.shtml" class="blue_menu">
+											FreeRTOS Labs
+										</a>
+									</td>
+									<td style="border-right:solid 2px white; width:120px; line-height:normal;" align="center">
+										<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" class="blue_menu">
+											FreeRTOS+TCP
+										</a>
+									</td>
+									<td style="border-right:solid 2px white; width:120px; line-height:normal;" align="center">
+										<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" class="blue_menu">
+											FreeRTOS+FAT
+										</a>
+									</td>
+									<td style="border-right:solid 2px white; width:120px; line-height:normal;" align="center">
+										<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_Enquiry.shtml" class="blue_menu">
+											Contact / Enquiries
+										</a>
+									</td>
+									<td align="center">
+										 <!-- Just to take any remaining width % when necessary -->
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</font>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td style="height:100%; width:200px;">
+			<table style="width:180px;" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="div_tree_menu">
+						<p>
+						<script type="text/javascript" language="JavaScript" src="http://www.freertos.org/FreeRTOS-Labs/left_menu.js">
+						</script>
+						<noscript>
+							This site required JavaScript
+							<br>
+							to be enabled. <a href="http://www.freertos.org/FreeRTOS-Labs/static_menu.html">Click here</a> to
+							<br>
+							view a static menu.
+						</noscript>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br>
+						<div align="center">
+							<table style="width:180px;" cellpadding="0" cellspacing="0">
+								<tr>
+									<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+										<div align="center">
+											<a href="http://www.freertos.org/FreeRTOS-Labs/RTOS_labs_download.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+												<b>&dArr; Download Labs &dArr;</b>
+											</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+							<p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="height:100%; width:100%;">
+			<!-- Table to keep the right text in the div from running into the scroll bar using a dummy column. -->
+			<table style="width:100%">
+				<tr>
+					<td>
+						<div align="center">
+							<div class="round_corner_shadow_box_container" id="round_corner_shadow_box_container_id" style="width:90%; margin-left:auto; margin-right:auto; padding-top:15px; line-height:normal;">
+								<div class="round_corner_shadow_box_shadow">
+									<div class="round_corner_shadow_box_content">
+										<i>
+											<small>
+												<b>FreeRTOS+TCP is still in the lab</b>
+												<br>
+												FreeRTOS+TCP is already used in
+												commercial products and we encourage
+												you to try it yourself.
+												Be aware however that we are
+												still refining its design, and the
+												source code and documentation do not
+												yet meet Real Time Engineers Ltd's strict quality standards.
+												<br>
+												Please use the <a href="freertos_support_forum_archive_index.html">forum</a> for support,
+												feedback and ideas,
+												or <a href="RTOS-contact-and-support.html">contact us directly</a> if you have a specific business interest.
+											</small>
+										</i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<h1>
+			FreeRTOS+TCP and FreeRTOS+FAT Examples
+		</h1>
+		<h2>
+			Introduction
+		</h2>
+		<div style="float:right; line-height:normal;" align="center">
+			<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP-IP_In_190K_RAM_Video.html">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/video_still_tcp_fat_190K.jpg" style="width: 420px; padding-right: 20px; padding-left:20px;" border=0>
+			</a>
+			<small>
+				<b>
+					<br>
+					Video demonstrating many of the standard RTOS TCP/IP and FAT
+					<br>
+					file system	demos (<a href="TCP_FAT_demo_projects.html#Free_TCPIP_FAT_examples">listed below</a>) running simultaneously
+					<br>
+					in less than 190K bytes of RAM
+				</b>
+			</small>
+		</div>
+		FreeRTOS+TCP and FreeRTOS+FAT are provided with pre-configured demo
+		projects that allow the middleware components to build and run
+		'out of the box'.  The links below
+		describe how to locate and use the demo projects.
+		<p>
+		<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/examples_FreeRTOS_simulator.html">
+		The demo that uses the FreeRTOS Windows port</a> provides a completely free and
+		feature rich environment for both evaluating and developing FreeRTOS+TCP and
+		FreeRTOS+FAT applications, using free tools, and without the need to purchase any special
+		hardware.
+		<p>
+		<br>
+		<h3>
+			Target Specific Pre-configured Projects
+		</h3>
+		<p>
+		<ul>
+			<li>
+				<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/examples_FreeRTOS_simulator.html">Windows demo</a> - using free tools
+			</li>
+			<li>
+				<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCPIP_FAT_Examples_Xilinx_Zynq.html">Xilinx Zynq dual core ARM Cortex-A9 demo</a>
+			</li>
+			<li>
+				<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCPIP_FAT_Examples_Atmel_SAM4E.html">Atmel SAM4E ARM Cortex-M4F demo</a>
+			</li>
+			<li>
+				<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP-IP_FAT_Examples_ST_STM32F407.html">ST STM32F4 ARM Cortex-M4F demo</a> (using internal RAM only!)
+			</li>
+		</ul>
+		<p>
+		<br>
+		<h3>
+			<a name="Free_TCPIP_FAT_examples">
+				Functionality
+			</a>
+		</h3>
+		The pre-configured demo projects run multiple examples.  A description of each example, along with instructions
+		for including the example in the build, are provided on the links below.
+		Not all the examples are included in all the demo projects - although
+		all are included in the
+		<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/examples_FreeRTOS_simulator.html">demo project that uses the FreeRTOS Windows port</a>.
+		<p>
+		<a name="examples"></a>
+			Available examples
+		<ul>
+			<li>
+				FreeRTOS+TCP UDP sockets examples
+				<ol>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_CLI.html">Command line interface using a UDP socket</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_client_server.html">Basic UDP clients communicating with basic UDP servers (standard and zero copy)</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/using_select.html">Using FreeRTOS_select()</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_Echo_Clients.html">UDP echo clients</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_Logging.html">Sending FreeRTOS+TCP log messages to a UDP port</a>
+					</li>
+				</ol>
+				<p>
+			</li>
+			<li>
+				FreeRTOS+TCP TCP sockets examples
+				<ol>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_Echo_Clients.html">TCP echo clients (Rx and Tx performed in the same RTOS task)</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_Echo_Clients_Separate.html">TCP echo clients (Rx and Tx performed in separate RTOS tasks)</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_Echo_Server.html">TCP echo server</a>
+					</li>
+				</ol>
+				<p>
+			</li>
+			<li>
+				FreeRTOS+TCP and FreeRTOS+FAT web (HTTP) and FTP examples
+				<ol>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/FTP_Server.html">FTP server</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/HTTP_web_Server.html">HTTP web server</a>
+					</li>
+				</ol>
+				<p>
+			</li>
+			<li>
+				FreeRTOS+FAT
+				<ol>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/creating_and_verifying_files.html">Creating and verifying a set of example files</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/basic_stdio_API_tests.html">Basic stdio API tests</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/creating_a_disk.html">Creating a disk</a>
+					</li>
+					<li>
+						<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/file_related_cli_commands.html">File system command line interface</a>
+					</li>
+				</ol>
+				<p>
+			</li>
+		</ul>
+
+		<p>
+		<br>
+		<div align="center" style="line-height:normal;">
+			<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/udp_logging_output.jpg" alt="Logging messages produced by the free RTOS TCP/IP stack">
+			<br>
+			<small>
+				<b>
+					The output produced by the <a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_Logging.html">UDP logging example</a>
+				</b>
+			</small>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+
+
+							</td>
+					<td style="width:20;">
+					</td>
+				</tr>
+			</table>
+			<p>
+			<br>
+			<div align="center">
+				<a href="TCP_FAT_demo_projects.html#page_top"><small>[ Back to the top ]</small></a>
+				&nbsp;&nbsp;
+				<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+				&nbsp;&nbsp;
+				<a href="http://www.freertos.org/FreeRTOS-Labs/static_menu.html"><small>[ FreeRTOS Labs Sitemap ]</small></a>
+				&nbsp;&nbsp;
+				<a href="static_menu.html"><small>[ Main FreeRTOS Sitemap ]</small></a>
+				&nbsp;&nbsp;
+				<small>[
+				<script type='text/javascript'><!--
+				var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+				//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+				]</small>
+			</div>
+			<br>
+			<p>
+			<br>
+			<p>
+			<br>
+			<p>
+			<br>
+			<div align="center" class="text_ad">
+				<font size="1">
+					Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+					Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+					See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</td>
+	</tr>
+</table>
+
+	</body>
+</html>
+

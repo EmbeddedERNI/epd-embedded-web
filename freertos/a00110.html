@@ -1,0 +1,1402 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<META name="description" content="FreeRTOS is a portable, open source, mini Real Time kernel.  A free RTOS for small embedded systems.  This page describes and explains the constants used to configure FreeRTOS.">
+<META name="keywords" content="FreeRTOS configuration, FreeRTOS constants, Free RTOS, RTOS, Cortex-M3, ARM7, ARM9, Renesas RX600, Renesas RX62N, configUSE_PREEMPTION, configUSE_IDLE_HOOK, configUSE_TICK_HOOK, configCPU_CLOCK_HZ, configTICK_RATE_HZ, configMAX_PRIORITIES, configMINIMAL_STACK_SIZE, configTOTAL_HEAP_SIZE, configMAX_TASK_NAME_LEN, configUSE_TRACE_FACILITY, configUSE_16_BIT_TICKS, configIDLE_SHOULD_YIELD, configUSE_MUTEXES, configUSE_RECURSIVE_MUTEXES, configUSE_COUNTING_SEMAPHORES, configUSE_ALTERNATIVE_API, configCHECK_FOR_STACK_OVERFLOW, configQUEUE_REGISTRY_SIZE, configGENERATE_RUN_TIME_STATS, configUSE_CO_ROUTINES, configMAX_CO_ROUTINE_PRIORITIES, configKERNEL_INTERRUPT_PRIORITY, configMAX_SYSCALL_INTERRUPT_PRIORITY">
+<title>FreeRTOS - The Free RTOS configuration constants and configuration options -  FREE Open Source RTOS for small real time embedded systems</title><link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+
+
+<body>
+<font face="Arial">
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="http://www.freertos.org/index.html">
+															<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="http://www.freertos.org/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="http://www.freertos.org/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+
+
+
+<h1>Customisation<br>
+<small>
+[<a class="el" href="http://www.freertos.org/a00109.html">Configuration</a>]</small></h1>
+
+FreeRTOS is customised using a configuration file called FreeRTOSConfig.h.  Every
+FreeRTOS application must have a FreeRTOSConfig.h header file in its pre-processor
+include path.  FreeRTOSConfig.h tailors the RTOS kernel to the application being
+built. It is therefore specific to the application, not the RTOS, and should be
+located in an application directory, not in one of the RTOS kernel source code
+directories.
+<p>
+Each demo application included in the RTOS source code download has its own
+FreeRTOSConfig.h file.  Some of the demos are quite old and do not contain all
+the available configuration options.  Configuration options that are omitted
+are set to a default value within an RTOS source file.
+<p>
+Here is a typical FreeRTOSConfig.h definition, followed by an explanation of each
+parameter:
+<p>
+
+<font face="courier"><pre>
+#ifndef FREERTOS_CONFIG_H
+#define FREERTOS_CONFIG_H
+
+<font color="green">/* Here is a good place to include header files that are required across
+your application. */</font>
+#include "something.h"
+
+#define <a href="a00110.html#configUSE_PREEMPTION">configUSE_PREEMPTION</a>                    1
+#define <a href="a00110.html#configUSE_PORT_OPTIMISED_TASK_SELECTION">configUSE_PORT_OPTIMISED_TASK_SELECTION</a> 0
+#define <a href="a00110.html#configUSE_TICKLESS_IDLE">configUSE_TICKLESS_IDLE</a>                 0
+#define <a href="a00110.html#configCPU_CLOCK_HZ">configCPU_CLOCK_HZ</a>                      60000000
+#define <a href="a00110.html#configTICK_RATE_HZ">configTICK_RATE_HZ</a>                      250
+#define <a href="a00110.html#configMAX_PRIORITIES">configMAX_PRIORITIES</a>                    5
+#define <a href="a00110.html#configMINIMAL_STACK_SIZE">configMINIMAL_STACK_SIZE</a>                128
+#define <a href="a00110.html#configMAX_TASK_NAME_LEN">configMAX_TASK_NAME_LEN</a>                 16
+#define <a href="a00110.html#configUSE_16_BIT_TICKS">configUSE_16_BIT_TICKS</a>                  0
+#define <a href="a00110.html#configIDLE_SHOULD_YIELD">configIDLE_SHOULD_YIELD</a>                 1
+#define <a href="a00110.html#configUSE_TASK_NOTIFICATIONS">configUSE_TASK_NOTIFICATIONS</a>            1
+#define <a href="a00110.html#configUSE_MUTEXES">configUSE_MUTEXES</a>                       0
+#define <a href="a00110.html#configUSE_RECURSIVE_MUTEXES">configUSE_RECURSIVE_MUTEXES</a>             0
+#define <a href="a00110.html#configUSE_COUNTING_SEMAPHORES">configUSE_COUNTING_SEMAPHORES</a>           0
+#define <a href="a00110.html#configUSE_ALTERNATIVE_API">configUSE_ALTERNATIVE_API</a>               0 <font color="green">/* Deprecated! */</font>
+#define <a href="a00110.html#configQUEUE_REGISTRY_SIZE">configQUEUE_REGISTRY_SIZE</a>               10
+#define <a href="a00110.html#configUSE_QUEUE_SETS">configUSE_QUEUE_SETS</a>                    0
+#define <a href="a00110.html#configUSE_TIME_SLICING">configUSE_TIME_SLICING</a>                  0
+#define <a href="a00110.html#configUSE_NEWLIB_REENTRANT">configUSE_NEWLIB_REENTRANT</a>              0
+#define <a href="a00110.html#configENABLE_BACKWARD_COMPATIBILITY">configENABLE_BACKWARD_COMPATIBILITY</a>     0
+#define <a href="a00110.html#configNUM_THREAD_LOCAL_STORAGE_POINTERS">configNUM_THREAD_LOCAL_STORAGE_POINTERS</a> 5
+
+<font color="green">/* Memory allocation related definitions. */</font>
+#define <a href="a00110.html#configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a>         1
+#define <a href="a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a>        1
+#define <a href="a00110.html#configTOTAL_HEAP_SIZE">configTOTAL_HEAP_SIZE</a>                   10240
+#define <a href="a00110.html#configAPPLICATION_ALLOCATED_HEAP">configAPPLICATION_ALLOCATED_HEAP</a>        1
+
+<font color="green">/* Hook function related definitions. */</font>
+#define <a href="a00110.html#configUSE_IDLE_HOOK">configUSE_IDLE_HOOK</a>                     0
+#define <a href="a00110.html#configUSE_TICK_HOOK">configUSE_TICK_HOOK</a>                     0
+#define <a href="a00110.html#configCHECK_FOR_STACK_OVERFLOW">configCHECK_FOR_STACK_OVERFLOW</a>          0
+#define <a href="a00110.html#configUSE_MALLOC_FAILED_HOOK">configUSE_MALLOC_FAILED_HOOK</a>            0
+#define <a href="a00110.html#configUSE_DAEMON_TASK_STARTUP_HOOK">configUSE_DAEMON_TASK_STARTUP_HOOK</a>      0
+
+<font color="green">/* Run time and task stats gathering related definitions. */</font>
+#define <a href="a00110.html#configGENERATE_RUN_TIME_STATS">configGENERATE_RUN_TIME_STATS</a>           0
+#define <a href="a00110.html#configUSE_TRACE_FACILITY">configUSE_TRACE_FACILITY</a>                0
+#define <a href="a00110.html#configUSE_STATS_FORMATTING_FUNCTIONS">configUSE_STATS_FORMATTING_FUNCTIONS</a>    0
+
+<font color="green">/* Co-routine related definitions. */</font>
+#define <a href="a00110.html#configUSE_CO_ROUTINES">configUSE_CO_ROUTINES</a>                   0
+#define <a href="a00110.html#configMAX_CO_ROUTINE_PRIORITIES">configMAX_CO_ROUTINE_PRIORITIES</a>         1
+
+<font color="green">/* Software timer related definitions. */</font>
+#define <a href="a00110.html#configUSE_TIMERS">configUSE_TIMERS</a>                        1
+#define <a href="a00110.html#configTIMER_TASK_PRIORITY">configTIMER_TASK_PRIORITY</a>               3
+#define <a href="a00110.html#configTIMER_QUEUE_LENGTH">configTIMER_QUEUE_LENGTH</a>                10
+#define <a href="a00110.html#configTIMER_TASK_STACK_DEPTH">configTIMER_TASK_STACK_DEPTH</a>            configMINIMAL_STACK_SIZE
+
+<font color="green">/* Interrupt nesting behaviour configuration. */</font>
+#define <a href="a00110.html#kernel_priority">configKERNEL_INTERRUPT_PRIORITY</a>         <small>[dependent of processor]</small>
+#define <a href="a00110.html#kernel_priority">configMAX_SYSCALL_INTERRUPT_PRIORITY</a>    <small>[dependent on processor and application]</small>
+#define <a href="a00110.html#kernel_priority">configMAX_API_CALL_INTERRUPT_PRIORITY</a>   <small>[dependent on processor and application]</small>
+
+<font color="green">/* Define to trap errors during development. */</font>
+#define <a href="a00110.html#configASSERT">configASSERT</a>( ( x ) ) if( ( x ) == 0 ) <a name="assert_definition">vAssertCalled</a>( __FILE__, __LINE__ )
+
+<font color="green">/* FreeRTOS MPU specific definitions. */</font>
+#define <a href="a00110.html#configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS">configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS</a> 0
+
+<font color="green">/* Optional functions - most linkers will remove unused functions anyway. */</font>
+#define <a href="a00110.html#include_parameters">INCLUDE_vTaskPrioritySet</a>                1
+#define <a href="a00110.html#include_parameters">INCLUDE_uxTaskPriorityGet</a>               1
+#define <a href="a00110.html#include_parameters">INCLUDE_vTaskDelete</a>                     1
+#define <a href="a00110.html#include_parameters">INCLUDE_vTaskSuspend</a>                    1
+#define <a href="a00110.html#include_parameters">INCLUDE_xResumeFromISR</a>                  1
+#define <a href="a00110.html#include_parameters">INCLUDE_vTaskDelayUntil</a>                 1
+#define <a href="a00110.html#include_parameters">INCLUDE_vTaskDelay</a>                      1
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskGetSchedulerState</a>          1
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskGetCurrentTaskHandle</a>       1
+#define <a href="a00110.html#include_parameters">INCLUDE_uxTaskGetStackHighWaterMark</a>     0
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskGetIdleTaskHandle</a>          0
+#define <a href="a00110.html#include_parameters">INCLUDE_eTaskGetState</a>                   0
+#define <a href="a00110.html#include_parameters">INCLUDE_xEventGroupSetBitFromISR</a>        1
+#define <a href="a00110.html#include_parameters">INCLUDE_xTimerPendFunctionCall</a>          0
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskAbortDelay</a>                 0
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskGetHandle</a>                  0
+#define <a href="a00110.html#include_parameters">INCLUDE_xTaskResumeFromISR</a>              1
+
+<font color="green">/* A header file that defines trace macro can be included here. */</font>
+
+#endif <font color="green">/* FREERTOS_CONFIG_H */</font>
+</pre></font>
+<p>
+<hr>
+<h2>'config' Parameters</h2>
+<h3><a name="configUSE_PREEMPTION">configUSE_PREEMPTION</a></h3>
+Set to 1 to use the preemptive RTOS scheduler, or 0 to use the cooperative RTOS scheduler.
+<p>
+<br>
+<h3><a name="configUSE_PORT_OPTIMISED_TASK_SELECTION">configUSE_PORT_OPTIMISED_TASK_SELECTION</a></h3>
+Some FreeRTOS ports have two methods of selecting the next task to execute - a
+generic method, and a method that is specific to that port.
+<p>
+The Generic method:
+<ul>
+	<li>
+		Is used when configUSE_PORT_OPTIMISED_TASK_SELECTION is set to 0, or when
+		a port specific method is not implemented.
+		<p>
+	</li>
+	<li>
+		Can be used with all FreeRTOS ports.
+		<p>
+	</li>
+	<li>
+		Is completely written in C, making it less efficient than a port specific
+		method.
+		<p>
+	</li>
+	<li>
+		Does not impose a limit on the maximum number of available priorities.
+		<p>
+	</li>
+</ul>
+<p>
+A port specific method:
+<ul>
+	<li>
+		Is not available for all ports.
+		<p>
+	</li>
+	<li>
+		Is used when configUSE_PORT_OPTIMISED_TASK_SELECTION is set to 1.
+		<p>
+	</li>
+	<li>
+		Relies on one or more architecture specific assembly instructions
+		(typically a Count Leading Zeros [CLZ] or equivalent instruction) so can
+		only be used with the architecture for which it was specifically written.
+		<p>
+	</li>
+	<li>
+		Is more efficient than the generic method.
+		<p>
+	</li>
+	<li>
+		Typically imposes a limit of 32 on the maximum number of available
+		priorities.
+	</li>
+</ul>
+<p>
+<br>
+<h3><a name="configUSE_TICKLESS_IDLE">configUSE_TICKLESS_IDLE</a></h3>
+Set configUSE_TICKLESS_IDLE to 1 to use the
+<a href="low-power-tickless-rtos.html">low power tickless mode</a>,
+or 0 to keep the tick interrupt running at all times.  Low power tickless
+implementations are not provided for all FreeRTOS ports.
+<p>
+<br>
+<h3><a name="configUSE_IDLE_HOOK">configUSE_IDLE_HOOK</a></h3>
+Set to 1 if you wish to use an <a href="RTOS-idle-task.html">idle hook</a>,
+ or 0 to omit an idle hook.
+<p>
+<br>
+<h3><a name="configUSE_MALLOC_FAILED_HOOK">configUSE_MALLOC_FAILED_HOOK</a></h3>
+The kernel uses a call to pvPortMalloc() to allocate memory from the heap each
+time a task, queue or semaphore is created.  The official FreeRTOS download
+includes four sample memory allocation schemes for this purpose.  The schemes
+are implemented in the heap_1.c, heap_2.c, heap_3.c, heap_4.c and heap_5.c source files
+respectively.  configUSE_MALLOC_FAILED_HOOK is only relevant when one of these
+three sample schemes is being used.
+<p>
+The malloc() failed hook function is a hook (or callback) function that, if
+defined and configured, will be called if pvPortMalloc() ever returns NULL.
+NULL will be returned only if there is insufficient FreeRTOS heap memory
+remaining for the requested allocation to succeed.
+<p>
+If configUSE_MALLOC_FAILED_HOOK is set to 1 then the application must define a
+malloc() failed hook function.  If configUSE_MALLOC_FAILED_HOOK is set to 0 then
+the malloc() failed hook function will not be called, even if one is defined.
+Malloc() failed hook functions must have the name and prototype shown below.
+<pre>
+void vApplicationMallocFailedHook( void );
+</pre>
+<p>
+<br>
+<h3><a name="configUSE_DAEMON_TASK_STARTUP_HOOK">configUSE_DAEMON_TASK_STARTUP_HOOK</a></h3>
+If configUSE_TIMERS and configUSE_DAEMON_TASK_STARTUP_HOOK are both set to 1
+then the application must define a hook function that has the exact name and
+prototype as shown below.  The hook function will be called exactly once when the
+RTOS daemon task (also known as the
+<a href="RTOS-software-timer-service-daemon-task.html">timer service task</a>)
+executes for the first time.  Any application initialisation code that needs the
+RTOS to be running can be placed in the hook function.
+<pre>
+void void vApplicationDaemonTaskStartupHook( void );
+</pre>
+<p>
+<br>
+<h3><a name="configUSE_TICK_HOOK">configUSE_TICK_HOOK</a></h3>
+Set to 1 if you wish to use an <a href="http://www.freertos.org/a00016.html#TickHook">tick hook</a>,
+ or 0 to omit an tick hook.
+<p>
+<br>
+<h3><a name="configCPU_CLOCK_HZ">configCPU_CLOCK_HZ</a></h3>
+Enter the frequency in Hz at which the <i>internal</i> clock that driver the
+peripheral used to generate the tick interrupt will be executing - this is normally
+the same clock that drives the internal CPU clock.  This value is required in order
+to correctly configure timer peripherals.
+<p>
+<br>
+<h3><a name="configTICK_RATE_HZ">configTICK_RATE_HZ</a></h3>
+The frequency of the RTOS tick interrupt.
+<p>
+The tick interrupt is used to measure time.  Therefore a higher tick frequency means time can be measured to a
+higher resolution.  However, a high tick frequency also means that the RTOS kernel will use more CPU time so be less
+efficient.  The RTOS demo applications all use a tick rate of 1000Hz.  This is used to test the RTOS kernel and is
+higher than would normally be required.
+<p>
+More than one task can share the same priority.  The RTOS scheduler will share processor time between tasks of the same priority by
+switching between the tasks during each RTOS tick.  A high tick rate frequency will therefore also have the effect of
+reducing the 'time slice' given to each task.
+<p>
+<br>
+<h3><a name="configMAX_PRIORITIES">configMAX_PRIORITIES</a></h3>
+The number of <a href="RTOS-task-priority.html">priorities</a>
+ available to the application tasks.  Any number of tasks can share the same priority.  Co-routines are prioritised separately - see configMAX_CO_ROUTINE_PRIORITIES.
+<p>
+Each available priority consumes RAM within the RTOS kernel so this value should not be set any higher than actually
+required by your application.
+<p>
+<br>
+<h3><a name="configMINIMAL_STACK_SIZE">configMINIMAL_STACK_SIZE</a></h3>
+The size of the stack used by the idle task.  Generally this should not be reduced from the value set in the FreeRTOSConfig.h
+file provided with the demo application for the port you are using.
+<p>
+Like the stack size parameter to the <a href="a00125.html">xTaskCreate()</a> and
+<a href="xTaskCreateStatic.html">xTaskCreateStatic()</a> functions, the stack size is
+specified in words, not bytes.  If each item placed on the stack is 32-bits, then
+a stack size of 100 means 400 bytes (each 32-bit stack item consuming 4 bytes).
+<p>
+<br>
+<h3><a name="configMAX_TASK_NAME_LEN">configMAX_TASK_NAME_LEN</a></h3>
+The maximum permissible length of the descriptive name given to a task when the task is created.
+The length is specified in the number of characters
+<i>including</i> the NULL termination byte.
+<p>
+<br>
+<h3><a name="configUSE_TRACE_FACILITY">configUSE_TRACE_FACILITY</a></h3>
+Set to 1 if you wish to include additional structure members and functions to assist with execution visualisation and tracing.
+<p>
+<br>
+<h3><a name="configUSE_STATS_FORMATTING_FUNCTIONS">configUSE_STATS_FORMATTING_FUNCTIONS</a></h3>
+Set configUSE_TRACE_FACILITY and configUSE_STATS_FORMATTING_FUNCTIONS to 1 to
+include the <a href="a00021.html#vTaskList">vTaskList()</a> and <a href="a00021.html#vTaskGetRunTimeStats">vTaskGetRunTimeStats()</a>
+functions in the build.  Setting either to 0 will omit vTaskList() and vTaskGetRunTimeStates() from the build.
+<p>
+<br>
+<h3><a name="configUSE_16_BIT_TICKS">configUSE_16_BIT_TICKS</a></h3>
+Time is measured in 'ticks' - which is the number of times the tick interrupt has executed since the RTOS kernel was started.
+The tick count is held in a variable of type TickType_t.
+<p>
+Defining configUSE_16_BIT_TICKS as 1 causes TickType_t to be defined (typedef'ed) as an unsigned 16bit type.
+Defining configUSE_16_BIT_TICKS as 0 causes TickType_t to be defined (typedef'ed) as an unsigned 32bit type.
+<p>
+Using a 16 bit type will greatly improve performance on 8 and 16 bit architectures, but limits the maximum specifiable
+time period to 65535 'ticks'.  Therefore, assuming a tick frequency
+of 250Hz, the maximum time a task can delay or block when a 16bit counter is used is 262 seconds, compared to
+17179869 seconds when using a 32bit counter.
+<p>
+<br>
+<h3><a name="configIDLE_SHOULD_YIELD">configIDLE_SHOULD_YIELD</a></h3>
+This parameter controls the behaviour of tasks at the idle priority.  It only has an effect if:
+<ol>
+	<li>The preemptive scheduler is being used.</li>
+	<li>The application creates tasks that run at the idle priority.</li>
+</ol>
+
+If configUSE_TIME_SLICING is set to 1 (or undefined) then tasks that share the
+same priority will time slice.  If none of the tasks get preempted then it might be assumed that each
+task at a given priority will be allocated an equal amount of processing time - and if the priority is above the
+idle priority then this is indeed the case.
+<p>
+When tasks share the idle priority the behaviour can be slightly different.  If configIDLE_SHOULD_YIELD is set to 1 then the
+idle task will yield immediately if any other task at the idle priority is ready to run.  This ensures the minimum
+amount of time is spent in the idle task when application tasks are available for scheduling.  This behaviour can however have
+undesirable effects (depending on the needs of your application) as depicted below:
+<div align="center">
+	<img src="http://www.freertos.org/idleyield.gif">
+</div>
+<p>
+The diagram above shows the execution pattern of four tasks that are all running
+at the idle priority.  Tasks A, B and C are application tasks.  Task
+I is the idle task.  A context switch occurs with regular period at times T0, T1, ..., T6.  When the idle task yields task
+A starts to execute - but the idle task has already consumed some of the current
+time slice.  This results in task I and task A effectively sharing the same time
+slice.  The application tasks B and C therefore get more processing time than the
+application task A.
+<p>
+This situation can be avoided by:
+<ul>
+	<li>If appropriate, using an <a href="RTOS-idle-task.html">idle hook</a> in place of
+	separate tasks at the idle priority.</li>
+	<li>Creating all application tasks at a priority greater than the idle priority.</li>
+	<li>Setting configIDLE_SHOULD_YIELD to 0.</li>
+</ul>
+Setting configIDLE_SHOULD_YIELD to 0 prevents the idle task from yielding
+processing time until the end of its time slice.  This ensure all tasks at the
+idle priority are allocated an equal amount of processing time (if none of the
+tasks get pre-empted) - but at the cost of a greater proportion
+of the total processing time being allocated to the idle task.
+
+<p>
+<br>
+<h3><a name="configUSE_TASK_NOTIFICATIONS">configUSE_TASK_NOTIFICATIONS</a></h3>
+Setting configUSE_TASK_NOTIFICATIONS to 1 (or leaving configUSE_TASK_NOTIFICATIONS undefined) will include
+<a href="RTOS-task-notifications.html">direct to task notification</a> functionality and its associated API in the build.
+<p>
+Setting configUSE_TASK_NOTIFICATIONS to 0 will exclude direct to task notification functionality and its associated API from the build.
+<p>
+Each task consumes 8 additional bytes of RAM when direct to task notifications are included in the build.
+
+<p>
+<br>
+<h3><a name="configUSE_MUTEXES">configUSE_MUTEXES</a></h3>
+Set to 1 to include mutex functionality in the build, or 0 to omit mutex functionality from the build.  Readers should familiarise
+themselves with the differences between mutexes and binary semaphores in relation to the FreeRTOS functionality.
+
+<p><br>
+<h3><a name="configUSE_RECURSIVE_MUTEXES">configUSE_RECURSIVE_MUTEXES</a></h3>
+Set to 1 to include recursive mutex functionality in the build, or 0 to omit recursive mutex functionality from the build.
+
+<p><br>
+
+<h3><a name="configUSE_COUNTING_SEMAPHORES">configUSE_COUNTING_SEMAPHORES</a></h3>
+Set to 1 to include counting semaphore functionality in the build, or 0 to omit counting semaphore functionality from the build.
+<p><br>
+
+<h3><a name="configUSE_ALTERNATIVE_API">configUSE_ALTERNATIVE_API</a></h3>
+Set to 1 to include the 'alternative' queue functions in the build, or 0 to omit the 'alternative' queue functions from the build.
+The alternative API is described within the queue.h header file.
+<b>The alternative API is deprecated and should not be used in new designs</b>.
+
+<p><br>
+
+<h3><a name="configCHECK_FOR_STACK_OVERFLOW">configCHECK_FOR_STACK_OVERFLOW</a></h3>
+
+The <a href="Stacks-and-stack-overflow-checking.html">stack overflow detection</a> page describes the use of this
+parameter.
+
+<p><br>
+<h3><a name="configQUEUE_REGISTRY_SIZE">configQUEUE_REGISTRY_SIZE</a></h3>
+
+The queue registry has two purposes, both of which are associated with RTOS kernel aware debugging:
+<ol>
+	<li>It allows a textual name to be associated with a queue for easy queue identification within a debugging GUI.</li>
+	<li>It contains the information required by a debugger to locate each registered queue and semaphore.</li>
+</ol>
+The queue registry has no purpose unless you are using a RTOS kernel aware debugger.
+<p>
+configQUEUE_REGISTRY_SIZE defines the maximum number of queues and semaphores that can be registered.
+Only those queues and semaphores that you want to view using a RTOS kernel aware debugger need be registered.
+See the API reference documentation for <a href="vQueueAddToRegistry.html">vQueueAddToRegistry()</a>
+and <a href="vQueueUnregisterQueue.html">vQueueUnregisterQueue()</a> for more information.
+<p><br>
+<h3><a name="configUSE_QUEUE_SETS">configUSE_QUEUE_SETS</a></h3>
+Set to 1 to include <a href="Pend-on-multiple-rtos-objects.html">queue set</a> functionality (the ability
+to block, or pend, on multiple queues and semaphores), or 0 to omit queue set functionality.
+<p>
+<br>
+<h3><a name="configUSE_TIME_SLICING">configUSE_TIME_SLICING</a></h3>
+By default (if configUSE_TIME_SLICING is not defined, or if configUSE_TIME_SLICING
+is defined as 1) FreeRTOS uses prioritised preemptive scheduling with time slicing.
+That means the RTOS scheduler will always run the highest priority task that is
+in the Ready state, and will switch between tasks of equal priority on every RTOS tick
+interrupt.  If configUSE_TIME_SLICING is set to 0 then the RTOS scheduler will
+still run the highest priority task that is in the Ready state, but will not
+switch between tasks of equal priority just because a tick interrupt has occurred.
+<p>
+<br>
+<h3><a name="configUSE_NEWLIB_REENTRANT">configUSE_NEWLIB_REENTRANT</a></h3>
+If configUSE_NEWLIB_REENTRANT is set to 1 then a <a href="http://sourceware.org/newlib/" target="_blank">newlib</a> reent structure will be
+allocated for each created task.
+<p>
+Note Newlib support has been included by popular demand, but is not
+used by the FreeRTOS maintainers themselves.  FreeRTOS is not
+responsible for resulting newlib operation.  User must be familiar with
+newlib and must provide system-wide implementations of the necessary
+stubs. Be warned that (at the time of writing) the current newlib design
+implements a system-wide malloc() that must be provided with locks.
+<p>
+<br>
+<h3><a name="configENABLE_BACKWARD_COMPATIBILITY">configENABLE_BACKWARD_COMPATIBILITY</a></h3>
+The FreeRTOS.h header file includes a set of #define macros that map the names of
+data types used in versions of FreeRTOS prior to version 8.0.0 to the names used
+in FreeRTOS version 8.0.0.  The macros allow application code to update the
+version of FreeRTOS they are built against from a pre 8.0.0 version to a post
+8.0.0 version without modification.  Setting configENABLE_BACKWARD_COMPATIBILITY
+to 0 in FreeRTOSConfig.h excludes the macors from the build, and in so doing
+allowing validation that no pre version 8.0.0 names are being used.
+<p>
+<br>
+<h3><a name="configNUM_THREAD_LOCAL_STORAGE_POINTERS">configNUM_THREAD_LOCAL_STORAGE_POINTERS</a></h3>
+Sets the number of indexes in each task's
+<a href="thread-local-storage-pointers.html">thread local storage array</a>.
+
+<p>
+<br>
+<h3><a name="configSUPPORT_STATIC_ALLOCATION">configSUPPORT_STATIC_ALLOCATION</a></h3>
+If configSUPPORT_STATIC_ALLOCATION is set to 1 then RTOS objects can be created
+using RAM provided by the application writer.
+<p>
+If configSUPPORT_STATIC_ALLOCATION is set to 0 then RTOS objects can only be
+created using RAM allocated from the FreeRTOS heap.
+<p>
+If configSUPPORT_STATIC_ALLOCATION is left undefined it will default to 0.
+<p>
+If configSUPPORT_STATIC_ALLOCATION
+is set to 1 then the application writer must also provide two callback functions:
+vApplicationGetIdleTaskMemory() to provide the memory for use by
+the RTOS Idle task, and (if configUSE_TIMERS is set to 1) vApplicationGetTimerTaskMemory() to
+provide memory for use by the RTOS Daemon/Timer Service task.  Examples are
+provided below.
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+<span class="code_comment">/* configSUPPORT_STATIC_ALLOCATION is set to 1, so the application must provide an
+implementation of vApplicationGetIdleTaskMemory() to provide the memory that is
+used by the Idle task. */</span>
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer,
+                                    StackType_t **ppxIdleTaskStackBuffer,
+                                    uint32_t *pulIdleTaskStackSize )
+{
+<span class="code_comment">/* If the buffers to be provided to the Idle task are declared inside this
+function then they must be declared static - otherwise they will be allocated on
+the stack and so not exists after this function exits. */</span>
+static StaticTask_t xIdleTaskTCB;
+static StackType_t uxIdleTaskStack[ configMINIMAL_STACK_SIZE ];
+
+    <span class="code_comment">/* Pass out a pointer to the StaticTask_t structure in which the Idle task's
+    state will be stored. */</span>
+    *ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
+
+    <span class="code_comment">/* Pass out the array that will be used as the Idle task's stack. */</span>
+    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
+
+    <span class="code_comment">/* Pass out the size of the array pointed to by *ppxIdleTaskStackBuffer.
+    Note that, as the array is necessarily of type StackType_t,
+    configMINIMAL_STACK_SIZE is specified in words, not bytes. */</span>
+    *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+<span class="code_comment">/*-----------------------------------------------------------*/</span>
+
+<span class="code_comment">/* configSUPPORT_STATIC_ALLOCATION and configUSE_TIMERS are both set to 1, so the
+application must provide an implementation of vApplicationGetTimerTaskMemory()
+to provide the memory that is used by the Timer service task. */</span>
+void vApplicationGetTimerTaskMemory( StaticTask_t **ppxTimerTaskTCBBuffer,
+                                     StackType_t **ppxTimerTaskStackBuffer,
+                                     uint32_t *pulTimerTaskStackSize )
+{
+<span class="code_comment">/* If the buffers to be provided to the Timer task are declared inside this
+function then they must be declared static - otherwise they will be allocated on
+the stack and so not exists after this function exits. */</span>
+static StaticTask_t xTimerTaskTCB;
+static StackType_t uxTimerTaskStack[ configTIMER_TASK_STACK_DEPTH ];
+
+    <span class="code_comment">/* Pass out a pointer to the StaticTask_t structure in which the Timer
+    task's state will be stored. */</span>
+    *ppxTimerTaskTCBBuffer = &xTimerTaskTCB;
+
+    <span class="code_comment">/* Pass out the array that will be used as the Timer task's stack. */</span>
+    *ppxTimerTaskStackBuffer = uxTimerTaskStack;
+
+    <span class="code_comment">/* Pass out the size of the array pointed to by *ppxTimerTaskStackBuffer.
+    Note that, as the array is necessarily of type StackType_t,
+    configTIMER_TASK_STACK_DEPTH is specified in words, not bytes. */</span>
+    *pulTimerTaskStackSize = configTIMER_TASK_STACK_DEPTH;
+}
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+Examples of the callback functions that must be provided by the application to
+<br>
+supply the RAM used by the Idle and Timer Service tasks if configSUPPORT_STATIC_ALLOCATION
+<br>
+is set to 1.
+<br>
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+<p>
+<br>
+See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic Memory Allocation</a>
+page for more information.
+
+<p>
+<br>
+<h3><a name="configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a></h3>
+If configSUPPORT_DYNAMIC_ALLOCATION is set to 1 then RTOS objects can be created
+using RAM that is automatically allocated from the FreeRTOS heap.
+<p>
+If configSUPPORT_DYNAMIC_ALLOCATION is set to 0 then RTOS objects can only be
+created using RAM provided by the application writer.
+<p>
+If configSUPPORT_DYNAMIC_ALLOCATION is left undefined it will default to 1.
+<p>
+See the <a href="Static_Vs_Dynamic_Memory_Allocation.html">Static Vs Dynamic Memory Allocation</a>
+page for more information.
+
+
+<p>
+<br>
+<h3><a name="configTOTAL_HEAP_SIZE">configTOTAL_HEAP_SIZE</a></h3>
+The total amount of RAM available in the FreeRTOS heap.
+<p>
+This value will only be used if <a href="a00110.html#configSUPPORT_DYNAMIC_ALLOCATION">configSUPPORT_DYNAMIC_ALLOCATION</a> is set to 1
+and the application makes use of one of the sample memory allocation schemes provided in the
+FreeRTOS source code download.
+See the <a href="a00111.html">memory configuration</a> section for further details.
+
+<p>
+<br>
+<h3><a name="configAPPLICATION_ALLOCATED_HEAP">configAPPLICATION_ALLOCATED_HEAP</a></h3>
+By default the <a href="a00111.html">FreeRTOS heap</a> is declared by FreeRTOS
+and placed in memory by the linker.  Setting configAPPLICATION_ALLOCATED_HEAP to
+1 allows the heap to instead be declared by the application writer, which allows
+the application writer to place the heap wherever they like in memory.
+<p>
+If heap_1.c, heap_2.c or heap_4.c is used, and configAPPLICATION_ALLOCATED_HEAP is
+set to 1, then the application writer must provide a uint8_t array with the exact
+name and dimension as shown below.  The array will be used as the FreeRTOS heap.
+How the array is placed at a specific memory location is dependent on the compiler
+being used - refer to your compiler's documentation.
+<pre>
+uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
+</pre>
+
+
+<p>
+<br>
+<h3><a name="configGENERATE_RUN_TIME_STATS">configGENERATE_RUN_TIME_STATS</a></h3>
+The <a href="rtos-run-time-stats.html">Run Time Stats</a> page describes the use of this parameter.
+<p><br>
+<h3><a name="configUSE_CO_ROUTINES">configUSE_CO_ROUTINES</a></h3>
+Set to 1 to include co-routine functionality in the build, or 0 to omit co-routine functionality from the build.  To include co-routines croutine.c must be
+included in the project.
+<p>
+<br>
+<h3><a name="configMAX_CO_ROUTINE_PRIORITIES">configMAX_CO_ROUTINE_PRIORITIES</a></h3>
+The number of <a href="co-routine-priorities.html">priorities</a>
+available to the application co-routines.  Any number of co-routines can share the same priority.  Tasks are prioritised separately - see configMAX_PRIORITIES.
+
+<p><br>
+<h3><a name="configUSE_TIMERS">configUSE_TIMERS</a></h3>
+Set to 1 to include software timer functionality, or 0 to omit software timer functionality.
+See the <a href="RTOS-software-timer.html">FreeRTOS software timers</a> page for a full description.
+
+
+<p><br>
+<h3><a name="configTIMER_TASK_PRIORITY">configTIMER_TASK_PRIORITY</a></h3>
+Sets the priority of the software timer service/daemon task.
+See the <a href="RTOS-software-timer.html">FreeRTOS software timers</a> page for a full description.
+
+
+
+<p><br>
+<h3><a name="configTIMER_QUEUE_LENGTH">configTIMER_QUEUE_LENGTH</a></h3>
+Sets the length of the software timer command queue.
+See the <a href="RTOS-software-timer.html">FreeRTOS software timers</a> page for a full description.
+
+
+
+<p><br>
+<h3><a name="configTIMER_TASK_STACK_DEPTH">configTIMER_TASK_STACK_DEPTH</a></h3>
+Sets the stack depth allocated to the software timer service/daemon task.
+See the <a href="RTOS-software-timer.html">FreeRTOS software timers</a> page for a full description.
+
+
+<p><br>
+<a name="kernel_priority"><h3>configKERNEL_INTERRUPT_PRIORITY<br>configMAX_SYSCALL_INTERRUPT_PRIORITY and<br>configMAX_API_CALL_INTERRUPT_PRIORITY</h3></a>
+<small>Ports that contain a configKERNEL_INTERRUPT_PRIORITY setting include ARM Cortex-M3, PIC24, dsPIC, PIC32, SuperH and RX600.
+Ports that contain a configMAX_SYSCALL_INTERRUPT_PRIORITY setting include PIC32, RX600, ARM Cortex-A and ARM Cortex-M ports.
+<p>
+<font color="red">ARM Cortex-M3 and ARM Cortex-M4 users please take heed of the special note at the end of this section!</font>
+</small><p>
+configMAX_API_CALL_INTERRUPT_PRIORITY is a new name for configMAX_SYSCALL_INTERRUPT_PRIORITY that is used by newer ports only.  The two are equivalent.
+<p>
+
+configKERNEL_INTERRUPT_PRIORITY should be set to the lowest priority.
+<p>
+Note in the following discussion that only API functions that end in "FromISR" can be called from within an interrupt service routine.
+<p>
+<u>For ports that only implement configKERNEL_INTERRUPT_PRIORITY</u><br>
+configKERNEL_INTERRUPT_PRIORITY sets the interrupt priority used by the RTOS kernel itself.  Interrupts that call API functions must also execute at this
+priority.  Interrupts that do not call API functions can execute at higher priorities and therefore never have their execution delayed by the RTOS kernel
+activity (within the limits of the hardware itself).
+<p>
+
+<u>For ports that implement both configKERNEL_INTERRUPT_PRIORITY and configMAX_SYSCALL_INTERRUPT_PRIORITY</u>:<br>
+
+configKERNEL_INTERRUPT_PRIORITY sets the interrupt priority used by the RTOS kernel itself.  configMAX_SYSCALL_INTERRUPT_PRIORITY sets the highest
+interrupt priority from which interrupt safe FreeRTOS API functions can be called.
+<p>
+A full interrupt nesting model is achieved by setting configMAX_SYSCALL_INTERRUPT_PRIORITY above (that is, at a higher priority level) than configKERNEL_INTERRUPT_PRIORITY.
+<b>This means the FreeRTOS kernel does not completely disable interrupts, even inside critical sections.</b>  Further, this is achieved without
+the disadvantages of a segmented kernel architecture.  Note however, certain microcontroller architectures will (in hardware) disable interrupts
+when a new interrupt is accepted - meaning interrupts are unavoidably disabled for the short period between the hardware accepting the
+interrupt, and the FreeRTOS code re-enabling interrupts.
+
+<p>
+Interrupts that do not call API functions can execute at priorities above configMAX_SYSCALL_INTERRUPT_PRIORITY and therefore never be delayed by the RTOS kernel execution.
+<p>
+For example, imagine a hypothetical microcontroller that has 8 interrupt priority levels - 0 being the lowest and 7 being the highest (see the special note for
+ARM Cortex-M3 users at the end of this section).  The picture below describes what can and
+cannot be done at each priority level should the two configuration constants be set to 4 and 0 as shown:
+<p>
+<div align="center">
+	<img src="http://www.freertos.org/Interrupt-priorities-interrupt-nesting.jpg"><br><small>Example interrupt priority configuration</small>
+</div>
+<p>
+
+These configuration parameters allow very flexible interrupt handling:
+
+<ul>
+	<li>
+		Interrupt handling 'tasks' can be written and prioritised as per any other task in the system. These are tasks that are woken
+		by an interrupt. The interrupt service routine (ISR) itself should be written to be as short as it possibly can be - it just grabs the data then wakes the
+		high priority handler task. The ISR then returns directly into the woken handler task - so interrupt processing is contiguous in time just as if it were all
+		done in the ISR itself. The benefit of this is that all interrupts remain enabled while the handler task executes.<p>
+	</li>
+	<li>
+		Ports that implement configMAX_SYSCALL_INTERRUPT_PRIORITY take this further - permitting a fully nested model where interrupts between
+		the RTOS kernel interrupt priority and configMAX_SYSCALL_INTERRUPT_PRIORITY can nest and make applicable API calls.  Interrupts with priority
+		above configMAX_SYSCALL_INTERRUPT_PRIORITY are never delayed by the RTOS kernel activity.<p>
+	<li>
+		ISR's running above the maximum syscall priority are never masked out by the RTOS kernel itself, so their responsiveness is not effected by the RTOS kernel functionality.
+		This is ideal for interrupts that require very high temporal accuracy - for example interrupts that perform motor commutation.
+		However, such ISR's cannot use the FreeRTOS API functions.
+	</li>
+</ul>
+
+To utilize this scheme your application design must adhere to the following rule: <b>Any interrupt that uses the FreeRTOS API must be set to the same priority as the RTOS kernel (as
+configured by the configKERNEL_INTERRUPT_PRIORITY macro), or at or below configMAX_SYSCALL_INTERRUPT_PRIORITY for ports that include this functionality.</b>
+
+<p>
+<font color="red">A special note for ARM Cortex-M3 and ARM Cortex-M4 users:</font> Please read
+<a href="RTOS-Cortex-M3-M4.html">the page dedicated to interrupt priority settings on ARM Cortex-M devices</a>.
+As a minimum, remember that ARM Cortex-M3 cores use numerically low priority numbers to represent HIGH
+priority interrupts, which can seem counter-intuitive and is easy to forget!  If you wish to assign an interrupt a low priority do NOT assign it a
+priority of 0 (or other low numeric value) as this can result in the interrupt actually having the highest priority in the system - and therefore potentially make your system crash if this
+priority is above configMAX_SYSCALL_INTERRUPT_PRIORITY.
+<p>
+The lowest priority on a ARM Cortex-M3 core is in fact 255 - however different ARM Cortex-M3 vendors implement a different number of priority bits and supply library
+functions that expect priorities to be specified in different ways.  For example, on the STM32 the lowest priority you can specify in an ST driver library call
+is in fact 15 - and the highest priority you can specify is 0.
+<p>
+<br>
+<h3>
+	<a name="configASSERT">configASSERT</a>
+</h3>
+The semantics of the configASSERT() macro are the same as the standard C assert() macro.  An
+assertion is triggered if the parameter passed into configASSERT() is zero.
+<p>
+configASSERT() is called throughout the FreeRTOS source files to check how the
+application is using FreeRTOS.  It is highly recommended to develop FreeRTOS
+applications with configASSERT() defined.
+<p>
+The example definition (shown at the top of the file and
+replicated below) calls vAssertCalled(), passing
+in the file name and line number of the triggering configASSERT() call (__FILE__ and
+__LINE__ are standard macros provided by most compilers).  This is just for demonstration as
+vAssertCalled() is not a FreeRTOS function, configASSERT() can be
+defined to take whatever action the application writer deems appropriate.
+<p>
+It is normal to define configASSERT() in such a way that it will prevent the
+application from executing any further.  This if for two reasons; stopping the
+application at the point of the assertion allows the cause of the assertion to
+be debugged, and executing past a triggered assertion will probably result in a
+crash anyway.
+<p>
+Note defining configASSERT() will increase both the application code size and
+execution time.  When the application is stable the additional overhead
+can be removed by simply commenting out the configASSERT() definition in
+FreeRTOSConfig.h.
+<pre>
+<font color="green">/* Define configASSERT() to call vAssertCalled() if the assertion fails.  The assertion
+has failed if the value of the parameter passed into configASSERT() equals zero. */</font>
+#define configASSERT( ( x ) )     if( ( x ) == 0 ) <a name="assert_definition">vAssertCalled</a>( __FILE__, __LINE__ )
+</pre>
+<p>
+If running FreeRTOS under the control of a debugger, then configASSERT() can be
+defined to just disable interrupts and sit in a loop, as demonstrated below.
+That will have the effect of stopping the code on the line that failed the assert
+test - pausing the debugger will then immediately take you to the offending line
+so you can see why it failed.
+<pre>
+<font color="green">/* Define configASSERT() to disable interrupts and sit in a loop. */</font>
+#define configASSERT( ( x ) )     if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
+</pre>
+<p>
+<br>
+<h3><a name="configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS">configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS</a></h3>
+configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS is only used by FreeRTOS MPU.
+<p>
+If configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS is set to 1 then
+the application writer must provide a header file called "application_defined_privileged_functions.h",
+in which functions the application writer needs to execute in privileged mode can
+be implemented.  Note that, despite having a .h extension, the header file should contain
+the implementation of the C functions, not just the functions' prototypes.
+<p>
+Functions implemented in "application_defined_privileged_functions.h" must save
+and restore the processor's privilege state using the prvRaisePrivilege() function
+and portRESET_PRIVILEGE() macro respectively.  For example, if a library provided
+print function accesses RAM that is outside of the control of the application writer,
+and therefore cannot be allocated to a memory protected user mode task, then the print function
+can be encapsulated in a privileged function using the following code:
+<p>
+<pre>
+void MPU_debug_printf( const char *pcMessage )
+{
+<font color="green">/* State the privilege level of the processor when the function was called. */</font>
+BaseType_t xRunningPrivileged = prvRaisePrivilege();
+
+    <font color="green">/* Call the library function, which now has access to all RAM. */</font>
+    debug_printf( pcMessage );
+
+    <font color="green">/* Reset the processor privilege level to its original value. */</font>
+    portRESET_PRIVILEGE( xRunningPrivileged );
+}
+</pre>
+<p>
+This technique should only be use during development, and not deployment, as it
+circumvents the memory protection.
+
+<p>
+<br>
+<hr>
+<h2><a name="include_parameters">INCLUDE Parameters</a></h2>
+
+The macros starting 'INCLUDE' allow those components of the real time kernel not utilized by your application to be
+excluded from your build. This ensures the RTOS does not use any more ROM or RAM than necessary for your particular
+embedded application.
+<p>
+Each macro takes the form ...<font face="courier"><pre><div>INCLUDE_FunctionName</pre></font></div> ... where FunctionName indicates the API
+function (or set of functions) that can optionally be excluded. To include the API function set the macro to 1,
+to exclude the function set the macro to 0. For example, to include the vTaskDelete()
+API function use: <font face="courier"><pre><div>#define INCLUDE_vTaskDelete    1</pre></font></div><p>
+To exclude vTaskDelete() from your build use: <font face="courier"><pre><div>#define INCLUDE_vTaskDelete    0</pre></font></div><br>
+<br>
+<br>
+<br>
+
+</font>
+						<p>
+						<br>
+						<div align="center">
+							<a href="a00110.html#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="http://www.freertos.org/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+</body>
+
+
+</html>

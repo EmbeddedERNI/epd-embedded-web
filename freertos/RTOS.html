@@ -1,0 +1,1002 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+	<META name="description" content="RTOS - FreeRTOS is a high quality free real time embedded operating system from Real Time Engineers, a free RTOS for small embedded systems">
+	<META name="keywords" content="RTOS, operating system, kernel, scheduler, embedded application, multitasking, multi-tasking, preemptive, pre-emptive, real time embedded, embedded software, Cortex-M4F, CM4F, Cortex-M4, ARM7, ARM9, RX600, RX62N, PIC32, MIPS, M4K, ARM Cortex-M3, CORTEX, M3, Single board computer, SBC, Free RTOS, royalty free, RTOS, free, RTOS free, open source, Xilinx, FPGA, real time, embedded, FreeRTOS, source code, AVR, GNU, PIC, PIC18, development tools, LPC2000, LPC2106, LPC2192, MSP430, MSP430X, RX600, Zilog, Z80, eZ80 Acclaim!, Fujitsu, MB91460, MB96340">
+	<title>RTOS - Free professionally developed and robust real time operating system for small embedded systems development</title>
+	<link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+
+	<!-- Carosel files. -->
+	<script type="text/javascript" src="http://www.freertos.org/FreeRTOS-partners/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="http://www.freertos.org/FreeRTOS-partners/jquery.jcarousel.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://www.freertos.org/FreeRTOS-partners/carosel_skin.css" />
+	<script type="text/javascript">
+
+		function mycarousel_initCallback(carousel)
+		{
+			// Disable autoscrolling if the user clicks the prev or next button.
+			carousel.buttonNext.bind('click', function() {
+				carousel.startAuto(0);
+			});
+
+			carousel.buttonPrev.bind('click', function() {
+				carousel.startAuto(0);
+			});
+
+			// Pause autoscrolling if the user moves with the cursor over the clip.
+			carousel.clip.hover(function() {
+				carousel.stopAuto();
+			}, function() {
+				carousel.startAuto();
+			});
+		};
+
+		jQuery(document).ready(function()
+		{
+			jQuery('#mycarousel').jcarousel
+			({
+				auto: 2,
+				wrap: 'last',
+				initCallback: mycarousel_initCallback
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="http://www.freertos.org/index.html">
+															<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="http://www.freertos.org/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="http://www.freertos.org/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+
+<font face="Arial, Helvetica">
+
+<h1>
+	About Real Time Engineers ltd.
+</h1>
+<table>
+	<tr>
+		<td style="padding-right:20px;">
+		<h3>
+		<i>
+			<b>
+				<div align="center" style="padding-top: 10px; padding-bottom:10px;">
+					"Provide a free product that surpasses the quality and
+					<br>service	demanded by users of commercial alternatives"
+				</div>
+			</b>
+		</i>
+		</h3>
+		<p>
+			FreeRTOS is solely owned, run, developed and maintained by
+			<a href="RTOS-contact-and-support.html">Real Time Engineers Ltd.</a>
+			<p>
+			Real Time Engineers Ltd. have been working in close partnership with the world's
+			leading chip companies for more than 12 years to provide you award winning,
+			commercial grade, and completely free <a href="FreeRTOS-Coding-Standard-and-Style-Guide.html">high quality</a>
+			software that is <a href="differences-between-officially-supported-and-contributed-FreeRTOS-code.html">free from any IP infringement risk</a>.
+		</td>
+		<td style="line-height:normal; padding:10px 20px 10px 20px; border-left: solid 1px silver;" width="125px">
+			<table>
+				<tr>
+					<td align="center">
+						<a href="http://www.realtimeengineers.com/ReferencedDownloads/Real_Time_Engineers_Ltd_FreeRTOS_Overview.pdf" onclick="_gaq.push(['_trackEvent','Download','PDF',this.href,1,true]);">
+							<img src="http://www.freertos.org/Documentation/PDF-large.png" border="0" height="40px">
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="center"  style="line-height:normal;">
+						<a href="http://www.realtimeengineers.com/ReferencedDownloads/Real_Time_Engineers_Ltd_FreeRTOS_Overview.pdf" onclick="_gaq.push(['_trackEvent','Download','PDF',this.href,1,true]);">
+							<small>
+								<b>
+									Corporate and product summary presentation
+								</b>
+							</small>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<p>
+<br>
+<h1>
+	About FreeRTOS
+</h1>
+<small>[Also see the "<a href="about-RTOS.html">What is an RTOS?</a>" and "<a href="http://www.freertos.org/FAQWhat.html#WhyUseRTOS">Why use an RTOS</a>" pages]</small>
+<p>
+<font size="4">FreeRTOS</font><small><sup>TM</sup></small> is a <a href="http://www.eetimes.com/document.asp?doc_id=1263083" target="_blank">market leading</a>
+RTOS from <a href="RTOS-contact-and-support.html">Real Time Engineers Ltd.</a> that supports 35 architectures
+and received >113000 downloads during 2014.  It is professionally developed, strictly quality controlled, robust,
+<a href="freertos_support_forum_archive_index.html">supported</a>, and
+<a href="a00114.html">free to embed in commercial products</a> without any requirement to expose your
+proprietary source code.
+<p>
+FreeRTOS has become the de facto standard RTOS for microcontrollers by
+<a href="open-source-software.html">removing common objections to using free
+software</a>, and in so doing, providing a truly compelling free software model.
+
+<p>
+<h2>
+	Implementation Quality Management
+</h2>
+<div style="float:right; padding-left:20px;">
+	<table border="1" cellspacing="1" cellpadding="4" style="width:460px;">
+		<tr style="height:40px;">
+			<td class="light_blue_table_cell">
+				Value Proposition
+			</td>
+		</tr>
+		<tr>
+			<td>
+				High quality C source code under strict configuration management
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Safety critical version ensures dependability
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Cross platform support secures time investment
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Tutorial books and training to educate engineers
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Pre-configured example projects for all supported ports
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Free support, quoted as better than some commercial alternatives
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Large and growing user base and community
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<i>Peace of mind</i> - low cost commercial options can be taken at any time
+			</td>
+		</tr>
+		<tr>
+			<td bgcolor="#ebc89f">
+				<font><b>= A low total cost of ownership, risk free, &amp; compelling solution</b></font>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<p>
+	<table border="1" cellspacing="1" cellpadding="4" style="width:460px;">
+		<tr style="height:40px;">
+			<td class="light_blue_table_cell" colspan="2">
+				RTOS Technology Highlights
+			</td>
+		</tr>
+		<tr>
+			<td width="50%">
+				Pre-emptive scheduling option
+			</td>
+			<td>
+				Easy to use message passing
+			</td>
+		</tr>
+		<tr>
+			<td width="50%">
+				Co-operative scheduling option
+			</td>
+			<td>
+				Round robin with time slicing
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Fast task notifications
+			</td>
+			<td>
+				Mutexes with priority inheritance
+			</td>
+		</tr>
+		<tr>
+			<td>
+				6K to 12K ROM footprint
+			</td>
+			<td>
+				Recursive mutexes
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Configurable / scalable
+			</td>
+			<td>
+				Binary and counting semaphores
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Chip and compiler agnostic
+			</td>
+			<td>
+				Very efficient software timers
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Some ports never completely disable interrupts
+			</td>
+			<td>
+				Easy to use API
+			</td>
+		</tr>
+	</table>
+	<br>
+	<p>
+	<table border="1" cellspacing="1" cellpadding="4" style="width:460px;">
+		<tr style="height:40px;">
+			<td class="light_blue_table_cell">
+				Partners
+			</td>
+		</tr>
+		<tr>
+			<td valign="middle">
+				<div align="center">
+					<ul id="mycarousel" class="jcarousel-skin-tango">
+						<li><img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" width="150" height="70" alt="ARM connected community RTOS partner" /></li>
+						<li><img src="Xilinx.jpg" width="150" height="70" alt="Xilinx Microblaze and Zynq partner" /></li>
+						<li><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" width="150" height="64" alt="Renesas Gold Alliance Partner RTOS partner" style="padding-top:5px;"/></li>
+						<li><img src="Partner-of-NXP.jpg" width="150" height="59" alt="Partner of NXP supplying RTOS to all ARM microcontrollers" /></li>
+						<li><img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" width="150" alt="Silicon Labs low power RTOS partner" /></li>
+						<li><img src="Microchip-Premier-Third-Party-Partner.jpg" width="150" height="57" alt="Microchip premier third party partner" style="padding-top:5px;"/></li>
+						<li><img src="Texas-Instruments-MCU-Developer-Network.jpg" width="150" height="64" alt="Texas Instruments MCU Developer Network for RTOS on ARM and MSP430 microcontrollers" /></li>
+						<li><img src="Freescale-alliance-member.jpg" width="150" height="67" alt="Freescale Alliance Member supplying RTOS for ARM Kinetis and ColdFire microcontroller" /></li>
+						<li><img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" width="150" height="67" alt="Infineon XMC ARM Cortex Microcontrollers" /></li>
+						<li><img src="Atmel-logo.jpg" width="150" height="69" alt="Atmel RTOS partner for SAM3 ARM Cortex Microcontrollers and AVR32" /></li>
+						<li><img src="Cypress-logo.jpg" width="150" height="62" alt="Cypress RTOS supplier for ARM Cortex-M3" style="padding-top:7px;"/></li>
+						<li><img src="STmicro-logo.jpg" width="150" height="87" alt="STmicroelectronics RTOS partner for STM32 ARM Cortex microcontrollers" /></li>
+						<li><img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" width="150" height="87" alt="Fujitsu RTOS partner for Cortex-M3 and FM3 microcontrollers" /></li>
+						<li><img src="microsemi.jpg" width="150" height="28" alt="Microsemi RTOS partner for ARM Cortex-M3 embedded processors" style="padding-top:15px;"/></li>
+						<li><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" width="150" height="35" alt="Atollic RTOS partner for all real time embedded systems" style="padding-top:15px;"/></li>
+						<li><img src="IAR.jpg" width="150" height="41" alt="IAR Embedded Workbench RTOS partner for all real time embedded systems" /></li>
+						<li><img src="Keil.gif" width="151" height="48" alt="ARM Keil RTOS partner for real time embedded systems" style="padding-top:10px;"/></li>
+						<li><img src="Embedded-Artists.jpg" width="150" height="93" alt="Embedded Artists RTOS partner for ARM based microcontroller embedded hardware" /></li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+FreeRTOS is very strictly quality managed, not just in
+<a href="FreeRTOS-Coding-Standard-and-Style-Guide.html">software coding standards and look and feel</a>,
+but also in implementation.  For example:
+<ul style="padding-left:7px">
+	<li>
+		FreeRTOS <b>never</b> performs a non-deterministic operation, such as
+		walking a linked list, from inside a critical section or interrupt.
+		<p>
+	</li>
+	<li>
+		We are particularly proud of the efficient
+		<a href="RTOS-software-timer.html">software timer</a> implementation
+		that <b>does not use any CPU time unless a timer actually needs servicing</b>.
+		Software timers do not contain variables that need to be counted down to
+		zero.
+		<p>
+	</li>
+	<li>
+		Likewise, lists of Blocked (pended) tasks do not require time
+		consuming periodic servicing.
+		<p>
+	</li>
+	<li>
+		<a href="RTOS-task-notifications.html">Direct to task notifications</a>
+		allow fast task signalling, with practically no
+		RAM overhead, and can be used in the majority of inter-task and
+		interrupt to task signalling scenarios.
+		<p>
+	</li>
+	<li>
+		The <a href="Embedded-RTOS-Queues.html">FreeRTOS queue usage model</a>
+		manages to combine simplicity with flexibility (in a tiny code size) - attributes that are
+		normally mutually exclusive.
+		<p>
+	</li>
+	<li>
+		FreeRTOS queues are base primitives on top of which other communication and
+		synchronisation primitives are built.  The code re-use obtained dramatically
+		reduced overall code size, which in turn <b>assists testing and helps ensure robustness</b>.
+	</li>
+</ul>
+<p>
+<br>
+In addition, the <a href="http://www.tuev-sued.com/" target="_blank">T&Uuml;V S&Uuml;D</a> certified SIL 3
+<a href="SafeRTOS.shtml" target="_blank">SafeRTOS real time kernel</a> was originally derived from
+FreeRTOS, and has undergone the most stringent analysis and test process - the
+results of which were fed back into the FreeRTOS code base (when commonality
+still existed).
+<p>
+<br>
+<h2>
+	Mission
+</h2>
+
+
+<i>
+	<b>
+		<div align="center">
+			"Provide a free product that surpasses the quality and service
+			<br>
+			demanded by users of commercial alternatives"
+		</div>
+	</b>
+</i>
+
+<p>
+The original mission of the FreeRTOS project was to provide a free RTOS solution that was
+easy to use.  That is, easy to build and deploy, on a Windows (or Linux)
+host computer, without having to figure out which source files are required, which
+include paths are required, or how to configure the real time debugging environment.
+This has been achieved through the provision of pre-configured, build-able,
+example projects for each
+<a href="differences-between-officially-supported-and-contributed-FreeRTOS-code.html">officially support port</a>.
+<p>
+Naturally, as the FreeRTOS started circa 2003, how these projects
+are created has evolved for the better, and some original projects remain that
+don't demonstrate all of the RTOS functionality, or have become
+stale.  However, each project is fully tested before it is added to the FreeRTOS
+zip file distribution, and many RTOS demo projects undergo active maintenance before
+each new release.  Responding to user feedback, each new demo added to the
+distribution now also includes a simple "blinky" style getting started configuration
+to compliment the comprehensive examples.
+<p>
+<br>
+<h2>
+	Design Goals
+</h2>
+The primary design goals are:
+<ul>
+	<li>
+		Easy to use
+	</li>
+	<li>
+		Small footprint
+	</li>
+	<li>
+		Robust
+	</li>
+</ul>
+<p>
+<br>
+<h2>
+	FreeRTOS Founder
+</h2>
+The FreeRTOS project was founded by Richard Barry.  Richard graduated with
+1st Class Honours in Computing for Real Time Systems. He's been directly involved
+in the start up of several companies, primarily working in the industrial
+automation and aerospace and simulation markets. Richard is currently a director
+of Real Time Engineers Ltd., owners and maintainers of the FreeRTOS project.
+<p>
+
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+						<p>
+						<br>
+						<div align="center">
+							<a href="RTOS.html#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="http://www.freertos.org/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+<a href="https://plus.google.com/106895663740671259833?
+  rel=author target="_blank">Google</a>
+<a href="https://profiles.google.com/106895663740671259833" rel="me">Profile</a>
+</font>
+
+
+</body>
+</html>

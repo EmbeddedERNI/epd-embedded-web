@@ -1,0 +1,1158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<META name="description" content="Using Free RTOS on an ARM Cortex-A embedded processor">
+<META name="keywords" content="RTOS, Cortex, ARM Cortex-A9, FreeRTOS, interrupt, interrupt priority, microcontroller">
+<title>RTOS for ARM Cortex-A</title><link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+
+
+<body>
+<font face="Arial">
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="http://www.freertos.org/index.html">
+															<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="http://www.freertos.org/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="http://www.freertos.org/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+
+
+<H1>Using FreeRTOS on ARM Cortex-A9 Embedded Processors
+<small>
+	<br>
+	That incorporate a Generic Interrupt Controller (GIC)
+</small>
+</H1>
+
+<h2>
+	Introduction
+</h2>
+The information on this page is relevant to both the 32-bit ARMv7-A and 64-bit
+ARMv8-A RTOS ports.
+<p>
+Some ARM Cortex-A processors incorporate ARM's own Generic Interrupt Controller
+(GIC), while others incorporate proprietary interrupt controllers.  Separate web
+pages are provided to give instructions on using the RTOS in both scenarios.
+This page provides information on running the RTOS on an ARM Cortex-A
+embedded processor that uses the ARM GIC.  See also the web page that describes
+<a href="http://www.freertos.org/Using-FreeRTOS-on-Cortex-A-proprietary-interrupt-controller.html">running the RTOS on an ARM Cortex-A
+embedded processor that uses a proprietary interrupt controller</a>.
+<p>
+On this page:
+<ul>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#FreeRTOS-On-Cortex-A">Features of the FreeRTOS ARM Cortex-A kernel port</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#floating-point">Using the floating point unit (FPU)</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#interrupt-priorities"><b><font color="red">Essential information</font></b> on interrupt priorities</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#FreeRTOSConfig-settings">ARM Cortex-A specific FreeRTOSConfig.h settings</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#tick-interrupt">Configuring and installing the RTOS tick interrupt</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#interrupt-handling">Interrupt handling</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#interrupt-handlers">Installing the FreeRTOS IRQ and SWI (SVC) interrupt handlers</a>
+	</li>
+	<li>
+		<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#modes-and-stacks">Cortex-A processor modes and stacks</a>
+	</li>
+</ul>
+<p>
+<br>
+<h3>
+	<a name="FreeRTOS-On-Cortex-A">
+		Features of the FreeRTOS ARM Cortex-A kernel port
+	</a>
+</h3>
+
+	The FreeRTOS ARM Cortex-A port:
+	<ul>
+		<li>
+			Extends the use of the familiar, small, simple, deterministic,
+			de facto standard FreeRTOS kernel beyond the microcontroller
+			market
+		<p></li>
+		<li>
+			Implements a full interrupt nesting model
+		<p></li>
+		<li>
+			Allows a subset of interrupts to remain enabled even inside RTOS
+			critical sections<sup><a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#note"> #1</a></sup>
+		<p></li>
+		<li>
+			Includes hardware floating point support
+		<p></li>
+		<li>
+			Uses a flat/linear memory model (the MMU is not supported).
+		<p></li>
+	</ul>
+<a name="note"><sup>#1</sup></a>
+<small>
+	The ARM Cortex-A hardware will itself globally disable
+	interrupts when an interrupt is taken, and dictates that interrupts
+	are globally disables when certain operations are performed.  These
+	are the only times interrupts are globally disabled, and interrupts
+	are always re-enabled as soon as possible.
+</small>
+
+<p>
+<br>
+<h3>
+	<a name="floating-point">
+		Using the floating point unit (FPU) in interrupts
+	</a>
+</h3>
+By default, the Cortex-A9 port does not support the use of the floating point
+unit in interrupts.  If it is necessary to use the floating point unit in interrupts
+then it will also be necessary to save the entire floating point context to the
+stack on entry to each (potentially nested) interrupt.  From FreeRTOS V9.0.0
+the FreeRTOS GCC Cortex-A port can do this automatically for you - see the
+description of the vApplicationFPUSafeIRQHandler() callback function in the
+<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#interrupt-handling">Interrupt Handling</a> section below.
+<p>
+<br>
+<h3>
+	<a name="floating-point-tasks">
+		Using the floating point unit (FPU) in tasks
+	</a>
+</h3>
+To prevent processor register corruption a task must not use any floating point
+registers unless it has a floating point context.  Whether or not RTOS tasks are
+created with a floating point context by default depends on
+the compiler in use, and the configUSE_TASK_FPU_SUPPORT setting in FreeRTOSConfig.h.
+<p>
+A newly created task will not have a floating point context if:
+<ul>
+	<li>
+		You are using a FreeRTOS version older than V9.0.0, <b>or</b>
+	</li>
+	<li>
+		You are using a compiler other than GCC, <b>or</b>
+	</li>
+	<li>
+		configUSE_TASK_FPU_SUPPORT is set to 1 in FreeRTOSConfig.h, <b>or</b>
+	</li>
+	<li>
+		configUSE_TASK_FPU_SUPPORT is undefined.
+	</li>
+</ul>
+<p>
+A newly created task will already have a floating point context if:
+<ul>
+	<li>
+		You are using FreeRTOS V9.0.0 <b>or</b> later, <b>and</b>
+	</li>
+	<li>
+		The GCC compiler is used, <b>and</b>
+	</li>
+	<li>
+		configUSE_TASK_FPU_SUPPORT is set to 2 in FreeRTOSConfig.h.
+	</li>
+</ul>
+<p>
+A task that does not have a floating point context must create a floating point
+context for itself by calling portTASK_USES_FLOATING_POINT() before any floating point
+calculations are executed.  It is only necessary to
+call portTASK_USES_FLOATING_POINT() once per task.  For example:
+<p>
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+void vATaskFunction( void *pvParameters )
+{
+double x, y;
+
+    <span class="code_comment">/* This task is going to use floating point operations.  Therefore it calls
+    portTASK_USES_FLOATING_POINT() once on task entry, before entering the loop
+    that implements its functionality.  From this point on the task has a floating
+    point context. */</span>
+    portTASK_USES_FLOATING_POINT();
+
+    <span class="code_comment">/* Enter the loop that implements the task's function. */</span>
+    for( ;; )
+    {
+        <span class="code_comment">/* portTASK_USES_FLOATING_POINT() has already been called, so it is safe
+        to use the floating point x and y variables here... */</span>
+        x = [whatever];
+        y = [whatever];
+    }
+}
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+Calling portTASK_USES_FLOATING_POINT() before any floating point calculations are performed
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+<p>
+<br>
+<h3><font color="red">Important note for GCC (and possibly other compiler) users:</font></h3>
+Some GCC libraries optimise memory copy and memory set (and possibly other)
+functions by making use of the wide floating point registers.  Therefore, by default,
+<b>any</b> task that uses functions such as memcpy(), memcmp() or memset(), or
+uses a FreeRTOS API function such as xQueueSend() which itself uses memcpy(), will
+inadvertently corrupt the floating point registers.  Further, <b>any</b> interrupt
+that calls a FreeRTOS queue or semaphore function will also corrupt the floating
+point context as they too make use of memcpy().
+<p>
+To avoid this either:
+<ul>
+	<li>
+		Use library functions that do not use the floating point registers, and if
+		that is not possible provide your own implementation of memcpy(), memcmp()
+		and memset() to ensure the versions provided by the library are not used.
+		<p>
+	</li>
+	<li>
+		Make use of the portTASK_USES_FLOATING_POINT() and vApplicationFPUSafeIRQHandler()
+		functions described on this page.
+	</li>
+</ul>
+<p>
+<br>
+<h3>
+	<a name="interrupt-priorities">
+		Essential information on interrupt priorities
+	</a>
+</h3>
+The RTOS Cortex-A port implements a full interrupt nesting scheme, the behaviour
+of which is dependent on the configMAX_API_CALL_INTERRUPT_PRIORITY setting.
+configMAX_API_CALL_INTERRUPT_PRIORITY <a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#FreeRTOSConfig-settings">must be defined in FreeRTOSConfig.h</a>.
+<p>
+Interrupts assigned a priority at or below the priority set by configMAX_API_CALL_INTERRUPT_PRIORITY
+can call interrupt safe FreeRTOS API function, and will nest.  Interrupts safe
+FreeRTOS API function are those that end in "FromISR" (FreeRTOS maintains a separate
+interrupt API to ensure interrupt entry is as efficient and simple as possible).
+<p>
+Interrupts assigned a priority above the configMAX_API_CALL_INTERRUPT_PRIORITY setting
+will not be effected by RTOS critical sections, and will nest, but <b>cannot call
+any FreeRTOS API functions</b>.
+<p>
+<b><font color="red">Special Note 1:</font></b> In ARM interrupt controllers, higher
+numeric interrupt priority values denote lower logical interrupt priorities.  Therefore an
+interrupt priority of 5 is lower than an interrupt priority of 4.  If
+configMAX_API_CALL_INTERRUPT_PRIORITY is set to 5, then it is correct for an interrupt
+handler that calls an interrupt safe API function to be assigned a priority of
+5 or 6, but it is <b>not correct</b> for it to be assigned a priority of 4.
+<p>
+<b><font color="red">Special Note 2:</font></b> The interrupt controller's internal
+representation of priority bits can be ignored.  If the interrupt controller
+implements 32 unique priority levels, then the only valid values for
+configMAX_API_CALL_INTERRUPT_PRIORITY are 1 to 30.  Likewise, if the interrupt
+controller implements 16 unique priority levels then valid values are 1 to 14.
+<p>
+<b><font color="red">Special Note 3:</font></b> Interrupt controllers that can
+sub-divide interrupt priority bits into preemption priorities and sub-priorities
+should have all bits configured as preemption priority.  In the ARM generic
+interrupt controller (GIC) this means the interrupt controller's binary point
+register must be set to 0.
+
+<p>
+<br>
+<h3>
+	<a name="FreeRTOSConfig-settings">
+		ARM Cortex-A specific FreeRTOSConfig.h settings
+	</a>
+</h3>
+
+The following settings must be included in FreeRTOSConfig.h:
+
+<ul>
+	<li>
+		configINTERRUPT_CONTROLLER_BASE_ADDRESS
+		<p>
+		Must be set to the base address of the ARM Generic Interrupt Controller
+		(GIC)
+		<p>
+	</li>
+	<li>
+		configINTERRUPT_CONTROLLER_CPU_INTERFACE_OFFSET
+		<p>
+		The offset from configINTERRUPT_CONTROLLER_BASE_ADDRESS at which the
+		GIC's CPU interface starts.  Typically this will be 0x1000.
+		<p>
+	</li>
+	<li>
+		configUNIQUE_INTERRUPT_PRIORITIES
+		<p>
+		The number of unique priorities that can be specified in the GIC.
+		<p>
+	</li>
+	<li>
+		configMAX_API_CALL_INTERRUPT_PRIORITY
+		<p>
+		See the <a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#interrupt-priorities">interrupt priorities</a> section.
+	</li>
+</ul>
+<p>
+<b><font color="red">Note:</font></b> If there is an official demo for
+the Cortex-A9 processor you are using then the
+FreeRTOSConfig.h file provided with the demo will already contain the correct
+settings.
+<p>
+<br>
+<h3>
+	<a name="tick-interrupt">Configuring and installing the RTOS tick interrupt</a>
+</h3>
+Every official FreeRTOS demo that targets an ARM Cortex-A based embedded processor
+includes code to configure a timer to generate the RTOS tick interrupt, and install
+the FreeRTOS tick interrupt handler.  The following information is only required
+if you need to change the provided implementation.
+<p>
+The macro configSETUP_TICK_INTERRUPT() is called by the RTOS kernel port layer.
+configSETUP_TICK_INTERRUPT() must be #defined in FreeRTOSConfig.h to configure
+a peripheral to generate a periodic interrupt at the frequency set by the
+configTICK_RATE_HZ FreeRTOSConfig.h setting.  FreeRTOS_Tick_Handler() must then
+be installed as the interrupt's handler function.  For example:
+<p>
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+<span class="code_comment">/* Implement a function in a C file to generate a periodic interrupt at the
+required frequency. */</span>
+void vSetupTickInterrupt( void )
+{
+<span class="code_comment">/* FreeRTOS_Tick_Handler() is itself defined in the RTOS port layer.  An extern
+declaration is required to allow the following code to compile. */</span>
+extern void FreeRTOS_Tick_Handler( void );
+
+    <span class="code_comment">/* Assume TIMER1_configure() configures a hypothetical timer peripheral called
+    TIMER1 to generate a periodic interrupt with a frequency set by its parameter. */</span>
+    TIMER1_configure( configTICK_RATE_HZ );
+
+    <span class="code_comment">/* Next assume Install_Interrupt() installs the function passed as its second
+    parameter as the handler for the peripheral passed as its first parameter. */</span>
+    Install_Interrupt( TIMER1, FreeRTOS_Tick_Handler );
+}
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+Defining a function that configures a timer to generate a periodic tick
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+<p>
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+<span class="code_comment">/* Given the function definition above, add the following line to FreeRTOSConfig.h. */</span>
+#define configSETUP_TICK_INTERRUPT() vSetupTickInterrupt()
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+#defining configSETUP_TICK_INTERRUPT() to the function that generates the periodic tick
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+
+
+<p>
+<br>
+<h3>
+	<a name="interrupt-handling">Interrupt handling</a>
+</h3>
+Every official FreeRTOS demo that targets an ARM Cortex-A based embedded processor
+includes code that handles interrupts.  The following information is only required
+if you need to change the provided implementation.
+<p>
+Interrupt entry, nesting, and exit code is provided by the RTOS kernel port layer.
+After an interrupt has been entered the RTOS port layer executes a callback function
+that must be provided by the application writer.  Individual interrupt service
+routines can then be called by the callback function.  An example is provided
+<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#example_irq_handler">below</a>.
+<p>
+The callback function can be called either vApplicationIRQHandler(), or if you
+are using GCC and FreeRTOS V9.0.0 or later, vApplicationFPUSafeIRQHandler().
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+<span class="code_comment">/* The two callback function options.  In both cases ulICCIAR is passed as the value
+of the interrupt controller's ICCIAR (interrupt acknowledge register). */</span>
+void vApplicationIRQHandler( uint32_t ulICCIAR );
+void vApplicationFPUSafeIRQHandler( uint32_t ulICCIAR );
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+The handler function called after interrupt entry housekeeping tasks have already been performed
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+<p>
+<br>
+If the application writer provides a callback function called vApplicationIRQHandler() then
+floating point registers will not be saved on entry to the interrupt, and the
+interrupt must not use any floating point instructions or registers.  If the
+application writer instead provides a callback function called
+vApplicationFPUSafeIRQHandler() then floating point registers will be saved on
+entry to each (potentially nested) interrupt, which will use more stack space and
+slow down interrupt entry, but allow interrupt handlers to use FPU registers.  See the
+"<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#floating-point">Using the floating point unit (FPU) in interrupts</a>"
+section above.
+<p>
+The callback function (vApplicationIRQHandler() or vApplicationFPUSafeIRQHandler())
+is called with interrupts disabled, but can (and in
+most cases should) enable interrupts.  Below is an example implementation:
+<p>
+<a name="example_irq_handler"></a>
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+<span class="code_comment">/* vApplicationIRQHandler() is just a normal C function. */</span>
+void vApplicationIRQHandler( uint32_t ulICCIAR )
+{
+uint32_t ulInterruptID;
+
+    <span class="code_comment">/* In the 64-bit Cortex-A RTOS port it is necessary to clear the source of
+    the interrupt BEFORE interrupts are re-enabled. */</span>
+    ClearInterruptSource();
+
+    <span class="code_comment">/* Re-enable interrupts. */</span>
+    __asm volatile( "CPSIE I" );
+
+    <span class="code_comment">/* The ID of the interrupt can be obtained by bitwise ANDing the ICCIAR value
+    with 0x3FF. */</span>
+    ulInterruptID = ulICCIAR & 0x3FFUL;
+
+    <span class="code_comment">/* On the assumption that handlers for each interrupt are stored in an array
+    called InterruptHandlerFunctionTable, use the interrupt ID to index to and
+    call the relevant handler function. */</span>
+    InterruptHandlerFunctionTable[ ulInterruptID ]();
+}
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+An example implementation of vApplicationIRQHandler()
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+
+<p>
+<br>
+<h3>
+	<a name="interrupt-handlers">
+		Installing the FreeRTOS IRQ and SWI (SVC) interrupt handlers
+	</a>
+</h3>
+
+FreeRTOS_IRQ_Handler() must be installed as the Cortex-A's IRQ handler.
+<p>
+FreeRTOS_SWI_Handler() must be installed as the Cortex-A's SWI (SVC) handler.
+<p>
+If it is not possible to edit the interrupt vector code then map the FreeRTOS
+handlers to the required handler names using #defines in FreeRTOSConfig.h.  For example,
+if the installed handlers are called IRQ_Handler() and SWI_Handler() respectively, then
+the FreeRTOS handlers can be mapped to these names by adding the following two lines
+to FreeRTOSConfig.h.
+<p>
+		<div align="center">
+			<table bgcolor="#f3f3f3">
+				<tr>
+					<td style='border:none; border-left:solid 1px silver; border-right:solid 1px silver; padding:0cm 10pt 0cm 10pt;'>
+						<pre>
+
+#define FreeRTOS_IRQ_Handler IRQ_Handler
+#define FreeRTOS_SWI_Handler SWI_Handler
+						</pre>
+						<div align="center">
+							<span  class="image_caption">
+
+Mapping the FreeRTOS interrupt handler names to alternative handler names
+							</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+<p>
+<br>
+<h3>
+	<a name="modes-and-stacks">
+		ARMv7A processor modes and stacks
+	</a>
+</h3>
+
+The C start up code must, as a minimum, configure stacks for the IRQ and Supervisor modes
+of the Cortex-A processor.  <b>main() must be called from a privileged mode, preferably
+Supervisor mode</b>.
+<p>
+It is not necessary to allocate a stack to User/System mode unless main() is
+called from System mode (main() must not be called from User mode).  If a stack
+is allocated to User/System mode it will not be used after the RTOS kernel has
+been started.
+<p>
+The RTOS stack overflow detection functionality only detects overflows in
+task stacks, not IRQ or Supervisor stacks.
+
+<p>
+<br>
+<h3>
+	<a name="modes-and-stacks">
+		ARMv8A exception levels
+	</a>
+</h3>
+Currently:
+<ul>
+	<li>
+		The RTOS executes at EL3 (Exception Level 3), and uses the EL3 stack.
+	</li>
+	<li>
+		RTOS tasks execute at EL3 and use the EL1 stack.
+	</li>
+</ul>
+
+<br>
+<br>
+<br>
+<br>
+
+</font>
+						<p>
+						<br>
+						<div align="center">
+							<a href="Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="http://www.freertos.org/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+</body></html>

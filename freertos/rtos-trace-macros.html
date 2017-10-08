@@ -1,0 +1,857 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<META name="description" content="Trace macros provide a generic mechanism for tracing and analysing the behaviour of a FreeRTOS application">
+<META name="keywords" content="FreeRTOS trace, RTOS trace, trace macros, FreeRTOS+Trace, FreeRTOS tools, FreeRTOS debug, FreeRTOS behavior, FreeRTOS diagnostics, FreeRTOS optimize, FreeRTOS visualilze">
+<title>FreeRTOS trace macros</title><link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="http://www.freertos.org/banners.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/stlib.js"></script>
+<script type="text/javascript" src="http://www.freertos.org/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+
+
+<body>
+<font face="Arial">
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="http://www.freertos.org/index.html">
+															<img src="logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="http://www.freertos.org/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="http://www.freertos.org/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="http://www.freertos.org/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="http://www.freertos.org/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="http://www.freertos.org/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="http://www.freertos.org/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+
+
+
+<h1>Trace Hook Macros<br>
+<small>
+[<a class="el" href="static_menu.html#more_advanced">More Advanced</a>]</small>
+</h1>
+
+<table bgcolor="#B6CFFE" cellpadding="3" cellspacing="0">
+	<tr>
+		<td style="border:solid 1px white; background-color:#7095d3;">
+			<div align="center">
+				<a href="FreeRTOS_Plus_Trace.shtml" target="_blank" style="color:white;">
+					Also available: <b>FreeRTOS+Trace</b>,	a third party trace tool for FreeRTOS - part of the FreeRTOS+ ecosystem
+				</a>
+			</div>
+		</td>
+	</tr>
+</table>
+<p>
+<h3>Description</h3>
+Trace hook macros are a very powerful feature that permit you to collect data on how your embedded application is behaving.
+<p>
+
+Key points of interest within the FreeRTOS source code contain empty macros that an application can re-define
+for the purpose of providing application specific trace facilities.  The application need only implement those macros
+of particular interest - with unused macros remaining empty and therefore not impacting the application timing.
+<p><br>
+<h3>Examples</h3>
+Following are some examples of how these macros can be used:
+
+<ul>
+	<li>Setting a digital output to indicate which task is executing - allowing a logic analyzer to be used to view and record the task execution sequence and timing.</li>
+	<li>Similarly - setting an analogue output to a voltage that represents which task is executing - allowing an oscilloscope to be used to view and record the task execution sequence and timing.</li>
+	<li>Logging task execution sequences, task timing, RTOS kernel events and API calls for offline analysis.</li>
+	<li>Integrating RTOS kernel events into third party debuggers.</li>
+</ul>
+
+<h4>Example 1</h4>
+The FreeRTOS task tag functionality provides a simple mechanism for setting up logging via digital or analogue outputs.  For
+example, the tag value can be set to a voltage that is unique to that task.
+The traceSWITCHED_IN() macro can then be defined to simply set an analogue output to the value associated with the task being switched in.  For example:
+
+<pre><font face="courier">
+    <font color="green">/* First task sets its tag value to 1. */</font>
+void vTask1( void *pvParameters )
+{
+    <font color="green">/* This task is going to be represented by a voltage scale of 1. */</font>
+    vTaskSetApplicationTaskTag( NULL, ( void * ) 1 );
+
+    for( ;; )
+    {
+        <font color="green">/* Task code goes here. */</font>
+    }
+}
+<font color="green">/*************************************************/</font>
+
+<font color="green">/* Second task sets its tag value to 2. */</font>
+void vTask2( void *pvParameters )
+{
+    <font color="green">/* This task is going to be represented by a voltage scale of 2. */</font>
+    vTaskSetApplicationTaskTag( NULL, ( void * ) 2 );
+
+    for( ;; )
+    {
+        <font color="green">/* Task code goes here. */</font>
+    }
+}
+<font color="green">/*************************************************/</font>
+
+<font color="green">/* Define the traceTASK_SWITCHED_IN() macro to output the voltage associated
+with the task being selected to run on port 0. */</font>
+#define traceTASK_SWITCHED_IN() vSetAnalogueOutput( 0, (int)pxCurrentTCB->pxTaskTag )
+</font></pre>
+
+
+<p>
+<h4>Example 2</h4>
+API call logging can be used to record the reason a context switch occurred.  RTOS kernel call logging can be used to record the sequence in which tasks execute.
+For example:
+
+<pre>
+<font face="courier"><font color="green">/* traceBLOCKING_ON_QUEUE_RECEIVE() is just one of the macros that can be used to
+record why a context switch is about to occur. */</font>
+#define traceBLOCKING_ON_QUEUE_RECEIVE(xQueue)      \
+    ulSwitchReason = reasonBLOCKING_ON_QUEUE_READ;
+
+<font color="green">/* log_event() is an application defined function that logs which tasks ran when,
+and why. */</font>
+#define traceTASK_SWITCHED_OUT()                    \
+    log_event( pxCurrentTCB, ulSwitchReason );
+</font>
+</pre>
+
+<p>
+<br>
+<h3>Defining</h3>
+Macros that are called from within interrupts, particularly the tick interrupt, must execute quickly and not use much stack space.
+Setting variables, writing to trace registers, or outputting to ports are all acceptable.  Attempting to fprintf() log data to a slow
+disk will not work!
+<p>
+Macro definitions must occur before the inclusion of FreeRTOS.h.  The easiest place to define trace macros is at the bottom of FreeRTOSConfig.h, or in a separate
+header file that is included from the bottom of FreeRTOSConfig.h.
+<p>
+
+The table below describes the available macros.  The macro parameters are used to indicate which task, queue, semaphore or mutex was
+associated with the event being recorded.
+<p>
+<table border="1" cellpadding="3">
+<tr>
+	<td><font face="arial"><b><div align="center">Macro definition</div></b></font></td><td><font face="arial"><b><div align="center">Description</div></b></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_INCREMENT_TICK(xTickCount)</font></font></td><td><font face="arial"><font face="arial">Called during the tick interrupt.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_SWITCHED_OUT()</font></font></td><td><font face="arial"><font face="arial">Called before a new task is selected to run.  At this point pxCurrentTCB contains the handle of the task about to leave the Running state.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_SWITCHED_IN()</font></font></td><td><font face="arial"><font face="arial">Called after a task has been selected to run.  At this point pxCurrentTCB contains the handle of the task about to enter the Running state.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceMOVED_TASK_TO_READY_STATE(xTask)</font></font></td><td><font face="arial"><font face="arial">Called when a task is transitioned into the Ready state.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceBLOCKING_ON_QUEUE_RECEIVE(xQueue)</font></font></td><td><font face="arial"><font face="arial">Indicates that the currently executing task is about to block following an attempt to read from an empty queue, or an attempt to 'take' an empty semaphore or mutex.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceBLOCKING_ON_QUEUE_SEND(xQueue)</font></font></td><td><font face="arial"><font face="arial">Indicates that the currently executing task is about to block following an attempt to write to a full queue.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceGIVE_MUTEX_RECURSIVE(xMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreGiveRecursive().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceGIVE_MUTEX_RECURSIVE_FAILED(xMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreGiveRecursive().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_CREATE(pxNewQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueCreate() or xQueueCreateStatic() if the queue was successfully created.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_CREATE_FAILED()</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueCreate() or xQueueCreateStatic() if the queue was not successfully created due to there being insufficient heap memory available.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceCREATE_MUTEX(pxNewMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreCreateMutex() if the mutex was successfully created.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceCREATE_MUTEX_FAILED()</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreCreateMutex() if the mutex was not successfully created due to there being insufficient heap memory available.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceGIVE_MUTEX_RECURSIVE(xMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreGiveRecursive() if the mutex was successfully 'given'.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceGIVE_MUTEX_RECURSIVE_FAILED(xMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreGiveRecursive() if the mutex was not successfully given as the calling task was not the mutex owner.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTAKE_MUTEX_RECURSIVE(xMutex)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueTakeMutexRecursive().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceCREATE_COUNTING_SEMAPHORE()</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreCreateCounting() if the semaphore was successfully created.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceCREATE_COUNTING_SEMAPHORE_FAILED()</font></font></td><td><font face="arial"><font face="arial">Called from within xSemaphoreCreateCounting() if the semaphore was not successfully created due to insufficient heap memory being available.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_SEND(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueSend(), xQueueSendToFront(), xQueueSendToBack(), or any of the semaphore 'give' functions, when the queue send was successful.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_SEND_FAILED(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueSend(), xQueueSendToFront(), xQueueSendToBack(), or any of the semaphore 'give' functions when the queue send operation failed due to the queue being full (after any block time that was specified).</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_RECEIVE(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueReceive() or any of the semaphore 'take' functions when the queue receive was successful.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_RECEIVE_FAILED(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueReceive() or any of the semaphore 'take' functions when the queue receive operation failed because the queue was empty (after any block time that was specified).</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_PEEK(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueuePeek()</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_SEND_FROM_ISR(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueSendFromISR() when the send operation was successful.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_SEND_FROM_ISR_FAILED(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueSendFromISR() when the send operation failed due to the queue already being full.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_RECEIVE_FROM_ISR(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueReceiveFromISR() when the receive operation was successful.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_RECEIVE_FROM_ISR_FAILED(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within xQueueReceiveFromISR() when the receive operation failed due to the queue already being empty.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceQUEUE_DELETE(xQueue)</font></font></td><td><font face="arial"><font face="arial">Called from within vQueueDelete().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_CREATE(xTask)</font></font></td><td><font face="arial"><font face="arial">Called from within xTaskCreate() (or <a href="xTaskCreateStatic.html">xTaskCreateStatic()</a>) when the task is successfully created.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_CREATE_FAILED(pxNewTCB)</font></font></td><td><font face="arial"><font face="arial">Called from within xTaskCreate() (or <a href="xTaskCreateStatic.html">xTaskCreateStatic()</a>) when the task was not successfully created due to there being insufficient heap space available.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_DELETE(xTask)</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskDelete().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_DELAY_UNTIL()</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskDelayUntil().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_DELAY()</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskDelay().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_PRIORITY_SET(xTask,uxNewPriority)</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskPrioritySet().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_SUSPEND(xTask)</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskSuspend().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_RESUME(xTask)</font></font></td><td><font face="arial"><font face="arial">Called from within vTaskResume().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTASK_RESUME_FROM_ISR(xTask)</font></font></td><td><font face="arial"><font face="arial">Called from within xTaskResumeFromISR().</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTIMER_COMMAND_RECEIVED(pxTimer, xCommandID, xCommandValue)</font></font></td><td><font face="arial"><font face="arial">Called within the timer service task each time it receives a command, before the command is actually processed.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTIMER_COMMAND_SEND(pxTimer, xCommandID, xOptionalValue, xStatus)</font></font></td><td><font face="arial"><font face="arial">Called from within any API function that sends a command to the timer service task, for example, xTimerReset(), xTimerStop(), etc.  xStatus will be pdFAIL if the command was not successfully sent to the timer command queue.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTIMER_CREATE(pxNewTimer)</font></font></td><td><font face="arial"><font face="arial">Called from within xTimerCreate() if the timer was successfully created.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTIMER_CREATE_FAILED()</font></font></td><td><font face="arial"><font face="arial">Called from within xTimerCreate() if the timer was not successfully created due to there being insufficient heap memory available.</font></font></td>
+</tr>
+<tr>
+	<td><font face="arial"><font face="courier">traceTIMER_EXPIRED(pxTimer)</font></font></td><td><font face="arial"><font face="arial">Called when a software timer expires, before the timer callback is executed.</font></font></td>
+</tr>
+</table>
+
+ <br>
+<br>
+<br>
+<br>
+<br>
+
+</font>
+						<p>
+						<br>
+						<div align="center">
+							<a href="rtos-trace-macros.html#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="http://www.freertos.org/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="http://www.freertos.org/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="http://www.freertos.org/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+</body>
