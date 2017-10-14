@@ -1,0 +1,868 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<META name="description" content="RTOS event bits, event groups and event flags">
+<META name="keywords" content="RTOS, event, events, flags, event bits, event groups, rendezvous">
+<title>FreeRTOS event bits, event groups and event flags</title>
+<link rel="stylesheet" href="doxygen.css"><style type="text/css"></style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="/banners.js"></script>
+<script type="text/javascript" src="/stlib.js"></script>
+<script type="text/javascript" src="/left_menu.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript">
+	window.onload = function()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	};
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6086815-2']);
+  _gaq.push(['_setDomainName', 'freertos.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+	function check_left_image_clash()
+	{
+		var rect1 = document.getElementById( 'left_banner_image' ).getBoundingClientRect();
+		var rect2 = document.getElementById( 'id_tree_menu' ).getBoundingClientRect();
+
+		if ( rect1.right >= rect2.left ) {
+			document.getElementById( 'td_left_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_left_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	function check_right_image_clash()
+	{
+		var rect1 = document.getElementById( 'td_right_side_bar' ).getBoundingClientRect();
+
+		if( rect1.right >= window.innerWidth )
+		{
+			document.getElementById( 'td_right_side_bar' ).style.display = 'none';
+			document.getElementById( 'td_right_side_bar' ).style.width = '0';
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+	$( document ).ready( function()
+						{
+							window.setTimeout("blindDownMenuHint();", 5000);
+							window.setTimeout("blindUpMenuHint();", 12000);
+						}
+	)
+
+	function blindDownMenuHint()
+	{
+		if( window.name != "done" )
+		{
+			$( "#menu_hint").show( "blind", "slow" );
+			window.name = "done";
+		}
+	}
+
+	function blindUpMenuHint()
+	{
+		$( "#menu_hint").hide( "blind", "slow" );
+	}
+
+</script>
+
+
+</head>
+
+<body>
+<font face="Arial">
+
+<a name="page_top"></a>
+
+<table>
+	<tr>
+		<td valign="top">
+			<!-- Content area - the other td is the side bar area. -->
+			<table style="height:100%;background:white; border-left:solid 1px #f0f0f0; border-right:solid 1px #f0f0f0;" cellpadding="5" cellspacing="0" align="center">
+				<tr valign="top">
+					<td colspan="3" style="height:100px;"> <!-- Spans the left menu, blank line, and main content columns of the next row. -->
+						<font face="Arial, Helvetica">
+							<table style="width:100%;" cellspacing="2" cellpadding="0" border="0"> <!-- Rows for logos and banners, blue lines with menu. -->
+
+								<tr  style="padding: 0px 0px 0px 0px;"> <!-- Top row, banner and logo. -->
+									<td>
+										<table width="100%" cellpadding="0" cellspacing="5px" style="table-layout:fixed;">
+											<tr>
+												<td style="line-height:normal;" valign="middle" width="174px" id="logo_column">
+													<div style="float:left;">
+														<a href="/index.html">
+															<img src="/logo.jpg" alt="Free RTOS logo" width="164px" border="0" style="padding: 0 0 0 5px;">
+														</a>
+													</div>
+												</td>
+												<td style="width:5px; border-top:solid 2px #e6e6e6; border-left:solid 2px #e6e6e6; border-bottom:solid 2px #e6e6e6;">
+													&nbsp;
+												</td>
+												<td valign="middle" style="line-height:normal; width:324px;" id="page_heading_largerx">
+													<h3>
+														Quality RTOS &amp; Embedded Software
+														<br>
+														<small>
+															<small>
+																<div id="logo_links">
+																	<a href="/RTOS.html"><u>About</u></a>
+																	<font size="1">&nbsp;</font>
+																	<a href="/RTOS-contact-and-support.html"><u>Contact</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="/FreeRTOS_Support_Forum_Archive/freertos_support_forum_archive_index.html"><u>Support</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="/FAQ.html"><u>FAQ</u></a></u>
+																	<font size="1">&nbsp;</font>
+																	<a href="/a00104.html"><u>Download</u></a></u>
+																</div>
+																<div id="logo_sitemap_link">
+																	<a href="/static_menu.html"><u>Static Menu</u></a>
+																	<font size="1">&nbsp;</font>
+																</div>
+															</small>
+														</small>
+													</h3>
+												</td>
+												<td>
+													<div id="banner_div" style="float:right; padding: 0px 0px 3px 0px; max-width:100%;"> <!-- Pad the bottom of the image slightly to keep it away from blue bar. -->
+														<a href="/RTOS-contact-and-support.html">Advertise here?</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr style="height:5px;" bgcolor="#7095d3"> <!-- Blank line. -->
+									<td>
+									</td>
+								</tr>
+								<tr style="height:19px;" bgcolor="#b6cffe"> <!-- Horizontal menu. -->
+									<td valign="middle" bgcolor="#b6cffe"> <!-- Top menu with social media icons. -->
+										<div id="Email_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											&nbsp;<a href="/RSS/FreeRTOS.xml"><img style="padding: 0px 0px 0px 0px; height:20px;" border="0" src="/RSS/rss_logo.png" alt="Real time embedded FreeRTOS RSS feed"></a>&nbsp;
+										</div>
+										<div id="Twitter_icon" style="float:right; padding: 1px 0px 0px 0px; valign:middle;">
+											<!-- Twitter -->
+											<a href="https://twitter.com/intent/follow?screen_name=real_FreeRTOS"><img src="/Twitter_Follow.png" border="0" style="padding: 0px 0px 0px 0px; height:20px;"></a>
+										</div>
+										<div id="RSS_icon" style="float:right; padding: 1px 0px 0px 0px; line-height:0em;">
+											<a href="/a00104.html#mailing_list"><img style="padding: 0px 0px 0px 0px; width:60px;" border="0" src="/RSS/mailinglist.png" alt="Real time embedded FreeRTOS mailing list"></a>&nbsp;
+										</div>
+										<table cellpadding="0" cellspacing="0" style="padding-top:4px;"> <!-- Top horizontal menu. -->
+											<tr>
+												<td width="4px">
+													<!-- Just brings the first white menu spacing bar in from the left of the blue bar. -->
+												</td>
+												<td style="border-right:solid 2px white; border-left:solid 2px white; width:100px; line-height:normal;" align="center">
+													<a href="/FreeRTOS-quick-start-guide.html" class="blue_menu">
+														Quick Start
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:112px; line-height:normal;" align="center">
+													<a href="/RTOS_ports.html" class="blue_menu">
+														Supported MCUs
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:104px; line-height:normal;" align="center">
+													<a href="/Documentation/RTOS_book.html" target="_blank" class="blue_menu">
+														PDF Books
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_Trace/FreeRTOS_Plus_Trace.shtml" target="_blank" class="blue_menu">
+														Trace Tools
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:94px; line-height:normal;" align="center">
+													<a href="/FreeRTOS-Plus/index.shtml" target="_blank" class="blue_menu">
+														Ecosystem
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="/FreeRTOS-Labs/index.shtml" class="blue_menu" target="_blank">
+														TCP &amp; FAT
+													</a>
+												</td>
+												<td style="border-right:solid 2px white; width:90px; line-height:normal;" align="center">
+													<a href="/FreeRTOS-Plus/Instructor_Led_FreeRTOS_Training/FreeRTOS_Training.shtml" class="blue_menu">
+														Training
+													</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</font>
+					</td>
+				</tr>
+				<tr valign="top"> <!-- Main content row with menu and content area columns. -->
+					<td style="width:180px; border:none;" id="id_tree_menu_column"> <!-- LHS menu -->
+						<table cellpadding="0" cellspacing="0" style="padding-right:15px;"> <!-- LHS menu -->
+							<tr> <!-- Tree menu. -->
+								<td class="div_tree_menu" id="id_tree_menu"> <!-- ID is used to detect clash with left banner. -->
+									<p>
+									<script type="text/javascript" language="JavaScript">
+										show_left_menu();
+									</script>
+									<noscript>
+										This site required JavaScript
+										<br>
+										to be enabled. <a href="/static_menu.html">Click here</a> to
+										<br>
+										view a static menu.
+									</noscript>
+								</td>
+							</tr>
+							<tr> <!-- FreeRTOS+ links table. -->
+								<td>
+									<br>
+									<div align="center">
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="/FreeRTOS-quick-start-guide.html#page_top" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>Quick Start Guide</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="/a00104.html" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>&dArr; Download Source &dArr;</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="/FreeRTOS-Labs/index.shtml" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Lab Projects</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_TCP/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+TCP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread safe TCP/IP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_FAT/index.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS+FAT:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware file system
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<p>
+										<table style="width:180px;" cellpadding="0" cellspacing="0">
+											<tr>
+												<td style="border:solid 1px white; background-color:#7095d3; height:25px;">
+													<div align="center">
+														<a href="/FreeRTOS-Plus" target="_blank" style="color:white; line-height:1.3em;" class="underline_on_hover">
+															<b>FreeRTOS+ Ecosystem</b>
+														</a>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/Nabto/Nabto.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Internet of Things:</b>
+														<br>
+														<font size="2">
+															&nbsp;Innovative complete solution
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/Fail_Safe_File_System/Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Fail Safe File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Ensures data integrity
+														</font>
+													</a>
+												</td>
+											</tr>
+<!--											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/embTCP/FreeRTOS_Plus_TCP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>InterNiche TCP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Low cost pre-ported libraries
+														</font>
+													</a>
+												</td>
+											</tr>
+-->
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/BSP_Solutions/FreeRTOS_BSP.html" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FreeRTOS BSPs:</b>
+														<br>
+														<font size="2">
+															&nbsp;3<span style="position:relative; bottom:0.5em; font-size:0.8em;">rd</span> party driver packages
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_FAT_SL/FreeRTOS_Plus_FAT_SL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>FAT SL File System:</b>
+														<br>
+														<font size="2">
+															&nbsp;Super lean FAT FS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_UDP/FreeRTOS_Plus_UDP.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>UDP/IP:</b>
+														<br>
+														<font size="2">
+															&nbsp;Thread aware UDP stack
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_Trace/FreeRTOS_Plus_Trace.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Trace &amp; Visualisation:</b>
+														<br>
+														<font size="2">
+															&nbsp;Tracealyzer for FreeRTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_CLI/FreeRTOS_Plus_Command_Line_Interface.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>CLI:</b>
+														<br>
+														<font size="2">
+															&nbsp;Command line interface
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/WolfSSL/WolfSSL.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>WolfSSL SSL / TLS:</b>
+														<br>
+														<font size="2">
+															&nbsp;Networking security protocols
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/Safety_Critical_Certified/SafeRTOS.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>Safety:</b>
+														<br>
+														<font size="2">
+															&nbsp;TUV certified RTOS
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/Instructor_Led_FreeRTOS_Training/FreeRTOS_Training.shtml" target="_top" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>RTOS Training:</b>
+														<br>
+														<font size="2">
+															&nbsp;Delivered online or on-site
+														</font>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="menu_cell_body">
+													<a href="/FreeRTOS-Plus/FreeRTOS_Plus_IO/FreeRTOS_Plus_IO.shtml" target="_blank" style="line-height:1.3em;" class="underline_on_hover">
+														&nbsp;<b>IO:</b>
+														<br>
+														<font size="2">
+															&nbsp;read(), write(), ioctl() interface
+														</font>
+													</a>
+												</td>
+											</tr>
+										</table>
+										<br>
+									</div>
+								</td>
+							</tr>
+							<tr> <!-- Search box. -->
+								<td>
+									<p>
+									<br>
+									<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+									  <div>
+										<input type="hidden" name="cx" value="partner-pub-1432383574659805:z8fglgeedjr" />
+										<input type="hidden" name="ie" value="ISO-8859-1" />
+										<input type="text" name="q" size="20" />
+										<input type="submit" name="sa" value="Search" />
+									  </div>
+									</form>
+									<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+									<p>
+									<br>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td style="width:2px; padding-right:0; padding-left:0;"> <!-- Blank column. -->
+						<!-- Just to move the main text away from the silver verticle line slightly. -->
+					</td>
+					<td id="td_main_content_column"> <!-- Main content area. -->
+						<table id="menu_hint" style="height:30px; background:#ffff99; display:none;" cellspacing="0" cellpadding="0" border="0">
+							<tr valign="middle">
+								<td width="5px">
+								</td>
+								<td width="30px">
+									<img src="/menu_hint_arrow.png" style="padding:0;" border="0" height="25px">
+								</td>
+								<td valign="middle" valign="middle">
+									Hint: Use the tree menu to navigate groups of related pages &nbsp;
+								</td>
+							</tr>
+						</table>
+
+
+
+<h1>
+	Event Bits (or <i>flags</i>) and Event Groups
+	<br>
+	<small>
+		[<a class="el" href="Inter-Task-Communication.html">Inter-task communication and synchronisation</a>]
+	</small>
+</h1>
+
+<p>
+<div align="center">
+	<table bgcolor="#B6CFFE" cellpadding="3" cellspacing="0">
+		<tr>
+			<td style="border:solid 1px white; background-color:#7095d3;" align="center">
+				<a href="/RTOS_Task_Notification_As_Event_Group.html" style="color:white;">
+					<b>&nbsp;TIP:  'Task Notifications' can provide a light weight alternative to event groups in many situations&nbsp;</b>
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<p>
+<br>
+On this page:
+<ul>
+	<li>
+		<a href="#event_bits">
+			Event Bits (Event Flags)
+		</a>
+	</li>
+	<li>
+		<a href="#event_groups">
+			Event Groups
+		</a>
+	</li>
+	<li>
+		<a href="#data_types">
+			Event Group and Event Bits Data Types
+		</a>
+	</li>
+	<li>
+		<a href="#API">
+			Event Group RTOS API Functions
+		</a>
+	</li>
+	<li>
+		<a href="#challenges">
+			The Challenges an RTOS Must Overcome When Implementing Event Groups
+		</a>
+	</li>
+	<li>
+		<a href="#examples">
+			Example code
+		</a>
+	</li>
+</ul>
+<p>
+<br>
+
+<h3>
+	<a name="event_bits">
+		Event Bits (Event Flags)
+	</a>
+</h3>
+Event bits are used to indicate if an event has occurred
+or not.  Event bits are often referred to as event <i>flags</i>.  For example, an
+application may:
+
+<ul>
+	<li>
+		Define a bit (or flag) that means "A message has been received
+		and is ready for processing" when it is set to 1, and "there are no
+		messages waiting to be processed" when it is set to 0.
+		<p>
+	</li>
+	<li>
+		Define a bit (or flag) that means "The application has queued a
+		message that is ready to be sent to a network" when it is set to 1, and
+		"there are no messages queued ready to be sent to the network" when it
+		is set to 0.
+		<p>
+	</li>
+	<li>
+		Define a bit (or flag) that means "It is time to send a heartbeat message
+		onto a network" when it is set to 1, and "it is not yet time to send
+		another heartbeat message" when it is set to 0.
+	</li>
+</ul>
+<p>
+<br>
+<h3>
+	<a name="event_groups">
+		Event Groups
+	</a>
+</h3>
+An event group is a set of event bits.  Individual event bits within an event
+group are referenced by a bit number.  Expanding the example provided above:
+<ul>
+	<li>
+		The event bit that means "A message has been received and is ready for processing"
+		might be bit number 0 within an event group.
+		<p>
+	</li>
+	<li>
+		The event bit that means "The application has queued a message that is ready to be
+		sent to a network" might be bit number 1 within the same event group.
+		<p>
+	</li>
+	<li>
+		The event bit that means "It is time to send a heartbeat message onto a
+		network" might be bit number 2 within the same event group.
+	</li>
+</ul>
+<p>
+<br>
+<h3>
+	<a name="data_types">
+		Event Group and Event Bits Data Types
+	</a>
+</h3>
+Event groups are referenced by variables of type EventGroupHandle_t.
+<p>
+The number of bits (or flags) stored within an event group is 8 if
+<a href="/a00110.html#configUSE_16_BIT_TICKS">configUSE_16_BIT_TICKS</a>
+is set to 1, or 24 if configUSE_16_BIT_TICKS is set to 0.
+The dependency on configUSE_16_BIT_TICKS results from the data type used for
+thread local storage in the internal implementation of tasks.
+<p>
+All the event bits in an event group are stored in a single unsigned variable of
+type EventBits_t.  Event bit 0 is stored in bit position 0, event bit 1 is
+stored in bit position 1, and so on.
+<p>
+The image below represents a 24-bit event group that uses three bits to
+hold the three example events already described.  In the image only event bit 2
+is set.
+<p>
+<div align="center">
+	<img src="/24-bit-event-group.gif" width="600px" alt="An event group containing 24 event flags">
+	<small>
+		<br>
+		<b>
+			An event group containing 24-event bits, only three of which are in use
+		</b>
+	</small>
+</div>
+<p>
+<br>
+<h3>
+	<a name="API">
+		Event Group RTOS API Functions
+	</a>
+</h3>
+Event group <a href="/event-groups-API.html">API functions</a> are provided that
+allow a task to, among other things, <a href="/xEventGroupSetBits.html">set</a> one
+or more event bits within an event group,
+<a href="/xEventGroupClearBits.html">clear</a> one or more event bits within an
+event group,
+and <a href="/xEventGroupWaitBits.html">pend</a> (enter the Blocked state so the
+task does not consume any processing time) to wait for a set of one or more event bits
+to become set within an event group.
+<p>
+Event groups can also be used to <a href="xEventGroupSync.html">synchronise</a> tasks,
+creating what is often referred to as a task 'rendezvous'.  A task synchronisation
+point is a place in application code at which a task will wait in the Blocked
+state (not consuming any CPU time) until all the other tasks taking part
+in the synchronisation also reached their synchronisation point.
+<p>
+<br>
+<h3>
+	<a name="challenges">
+		The Challenges an RTOS Must Overcome When Implementing Event Groups
+	</a>
+</h3>
+The two main challenges an RTOS must overcome when implementing event groups
+are:
+<ol>
+	<li>
+		<u>
+			Avoiding the creation of race conditions in the user's application:
+		</u>
+		<p>
+		An event group implementation will create a race condition in the
+		application if:
+		<ul>
+			<li>
+				It is not clear who is responsible for clearing individual bits
+				(or flags).
+				<p>
+			</li>
+			<li>
+				It is not clear when a bit is to be cleared.
+				<p>
+			</li>
+			<li>
+				It is not clear if a bit was set or clear at the time a task
+				exited the API function that tested the bit's value (it could be
+				that another task or interrupt has since changed the bit's state).
+				<p>
+			</li>
+		</ul>
+		The FreeRTOS event groups implementation removes the potential for race
+		conditions by including built in
+		intelligence to ensure setting,
+		testing and clearing of bits appears atomic.  Thread local storage and
+		careful use of API function return values make this possible.
+		<p>
+	</li>
+	<li>
+		<u>
+			Avoiding non-determinism:
+		</u>
+		<p>
+		The event group concept implies non-deterministic behaviour because
+		it is not know how many tasks are blocked on an event group, and therefore
+		it is not known how many conditions will need to be tested or tasks
+		unblocked when an event bit is set.
+		<p>
+		The FreeRTOS quality standards do <b>not</b> permit non-deterministic
+		actions to be performed while interrupts are disabled, or from within
+		interrupt service routines.  To ensure these strict quality standards are
+		not breached when an event bit is set:
+		<ul>
+			<li>
+				The RTOS scheduler's locking mechanism is used to ensure
+				interrupts remain enabled when an event bit is set from an RTOS
+				task.
+				<p>
+			</li>
+			<li>
+				The centralised deferred interrupt mechanism is used to defer
+				the action of setting a bit to a task when an attempt is made to
+				set an event bit from an interrupt service routine.
+			</li>
+		<p>
+	</li>
+</ol>
+<p>
+<br>
+<h3>
+	<a name="examples">
+		Example Code
+	</a>
+</h3>
+Example code snippets are provided in the <a href="/event-groups-API.html">API</a>
+documentation, and a comprehensive example is provided in the <tt>EventGroupsDemo.c</tt>
+set of standard demo tasks (the source file is located in the <tt>FreeRTOS/Demo/Common/Minimal</tt>
+directory of the main <a href="/a00104.html">FreeRTOS download</a>).
+<br>
+<br>
+<br>
+<br>
+
+</font>
+						<p>
+						<br>
+						<div align="center">
+							<a href="#page_top"><small>[ Back to the top ]</small></a>
+							&nbsp;&nbsp;
+							<a href="/RTOS.html"><small>[ About FreeRTOS ]</small></a>
+							&nbsp;&nbsp;
+							<a href="/static_menu.html"><small>[ Sitemap ]</small></a>
+							&nbsp;&nbsp;
+							<small>[
+							<script type='text/javascript'><!--
+							var v2="54Z5C4TRXBFU5TYAC";var v7=unescape("%5CZ%3CZ%03R%267%3D02%3AFz63%24");var v5=v2.length;var v1="";for(var v4=0;v4<v5;v4++){v1+=String.fromCharCode(v2.charCodeAt(v4)^v7.charCodeAt(v4));}document.write('<a href="javascript:void(0)" onclick="window.location=\'mail\u0074o\u003a'+v1+'?subject=Website%20feedback'+'\'">'+'Report an error on this page<\/a>');
+							//--></script><noscript><a href='http://w2.syronex.com/jmr/safemailto/#noscript'>Report an error on this page (with anti-spam)</a></noscript>
+							]</small>
+						</div>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<p>
+						<br>
+						<div align="center" class="text_ad">
+							<font size="1">
+								Copyright (C) 2004-2010 Richard Barry. Copyright (C) 2010-2016 Real Time Engineers Ltd.<BR>
+								Any and all data, files, source code, html content and documentation included in the FreeRTOS<SMALL><SUP>TM</SUP></SMALL> distribution or available on this site are the exclusive property of Real Time Engineers Ltd..
+								See the files license.txt (included in the distribution) and this <a href="/copyright.html">copyright notice</a> for more information.  FreeRTOS<sup>TM</sup> and FreeRTOS.org<sup>TM</sup> are trade marks of Real Time Engineers Ltd.				</font>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width:240px; float:right; padding-left:0px; padding-right:0px; line-height:normal;" align="center" id="td_right_side_bar">
+			<!-- Right side bar ads. -->
+			<p>
+			<small>
+				<b>
+					<u>
+						Latest News:
+					</u>
+					<p>
+					FreeRTOS <a href="/FreeRTOS-V9.html">V9.0.0</a> is now available for <a href="/a00104.html">download</a>.
+				</b>
+			</small>
+			<p>
+			<br>
+			<a href="/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_demo_projects.html" style="line-height:normal;">
+				<img src="/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_FAT_Demo_Projects.png" alt="Free TCP/IP and file system demos for the RTOS" style="width:200px; max-width:200px;" border="0">
+			</a>
+
+			<p>
+			<br>
+			<small><b><u>Sponsored Links</u></b></small>
+			<p>
+			<a href="http://www.atollic.com/truestudio" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Atollic_120x60',this.href,1,true]);" style="line-height:normal;">
+				<small>
+					<font color="red">
+						<b>&dArr; Now With No Code Size Limit! &dArr;</b>
+					</font>
+				</small>
+				<img src="/banner-images/Atollic_220x220.jpg" style="width:220px; max-width:220px;" border="0">
+				<br>
+				<small>
+					<font color="red">
+						<b>&uArr; Free Download Without Registering &uArr;</b>
+					</font>
+				</small>
+			</a>
+			<p>
+			<a href="https://www.highintegritysystems.com/safertos/" target="_blank">
+				<img src="/banner-images/WHIS_SafeRTOS.png" style="width:220px; max-width:220px;" border="0">
+			</a>
+			<p>
+			<a href="/FreeRTOS-Plus/Fail_Safe_File_System/Reliance_Edge_Fail_Safe_File_System.shtml" target="_blank" onclick="_gaq.push(['_trackEvent','Banner','Datalight_120x60',this.href,1,true]);">
+				<img src="/banner-images/fail_safe_file_system_240x240.jpg" width="220px" style="border: 1px solid silver; max-width:220px;">
+			</a>
+			<p>
+			<br>
+			<small><b><u>FreeRTOS Partners</u></b></small>
+			<p>
+			<img src="/FreeRTOS-partners/ARM-connected.png" alt="ARM Connected RTOS partner for all ARM microcontroller cores">
+			<p>
+			<a href="http://www.renesas.eu/" target="_blank"><img src="/FreeRTOS-partners/Renesas-Electronics-Gold-Alliance-Partner.jpg" border="0" alt="Renesas Electronics Gold Alliance RTOS Partner.jpg"></a>
+			<p>
+			<a href="http://www.microchip.com/" target="_blank"><img src="/FreeRTOS-partners/Microchip-Premier-Third-Party-Partner.jpg" border="0" alt="Microchip Premier RTOS Partner"></a>
+			<p>
+			<img src="/FreeRTOS-partners/Partner-of-NXP.jpg" alt="RTOS partner of NXP for all NXP ARM microcontrollers">
+			<p>
+			<img src="/FreeRTOS-partners/Atmel-logo.jpg" alt="Atmel RTOS partner supporting ARM Cortex-M3 and AVR32 microcontrollers">
+			<p>
+			<img src="/FreeRTOS-partners/STmicro-logo.jpg" alt="STMicro RTOS partner supporting ARM7, ARM Cortex-M3, ARM Cortex-M4 and ARM Cortex-M0">
+			<p>
+			<img src="/FreeRTOS-partners/Xilinx.jpg" alt="Xilinx Microblaze and Zynq partner">
+			<p>
+			<img src="/FreeRTOS-partners/silicon-labs-logo.png" alt="Silicon Labs low power RTOS partner">
+			<p>
+			<img src="/FreeRTOS-partners/Altera.jpg" alt="Altera RTOS partner for Nios II and Cortex-A9 SoC">
+			<p>
+			<img src="/FreeRTOS-partners/Freescale-alliance-member.jpg" alt="Freescale Alliance RTOS Member supporting ARM and ColdFire microcontrollers">
+			<p>
+			<img src="/FreeRTOS-partners/Infineon.png" alt="Infineon ARM Cortex-M microcontrollers">
+			<p>
+			<img src="/FreeRTOS-partners/Texas-Instruments-MCU-Developer-Network.jpg" alt="Texas Instruments MCU Developer Network RTOS partner for ARM and MSP430 microcontrollers">
+			<p>
+			<img src="/FreeRTOS-partners/Cypress-logo.jpg" alt="Cypress RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<img src="/FreeRTOS-partners/fujitsu.png" alt="Fujitsu RTOS partner supporting ARM Cortex-M3 and FM3">
+			<p>
+			<img src="/FreeRTOS-partners/microsemi.jpg" alt="Microsemi (previously Actel) RTOS partner supporting ARM Cortex-M3">
+			<p>
+			<a href="http://www.atollic.com" target="_blank"><img src="/FreeRTOS-partners/Atollic.png" alt="Atollic Partner" border="0"></a>
+			<p>
+			<img src="/FreeRTOS-partners/IAR.jpg" alt="IAR Partner">
+			<p>
+			<img src="/FreeRTOS-partners/Keil.gif" alt="Keil ARM Partner">
+			<p>
+			<img src="/FreeRTOS-partners/Embedded-Artists.jpg" alt="Embedded Artists">
+			<p>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" language="JavaScript"><!--
+	document.getElementById('banner_div').innerHTML = show_banners2();
+//--></script>
+
+
+</body>
+</html>
