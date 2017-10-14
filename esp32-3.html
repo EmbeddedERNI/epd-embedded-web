@@ -1,0 +1,281 @@
+nvs_flash_init<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>ERNI Performance Day - Embedded</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/modern-business.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">EPD - Embedded</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Roadmap
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
+                                <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
+                                <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="feedback.html">Feedback</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container mb-3">
+
+            <ol class="breadcrumb mt-4  mb-3">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="roadmap-esp32.html">Roadmap ESP32</a>
+                </li>
+                <li class="breadcrumb-item active">Project Three</li>
+            </ol>
+
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">ESP32 Project Three
+                <br>
+                <small>Communicate using MQTT</small>
+            </h1>
+
+            <hr>
+
+            <h3 class="mb-3">Overview</h3>
+            <p>
+            <div class="alert alert-info">This MQTT communication example is based on a patched version of the <a href="https://github.com/tuanpmt/esp32-mqtt">https://github.com/tuanpmt/esp32-mqtt</a>, that is also based on <a href="https://github.com/esar/contiki-mqtt">https://github.com/esar/contiki-mqtt</a></div>
+
+            <p>
+                In order to write a Wi-Fi application, you need to follow these steps.
+            </p>
+            <ol>
+                <li>Call <code>nvs_flash_init</code> routine to initialize the non-volatile storage library. See <a href="esp-idf/docs/api-reference/storage/nvs_flash.html">esp-idf/docs/api-reference/storage/nvs_flash.html</a> for more details</li>
+                <li>Call <code>tcpip_adapter_init</code> routine to create an LwIP core task and initialize LwIP-related work. </li>
+                <li>wifi_event_group = xEventGroupCreate();</li>
+                <li>
+                    Call <code>esp_event_loop_init</code> routine to create a system Event task and initialize an application event’s callback function. 
+                    <br>
+                    The routine signature is <code>esp_err_t esp_event_loop_init(system_event_cb_t cb, void *ctx)</code> where <code>cb</code> is the callback routine. The callback signature is
+                    
+                    <pre><code>
+typedef esp_err_t (*system_event_cb_t)(void *ctx, system_event_t *event);
+                    </code></pre>
+                    
+                </li>
+                <li>Call <code>esp_wifi_init</code> routine to create the Wi-Fi driver task and initialize the Wi-Fi driver.</li>
+                <li>Optionally call the <code>esp_wifi_set_storage</code> routine to specify if the Wi-Fi configurations should be stored in RAM (<code>WIFI_STORAGE_RAM</code>) or in RAM/FLASH (<code>WIFI_STORAGE_FLASH</code>)</li>
+                <li>Call <code>esp_wifi_set_mode</code> routine to configure the Wi-Fi as STAtion (<code>WIFI_MODE_STA</code>), AP (<code>WIFI_MODE_AP</code>) or both (<code>WIFI_MODE_APSTA</code>).</li>
+                <li>Call <code>esp_wifi_set_config</code> routine to configure the Wi-Fi parameters.
+                    <br>                    
+                    The associated data types are: 
+                    <pre><code>
+   typedef enum {
+       WIFI_AUTH_OPEN = 0,      
+       WIFI_AUTH_WEP,           
+       WIFI_AUTH_WPA_PSK,       
+       WIFI_AUTH_WPA2_PSK,      
+       WIFI_AUTH_WPA_WPA2_PSK,  
+       WIFI_AUTH_MAX
+   } wifi_auth_mode_t;
+
+   typedef struct {
+       char ssid[32];              
+       char password[64];          
+       uint8_t ssid_len;           
+       uint8_t channel;            
+       wifi_auth_mode_t authmode;  
+       uint8_t ssid_hidden;        
+       uint8_t max_connection;     
+       uint16_t beacon_interval;   
+   } wifi_ap_config_t;
+   
+   typedef struct {
+       char ssid[32];         
+       char password[64];     
+       bool bssid_set;        
+       uint8_t bssid[6];     
+   } wifi_sta_config_t;
+   
+   typedef union {
+       wifi_ap_config_t  ap;  
+       wifi_sta_config_t sta; 
+   } wifi_config_t;
+                    </code></pre>
+                </li>
+                <li>Call <code>esp_wifi_start</code> routine to start the Wi-Fi.</li>
+                <li>Now, you will receive a callback on the routine passed to the <code>esp_event_loop_init</code> associated to the following events:
+                    <ul>
+                        <li>SYSTEM_EVENT_STA_START</li>
+                        <li>SYSTEM_EVENT_STA_GOT_IP</li>
+                        <li>SYSTEM_EVENT_STA_DISCONNECTED</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p>
+                Now, when a SYSTEM_EVENT_STA_START event was received, you should try to connect to the Wi-Fi network using the <code>esp_wifi_connect</code>. See <a href="esp-idf/docs/api-reference/wifi/esp_wifi.html#_CPPv216esp_wifi_connectv" target="_blank">esp_wifi_connect</a>.
+                <br>
+                After that, when a SYSTEM_EVENT_STA_GOT_IP event was received, you should start the mqtt library using the <code>mqtt_start</code> routine. 
+                <br>
+                The mqtt_start routine receives a pointer to the <code>mqtt_settings</code> datatype, to be able to configure the library.
+                    <pre><code>
+typedef struct mqtt_settings {
+    mqtt_connect_callback connect_cb;
+    mqtt_disconnect_callback disconnect_cb;
+
+    mqtt_read_callback read_cb;
+    mqtt_write_callback write_cb;
+
+    mqtt_event_callback connected_cb;
+    mqtt_event_callback disconnected_cb;
+
+    mqtt_event_callback subscribe_cb;
+    mqtt_event_callback publish_cb;
+    mqtt_event_callback data_cb;
+
+    char host[CONFIG_MQTT_MAX_HOST_LEN];
+    uint32_t port;
+    char client_id[CONFIG_MQTT_MAX_CLIENT_LEN];
+    char username[CONFIG_MQTT_MAX_USERNAME_LEN];
+    char password[CONFIG_MQTT_MAX_PASSWORD_LEN];
+    char lwt_topic[CONFIG_MQTT_MAX_LWT_TOPIC];
+    char lwt_msg[CONFIG_MQTT_MAX_LWT_MSG];
+    uint32_t lwt_msg_len;
+    uint32_t lwt_qos;
+    uint32_t lwt_retain;
+    uint32_t clean_session;
+    uint32_t keepalive;
+    bool auto_reconnect;
+} mqtt_settings;
+                    </code></pre>
+
+                    with the following signatures for the callback routines.
+            
+                    <pre><code>
+typedef bool (* mqtt_connect_callback)(mqtt_client *client);
+typedef void (* mqtt_disconnect_callback)(mqtt_client *client);
+typedef int (* mqtt_read_callback)(mqtt_client *client, void *buffer, int len, int timeout_ms);
+typedef int (* mqtt_write_callback)(mqtt_client *client, const void *buffer, int len, int timeout_ms);
+typedef void (* mqtt_event_callback)(mqtt_client *client, mqtt_event_data_t *event_data);
+                    </code></pre>
+
+                    and the associated datatypes
+                    
+                    <pre><code>
+typedef struct mqtt_event_data_t
+{
+  uint8_t type;
+  const char* topic;
+  const char* data;
+  uint16_t topic_length;
+  uint16_t data_length;
+  uint16_t data_offset;
+  uint16_t data_total_length;
+} mqtt_event_data_t;
+                    </code></pre>
+
+                    After calling the <code>mqtt_start</code> routine, the mqtt callbacks 
+                    should be called, responding to the mqtt events.
+            </p>
+            
+            <hr>
+            
+            <h3 class="mb-3">Stage 1<br><small>Getting the project</small></h3>
+             <ol>
+                <li>Change directory to <code>~/esp/</code></li>
+                <li>Clone the patched code using the command <code>git clone <a href="https://github.com/hmbar/esp32-mqtt">https://github.com/hmbar/esp32-mqtt</a> esp-mqtt</code></li>
+                <li>Change directory to <code>~/esp/esp-mqtt/components/</code></li>
+                <li>Clone the patched library using the command <code>git clone <a href="https://github.com/hmbar/espmqtt.git">https://github.com/hmbar/espmqtt.git</a> espmqtt</code></li>
+                <li>Change directory to <code>~/esp/esp-mqtt/</code></li>
+                <li>Configure the project using <code>make menuconfig</code>
+                    <br>
+                    <ol type="a">
+                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, as you make in previous examples, and change it if necessary</li>
+                        <li>
+                            Enter in the MQTT Application sample menu entry
+                            <br>
+                            <img class="img-thumbnail" src="img/menuconfig-mqtt.jpg" alt="make menuconfig mqtt screenshoot"/>
+                        </li>
+                        <li>
+                            Configure you Wi-Fi information, if needed.
+                            <br>
+                            <img class="img-thumbnail" src="img/menuconfig-mqtt-wifi.jpg" alt="make menuconfig mqtt wifi screenshoot"/>
+                        </li>
+                        <li>Save and Exit</li>
+                    </ol>
+                </li>
+                <li>Edit, in the <code>main/main.cpp</code> file, the <code>mqtt_settings</code> struct with the appropriate values </li>
+                <li>Compile the project using <code>make</code></li>
+                <li>Flash the code using the <code>make flash</code> command</li>
+                <li>Open another terminal and run a mqtt broker using the <code>mosquitto_sub -t /test</code> command</li>
+                <li>Connect to the esp32 log using the <code>make monitor</code> command</li>
+                <li>Look at the mqtt broker terminal and check if you receive the initial message</li>
+                <li>Open another terminal and run a mqtt client using the <code>mosquitto_pub -t /test -m 123</code> command</li>
+                <li>Look at the mqtt broker terminal and check again for the a new message</li>
+                <li>Look at the esp32 log, and should also have the same message</li>
+            </ol>
+
+            <hr>
+
+            <h3 class="mb-3">Stage 2<br><small>Remote managed GPIOs</small></h3>
+            <p>
+            Merge the actual project with the previous one, to be able to manage a GPIO output remotely with a mqtt message and locally with an input GPIO. 
+            <br>
+            Also report both states regularly.
+            </p>
+            <div class="alert alert-info">Define your own commands protocol, and implement the associated actions in the mqtt_read_callback routine.</div>
+            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-mqtt-gpio">https://github.com/hmbar/esp-mqtt-gpio</a></div>
+            <hr>
+            
+            <div class="alert alert-success">
+                You should be able to handle digital inputs and outputs. If so, congrats!
+            </div>
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">ERNI Spain - Embedded Firmware Community</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper/popper.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
+
+</html>
