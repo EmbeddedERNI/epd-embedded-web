@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="">
+
+        <title>ERNI Performance Day - Embedded</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Custom styles for this template -->
+        <link href="css/modern-business.css" rel="stylesheet"/>
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">EPD - Embedded</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Roadmap
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
+                                <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
+                                <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="feedback.html">Feedback</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container mb-3">
+
+            <ol class="breadcrumb mt-4  mb-3">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="roadmap-esp32.html">Roadmap ESP32</a>
+                </li>
+                <li class="breadcrumb-item active">Project Four</li>
+            </ol>
+
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3">ESP32 Project Four
+                <br>
+                <small>Read the DHT22 Temperature and Humidity meter</small>
+            </h1>
+
+            <hr>
+
+            <h3 class="mb-3">Overview</h3>
+            <p>
+            <div class="alert alert-info">The datasheet for the DHT22 can be download <a href="DHT22.pdf">here</a></div>
+
+            <p>
+                The DHT22 signals have times that be in order of tens microsecond, but that time granularity cannot be achieved by the RTOS, so a hardware timer must be used.
+                For more information, please see the <a href="esp-idf/docs/api-reference/peripherals/timer.html" target=”_blank” >Timer API Reference</a>
+                <br>
+                The ESP32 has two groups of two hardware timers, and to be able to use them, you need:
+                <ol>
+                    <li>To include the <code>driver/timer.h</code> header</li>
+                    <li>
+                        Call <code>timer_init</code> routine to initialize the hardware timer. See <a href="esp-idf/docs/api-reference/peripherals/timer.html#_CPPv210timer_init13timer_group_t11timer_idx_tPK14timer_config_t" target=”_blank” >timer_init reference</a> for more details.
+                        <br>
+                        The routine signature is <code>esp_err_t timer_init(timer_group_t group_num, timer_idx_t timer_num, const timer_config_t *config)</code> and the data types associated are
+                        <pre><code>
+typedef enum {
+    TIMER_GROUP_0,  /*!&lt;Hw timer group 0*/
+    TIMER_GROUP_1,  /*!&lt;Hw timer group 1*/
+    TIMER_GROUP_MAX,
+} timer_group_t;
+
+typedef enum {
+    TIMER_0,        /*!&lt;Select timer0 of GROUPx*/
+    TIMER_1,        /*!&lt;Select timer1 of GROUPx*/
+    TIMER_MAX,
+} timer_idx_t;
+
+typedef enum {
+    TIMER_INTR_LEVEL,   /*!&lt; Interrupt mode: level mode*/
+    //TIMER_INTR_EDGE,  /*!&lt; Interrupt mode: edge mode, Not supported Now*/
+    TIMER_INTR_MAX
+} timer_intr_mode_t;
+
+typedef enum {
+    TIMER_COUNT_DOWN,   /*!&lt; Descending Count from cnt.high|cnt.low*/
+    TIMER_COUNT_UP,     /*!&lt; Ascending Count from Zero*/
+    TIMER_COUNT_MAX
+} timer_count_dir_t;
+
+typedef struct {
+    bool alarm_en;                  /*!&lt; Timer alarm enable */
+    bool counter_en;                /*!&lt; Counter enable */
+    timer_intr_mode_t intr_type;    /*!&lt; Interrupt mode */
+    timer_count_dir_t counter_dir;  /*!&lt; Counter direction  */
+    bool auto_reload;               /*!&lt; Timer auto-reload */
+    uint16_t divider;               /*!&lt; Counter clock divider*/
+} timer_config_t;</code></pre>
+                        <p>
+                            Note that the clock frequency for the hardware timer is 80MHz, so a divider of 8 or 80 gives you a granularity of 0.1 or 1us, which will be appropriate for these purposes.
+                        </p>
+                    </li>
+                    <li>Call <code>timer_pause</code> to stop the timer. See <a href="esp-idf/docs/api-reference/peripherals/timer.html#_CPPv211timer_pause13timer_group_t11timer_idx_t" target="_blank">timer_pause reference</a> for more information.</li>
+                    <li>Call <code>timer_set_counter_value</code> to reset the timer counter. See <a href="esp-idf/docs/api-reference/peripherals/timer.html#_CPPv223timer_set_counter_value13timer_group_t11timer_idx_t8uint64_t" target="_blank">timer_set_counter_value reference</a> for more information.</li>
+                    <li>Call <code>timer_start</code> to start the time. See <a href="esp-idf/docs/api-reference/peripherals/timer.html#_CPPv211timer_start13timer_group_t11timer_idx_t" target="_blank">timer_start reference</a> for more information.</li>
+                    <li>Call <code>timer_get_counter_value</code> to read timer counter. See <a href="esp-idf/docs/api-reference/peripherals/timer.html#_CPPv223timer_get_counter_value13timer_group_t11timer_idx_tP8uint64_t" target="_blank">timer_get_counter_value reference</a> for more information.</li>
+                </ol>
+            </p>
+
+            <p>
+                To send information from the ISR, a message queue could be used. For more information, please see the <a href="freertos/a00018.html" target=”_blank” >FreeRTOS Queue Management Reference</a>.
+                <br>
+                To use the Queue Messages you need:
+                <ol>
+                    <li>To include the <code>freertos/queue.h</code> header</li>
+                    <li>Define a QueueHandle_t object. </li>
+                    <li>
+                        Call <code>xQueueCreate</code> routine to create the queue. See <a href="freertos/a00116.html" target=”_blank” >xQueueCreate reference</a> for more details.
+                        <br>
+                        The routine signature is <code>QueueHandle_t xQueueCreate( UBaseType_t uxQueueLength, UBaseType_t uxItemSize )</code>, where the first parameter is for the expected queue length, and the second one is for the size of each element.
+                    </li>
+                    <li>Call <code>xQueueSendFromISR</code> to queue data form the ISR. See <a href="freertos/a00119.html" target="_blank">xQueueSendFromISR reference</a> for more information.</li>
+                    <li>Call <code>xQueueReset</code> to reset the queue. See <a href="freertos/a00018.html#xQueueReset" target="_blank">xQueueReset reference</a> for more information.</li>
+                    <li>Call <code>xQueueReceive</code> to receive the message from the working task. See <a href="freertos/a00118.html" target="_blank">xQueueReceive reference</a> for more information.</li>
+                </ol>
+            </p>
+
+            <p>
+                For this exercise, it is going to be useful what we saw in previous exercises regarding GPIOs managed by interrupts and synchronization with semaphores.
+            </p>
+
+            <p>
+                In order to read the sensor that, you will need to follow these steps.
+                <ol>
+                    <li>Set the pin as an output</li>
+                    <li>Keep the pin down for at least 500us</li>
+                    <li>Keep the pin up for 20-40us</li>
+                    <li>Set the pin as an input</li>
+                    <li>The sensor will keep the signal down for 80us</li>
+                    <li>The sensor will keep the signal up for 80us</li>
+                    <li>Now you will receive a pulse train of 80 bits where
+                        <ol type="A">
+                            <li>
+                                a zero bit is when you have a signal with:
+                                <ol type="a">
+                                    <li>50us down </li>
+                                    <li>~30us up</li>
+                                </ol>
+                            </li>
+                            <li>
+                                a one bit is when you have a signal with:
+                                <ol type="a">
+                                    <li>50us down </li>
+                                    <li>70us up</li>
+                                </ol>
+                            </li>
+                        </ol>
+                        where the first bit received will be the MSB of the first byte.
+                    </li>
+                </ol>
+            </p>
+            <p>
+                If the received bytes are named b1 b2 b3 b4 and b5, the information received will be:
+                <ol>
+                    <li>The humidity in tenths of percentage is ( (b1<<8) | b2 ) </li>
+                    <li>The temperature in tenths of celsius degrees is ( ((b3&0x7F)<<8) | b4 ) and the MSB of b3 is the sign</li>
+                    <li>b5 is the checksum given by the sum of the previous bytes</li>
+                </ol>
+            </p>
+
+            <hr>
+
+            <h3 class="mb-3">Step 1<br><small>Read the DHT22 sensor output</small></h3>
+            <p>
+                With the above information and the previous exercises as reference, program an example that reads the sensor output.
+            </p>
+
+            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-dht22">https://github.com/hmbar/esp-dht22</a></div>
+
+            <hr>
+
+            <div class="alert alert-success">
+                You should be able to read the sensor outputs. If so, congrats!
+            </div>
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">ERNI Spain - Embedded Firmware Community</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/popper/popper.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
+
+</html>
