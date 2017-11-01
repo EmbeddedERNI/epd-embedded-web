@@ -9,7 +9,7 @@ $(function() {
       event.preventDefault(); // prevent default submit behaviour
       // get values from FORM
       var name = $("input#name").val();
-      var rate = $("input#rate").val();
+      var rate = $('input[name="rate"]:checked').val();
       var message = $("textarea#message").val();
       var firstName = name; // For Success/Failure Message
       // Check for white space in name for Success/Fail message
