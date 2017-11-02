@@ -80,6 +80,82 @@
             </h1>
 
             <hr>
+
+            <h3 class="mb-3">Overview</h3>
+            <p>
+                Now, we will integrate all the previous exercises in a Smart Thermostat.
+                <br/>
+                For that, we will need to define a set of commands to communicate with the other devices.
+                <br/>
+                We propose the following ones:
+                <ol>
+                    <li>s=&lt;temperature&gt;: Set setpoint</li>
+                    <li>s: Get the current setpoint</li>
+                    <li>d=&lt;temperature&gt;: Set hysteresis</li>
+                    <li>d: Get the current hysteresis</li>
+                    <li>m=&lt;mode&gt;: Set use mode
+                        <ul><li>off: Turn off the heating</li></ul>
+                        <ul><li>heat: Keep heating despite the actual temperature / setpoint</li></ul>
+                        <ul><li>auto: Keep heating if the ambient temperature is below the setpoint defined, if not, turn off the heating control.</li></ul>
+                    </li>
+                    <li>m: Get the current mode</li>
+                    <li>t: Get the current ambient temperature</li>
+                    <li>h: Get the current humidity</li>
+                    <li>o: Get heating output state</li>
+                </ol>
+                The responses have the same opcodes, but in uppercase. Also, all of them are reported periodically to keep the server updated.
+                <ol>
+                    <li>S=&lt;temperature&gt;: Report the current setpoint</li>
+                    <li>D=&lt;temperature&gt;: Report the current hysteresis</li>
+                    <li>M=&lt;mode&gt;: Report the current mode
+                        <ul><li>off</li></ul>
+                        <ul><li>heat</li></ul>
+                        <ul><li>auto</li></ul>
+                    </li>
+                    <li>T=&lt;temperature&gt;: Report the current ambient temperature</li>
+                    <li>H=&lt;humidity&gt;: Report the current humidity</li>
+                    <li>O=&lt;state&gt;: Report the heating output state
+                        <ul><li>1: The heating output is turned on</li></ul>
+                        <ul><li>0: The heating output is turned off</li></ul>
+                    </li>
+                </ol>
+            </p>
+            
+            <hr>
+
+            <h3 class="mb-3">Step 1<br><small>Program a Smart Thermostat</small></h3>
+            <p>
+                With the above information and the previous exercises as reference, program a Smart Thermostat.
+            </p>
+            <p>
+                Keep in mind that a thermostat needs to activate its output when the current ambient temperature is below a given setpoint.
+                <br/>
+                Also, to avoid stressing the heating system, a gap should be defined around the setpoint, and inside that gap the 
+                current output state must be maintained, in order to avoid turning on and off the heating system when the current 
+                temperature is almost the same as the setpoint. The hystersis value defines the thresholds for the gap.
+                <br/>
+                Defined the setpoint and the hysteresis, if the thermostat is turned off, it will be turned on when the temperature is below the setpoint minus the hysteresis value.
+                On the other hand, if the thermostat is turned on, if will be turned off when the temperature exceed the setpoint plus the hysteresis value.
+                <pre><code>
+T => turn off
+------------------------------------ setpoint+hysteresis
+T => hold the output
+==================================== setpoint
+T => hold the output
+------------------------------------ setpoint-hysteresis
+T => turn on
+                </code></pre>
+            </p>
+
+            <div class="alert alert-info">
+                If you need help, take a look at <a href="https://github.com/hmbar/esp-thermostat">https://github.com/hmbar/esp-thermostat</a>
+            </div>
+
+            <hr>
+
+            <div class="alert alert-success">
+                You should be able to program a smart thermostat that communicates with a MQTT broker. If so, congrats!
+            </div>
         </div>
         <!-- /.container -->
 
