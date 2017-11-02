@@ -130,12 +130,12 @@
             <p>
                 Keep in mind that a thermostat needs to activate its output when the current ambient temperature is below a given setpoint.
                 <br/>
-                Also, to avoid stressing the heating system, a gap should be defined around the setpoint, and inside that gap the 
-                current output state must be maintained, in order to avoid turning on and off the heating system when the current 
+                Also, to avoid stressing the heating system, a gap should be defined around the setpoint, and within that gap the 
+                current output state must be maintained, in order to avoid turning the heating system on and off when the current 
                 temperature is almost the same as the setpoint. The hystersis value defines the thresholds for the gap.
                 <br/>
-                Defined the setpoint and the hysteresis, if the thermostat is turned off, it will be turned on when the temperature is below the setpoint minus the hysteresis value.
-                On the other hand, if the thermostat is turned on, if will be turned off when the temperature exceed the setpoint plus the hysteresis value.
+                Defined the setpoint and the hysteresis, if the thermostat is turned off, it will turn on when the temperature is below the setpoint minus the hysteresis value.
+                On the other hand, if the thermostat is turned on, if will turn off when the temperature exceeds the setpoint plus the hysteresis value.
                 <pre><code>
 T => turn off
 ------------------------------------ setpoint+hysteresis
