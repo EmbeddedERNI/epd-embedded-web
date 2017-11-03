@@ -37,8 +37,7 @@
                 Information
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="info-iot.html">IoT</a>
-                <a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a>
+                <!--a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a-->
                 <a class="dropdown-item" href="info-esp32.html">ESP32</a>
               </div>
             </li>
@@ -47,7 +46,6 @@
                 Roadmap
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
                 <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
                 <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
               </div>
@@ -74,16 +72,20 @@
         </li>
         <li class="breadcrumb-item active">Roadmap Raspberry Pi</li>
       </ol>
-
         <p><strong>CONTENTS</strong></p>
 <ul>
 <li><a href="#raspberry-pi-setup">Raspberry Pi Setup</a>
 <ul>
 <li><a href="#download-this-repository">Download this repository</a></li>
-<li><a href="#install-git-client">Install git client</a>
+<li><a href="#install-graphical-git-client-optional">Install Graphical git client (Optional)</a>
 <ul>
-<li><a href="#windows-ssh">Windows SSH</a></li>
-<li><a href="#linux-ssh">Linux SSH</a></li>
+<li><a href="#gitkraken-windows-ssh">GitKraken Windows SSH</a></li>
+<li><a href="#gitkraken-linux-ssh">GitKraken Linux SSH</a></li>
+</ul>
+</li>
+<li><a href="#configure-raspberrypi-git">Configure Raspberrypi Git</a>
+<ul>
+<li><a href="#setup-ssh-keys">Setup SSH keys</a></li>
 </ul>
 </li>
 <li><a href="#connect-ssh">Connect SSH</a></li>
@@ -123,31 +125,45 @@
 <li><a href="#task-qml-mqtt-client">TASK QML MQTT client</a></li>
 </ul>
 </li>
-<li><a href="#final-task-qml-thermostat">FINAL TASK: QML Thermostat</a></li>
+<li><a href="#task-qml-thermostat">TASK: QML Thermostat</a></li>
 </ul>
 </li>
+<li><a href="#challenges">Challenges</a></li>
+<li><a href="#questions">Questions</a></li>
 </ul>
 <h1 id="raspberry-pi-setup">Raspberry Pi Setup</h1>
 <p>This repository contains all the binaries that you may need along with all the instructions to setup the raspberry pi.</p>
 <h2 id="download-this-repository">Download this repository</h2>
 <p>In the overview tab there is a button just bellow the repository name that allows you to download the full repository as a package.</p>
-<h2 id="install-git-client">Install git client</h2>
-<p>You are free to use any git client of your choice if you are familiar with it. we will be using GitKraken.</p>
-<h3 id="windows-ssh">Windows SSH</h3>
+<h2 id="install-graphical-git-client-optional">Install Graphical git client (Optional)</h2>
+<p>This is usefull if you want to have the repositories in your own computer.
+You are free to use any git client of your choice if you are familiar with it. we will be using GitKraken.</p>
+<h3 id="gitkraken-windows-ssh">GitKraken Windows SSH</h3>
 <ul>
 <li>Run the installer in the Binary folder</li>
 <li>Open preferences &gt; Authentication  and click in &quot;Generate&quot; button to generate a key.</li>
 <li>Copy the public key and add it to your profile in GitLab.</li>
 </ul>
-<h3 id="linux-ssh">Linux SSH</h3>
+<h3 id="gitkraken-linux-ssh">GitKraken Linux SSH</h3>
 <ul>
 <li>Instal the .deb package.</li>
 <li>Use ssh-keygen command to generate a key.</li>
 <li>Add the key to GitKraken in preferences &gt; Authentication.</li>
 <li>Add the public key to your GitLab profile.</li>
 </ul>
+<h2 id="configure-raspberrypi-git">Configure Raspberrypi Git</h2>
+<p>If you want to share code using the GitLab Server, you will need to register and to setup a SSH key.</p>
+<h3 id="setup-ssh-keys">Setup SSH keys</h3>
+<ul>
+<li>cd to ~/.ssh/</li>
+<li>ssh-keygen -t rsa</li>
+<li>set name to &quot;id_rsa&quot;</li>
+<li>left passphrase blank</li>
+<li>Add the id_rsa.pub file content to your GitLab account settings &gt; ssh keys.</li>
+</ul>
+<p>With this information, now you should be able to use git push and git pull without password.</p>
 <h2 id="connect-ssh">Connect SSH</h2>
-<p>If you are familiar with ssh, you can use any client of your choice, we will use MobaXTerm for windows.</p>
+<p>If you are familiar with ssh, you can use any client of your choice, we will use MobaXTerm for windows and regular terminal for Linux.</p>
 <ul>
 <li>Launch MobaXTerm portable from binaries.</li>
 <li>Get your RPI IP Address, we will tell to each group the right one.</li>
@@ -323,6 +339,7 @@ void Subscriber::publishMsg(const quint16 id, const QString &topic, const QStrin
 </ul>
 <h3 id="task-c-thermostat">TASK: C++ Thermostat</h3>
 <p>Implement a class named Thermostat to handle the Thermostat behaviour with the following interface.</p>
+<p>You can clone it from http://192.168.0.2:8081/PerformanceIOT/ThermostatLogic</p>
 <p><strong>You are free to create method that you need, but you can't remove any method</strong></p>
 <pre><code>#ifndef THERMOSTAT_H
 #define THERMOSTAT_H
@@ -342,10 +359,10 @@ public:
     
     
     bool getHeaterStatus();
-    float getTemp();
-    float getHumidity();
-    float getMaxTemp();
-    float getMinTemp();
+    float getTemp() const;
+    float getHumidity() const;
+    float getMaxTemp() const;
+    float getMinTemp() const;
 
 signals:
     void heaterStatusChanged();
@@ -359,10 +376,10 @@ public slots:
     void setMinTemp();
 
 private:
-    // we need to append this to all the paths, this will help to separate messages from diferent sensors but keeping the same interface.
+    // we need to append this to all the paths, this will help to separate messages from different sensors but keeping the same interface.
     QString baseMQTTTopic;
 
-    // Sugestion: implement a function like this that returns the full path ready to use.
+    // Suggestion: implement a function like this that returns the full path ready to use.
     QString getTopic(QString topic);
 
     // Topics
@@ -380,6 +397,7 @@ private:
 
 #endif // THERMOSTAT_H
 </code></pre>
+<p>This application should act as an Interface between the LowLevel and HighLevel applications.</p>
 <p><strong>Code example</strong></p>
 <p>You have an example in Gitlab/qmqtt.</p>
 <p><code>The url may be incorrect, replace the address with the server ip</code></p>
@@ -493,12 +511,40 @@ private:
 </code></pre>
 <p>Create different <strong>TextField</strong> to allow the user to enter the IP, port, Topic and Message and a button to send the message. You can start from the application that we did in the <a href="#qml-basics">QML basics</a>.</p>
 <p><strong>HINT</strong>: You will find useful the QML item <strong>GridLayout</strong> to arrange the items in a cool from way.</p>
-<h2 id="final-task-qml-thermostat">FINAL TASK: QML Thermostat</h2>
-<p>Starting from the last application, you can remplace the QMQTT::Client * client with the class Thermostat that we implemented in the section <a href="#task-c-thermostat">TASK: C++ Thermostat</a> to automatically expose all the functionality of the thermometer to QML. We only need to define the properties with the Q_PROPERTY macro just like the QmlClient class.</p>
-<pre><code>// Example with temp property
-Q_PROPERTY(temp READ getTemp NOTIFY tempChanged)
-</code></pre>
-
+<h2 id="task-qml-thermostat">TASK: QML Thermostat</h2>
+<p>Starting from the last application, you can subscribe to the high level messages from your previous app and create a visual interface to the Thermostat.</p>
+<p><strong>Remember to run both apps at the same time.</strong></p>
+<h1 id="challenges">Challenges</h1>
+<ul>
+<li>Add extra functionalities
+<ul>
+<li>Humidity threshold.</li>
+<li>Day/Night configuration.</li>
+<li>Manual mode.</li>
+</ul>
+</li>
+<li>Improve interface.
+<ul>
+<li>Add information about connection status, server ip...</li>
+<li>Add Children-Lock system.</li>
+</ul>
+</li>
+</ul>
+<h1 id="questions">Questions</h1>
+<p>Which technology is not being used in this project?</p>
+<ul>
+<li>C++</li>
+<li>JavaScript</li>
+<li>Mosquitto</li>
+<li>C# (X)</li>
+</ul>
+<p>If you want to subscribe to all the temperatures from the sensors in the room knowing that the pattern is /group/sensor/temp/. which of this wildcards is valid.</p>
+<ul>
+<li>/#/sensor/temp</li>
+<li>/+/sensor/temp (X)</li>
+<li>/+/temp</li>
+<li>/+/#</li>
+</ul>
 
       <hr>
 

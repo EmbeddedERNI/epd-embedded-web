@@ -37,8 +37,7 @@
                             Information
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="info-iot.html">IoT</a>
-                            <a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a>
+                <!--a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a-->
                             <a class="dropdown-item" href="info-esp32.html">ESP32</a>
                           </div>
                         </li>
@@ -47,7 +46,6 @@
                                 Roadmap
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
                                 <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
                                 <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
                             </div>
@@ -223,9 +221,9 @@ typedef struct mqtt_event_data_t
             <h3 class="mb-3">Step 1<br><small>Getting the project</small></h3>
              <ol>
                 <li>Change directory to <code>~/esp/</code></li>
-                <li>Clone the patched code using the command <code>git clone <a href="https://github.com/hmbar/esp32-mqtt">https://github.com/hmbar/esp32-mqtt</a> esp-mqtt</code></li>
+                <li>Clone the original code using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt">http://server:8081/PerformanceIOT/esp32-mqtt</a> esp-mqtt</code></li>
                 <li>Change directory to <code>~/esp/esp-mqtt/components/</code></li>
-                <li>Clone the patched library using the command <code>git clone <a href="https://github.com/hmbar/espmqtt.git">https://github.com/hmbar/espmqtt.git</a> espmqtt</code></li>
+                <li>Clone the original library using the command <code>git clone <a href="http://server:8081/PerformanceIOT/espmqtt.git">http://server:8081/PerformanceIOT/espmqtt.git</a> espmqtt</code></li>
                 <li>Change directory to <code>~/esp/esp-mqtt/</code></li>
                 <li>Configure the project using <code>make menuconfig</code>
                     <br>
@@ -244,6 +242,7 @@ typedef struct mqtt_event_data_t
                         <li>Save and Exit</li>
                     </ol>
                 </li>
+                <li>Try to correct the problems that the original library has. If you need help, you can take the patch from the server ( <a href="mqtt_config.h.patch">mqtt_config.h</a> / <a href="app_main.c.patch">app_main.c</a> ), or clone a patched version using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt-patched.git">http://server:8081/PerformanceIOT/esp32-mqtt-patched.git</a> esp32-mqtt</code> </li>
                 <li>Edit, in the <code>main/main.cpp</code> file, the <code>mqtt_settings</code> struct with the appropriate values </li>
                 <li>Compile the project using <code>make</code></li>
                 <li>Flash the code using the <code>make flash</code> command</li>
@@ -264,7 +263,7 @@ typedef struct mqtt_event_data_t
             Also report both states regularly.
             </p>
             <div class="alert alert-info">Define your own commands protocol, and implement the associated actions in the mqtt_read_callback routine.</div>
-            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-mqtt-gpio">https://github.com/hmbar/esp-mqtt-gpio</a></div>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-mqtt-gpio">http://server:8081/PerformanceIOT/esp-mqtt-gpio</a></div>
             <hr>
             
             <div class="alert alert-success">

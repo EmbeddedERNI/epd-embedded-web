@@ -37,8 +37,7 @@
                             Information
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <a class="dropdown-item" href="info-iot.html">IoT</a>
-                            <a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a>
+                <!--a class="dropdown-item" href="info-rpi.html">Raspberry Pi</a-->
                             <a class="dropdown-item" href="info-esp32.html">ESP32</a>
                           </div>
                         </li>
@@ -47,7 +46,6 @@
                                 Roadmap
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                                <a class="dropdown-item" href="roadmap-iot.html">IoT</a>
                                 <a class="dropdown-item" href="roadmap-rpi.html">Raspberry Pi</a>
                                 <a class="dropdown-item" href="roadmap-esp32.html">ESP32</a>
                             </div>
@@ -242,7 +240,7 @@ int gpio_get_level(gpio_num_t gpio_num);
             <h3 class="mb-3">Step 1<br><small>Using GPIO as an output</small></h3>
             <ol>
                 <li>Change directory to <code>~/esp/</code></li>
-                <li>Clone the skeleton project using the command <code>git clone <a href="https://github.com/hmbar/esp-skeleton">https://github.com/hmbar/esp-skeleton</a> esp-gpio</code></li>
+                <li>Clone the skeleton project using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp-skeleton">http://server:8081/PerformanceIOT/esp-skeleton</a> esp-gpio</code></li>
                 <li>Edit the main.c file
                     <ul>
                         <li>Include the appropriate headers</li>
@@ -253,7 +251,7 @@ int gpio_get_level(gpio_num_t gpio_num);
             </ol>
 
 
-            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-gpio/releases/tag/v1.0">https://github.com/hmbar/esp-gpio/releases/tag/v1.0</a></div>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/1">http://server:8081/PerformanceIOT/esp-gpio/tags/1</a></div>
             <div class="alert alert-info">After it works, change your code and try to configure an input-only pin as an output, to check error handling</div>
 
             <hr>
@@ -268,7 +266,7 @@ int gpio_get_level(gpio_num_t gpio_num);
                 <li>Configure a pin as an input. This pin must have a pull-up or pull-down, internal or external.</li>
                 <li>Be aware that the loop delay should be short enough, to avoid losing to many events.</li>
             </ol>
-            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-gpio/releases/tag/v2.0">https://github.com/hmbar/esp-gpio/releases/tag/v2.0</a></div>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/2">http://server:8081/PerformanceIOT/esp-gpio/tags/2</a></div>
 
             <hr>
 
@@ -282,7 +280,7 @@ int gpio_get_level(gpio_num_t gpio_num);
                 <li>Install an ISR associated with the input pin, and signal the input event.</li>
                 <li>Add a Task, wait for the semaphore, and process the event.</li>
             </ol>
-            <div class="alert alert-info">If you need help, take a look at <a href="https://github.com/hmbar/esp-gpio/releases/tag/v3.0">https://github.com/hmbar/esp-gpio/releases/tag/v3.0</a></div>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/3">http://server:8081/PerformanceIOT/esp-gpio/tags/3</a></div>
 
             <hr>
             
