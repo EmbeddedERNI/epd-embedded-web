@@ -91,7 +91,7 @@
                 <li>Call <code>tcpip_adapter_init</code> routine to create an LwIP core task and initialize LwIP-related work. </li>
                 <li>wifi_event_group = xEventGroupCreate();</li>
                 <li>
-                    Call <code>esp_event_loop_init</code> routine to create a system Event task and initialize an application event’s callback function. 
+                    Call <code>esp_event_loop_init</code> routine to create a system event task and initialize a callback function for the application events . 
                     <br>
                     The routine signature is <code>esp_err_t esp_event_loop_init(system_event_cb_t cb, void *ctx)</code> where <code>cb</code> is the callback routine. The callback signature is
                     
@@ -151,9 +151,9 @@ typedef esp_err_t (*system_event_cb_t)(void *ctx, system_event_t *event);
             </ol>
             
             <p>
-                Now, when a SYSTEM_EVENT_STA_START event was received, you should try to connect to the Wi-Fi network using the <code>esp_wifi_connect</code>. See <a href="esp-idf/docs/api-reference/wifi/esp_wifi.html#_CPPv216esp_wifi_connectv" target="_blank">esp_wifi_connect</a>.
+                Now, when a SYSTEM_EVENT_STA_START event is received, you should try to connect to the Wi-Fi network using the <code>esp_wifi_connect</code>. See <a href="esp-idf/docs/api-reference/wifi/esp_wifi.html#_CPPv216esp_wifi_connectv" target="_blank">esp_wifi_connect</a>.
                 <br>
-                After that, when a SYSTEM_EVENT_STA_GOT_IP event was received, you should start the mqtt library using the <code>mqtt_start</code> routine. 
+                After that, when a SYSTEM_EVENT_STA_GOT_IP event is received, you should start the mqtt library using the <code>mqtt_start</code> routine. 
                 <br>
                 The mqtt_start routine receives a pointer to the <code>mqtt_settings</code> datatype, to be able to configure the library.
                     <pre><code>
@@ -228,7 +228,7 @@ typedef struct mqtt_event_data_t
                 <li>Configure the project using <code>make menuconfig</code>
                     <br>
                     <ol type="a">
-                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, as you make in previous examples, and change it if necessary</li>
+                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, as you made in previous examples, and change it if necessary</li>
                         <li>
                             Enter in the MQTT Application sample menu entry
                             <br>
@@ -250,8 +250,8 @@ typedef struct mqtt_event_data_t
                 <li>Connect to the esp32 log using the <code>make monitor</code> command</li>
                 <li>Look at the mqtt broker terminal and check if you receive the initial message</li>
                 <li>Open another terminal and run a mqtt client using the <code>mosquitto_pub -t /test -m 123</code> command</li>
-                <li>Look at the mqtt broker terminal and check again for the a new message</li>
-                <li>Look at the esp32 log, and should also have the same message</li>
+                <li>Look at the mqtt broker terminal and check again for the new message</li>
+                <li>Look at the esp32 log, it should also have the same message</li>
             </ol>
 
             <hr>

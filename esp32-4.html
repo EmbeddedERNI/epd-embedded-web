@@ -84,7 +84,7 @@
             <div class="alert alert-info">The datasheet for the DHT22 can be download <a href="DHT22.pdf">here</a></div>
 
             <p>
-                The DHT22 signals have times that be in order of tens microsecond, but that time granularity cannot be achieved by the RTOS, so a hardware timer must be used.
+                The DHT22 handle times that are in order of ten microsecond, but that time granularity cannot be achieved by the RTOS, so a hardware timer must be used.
                 For more information, please see the <a href="esp-idf/docs/api-reference/peripherals/timer.html" target=”_blank” >Timer API Reference</a>
                 <br>
                 The ESP32 has two groups of two hardware timers, and to be able to use them, you need:
@@ -139,12 +139,12 @@ typedef struct {
             </p>
 
             <p>
-                To send information from the ISR, a message queue could be used. For more information, please see the <a href="freertos/a00018.html" target=”_blank” >FreeRTOS Queue Management Reference</a>.
+                To send information from the ISR, a message queue can be used. For more information, please see the <a href="freertos/a00018.html" target=”_blank” >FreeRTOS Queue Management Reference</a>.
                 <br>
                 To use the Queue Messages you need:
                 <ol>
                     <li>To include the <code>freertos/queue.h</code> header</li>
-                    <li>Define a QueueHandle_t object. </li>
+                    <li>Define a <code>QueueHandle_t</code> object. </li>
                     <li>
                         Call <code>xQueueCreate</code> routine to create the queue. See <a href="freertos/a00116.html" target=”_blank” >xQueueCreate reference</a> for more details.
                         <br>
@@ -161,7 +161,7 @@ typedef struct {
             </p>
 
             <p>
-                In order to read the sensor that, you will need to follow these steps.
+                In order to read the sensor, you will need to follow these steps.
                 <ol>
                     <li>Set the pin as an output</li>
                     <li>Keep the pin down for at least 500us</li>

@@ -218,7 +218,7 @@ int gpio_get_level(gpio_num_t gpio_num);
                 In order to handle the inputs by interruption, we will need to install an ISR routine.
                 <br>
                 In addition, it is a good practice to leave the ISR as light as possible,
-                just signaling/enqueuing the events there, and leave the process to another task.
+                just signaling/enqueuing the events there, and leaving the process to another task.
                 <br>
                 Sometimes the task that processes those events may be different from the main task.
             </p>
@@ -264,7 +264,7 @@ int gpio_get_level(gpio_num_t gpio_num);
             </p>
             <ol>
                 <li>Configure a pin as an input. This pin must have a pull-up or pull-down, internal or external.</li>
-                <li>Be aware that the loop delay should be short enough, to avoid losing to many events.</li>
+                <li>Be aware that the loop delay should be short enough, to avoid loosing too many events.</li>
             </ol>
             <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/2">http://server:8081/PerformanceIOT/esp-gpio/tags/2</a></div>
 
@@ -272,7 +272,7 @@ int gpio_get_level(gpio_num_t gpio_num);
 
             <h3 class="mb-3">Step 3<br><small>Manage the inputs in an interrupt-driven way</small></h3>
             <p>
-                Modify your code to have the same behavior, but works in an interrupt-driven way.
+                Modify your code to have the same behavior, but working in an interrupt-driven way.
             </p>
             <ol>
                 <li>Configure the pin to use interrupts.</li>
