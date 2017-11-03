@@ -8,5 +8,7 @@ Based on Start Bootstrap created by and maintained by [David Miller](http://davi
 
 Copyright 2017 - Hern&aacute;n Bartoletti  
 Copyright 2017 - V&iacute;ctor P&eacute;rez  
+Copyright 2017 - Juan Carlos Arco
+
 
 Code released under the [MIT](https://github.com/hmbar/epd-embedded-web/blob/master/LICENSE) license.
