@@ -78,8 +78,59 @@
             </h1>
 
             <hr>
+            
+            <h3 class="mb-3">Step 1<br><small>Using GPIO as an output</small></h3>
+            <ol>
+                <li>Change directory to <code>~/esp/</code></li>
+                <li>Clone the skeleton project using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp-skeleton">http://server:8081/PerformanceIOT/esp-skeleton</a> esp-gpio</code></li>
+                <li>Edit the main.c file
+                    <ul>
+                        <li>Include the appropriate headers</li>
+                        <li>Configure the GPIOs</li>
+                        <li>Toggle an output inside a loop</li>
+                    </ul>
+                </li>
+            </ol>
 
-            <h3 class="mb-3">Overview</h3>
+
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/1">http://server:8081/PerformanceIOT/esp-gpio/tags/1</a></div>
+            <div class="alert alert-info">After it works, change your code and try to configure an input-only pin as an output, to check error handling</div>
+
+            <hr>
+
+            <h3 class="mb-3">Step 2<br><small>Using GPIO as an input</small></h3>
+            <p>
+                Modify your code to begin with the led blinking, but after your first event in the input, the led must follow the input. Then, modify it again, to let the led switch after a push-release cycle.
+                <br>
+                In the first one, we are turning on/off a light using a regular light button, and in the second one you are using a push-button.
+            </p>
+            <ol>
+                <li>Configure a pin as an input. This pin must have a pull-up or pull-down, internal or external.</li>
+                <li>Be aware that the loop delay should be short enough, to avoid losing to many events.</li>
+            </ol>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/2">http://server:8081/PerformanceIOT/esp-gpio/tags/2</a></div>
+
+            <hr>
+
+            <h3 class="mb-3">Step 3<br><small>Manage the inputs in an interrupt-driven way</small></h3>
+            <p>
+                Modify your code to have the same behavior, but works in an interrupt-driven way.
+            </p>
+            <ol>
+                <li>Configure the pin to use interrupts.</li>
+                <li>Add a semaphore to signal the events.</li>
+                <li>Install an ISR associated with the input pin, and signal the input event.</li>
+                <li>Add a Task, wait for the semaphore, and process the event.</li>
+            </ol>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/3">http://server:8081/PerformanceIOT/esp-gpio/tags/3</a></div>
+
+            <hr>
+            
+            <div class="alert alert-success">
+                You should be able to handle digital inputs and outputs. If so, congrats!
+            </div>
+            <hr>
+            <h3 class="mb-3">Quick Guide on ESP32 GPIOs</h3>
             ESP32 chip has 40 GPIOs, but not all of them are available.
             Starting form <code>GPIO_NUM_0</code>, pins 20,24,28-31 are unavailable.
             <br>
@@ -214,6 +265,7 @@ int gpio_get_level(gpio_num_t gpio_num);
                 </li>
             </ol>
             <hr>
+            <h3 class="mb-3">Quick Guide on ESP32 GPIOs interrupts</h3>
             <p>
                 In order to handle the inputs by interruption, we will need to install an ISR routine.
                 <br>
@@ -233,62 +285,12 @@ int gpio_get_level(gpio_num_t gpio_num);
                     <li>Use the <code>xSemaphoreTake</code> routine to receive the signal. See <a href="freertos/a00122.html" target="_blank">xSemaphoreTake documentation</a> for more information</li>
                     <li>Create a second task using the routine <code>xTaskCreate</code>. See <a href="freertos/a00125.html" target="_blank">xTaskCreate documentation</a> for more information</li>
                 </ol>
-
             </p>
-            
             <hr>
-            <h3 class="mb-3">Step 1<br><small>Using GPIO as an output</small></h3>
-            <ol>
-                <li>Change directory to <code>~/esp/</code></li>
-                <li>Clone the skeleton project using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp-skeleton">http://server:8081/PerformanceIOT/esp-skeleton</a> esp-gpio</code></li>
-                <li>Edit the main.c file
-                    <ul>
-                        <li>Include the appropriate headers</li>
-                        <li>Configure the GPIOs</li>
-                        <li>Toggle an output inside a loop</li>
-                    </ul>
-                </li>
-            </ol>
-
-
-            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/1">http://server:8081/PerformanceIOT/esp-gpio/tags/1</a></div>
-            <div class="alert alert-info">After it works, change your code and try to configure an input-only pin as an output, to check error handling</div>
-
-            <hr>
-
-            <h3 class="mb-3">Step 2<br><small>Using GPIO as an input</small></h3>
-            <p>
-                Modify your code to begin with the led blinking, but after your first event in the input, the led must follow the input. Then, modify it again, to let the led switch after a push-release cycle.
-                <br>
-                In the first one, we are turning on/off a light using a regular light button, and in the second one you are using a push-button.
-            </p>
-            <ol>
-                <li>Configure a pin as an input. This pin must have a pull-up or pull-down, internal or external.</li>
-                <li>Be aware that the loop delay should be short enough, to avoid loosing too many events.</li>
-            </ol>
-            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/2">http://server:8081/PerformanceIOT/esp-gpio/tags/2</a></div>
-
-            <hr>
-
-            <h3 class="mb-3">Step 3<br><small>Manage the inputs in an interrupt-driven way</small></h3>
-            <p>
-                Modify your code to have the same behavior, but working in an interrupt-driven way.
-            </p>
-            <ol>
-                <li>Configure the pin to use interrupts.</li>
-                <li>Add a semaphore to signal the events.</li>
-                <li>Install an ISR associated with the input pin, and signal the input event.</li>
-                <li>Add a Task, wait for the semaphore, and process the event.</li>
-            </ol>
-            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-gpio/tags/3">http://server:8081/PerformanceIOT/esp-gpio/tags/3</a></div>
-
-            <hr>
-            
-            <div class="alert alert-success">
-                You should be able to handle digital inputs and outputs. If so, congrats!
-            </div>
         </div>
         <!-- /.container -->
+        
+            
 
         <!-- Footer -->
         <footer class="py-5 bg-dark">

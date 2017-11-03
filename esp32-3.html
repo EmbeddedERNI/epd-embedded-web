@@ -79,7 +79,60 @@
 
             <hr>
 
-            <h3 class="mb-3">Overview</h3>
+            <h3 class="mb-3">Step 1<br><small>Getting the project</small></h3>
+             <ol>
+                <li>Change directory to <code>~/esp/</code></li>
+                <li>Clone the original code using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt">http://server:8081/PerformanceIOT/esp32-mqtt</a> esp-mqtt</code></li>
+                <li>Change directory to <code>~/esp/esp-mqtt/components/</code></li>
+                <li>Clone the original library using the command <code>git clone <a href="http://server:8081/PerformanceIOT/espmqtt.git">http://server:8081/PerformanceIOT/espmqtt.git</a> espmqtt</code></li>
+                <li>Change directory to <code>~/esp/esp-mqtt/</code></li>
+                <li>Configure the project using <code>make menuconfig</code>
+                    <br>
+                    <ol type="a">
+                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, as you make in previous examples, and change it if necessary</li>
+                        <li>
+                            Enter in the MQTT Application sample menu entry
+                            <br>
+                            <img class="img-thumbnail" src="img/menuconfig-mqtt.jpg" alt="make menuconfig mqtt screenshoot"/>
+                        </li>
+                        <li>
+                            Configure you Wi-Fi information, if needed.
+                            <br>
+                            <img class="img-thumbnail" src="img/menuconfig-mqtt-wifi.jpg" alt="make menuconfig mqtt wifi screenshoot"/>
+                        </li>
+                        <li>Save and Exit</li>
+                    </ol>
+                </li>
+                <li>Try to correct the problems that the original library has. If you need help, you can take the patch from the server ( <a href="mqtt_config.h.patch">mqtt_config.h</a> / <a href="app_main.c.patch">app_main.c</a> ), or clone a patched version using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt-patched.git">http://server:8081/PerformanceIOT/esp32-mqtt-patched.git</a> esp32-mqtt</code> </li>
+                <li>Edit, in the <code>main/main.cpp</code> file, the <code>mqtt_settings</code> struct with the appropriate values </li>
+                <li>Compile the project using <code>make</code></li>
+                <li>Flash the code using the <code>make flash</code> command</li>
+                <li>Open another terminal and run a mqtt broker using the <code>mosquitto_sub -t /test</code> command</li>
+                <li>Connect to the esp32 log using the <code>make monitor</code> command</li>
+                <li>Look at the mqtt broker terminal and check if you receive the initial message</li>
+                <li>Open another terminal and run a mqtt client using the <code>mosquitto_pub -t /test -m 123</code> command</li>
+                <li>Look at the mqtt broker terminal and check again for the a new message</li>
+                <li>Look at the esp32 log, and should also have the same message</li>
+            </ol>
+
+            <hr>
+
+            <h3 class="mb-3">Step 2<br><small>Remote managed GPIOs</small></h3>
+            <p>
+            Merge the actual project with the previous one, to be able to manage a GPIO output remotely with a mqtt message and locally with an input GPIO. 
+            <br>
+            Also report both states regularly.
+            </p>
+            <div class="alert alert-info">Define your own commands protocol, and implement the associated actions in the mqtt_read_callback routine.</div>
+            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-mqtt-gpio">http://server:8081/PerformanceIOT/esp-mqtt-gpio</a></div>
+            <hr>
+            
+            <div class="alert alert-success">
+                You should be able to handle digital inputs and outputs. If so, congrats!
+            </div>
+            
+            <hr>
+            <h3 class="mb-3">Quick Guide on ESP32 WIFI and MQTT</h3>
             <p>
             <div class="alert alert-info">This MQTT communication example is based on a patched version of the <a href="https://github.com/tuanpmt/esp32-mqtt">https://github.com/tuanpmt/esp32-mqtt</a>, that is also based on <a href="https://github.com/esar/contiki-mqtt">https://github.com/esar/contiki-mqtt</a></div>
 
@@ -217,58 +270,6 @@ typedef struct mqtt_event_data_t
             </p>
             
             <hr>
-            
-            <h3 class="mb-3">Step 1<br><small>Getting the project</small></h3>
-             <ol>
-                <li>Change directory to <code>~/esp/</code></li>
-                <li>Clone the original code using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt">http://server:8081/PerformanceIOT/esp32-mqtt</a> esp-mqtt</code></li>
-                <li>Change directory to <code>~/esp/esp-mqtt/components/</code></li>
-                <li>Clone the original library using the command <code>git clone <a href="http://server:8081/PerformanceIOT/espmqtt.git">http://server:8081/PerformanceIOT/espmqtt.git</a> espmqtt</code></li>
-                <li>Change directory to <code>~/esp/esp-mqtt/</code></li>
-                <li>Configure the project using <code>make menuconfig</code>
-                    <br>
-                    <ol type="a">
-                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, as you made in previous examples, and change it if necessary</li>
-                        <li>
-                            Enter in the MQTT Application sample menu entry
-                            <br>
-                            <img class="img-thumbnail" src="img/menuconfig-mqtt.jpg" alt="make menuconfig mqtt screenshoot"/>
-                        </li>
-                        <li>
-                            Configure you Wi-Fi information, if needed.
-                            <br>
-                            <img class="img-thumbnail" src="img/menuconfig-mqtt-wifi.jpg" alt="make menuconfig mqtt wifi screenshoot"/>
-                        </li>
-                        <li>Save and Exit</li>
-                    </ol>
-                </li>
-                <li>Try to correct the problems that the original library has. If you need help, you can take the patch from the server ( <a href="mqtt_config.h.patch">mqtt_config.h</a> / <a href="app_main.c.patch">app_main.c</a> ), or clone a patched version using the command <code>git clone <a href="http://server:8081/PerformanceIOT/esp32-mqtt-patched.git">http://server:8081/PerformanceIOT/esp32-mqtt-patched.git</a> esp32-mqtt</code> </li>
-                <li>Edit, in the <code>main/main.cpp</code> file, the <code>mqtt_settings</code> struct with the appropriate values </li>
-                <li>Compile the project using <code>make</code></li>
-                <li>Flash the code using the <code>make flash</code> command</li>
-                <li>Open another terminal and run a mqtt broker using the <code>mosquitto_sub -t /test</code> command</li>
-                <li>Connect to the esp32 log using the <code>make monitor</code> command</li>
-                <li>Look at the mqtt broker terminal and check if you receive the initial message</li>
-                <li>Open another terminal and run a mqtt client using the <code>mosquitto_pub -t /test -m 123</code> command</li>
-                <li>Look at the mqtt broker terminal and check again for the new message</li>
-                <li>Look at the esp32 log, it should also have the same message</li>
-            </ol>
-
-            <hr>
-
-            <h3 class="mb-3">Step 2<br><small>Remote managed GPIOs</small></h3>
-            <p>
-            Merge the actual project with the previous one, to be able to manage a GPIO output remotely with a mqtt message and locally with an input GPIO. 
-            <br>
-            Also report both states regularly.
-            </p>
-            <div class="alert alert-info">Define your own commands protocol, and implement the associated actions in the mqtt_read_callback routine.</div>
-            <div class="alert alert-info">If you need help, take a look at <a href="http://server:8081/PerformanceIOT/esp-mqtt-gpio">http://server:8081/PerformanceIOT/esp-mqtt-gpio</a></div>
-            <hr>
-            
-            <div class="alert alert-success">
-                You should be able to handle digital inputs and outputs. If so, congrats!
-            </div>
         </div>
         <!-- /.container -->
 
