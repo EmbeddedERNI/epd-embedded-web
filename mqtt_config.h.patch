@@ -1,0 +1,13 @@
+diff --git a/include/mqtt_config.h b/include/mqtt_config.h
+index bab429e..a8adfe2 100644
+--- a/include/mqtt_config.h
++++ b/include/mqtt_config.h
+@@ -4,7 +4,7 @@
+ #include <stdio.h>
+ 
+ #define CONFIG_MQTT_PROTOCOL_311 1
+-#define CONFIG_MQTT_SECURITY_ON 1
++#undef CONFIG_MQTT_SECURITY_ON 
+ #define CONFIG_MQTT_PRIORITY 5
+ #define CONFIG_MQTT_LOG_ERROR_ON
+ #define CONFIG_MQTT_LOG_WARN_ON
