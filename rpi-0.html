@@ -66,53 +66,75 @@
                     <a href="index.html">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="roadmap-esp32.html">Roadmap ESP32</a>
+                    <a href="roadmap-esp32.html">Roadmap RPi</a>
                 </li>
-                <li class="breadcrumb-item active">Project One</li>
+                <li class="breadcrumb-item active">Project Zero</li>
             </ol>
 
             <!-- Page Heading/Breadcrumbs -->
-            <h1 class="mt-4 mb-3">ESP32 Project One
+            <h1 class="mt-4 mb-3">RPi Project Zero
                 <br>
-                <small>Hello World </small>
+                <small>Setup the RPi Development Environment </small>
             </h1>
+
+            <div class="alert alert-info">
+                The git client will allow you to download the repositories used for this workshop. You are free to use any git client of your choice if you are familiar with it. Still, we will be using GitKraken.
+            </div>
 
             <hr>
 
-            <h3 class="mb-3">Get the code</h3>
+            <h3 class="mb-3">Install the Git client</h3>
 
             <ol>
-                <li>Copy <code>~/esp/esp-idf/examples/get-started/hello_world/</code> to <code>~/esp/</code></li>
-                <li>Change directory to <code>~/esp/esp-idf/hello_world/</code></li>
+                <li>Create a directory named <code>esp</code> at your home</li>
+                <li>Download the <a href='files/xtensa-esp32-elf.tar.gz'>xtensa-esp32 toolchain for raspberry</a></li>
+                <li>Extract it under your <code>~/esp/xtensa-esp32-elf/</code> directory</li>
+                <li>
+                    Check if <code>~/esp/xtensa-esp32-elf/bin</code> is in your PATH, and if not, include it.
+                    <br/>
+                    For that, edit your <code>~/.profile</code> or <code>~/.bash_profile</code> file, and add the following line:
+                    <br/>
+                    <div class="well"><code>export PATH="$PATH:$HOME/esp/xtensa-esp32-elf/bin"</code></div>
+                </li>
             </ol>
 
             <hr>
 
-            <h3>Hands-on</h3>
-
-            <div class="alert alert-info">
-                These steps are common for almost all projects.
-            </div>
-
+            <h3>Install your Epressif IoT Development Framework</h3>
             <ol>
-                <li>Run <code>make menuconfig</code> to configure the project
-                    <br>
-                    <img class="img-thumbnail" src="img/menuconfig.jpg" alt="make menuconfig screenshoot"/>
-                    <ol type="a">
-                        <li>Verify the communication port under "Serial flasher config -> Default serial port" menu entry, and change it if necessary</li>
-                        <li>Save and Exit</li>
-                    </ol>
+                <li>Download the <a href='files/esp-idf-master.zip'>Espressif IoT Development Framework</a></li>
+                <li>Extract it under your <code>~/esp/esp-idf/</code> directory</li>
+                <li>Add an environment variable <code>IDF_PATH</code> to your <code>~/.profile</code> or <code>~/.bash_profile</code> file.
+                    <br/>
+                    <code>export IDF_PATH=~/esp/esp-idf</code>
                 </li>
-                <li>Generate the binary using <code>make</code></li>
-                <li>Upload the binary using <code>make flash</code></li>
-                <li>Connect to the ESP log stream using <code>make monitor</code>. To exit the monitor, press <kbd>Ctl + ]</kbd></li>
+                <li>Add your user to the dialout user group
+                    <br/>
+                    <code>sudo usermod -a -G dialout $USER</code>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h3>Check USB Comm</h3>
+            <ol>
+                <li>Run the command <code>ls /dev/tty*</code> before plug the USB cable</li>
+                <li>Plug the USB cable to a free USB port in the raspberry and to the Espressif Board</li>
+                <li>Run again the command <code>ls /dev/tty*</code> after plug the USB cable</li>
+                <li>Write down the new entry. It should be <code>/dev/ttyUSBx</code>.</li>
+                <li>Run a serial terminal to this port, with baudrate of 115200 and 8N1
+                    <br>
+                    i.e.: <code>miniterm.py  /dev/ttyUSB0 115200</code>
+                </li>
             </ol>
 
             <hr>
 
             <div class="alert alert-success">
-                You should see a <b>Hello world!</b> message and a 10 seconds countdown. If so, congrats!
+                Reset your board. You should see the board log. If so, congrats!
             </div>
+
+
         </div>
         <!-- /.container -->
 
